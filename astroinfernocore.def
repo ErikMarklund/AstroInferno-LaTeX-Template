@@ -70,21 +70,21 @@
 % conflicts (e.g., package options).
 % Low-level modules first.
 \RequirePackage {lib/compat}        % compatibility definitions
-\RequirePackage {lib/dndutility}    % utility functions
-\RequirePackage {lib/dndcolors}     % color definitions
-\RequirePackage {lib/dndfonts}      % font definitions
-\RequirePackage {lib/dndstrings}    % Load document strings
+\RequirePackage {lib/astroinfernoutility}    % utility functions
+\RequirePackage {lib/astroinfernocolors}     % color definitions
+\RequirePackage {lib/astroinfernofonts}      % font definitions
+\RequirePackage {lib/astroinfernostrings}    % Load document strings
 
 % Conditionally load deprecated code for backwards compatibility
 \bool_if:NF \l__AI_no_deprecated_code_bool
-  { \RequirePackage {lib/dnddeprecated} }
+  { \RequirePackage {lib/astroinfernodeprecated} }
 
 % Main modules in alphabetical order
-\RequirePackage {lib/dndcomment}    % inline comment boxes
-\RequirePackage {lib/dndheader}     % fancy headers and footers
-\RequirePackage {lib/dndmonster}    % stat blocks
-\RequirePackage {lib/dndreadaloud}  % read-aloud text
-\RequirePackage {lib/dndsections}   % section styling and special section headers
-\RequirePackage {lib/dndsidebar}    % sidebars
-\RequirePackage {lib/dndtable}      % tables
-\RequirePackage {lib/dndtoc}        % table of contents styling
+\RequirePackage {lib/astroinfernocomment}    % inline comment boxes
+\RequirePackage {lib/astroinfernoheader}     % fancy headers and footers
+\RequirePackage {lib/astroinfernomonster}    % stat blocks
+\RequirePackage {lib/astroinfernoreadaloud}  % read-aloud text
+\RequirePackage {lib/astroinfernosections}   % section styling and special section headers
+\RequirePackage {lib/astroinfernosidebar}    % sidebars
+\RequirePackage {lib/astroinfernotable}      % tables
+\RequirePackage {lib/astroinfernotoc}        % table of contents styling

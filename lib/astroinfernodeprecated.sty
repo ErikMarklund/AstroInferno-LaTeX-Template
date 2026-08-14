@@ -24,7 +24,7 @@
   }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% dndcolors.sty - to be removed in version 1.0.0
+% astroinfernocolors.sty - to be removed in version 1.0.0
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Sets the themecolor and colors for all themed elements
@@ -49,7 +49,7 @@
 \colorlet {quoteboxcolor}   {readaloudcolor}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% dndcomment.sty - to be removed in version 1.0.0
+% astroinfernocomment.sty - to be removed in version 1.0.0
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Usage \begin{commentbox}[options]{title}[color]
 \ExplSyntaxOn
@@ -88,12 +88,12 @@
 \ExplSyntaxOff
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% dndmonster.sty - to be removed in version 1.0.0
+% astroinfernomonster.sty - to be removed in version 1.0.0
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Fancy DnD 5e stat block rule
-\newcommand{\dndline}{%
-  \AIDeprecate{\noexpand\dndline}{1.0.0}{Use \noexpand\AIMonsterLine for stat block rules.}%
+\newcommand{\astroinfernoline}{%
+  \AIDeprecate{\noexpand\astroinfernoline}{1.0.0}{Use \noexpand\AIMonsterLine for stat block rules.}%
   \noindent
   \begin{tikzpicture}[]
     \draw [rulered, fill=rulered] (0, 0) --(0,0.1) -- (\textwidth, 0.05);
@@ -230,11 +230,11 @@
 }{\par}
 
 % A description variant used to list creature attributes.
-\newlist{dnd@monsterattrs}{description}{1}
+\newlist{astroinferno@monsterattrs}{description}{1}
 
 \ExplSyntaxOn
 
-\setlist[dnd@monsterattrs]{
+\setlist[astroinferno@monsterattrs]{
   before=\color{titlered},
   font=\AIFontStatBlockBody,
   labelsep=\l__AI_space_dim,
@@ -244,14 +244,14 @@
 
 \ExplSyntaxOff
 
-% A dnd@monsterattrs helper macro that always displays an attribute.
-\newcommand{\dnd@monsterattr}[2]{%
+% A astroinferno@monsterattrs helper macro that always displays an attribute.
+\newcommand{\astroinferno@monsterattr}[2]{%
   \item[#2] \commandkey{#1}
 }
 
-% A dnd@monsterattrs helper macro that displays an attribute if the user defined
+% A astroinferno@monsterattrs helper macro that displays an attribute if the user defined
 % it.
-\newcommand{\dnd@ifmonsterattr}[2]{%
+\newcommand{\astroinferno@ifmonsterattr}[2]{%
   \ifcommandkey{#1}{%
     \item[#2] \commandkey{#1}
   }{}%
@@ -262,11 +262,11 @@
 %
 \newkeycommand\basics[armorclass=0, hitpoints=0, speed=0]{%
   \AIDeprecate{\noexpand\basics}{1.0.0}{Use \noexpand\AIMonsterBasics for stat block AC, HP, and speed.}%
-  \begin{dnd@monsterattrs}
-    \dnd@monsterattr{armorclass}{\armorclassname}
-    \dnd@monsterattr{hitpoints}{\hitpointsname}
-    \dnd@monsterattr{speed}{\speedname}
-  \end{dnd@monsterattrs}%
+  \begin{astroinferno@monsterattrs}
+    \astroinferno@monsterattr{armorclass}{\armorclassname}
+    \astroinferno@monsterattr{hitpoints}{\hitpointsname}
+    \astroinferno@monsterattr{speed}{\speedname}
+  \end{astroinferno@monsterattrs}%
 }
 
 % Taubular enviornment for stats-block
@@ -311,37 +311,37 @@
   challenge=1,
   ]{%
   \AIDeprecate{\noexpand\details}{1.0.0}{Use \noexpand\AIMonsterDetails for stat block details like resistances and CR.}%
-  \begin{dnd@monsterattrs}
-    \dnd@ifmonsterattr{savingthrows}{\savesname}
-    \dnd@ifmonsterattr{skills}{\skillsname}
-    \dnd@ifmonsterattr{damagevulnerabilities}{\dvulname}
-    \dnd@ifmonsterattr{damageresistances}{\dresname}
-    \dnd@ifmonsterattr{damageimmunities}{\dimmname}
-    \dnd@ifmonsterattr{conditionimmunities}{\cimmname}
-    \dnd@monsterattr{senses}{\sensesname}
-    \dnd@monsterattr{languages}{\languagesname}
+  \begin{astroinferno@monsterattrs}
+    \astroinferno@ifmonsterattr{savingthrows}{\savesname}
+    \astroinferno@ifmonsterattr{skills}{\skillsname}
+    \astroinferno@ifmonsterattr{damagevulnerabilities}{\dvulname}
+    \astroinferno@ifmonsterattr{damageresistances}{\dresname}
+    \astroinferno@ifmonsterattr{damageimmunities}{\dimmname}
+    \astroinferno@ifmonsterattr{conditionimmunities}{\cimmname}
+    \astroinferno@monsterattr{senses}{\sensesname}
+    \astroinferno@monsterattr{languages}{\languagesname}
     \item[\challengename] \AICRExp{\commandkey{challenge}}
-  \end{dnd@monsterattrs}%
+  \end{astroinferno@monsterattrs}%
 }
 
 \ExplSyntaxOn
-\newcommand{\dnd@hit}[1]{%
+\newcommand{\astroinferno@hit}[1]{%
   \__AI_caption:nn {\tohitname} {#1}
 }
 \ExplSyntaxOff
 
-\newcommand{\dnd@damage}[2]{%
+\newcommand{\astroinferno@damage}[2]{%
   \commandkey{#1}\ \commandkey{#2}\ \damagename%
 }
 
-\newcommand{\dnd@ifplusdmg}[2]{%
+\newcommand{\astroinferno@ifplusdmg}[2]{%
   \ifcommandkey{#1}{%
     { }\plusname\ \commandkey{#1}\ \commandkey{#2}\ \damagename%
   }{}%
 }
-\newcommand{\dnd@ifordmg}[5]{%
+\newcommand{\astroinferno@ifordmg}[5]{%
   \ifcommandkey{#1}{%
-    , \orname\ \commandkey{#1}\ \commandkey{#2}\ \damagename\dnd@ifplusdmg{#4}{#5}\ \commandkey{#3}%
+    , \orname\ \commandkey{#1}\ \commandkey{#2}\ \damagename\astroinferno@ifplusdmg{#4}{#5}\ \commandkey{#3}%
   }{}%
 }
 
@@ -420,20 +420,20 @@
   \AIDeprecate{\noexpand\monsterattack}{1.0.0}{Use \noexpand\AIMonsterMelee, \noexpand\AIMonsterRanged, or \noexpand\AIMonsterAttack for attacks that are melee, ranged, or both, respectively.}%
   \begin{monsteraction}[\commandkey{name}]
     \IfStrEqCase{\commandkey{type}}{%
-      {melee}{\textit{\AICaption{\meleeattackname}{\weaponname}:} \dnd@hit{mod}, \reachname\ \commandkey{reach} \unitsname}%
-      {ranged}{\textit{\AICaption{\rangedattackname}{\weaponname}:} \dnd@hit{mod}, \rangename\ \commandkey{range} \unitsname}%
-      {both}{\textit{\AICaption{\meleeorrangedattackname}{\weaponname}:} \dnd@hit{mod}, \reachname\ \commandkey{reach} \unitsname\ \orname\ \rangename\ \commandkey{range} \unitsname}%
+      {melee}{\textit{\AICaption{\meleeattackname}{\weaponname}:} \astroinferno@hit{mod}, \reachname\ \commandkey{reach} \unitsname}%
+      {ranged}{\textit{\AICaption{\rangedattackname}{\weaponname}:} \astroinferno@hit{mod}, \rangename\ \commandkey{range} \unitsname}%
+      {both}{\textit{\AICaption{\meleeorrangedattackname}{\weaponname}:} \astroinferno@hit{mod}, \reachname\ \commandkey{reach} \unitsname\ \orname\ \rangename\ \commandkey{range} \unitsname}%
     }[]%
     , \commandkey{targets}.
-    \textit{\hitname:} \dnd@damage{dmg}{dmgtype}%
-    \dnd@ifplusdmg{plusdmg}{plusdmgtype}%
-    \dnd@ifordmg{ordmg}{dmgtype}{ordmgwhen}{plusdmg}{plusdmgtype}%
+    \textit{\hitname:} \astroinferno@damage{dmg}{dmgtype}%
+    \astroinferno@ifplusdmg{plusdmg}{plusdmgtype}%
+    \astroinferno@ifordmg{ordmg}{dmgtype}{ordmgwhen}{plusdmg}{plusdmgtype}%
     \ifcommandkey{extra}{\commandkey{extra}}{}.
   \end{monsteraction}
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% dndpaperbox.sty - to be removed in version 1.0.0
+% astroinfernopaperbox.sty - to be removed in version 1.0.0
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Usage \begin{paperbox}[options]{title}[color]
 \ExplSyntaxOn
@@ -480,7 +480,7 @@
 \ExplSyntaxOn
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% dndquote.sty - to be removed in version 1.0.0
+% astroninfernoquote.sty - to be removed in version 1.0.0
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Usage \begin{quotebox}[options][color]
 \ExplSyntaxOn
@@ -520,7 +520,7 @@
 \ExplSyntaxOff
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% dndsections.sty - to be removed in version 1.0.0
+% astroinfernosections.sty - to be removed in version 1.0.0
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Special command for magic items, traps, and the like.
@@ -574,7 +574,7 @@
       {#1--\arabic{DetailArea}\par\expandafter\ignorespaces\noindent}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% dndspell.sty - to be removed in version 1.0.0
+% astroinfernospell.sty - to be removed in version 1.0.0
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\spellheader}[6]{%
   \AIDeprecate{\noexpand\spellheader}{1.0.0}{Use \noexpand\AISpellHeader to typeset a spell header.}%
@@ -593,7 +593,7 @@
 {}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% dndtable.sty - to be removed in version 1.0.0
+% astroinfernotable.sty - to be removed in version 1.0.0
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Table Header
 \newcommand{\header}[1]{%
@@ -606,8 +606,8 @@
 }
 
 % Table Environment
-\NewDocumentEnvironment{dndtable}{O{XX} O{tablecolor}}{%
-  \AIDeprecate{\noexpand\dndtable}{1.0.0}{Use \noexpand\AITable for tables.}%
+\NewDocumentEnvironment{astroinfernotable}{O{XX} O{tablecolor}}{%
+  \AIDeprecate{\noexpand\astroinfernotable}{1.0.0}{Use \noexpand\AITable for tables.}%
   \par\vspace{2pt plus 1pt minus 1pt}%
   \noindent%
   \AIFontTableBody%
