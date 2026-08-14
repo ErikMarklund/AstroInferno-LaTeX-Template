@@ -1,6 +1,6 @@
 \ExplSyntaxOn
 
-\NewDocumentCommand {\DndCRExp} { m }
+\NewDocumentCommand {\AICRExp} { m }
   {
     \str_case_e:nnF {#1}
       {
@@ -47,7 +47,7 @@
 % Monster environments
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Stat block made to look like the Monster Manual NPC definitions
-\DeclareTColorBox {DndMonsterNoBg} { O{} m }
+\DeclareTColorBox {AIMonsterNoBg} { O{} m }
   {
     enhanced,
     frame~hidden,
@@ -61,16 +61,16 @@
     sharp~corners,
     opacityback = 0,
     colframe    = titlered,
-    fonttitle   = \DndFontStatBlockTitle,
-    fontupper   = \DndFontStatBlockBody,
-    fontlower   = \DndFontStatBlockBody,
+    fonttitle   = \AIFontStatBlockTitle,
+    fontupper   = \AIFontStatBlockBody,
+    fontlower   = \AIFontStatBlockBody,
     title       = {#2},
     coltitle    = titlered,
     #1
   }
 
 % Stat block made to look like stat blocks in the PHB.
-\DeclareTColorBox {DndMonsterBg} { O{} m }
+\DeclareTColorBox {AIMonsterBg} { O{} m }
   {
     enhanced,
     frame~hidden,
@@ -93,26 +93,26 @@
     colback          = statblockbg,
     colbacktitle     = statblockbg,
     colframe         = titlered,
-    fonttitle        = \DndFontStatBlockTitle,
+    fonttitle        = \AIFontStatBlockTitle,
     coltitle         = titlered,
-    fontupper        = \DndFontStatBlockBody,
-    fontlower        = \DndFontStatBlockBody,
+    fontupper        = \AIFontStatBlockBody,
+    fontlower        = \AIFontStatBlockBody,
     title            = {#2},
     #1
   }
 
-% Alias DndMonster to correct background type
-\bool_if:NTF \l__dnd_show_background_bool
+% Alias AIMonster to correct background type
+\bool_if:NTF \l__AI_show_background_bool
   {
-    \let\DndMonster\DndMonsterBg
-    \let\endDndMonster\endDndMonsterBg
+    \let\AIMonster\AIMonsterBg
+    \let\endAIMonster\endAIMonsterBg
   }{
-    \let\DndMonster\DndMonsterNoBg
-    \let\endDndMonster\endDndMonsterNoBg
+    \let\AIMonster\AIMonsterNoBg
+    \let\endAIMonster\endAIMonsterNoBg
   }
 
 % Italicized text appearing immediately after monster's name
-\NewDocumentCommand {\DndMonsterType} {m}
+\NewDocumentCommand {\AIMonsterType} {m}
   {
     \begin {hangingpar}
       \textit {#1}
@@ -120,7 +120,7 @@
   }
 
 % Fancy DnD 5e stat block rule
-\NewDocumentCommand {\DndMonsterLine} {}
+\NewDocumentCommand {\AIMonsterLine} {}
   {
     \par \vspace{-2pt} \noindent
     \begin {tikzpicture}
@@ -130,31 +130,31 @@
   }
 
 % A description variant used to list creature attributes.
-\newlist {__dnd_monster_attributes} {description} {1}
-\setlist [__dnd_monster_attributes]
+\newlist {__AI_monster_attributes} {description} {1}
+\setlist [__AI_monster_attributes]
   {
     before   = \color {titlered},
-    font     = \DndFontStatBlockBody,
-    labelsep = \l__dnd_space_dim,
+    font     = \AIFontStatBlockBody,
+    labelsep = \l__AI_space_dim,
     nosep,
   }
 
 % Only prints the item label if the value was supplied
-\cs_new_protected_nopar:Npn \__dnd_if_monster_attribute:nn #1#2
+\cs_new_protected_nopar:Npn \__AI_if_monster_attribute:nn #1#2
   {
     \tl_if_empty:NF {#1}
       { \item [#2] #1 }
   }
 
 %% Monster basics
-\keys_define:nn { dnd / monster / basics }
+\keys_define:nn { astroinferno / monster / basics }
   {
     armor-class .tl_set:N          = \l__armor_class_tl,
     armor-class .initial:n         = 10,
     armor-class .value_required:n  = true,
     armorclass .meta:n = { armor-class = {#1} },
     hit-points .tl_set:N         = \l__hit_points_tl,
-    hit-points .initial:n        = \DndDice {1d8},
+    hit-points .initial:n        = \AIDice {1d8},
     hit-points .value_required:n = true,
     hitpoints .meta:n = { hit-points = {#1} },
     speed .tl_set:N         = \l__speed_tl,
@@ -162,29 +162,29 @@
     speed .value_required:n = true,
   }
 
-\cs_new_protected_nopar:Npn \__dnd_monster_basics:
+\cs_new_protected_nopar:Npn \__AI_monster_basics:
   {
-      \begin {__dnd_monster_attributes}
+      \begin {__AI_monster_attributes}
         \item [\armorclassname] \l__armor_class_tl
         \item [\hitpointsname]  \l__hit_points_tl
         \item [\speedname]      \l__speed_tl
-      \end {__dnd_monster_attributes}
+      \end {__AI_monster_attributes}
   }
 
-\NewDocumentCommand {\DndMonsterBasics} {o}
+\NewDocumentCommand {\AIMonsterBasics} {o}
   {
     \group_begin:
-      \keys_set:nn { dnd / monster / basics } {#1}
-      \DndMonsterLine
-      \__dnd_monster_basics:
-      \DndMonsterLine
+      \keys_set:nn { astroinferno / monster / basics } {#1}
+      \AIMonsterLine
+      \__AI_monster_basics:
+      \AIMonsterLine
     \group_end:
   }
 
 %% Monster CR/XP helper
 % \l_tmpa_tl - CR
 % \l_tmpb_tl - XP
-\cs_new_protected_nopar:Npn \__dnd_cr_xp:N #1
+\cs_new_protected_nopar:Npn \__AI_cr_xp:N #1
   {
     \tl_set:Nn \l_tmpa_tl {#1}
     \str_case_e:nnTF {#1}
@@ -242,7 +242,7 @@
 %% Monster CR/PB helper
 % \l_tmpa_tl - CR
 % \l_tmpb_tl - PB
-\cs_new_protected_nopar:Npn \__dnd_cr_pb:N #1
+\cs_new_protected_nopar:Npn \__AI_cr_pb:N #1
   {
     \tl_set:Nn \l_tmpa_tl {#1}
     \str_case_e:nnTF {#1}
@@ -287,7 +287,7 @@
   }
 
 %% Monster details
-\keys_define:nn { dnd / monster / details }
+\keys_define:nn { astroinferno / monster / details }
 {
   saving-throws .tl_set:N         = \l__saving_throws_tl,
   saving-throws .value_required:n = true,
@@ -321,43 +321,43 @@
   proficiencybonus .meta:n    = { proficiency-bonus = {#1} },
 }
 
-\cs_new_protected_nopar:Npn \__dnd_monster_details:
+\cs_new_protected_nopar:Npn \__AI_monster_details:
 {
-    \begin {__dnd_monster_attributes}
-      \__dnd_if_monster_attribute:nn {\l__saving_throws_tl}          {\savesname}
-      \__dnd_if_monster_attribute:nn {\l__skills_tl}                 {\skillsname}
-      \__dnd_if_monster_attribute:nn {\l__damage_vulnerabilities_tl} {\dvulname}
-      \__dnd_if_monster_attribute:nn {\l__damage_resistances_tl}     {\dresname}
-      \__dnd_if_monster_attribute:nn {\l__damage_immunities_tl}      {\dimmname}
-      \__dnd_if_monster_attribute:nn {\l__condition_immunities_tl}   {\cimmname}
+    \begin {__AI_monster_attributes}
+      \__AI_if_monster_attribute:nn {\l__saving_throws_tl}          {\savesname}
+      \__AI_if_monster_attribute:nn {\l__skills_tl}                 {\skillsname}
+      \__AI_if_monster_attribute:nn {\l__damage_vulnerabilities_tl} {\dvulname}
+      \__AI_if_monster_attribute:nn {\l__damage_resistances_tl}     {\dresname}
+      \__AI_if_monster_attribute:nn {\l__damage_immunities_tl}      {\dimmname}
+      \__AI_if_monster_attribute:nn {\l__condition_immunities_tl}   {\cimmname}
       \item [\sensesname]    \l__senses_tl
       \item [\languagesname] \l__languages_tl
-      \item [\challengename] \__dnd_cr_xp:N {\l__challenge_tl}
+      \item [\challengename] \__AI_cr_xp:N {\l__challenge_tl}
       \tl_if_empty:NF {\l__proficiency_tl}
         {
           {\enit@svlabel{\enit@format{\pbonname}}}
           \hskip \labelsep
           \str_if_eq:VnTF \l__proficiency_tl *
-            {\__dnd_cr_pb:N {\l__challenge_tl}}
+            {\__AI_cr_pb:N {\l__challenge_tl}}
             {\l__proficiency_tl}
         }
-    \end {__dnd_monster_attributes}
+    \end {__AI_monster_attributes}
 }
 
-\NewDocumentCommand {\DndMonsterDetails} {o}
+\NewDocumentCommand {\AIMonsterDetails} {o}
 {
   \group_begin:
-    \keys_set:nn { dnd / monster / details } {#1}
-    \DndMonsterLine{}
-    \__dnd_monster_details:
-    \DndMonsterLine{}
+    \keys_set:nn { astroinferno / monster / details } {#1}
+    \AIMonsterLine{}
+    \__AI_monster_details:
+    \AIMonsterLine{}
   \group_end:
 }
 
 %% Ability scores
 % Print ability score stats with auto-computed modifier
 % e.g. \stat{12} prints "12 (+1)"
-\cs_new_protected_nopar:Npn \__dnd_ability_score_modifier:N #1
+\cs_new_protected_nopar:Npn \__AI_ability_score_modifier:N #1
   {
     \regex_match:NnTF \c__pos_int_regex {#1}
       {
@@ -372,7 +372,7 @@
       {#1}
   }
 
-\keys_define:nn { dnd / monster / ability_scores }
+\keys_define:nn { astroinferno / monster / ability_scores }
   {
     str .tl_set:N         = \l__str_tl,
     str .initial:n        = 10,
@@ -401,7 +401,7 @@
   }
 
 % Ability scores in a table
-\cs_new_protected_nopar:Npn \__dnd_monster_ability_scores:
+\cs_new_protected_nopar:Npn \__AI_monster_ability_scores:
   {
     \color {titlered}
     \par \vspace{1pt} \noindent
@@ -413,39 +413,39 @@
       \textbf {\intstatname} &
       \textbf {\wisstatname} &
       \textbf {\chastatname} \\
-      \exp_args:NV \__dnd_ability_score_modifier:N \l__str_tl &
-      \exp_args:NV \__dnd_ability_score_modifier:N \l__dex_tl &
-      \exp_args:NV \__dnd_ability_score_modifier:N \l__con_tl &
-      \exp_args:NV \__dnd_ability_score_modifier:N \l__int_tl &
-      \exp_args:NV \__dnd_ability_score_modifier:N \l__wis_tl &
-      \exp_args:NV \__dnd_ability_score_modifier:N \l__cha_tl
+      \exp_args:NV \__AI_ability_score_modifier:N \l__str_tl &
+      \exp_args:NV \__AI_ability_score_modifier:N \l__dex_tl &
+      \exp_args:NV \__AI_ability_score_modifier:N \l__con_tl &
+      \exp_args:NV \__AI_ability_score_modifier:N \l__int_tl &
+      \exp_args:NV \__AI_ability_score_modifier:N \l__wis_tl &
+      \exp_args:NV \__AI_ability_score_modifier:N \l__cha_tl
     \end{tabularx}
 
     \par \vspace{4pt}%
   }
 
-\NewDocumentCommand {\DndMonsterAbilityScores} {o}
+\NewDocumentCommand {\AIMonsterAbilityScores} {o}
   {
     \group_begin:
-      \keys_set:nn { dnd / monster / ability_scores } {#1}
-      \__dnd_monster_ability_scores:
+      \keys_set:nn { astroinferno / monster / ability_scores } {#1}
+      \__AI_monster_ability_scores:
     \group_end:
   }
 
 % Inline header for monster actions - similar to a paragraph
-\NewDocumentCommand {\DndMonsterAction} {m}
+\NewDocumentCommand {\AIMonsterAction} {m}
   { \par \smallskip \noindent \textsl { \textbf {#1.} } }
 
 % Inline header for monster sub actions - similar to a subparagraph
-\NewDocumentCommand {\DndMonsterSubAction} {m}
+\NewDocumentCommand {\AIMonsterSubAction} {m}
   { \par \textsl { \textbf {#1.} } }
 
 % Monster subsection header style
-\NewDocumentCommand {\DndMonsterSection} {m}
+\NewDocumentCommand {\AIMonsterSection} {m}
   {
     \addvspace{6pt plus 2pt minus 2pt} \noindent
     \group_begin:
-      \DndFontStatBlockSection #1\nopagebreak[4]
+      \AIFontStatBlockSection #1\nopagebreak[4]
       % \rule is a horizontal command, so placing it under the title incurs extra
       % line spacing. Use \hrule (a vertical command) instead.
       \vspace {2pt}\nopagebreak[4]
@@ -456,16 +456,16 @@
   }
 
 % Spellcasting levels
-\newlist {DndMonsterSpells} {description} {1}
-\setlist [DndMonsterSpells]
+\newlist {AIMonsterSpells} {description} {1}
+\setlist [AIMonsterSpells]
   {
-    font     = \normalfont \DndFontStatBlockBody,
-    labelsep = \l__dnd_space_dim,
+    font     = \normalfont \AIFontStatBlockBody,
+    labelsep = \l__AI_space_dim,
     noitemsep,
     topsep   = 6pt plus 2pt minus 2pt,
   }
 
-\NewDocumentCommand {\DndEmphSpellString} {m}
+\NewDocumentCommand {\AIEmphSpellString} {m}
   {
     \group_begin:
       \seq_set_from_clist:Nn \l_tmpa_seq {#1}
@@ -474,23 +474,23 @@
     \group_end:
   }
 
-\NewDocumentCommand {\DndInnateSpellLevel} { O {\innateatwillname} m }
+\NewDocumentCommand {\AIInnateSpellLevel} { O {\innateatwillname} m }
   {
     \item
       [
         \regex_match:NnTF \c__pos_int_regex {#1}
         {
           \str_if_in:NnTF {#2} {,}
-          { \__dnd_caption:nn {\numberperdayeachname} {#1} }
-          { \__dnd_caption:nn {\numberperdayname} {#1} }
+          { \__AI_caption:nn {\numberperdayeachname} {#1} }
+          { \__AI_caption:nn {\numberperdayname} {#1} }
         }
         {#1}
         :
       ]
-      \DndEmphSpellString {#2}
+      \AIEmphSpellString {#2}
   }
 
-\NewDocumentCommand {\DndMonsterSpellLevel} { O{\spellcantripsname} O{\spellatwillname} m }
+\NewDocumentCommand {\AIMonsterSpellLevel} { O{\spellcantripsname} O{\spellatwillname} m }
   {
     \item
       [
@@ -518,25 +518,25 @@
           {#2}
         ) :
       ]
-    \DndEmphSpellString{#3}
+    \AIEmphSpellString{#3}
   }
 
 %% Monster attacks
-\tl_new:N \l__dnd_attack_distance_tl
-\tl_new:N \l__dnd_attack_type_tl
+\tl_new:N \l__AI_attack_distance_tl
+\tl_new:N \l__AI_attack_type_tl
 
-\keys_define:nn { dnd / monster / attack }
+\keys_define:nn { astroinferno / monster / attack }
   {
     name .tl_set:N         = \l__name_tl,
     name .value_required:n = true,
     distance .choice:,
     distance .choices:nn =
       { both, melee, ranged }
-      { \tl_set:Nn \l__dnd_attack_distance_tl { #1 } },
+      { \tl_set:Nn \l__AI_attack_distance_tl { #1 } },
     distance .initial:n  = both,
     type .choice:,
-    type / weapon .code:n = { \tl_set:Nn \l__dnd_attack_type_tl {\weaponname} },
-    type / spell .code:n = { \tl_set:Nn \l__dnd_attack_type_tl {\spellname} },
+    type / weapon .code:n = { \tl_set:Nn \l__AI_attack_type_tl {\weaponname} },
+    type / spell .code:n = { \tl_set:Nn \l__AI_attack_type_tl {\spellname} },
     type .initial:n  = weapon,
     mod .tl_set:N         = \l__mod_tl,
     mod .value_required:n = true,
@@ -565,23 +565,23 @@
     extra .value_required:n = true,
   }
 
-\cs_new_protected:Npn \__dnd_monster_reach:
+\cs_new_protected:Npn \__AI_monster_reach:
   {
     \reachname\ \l__reach_tl\ \unitsname
   }
 
-\cs_new_protected:Npn \__dnd_monster_range:
+\cs_new_protected:Npn \__AI_monster_range:
   {
     \rangename\ \l__range_tl\ \unitsname
   }
 
-\cs_new_protected:Npn \__dnd_if_plus_dmg:
+\cs_new_protected:Npn \__AI_if_plus_dmg:
   {
     \tl_if_empty:NF {\l__plus_dmg_tl}
     { ~ \plusname\ \l__plus_dmg_tl\ \l__plus_dmg_type_tl\ \damagename }
   }
 
-\cs_new_protected_nopar:Npn \__dnd_if_or_dmg:
+\cs_new_protected_nopar:Npn \__AI_if_or_dmg:
   {
     \tl_if_empty:NF {\l__or_dmg_tl}
     {
@@ -592,26 +592,26 @@
     }
   }
 
-\cs_new_protected:Npn \__dnd_monster_attack:
+\cs_new_protected:Npn \__AI_monster_attack:
   {
-    \__dnd_check_for_key:Nnn \l__name_tl {\DndMonsterAttack} {name}
-    \__dnd_check_for_key:Nnn \l__mod_tl {\DndMonsterAttack} {mod}
+    \__AI_check_for_key:Nnn \l__name_tl {\AIMonsterAttack} {name}
+    \__AI_check_for_key:Nnn \l__mod_tl {\AIMonsterAttack} {mod}
 
-    \begin{DndMonsterAction} {\l__name_tl}~
+    \begin{AIMonsterAction} {\l__name_tl}~
 
-      \str_case_e:nnF {\l__dnd_attack_distance_tl}
+      \str_case_e:nnF {\l__AI_attack_distance_tl}
         {
           { melee }
             {
-              \textit{ \__dnd_caption:nn {\meleeattackname} {\l__dnd_attack_type_tl} : } ~ \__dnd_caption:nn {\tohitname} {\l__mod_tl}, ~ \__dnd_monster_reach:
+              \textit{ \__AI_caption:nn {\meleeattackname} {\l__AI_attack_type_tl} : } ~ \__AI_caption:nn {\tohitname} {\l__mod_tl}, ~ \__AI_monster_reach:
             }
           { ranged }
             {
-              \textit{ \__dnd_caption:nn {\rangedattackname} {\l__dnd_attack_type_tl} : } ~ \__dnd_caption:nn {\tohitname} {\l__mod_tl}, ~ \__dnd_monster_range:
+              \textit{ \__AI_caption:nn {\rangedattackname} {\l__AI_attack_type_tl} : } ~ \__AI_caption:nn {\tohitname} {\l__mod_tl}, ~ \__AI_monster_range:
             }
         }
         {% Melee and Ranged is the default
-          \textit{ \__dnd_caption:nn {\meleeorrangedattackname} {\l__dnd_attack_type_tl} : } ~ \__dnd_caption:nn {\tohitname} {\l__mod_tl}, ~ \__dnd_monster_reach:\ \orname\ \__dnd_monster_range:
+          \textit{ \__AI_caption:nn {\meleeorrangedattackname} {\l__AI_attack_type_tl} : } ~ \__AI_caption:nn {\tohitname} {\l__mod_tl}, ~ \__AI_monster_reach:\ \orname\ \__AI_monster_range:
         }
       , ~ \l__targets_tl. ~
       \textit { \hitname : } ~
@@ -619,52 +619,52 @@
       \str_if_empty:NF {\l__dmg_tl} % Don't show any damage if `dmg' is not set.
         {
           \l__dmg_tl\ \l__dmg_type_tl\ \damagename
-          \__dnd_if_or_dmg:
-          \__dnd_if_plus_dmg:
+          \__AI_if_or_dmg:
+          \__AI_if_plus_dmg:
         }
 
       % `extra' is any special text that goes after the final damage; do not
       % include the final full stop.
       \l__extra_tl .
-    \end{DndMonsterAction}
+    \end{AIMonsterAction}
   }
 
-\NewDocumentCommand {\DndMonsterAttack} {o}
+\NewDocumentCommand {\AIMonsterAttack} {o}
   {
     \group_begin:
-      \keys_set:nn { dnd / monster / attack } {#1}
-      \__dnd_monster_attack:
+      \keys_set:nn { astroinferno / monster / attack } {#1}
+      \__AI_monster_attack:
     \group_end:
   }
 
-\NewDocumentCommand {\DndMonsterMelee} {o}
+\NewDocumentCommand {\AIMonsterMelee} {o}
   {
     \group_begin:
-      \keys_set:nn { dnd / monster / attack } { #1, distance = melee }
-      \__dnd_monster_attack:
+      \keys_set:nn { astroinferno / monster / attack } { #1, distance = melee }
+      \__AI_monster_attack:
     \group_end:
   }
 
-\NewDocumentCommand {\DndMonsterRanged} {o}
+\NewDocumentCommand {\AIMonsterRanged} {o}
   {
     \group_begin:
-      \keys_set:nn { dnd / monster / attack } { #1, distance = ranged }
-      \__dnd_monster_attack:
+      \keys_set:nn { astroinferno / monster / attack } { #1, distance = ranged }
+      \__AI_monster_attack:
     \group_end:
   }
 
 %% Legendary Actions
 
-\newlist {DndMonsterLegendaryActions} {description} {1}
-\setlist [DndMonsterLegendaryActions]
+\newlist {AIMonsterLegendaryActions} {description} {1}
+\setlist [AIMonsterLegendaryActions]
   {
-    font     = \DndFontStatBlockBody,
-    labelsep = \l__dnd_space_dim,
+    font     = \AIFontStatBlockBody,
+    labelsep = \l__AI_space_dim,
     noitemsep,
     topsep   = 6pt plus 2pt minus 2pt,
   }
 
-\NewDocumentCommand {\DndMonsterLegendaryAction} { m m }
+\NewDocumentCommand {\AIMonsterLegendaryAction} { m m }
   {
     \item [ #1 . ] #2
   }

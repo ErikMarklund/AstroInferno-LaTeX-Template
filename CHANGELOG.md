@@ -23,21 +23,21 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added in 0.8.0
 
-* `\DndSetFonts` allows setting of font family and style throughout the document
+* `\AISetFonts` allows setting of font family and style throughout the document
 * Added Spanish captions
 * Added styling for the Table of Contents, using the `titletoc` package
 * Added styling for `\part`
 * Added colors from the 2018 Basic Rules
 * Added `nodeprecatedcode` option to exclude deprecated code from building
-* Added `\DndFeatHeader`
+* Added `\AIFeatHeader`
 
 ### Changed in 0.8.0
 
 * Rewrite internals in LaTeX3
-* `dndtable` becomes `DndTable`
-* `commentbox`, `paperbox`, and `quotebox` become `DndComment`, `DndSidebar`, and `DndReadAloud`
-* `\subtitlesection`, `\spellheader`, `\area`, and `\subarea` become `\DndItemHeader`, `\DndSpellHeader`, `\DndArea`, and `\DndSubArea`
-* `monsterbox` becomes `DndMonster`
+* `dndtable` becomes `AITable`
+* `commentbox`, `paperbox`, and `quotebox` become `AIComment`, `AISidebar`, and `AIReadAloud`
+* `\subtitlesection`, `\spellheader`, `\area`, and `\subarea` become `\AIItemHeader`, `\AISpellHeader`, `\AIArea`, and `\AISubArea`
+* `monsterbox` becomes `AIMonster`
 * Separated language files
 * Added contour to styling for `\chapter`
 
@@ -45,7 +45,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added in 0.7.1
 
-* Added `DndDropCapLine` command to create drop capital letters at chapter beginnings
+* Added `AIDropCapLine` command to create drop capital letters at chapter beginnings
 * Configured CI to compile example document under pdfTeX, LuaTeX, and XeTeX.
 * Japanese translation
 

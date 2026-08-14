@@ -1,6 +1,6 @@
 \ExplSyntaxOn
 
-\bool_if:NT \l__dnd_layout_bool
+\bool_if:NT \l__AI_layout_bool
 {
   \RequirePackage{titletoc}
 
@@ -9,7 +9,7 @@
 
   \titlecontents{part}
     [0pt] % left
-    { \addvspace{.06in} \DndFontTocPart } % above-code
+    { \addvspace{.06in} \AIFontTocPart } % above-code
     {\partname\ \thecontentslabel :~ } % numbered-entry-format
     {} % numberless-entry-format
     {} % filler-page-format
@@ -17,14 +17,14 @@
 
   \titlecontents{chapter}
     [0pt] % left
-    { \addvspace{.1in} \DndFontTocChapter } % above-code
+    { \addvspace{.1in} \AIFontTocChapter } % above-code
     { \tocchapapp\ \thecontentslabel :~ } % numbered-entry-format
     {} % numberless-entry-format
     {\titlerule*{.}\contentspage} % filler-page-format
 
   \titlecontents{section}
     [0pt] % left
-    {\DndFontTocSection} % above-code
+    {\AIFontTocSection} % above-code
     {\thecontentslabel :~ } % numbered-entry-format
     {} % numberless-entry-format
     {\titlerule*{.}\contentspage} % filler-page-format

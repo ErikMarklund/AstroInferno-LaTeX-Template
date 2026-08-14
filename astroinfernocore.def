@@ -25,7 +25,7 @@
     \RequirePackage {luacolor}
   }
 
-\bool_if:NT \l__dnd_layout_bool
+\bool_if:NT \l__AI_layout_bool
   {
     \RequirePackage {geometry}
     \RequirePackage {microtype} % Improve ragged2e hyphenation and overfull boxes
@@ -33,7 +33,7 @@
     \RequirePackage [titles] {tocloft} % multi-column toc
     \RequirePackage [newparttoc] {titlesec}  % Used to adjust (sub)section, part, and table of contents formatting
 
-    \bool_if:NT \l__dnd_multitoc_bool
+    \bool_if:NT \l__AI_multitoc_bool
       { \RequirePackage [toc] {multitoc} }
 
     % Set page geometry.
@@ -58,7 +58,7 @@
     \hbadness         = 10000
 
     % Set left justification if not justified
-    \bool_if:NF \l__dnd_justified_bool
+    \bool_if:NF \l__AI_justified_bool
       { \RaggedRight }
 
     % Customize itemize environment.
@@ -76,7 +76,7 @@
 \RequirePackage {lib/dndstrings}    % Load document strings
 
 % Conditionally load deprecated code for backwards compatibility
-\bool_if:NF \l__dnd_no_deprecated_code_bool
+\bool_if:NF \l__AI_no_deprecated_code_bool
   { \RequirePackage {lib/dnddeprecated} }
 
 % Main modules in alphabetical order

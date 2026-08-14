@@ -1,6 +1,6 @@
 \ExplSyntaxOn
 
-\bool_if:NT \l__dnd_layout_bool
+\bool_if:NT \l__AI_layout_bool
 {
   % Change part numbering to Arabic numbers from Roman numerals
   \renewcommand{\thepart}{\arabic{part}}
@@ -19,17 +19,17 @@
   % Part
   \titleformat {\part}
     [display]
-    { \centering \DndFontPart } % format
-    { \DndContour{\partname\ \thepart} } % label
+    { \centering \AIFontPart } % format
+    { \AIContour{\partname\ \thepart} } % label
     { 2ex } % sep
-    { \DndContour } % before-code
+    { \AIContour } % before-code
 
   % Chapter
   \titleformat {\chapter}
-    { \DndFontChapter } % format
-    { \DndContour{\chaptertitlename\ \thechapter :} } % label
+    { \AIFontChapter } % format
+    { \AIContour{\chaptertitlename\ \thechapter :} } % label
     { \wordsep } % sep
-    { \DndContour } % before-code
+    { \AIContour } % before-code
 
   \titlespacing* {\chapter}
     { 0pt }  % left
@@ -38,7 +38,7 @@
 
   % Section
   \titleformat {\section}
-    { \DndFontSection } % format
+    { \AIFontSection } % format
     { \thesection } % label
     { 1em } % sep
     { \nopagebreak } % before-code
@@ -50,7 +50,7 @@
 
   % Subsection
   \titleformat {\subsection}
-    { \DndFontSubsection } % format
+    { \AIFontSubsection } % format
     { \thesubsection } % label
     { 1em } % sep
     { \nopagebreak } % before-code
@@ -63,7 +63,7 @@
 
   % Subsubsection
   \titleformat {\subsubsection}
-    { \DndFontSubsubsection } % format
+    { \AIFontSubsubsection } % format
     { \thesubsubsection } % label
     { 1em } % sep
     { \nopagebreak } % before-code
@@ -75,7 +75,7 @@
 
   % Paragraph
   \titleformat {\paragraph} [runin]
-    { \DndFontParagraph } % format
+    { \AIFontParagraph } % format
     { \theparagraph \quad } % label
     {0pt} % sep
     {}    % before-code
@@ -88,7 +88,7 @@
 
   % Subparagraph
   \titleformat {\subparagraph} [runin]
-    { \DndFontSubaragraph } % format
+    { \AIFontSubaragraph } % format
     { \thesubparagraph \quad } % label
     {0pt} % sep
     {}    % before-code
@@ -103,7 +103,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Special command for magic items, traps, and the like.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\NewDocumentCommand {\DndFeatHeader} { m o }
+\NewDocumentCommand {\AIFeatHeader} { m o }
   {
     \subsection {#1}
     \IfValueT{#2}
@@ -116,7 +116,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Special command for magic items, traps, and the like.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\NewDocumentCommand {\DndItemHeader} { m m }
+\NewDocumentCommand {\AIItemHeader} { m m }
   {
     \subsubsection {#1}
     \textit {#2}
@@ -132,14 +132,14 @@
 % #4 - Range
 % #5 - Components
 % #6 - Duration
-\NewDocumentCommand {\DndSpellHeader} { m m m m m m }
+\NewDocumentCommand {\AISpellHeader} { m m m m m m }
   {
-    \DndItemHeader {#1} {#2}
+    \AIItemHeader {#1} {#2}
 
     \begin{description}
       [
         nosep,
-        labelsep = \l__dnd_space_dim,
+        labelsep = \l__AI_space_dim,
         after    = { \vspace{4pt plus 1pt minus 1pt} },
       ]
       \item [ \spellcastingtimename : ] #3
@@ -153,54 +153,54 @@
 % Map Areas and their References
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\tl_new:N \l__dnd_area_num_depth_tl
+\tl_new:N \l__AI_area_num_depth_tl
 
 % Options
-\keys_define:nn { dnd / areas }
+\keys_define:nn { astroinferno / areas }
   {
-    area-label .tl_set:N          = \l__dnd_area_label_tl,
+    area-label .tl_set:N          = \l__AI_area_label_tl,
     area-label .initial:n         = area,
     area-label .value_required:n  = true,
-    sub-area-label .tl_set:N          = \l__dnd_sub_area_label_tl,
+    sub-area-label .tl_set:N          = \l__AI_sub_area_label_tl,
     sub-area-label .initial:n         = subarea,
     sub-area-label .value_required:n  = true,
-    region .tl_set:N          = \l__dnd_region_tl,
+    region .tl_set:N          = \l__AI_region_tl,
     region .value_required:n  = true,
     area-num-depth .choice:,
     area-num-depth .choices:nn =
       { 1, 2, 3, 4 }
-      { \tl_set:Nn \l__dnd_area_num_depth_tl {#1} },
+      { \tl_set:Nn \l__AI_area_num_depth_tl {#1} },
     area-num-depth .initial:n  = 2, % subsection
   }
 
-\NewDocumentCommand {\DndSetAreaOptions} {o}
+\NewDocumentCommand {\AISetAreaOptions} {o}
   {
-    \keys_set:nn { dnd / areas } { #1 }
+    \keys_set:nn { astroinferno / areas } { #1 }
   }
 
 % Counters
-\newcounter {DndAreaCounter}
+\newcounter {AIAreaCounter}
 
-\NewDocumentCommand {\DndResetAreas} {}
+\NewDocumentCommand {\AIResetAreas} {}
   {
-    \setcounter {DndAreaCounter} {0}
+    \setcounter {AIAreaCounter} {0}
   }
 
-\newcounter {DndSubAreaCounter} [DndAreaCounter]
+\newcounter {AISubAreaCounter} [AIAreaCounter]
 
 % sub area references should be '5a', '5b', not '51', '52'
-\renewcommand \p@DndSubAreaCounter { \arabic {DndAreaCounter} }
-\renewcommand \theDndSubAreaCounter { \alph {DndSubAreaCounter} }
+\renewcommand \p@AISubAreaCounter { \arabic {AIAreaCounter} }
+\renewcommand \theAISubAreaCounter { \alph {AISubAreaCounter} }
 
 % Functions to create an area including text and label
-\NewDocumentCommand {\DndArea} {m}
+\NewDocumentCommand {\AIArea} {m}
   {
-    \refstepcounter {DndAreaCounter}
-    \label { \l__dnd_region_tl \l__dnd_area_label_tl :#1 }
+    \refstepcounter {AIAreaCounter}
+    \label { \l__AI_region_tl \l__AI_area_label_tl :#1 }
 
-    \tl_set:Nn \l_tmpa_tl { \l__dnd_region_tl \arabic {DndAreaCounter} . ~ #1 }
+    \tl_set:Nn \l_tmpa_tl { \l__AI_region_tl \arabic {AIAreaCounter} . ~ #1 }
 
-    \str_case_e:nn {\l__dnd_area_num_depth_tl}
+    \str_case_e:nn {\l__AI_area_num_depth_tl}
       {
         {1} { \section       {\l_tmpa_tl} }
         {2} { \subsection    {\l_tmpa_tl} }
@@ -209,14 +209,14 @@
       }
   }
 
-\NewDocumentCommand {\DndSubArea} {m}
+\NewDocumentCommand {\AISubArea} {m}
   {
-    \refstepcounter {DndSubAreaCounter}
-    \label { \l__dnd_region_tl \l__dnd_sub_area_label_tl : #1 }
+    \refstepcounter {AISubAreaCounter}
+    \label { \l__AI_region_tl \l__AI_sub_area_label_tl : #1 }
 
-    \tl_set:Nn \l_tmpa_tl { \l__dnd_region_tl \arabic {DndAreaCounter} \alph {DndSubAreaCounter} . ~ #1 }
+    \tl_set:Nn \l_tmpa_tl { \l__AI_region_tl \arabic {AIAreaCounter} \alph {AISubAreaCounter} . ~ #1 }
 
-    \str_case_e:nn {\l__dnd_area_num_depth_tl}
+    \str_case_e:nn {\l__AI_area_num_depth_tl}
       {
         {1} { \subsection    {\l_tmpa_tl} }
         {2} { \subsubsection {\l_tmpa_tl} }
@@ -227,18 +227,18 @@
   }
 
 % Functions to reference a label
-\NewDocumentCommand {\DndAreaRef} { o m }
+\NewDocumentCommand {\AIAreaRef} { o m }
   {
     \group_begin:
-      \keys_set:nn { dnd / areas } {#1} % Temp set keys to reference other regions
-      #2 ~ ( \pageabbreviationname\ \pageref { \l__dnd_region_tl \l__dnd_area_label_tl : #2 } )
+      \keys_set:nn { astroinferno / areas } {#1} % Temp set keys to reference other regions
+      #2 ~ ( \pageabbreviationname\ \pageref { \l__AI_region_tl \l__AI_area_label_tl : #2 } )
     \group_end:
   }
 
-\NewDocumentCommand {\DndSubAreaRef} { o m }
+\NewDocumentCommand {\AISubAreaRef} { o m }
   {
     \group_begin:
-      \keys_set:nn { dnd / areas } { #1 } % Temp set keys to reference other regions
-      #2 ~ ( \pageabbreviationname\ \pageref { \l__dnd_region_tl \l__dnd_sub_area_label_tl : #2 } )
+      \keys_set:nn { astroinferno / areas } { #1 } % Temp set keys to reference other regions
+      #2 ~ ( \pageabbreviationname\ \pageref { \l__AI_region_tl \l__AI_sub_area_label_tl : #2 } )
     \group_end:
   }

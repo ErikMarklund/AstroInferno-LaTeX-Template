@@ -5,7 +5,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Page
-\definecolor {bgtan}    {HTML} {F7F2E5}	% DndReadAloud background
+\definecolor {bgtan}    {HTML} {F7F2E5}	% AIReadAloud background
 \definecolor {bgtan2018}{HTML} {F9EFD6} % lighter version of bgtan from the 2018 Basic Rules
 \definecolor {pagegold} {HTML} {B89A67} % pagenumbers and footer
 
@@ -32,22 +32,22 @@
 % Trim aliases
 \colorlet {DmgSlateGrey} {DmgSlateGray}
 
-% The color used in \DndSetThemeColor when a new color is not set
+% The color used in \AISetThemeColor when a new color is not set
 \colorlet {themecolor} {PhbLightGreen} % Set the default theme to Part 1 of the PHB.
 
-% Element colors that change when \DndSetThemeColor is used
-\colorlet {commentcolor} {themecolor} % DndComment background
-\colorlet {sidebarcolor} {themecolor} % DndSidebar background
-\colorlet {tablecolor}   {themecolor} % DndTable even row background
+% Element colors that change when \AISetThemeColor is used
+\colorlet {commentcolor} {themecolor} % AIComment background
+\colorlet {sidebarcolor} {themecolor} % AISidebar background
+\colorlet {tablecolor}   {themecolor} % AITable even row background
 
-% Element colors that do not respond to \DndSetThemeColor
-\colorlet {readaloudcolor} {bgtan} % DndReadAloud background
+% Element colors that do not respond to \AISetThemeColor
+\colorlet {readaloudcolor} {bgtan} % AIReadAloud background
 \definecolor {statblockribbon} {HTML} {E69A28} % stat block top/bottom borders (gold)
 \definecolor {statblockbg}     {HTML} {FDF1DC} % stat block background (tan)
 
 % Sets the themecolor and colors for all themed elements
 % If called without the optional color, resets the color of all themed elements to the current themecolor
-\NewDocumentCommand {\DndSetThemeColor} { O {themecolor} }
+\NewDocumentCommand {\AISetThemeColor} { O {themecolor} }
   {
     \colorlet {themecolor}   {#1}
     \colorlet {commentcolor} {#1}

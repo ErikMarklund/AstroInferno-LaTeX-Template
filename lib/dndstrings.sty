@@ -4,7 +4,7 @@
 % We need to make our own parameters
 % |1| represents parameter 1
 
-\cs_new_protected:Npn \__dnd_caption:nn #1#2
+\cs_new_protected:Npn \__AI_caption:nn #1#2
   {
     \group_begin:
       \str_set:Nx \l_tmpa_str { #1 }
@@ -15,8 +15,8 @@
   }
 
 % Document-level version for backwards compatibility
-\NewDocumentCommand{\DndCaption}{ m m }
-  { \__dnd_caption:nn {#1} {#2} }
+\NewDocumentCommand{\AICaption}{ m m }
+  { \__AI_caption:nn {#1} {#2} }
 
 % Define all strings as new macros instead of hardcoding them in the
 % TeX files. This then allows us to add captions for multilanguage support.
@@ -114,7 +114,7 @@
 % 3. Replace the English strings with the translations and comment any captions
 %    that you do not translate. Please keep the captions in the same order.
 % 4. Add \RequirePackage{lib/languages/<language>} to the following function.
-\cs_new_protected_nopar:Npn \__dnd_input_languages:
+\cs_new_protected_nopar:Npn \__AI_input_languages:
   {
     \RequirePackage{lib/languages/italian}
     \RequirePackage{lib/languages/japanese} % Requires LuaTeX or XeTeX
@@ -127,7 +127,7 @@
 
 % Delay loading captions until after the user has imported a language package.
 % Enables using babel/polyglossia with the dndbook document class as well as the
-% dnd package.
+% astroinferno package.
 %
 % Both language packages use \AtBeginDocument. Use \AtEndPreamble (etoolbox)
 % instead to side-step load order issues.
@@ -135,9 +135,9 @@
   % Check if either babel or polyglossia have been loaded,
   % in which case load the string captions
   \@ifpackageloaded{babel}{
-    \__dnd_input_languages:
+    \__AI_input_languages:
   }{}
   \@ifpackageloaded{polyglossia}{
-    \__dnd_input_languages:
+    \__AI_input_languages:
   }{}
 }

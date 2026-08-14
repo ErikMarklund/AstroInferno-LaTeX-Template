@@ -3,7 +3,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Custom headers and footers
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\bool_if:NT \l__dnd_layout_bool
+\bool_if:NT \l__AI_layout_bool
   {
 \RequirePackage {fancyhdr} % Adaptation of the footers
 
@@ -35,7 +35,7 @@
 
 % Header is used to include the page background
 \fancyhead{
-  \bool_if:NT \l__dnd_show_background_bool
+  \bool_if:NT \l__AI_show_background_bool
     {
     \begin{tikzpicture}[remember~picture,overlay]
       \node[inner~sep=0pt] at (current~page.center) {\includegraphics[width=\paperwidth,height=\paperheight]{img/paper}};
@@ -45,23 +45,23 @@
 
 % Left-even page footer
 \fancyfoot[LE]{%
-    \DndFontFooter \leftmark
+    \AIFontFooter \leftmark
     \begin{tikzpicture}[remember~picture,overlay]
-      \bool_if:NT \l__dnd_show_footer_scroll_bool {
+      \bool_if:NT \l__AI_show_footer_scroll_bool {
         \node[xscale=-1,inner~sep=0pt,anchor=south,nearly~opaque] at (current~page.south) {\includegraphics[width=\paperwidth,height=.6in]{img/footerscroll}};
       }
-      \node[inner~sep=0pt,anchor=south,xshift=.28in,yshift=.39in] at (current~page.south~west) {\DndFontPageNumber \thepage};
+      \node[inner~sep=0pt,anchor=south,xshift=.28in,yshift=.39in] at (current~page.south~west) {\AIFontPageNumber \thepage};
     \end{tikzpicture}
   }
 
 % Right-odd page footer
 \fancyfoot[RO]{%
-    \DndFontFooter \leftmark
+    \AIFontFooter \leftmark
     \begin{tikzpicture}[remember~picture,overlay]
-      \bool_if:NT \l__dnd_show_footer_scroll_bool {
+      \bool_if:NT \l__AI_show_footer_scroll_bool {
         \node[inner~sep=0pt,anchor=south,nearly~opaque] at (current~page.south) {\includegraphics[width=\paperwidth,height=.6in]{img/footerscroll}};
       }
-      \node[inner~sep=0pt,anchor=south,xshift=-.28in,yshift=.39in] at (current~page.south~east) {\DndFontPageNumber \thepage};
+      \node[inner~sep=0pt,anchor=south,xshift=-.28in,yshift=.39in] at (current~page.south~east) {\AIFontPageNumber \thepage};
     \end{tikzpicture}
   }
 

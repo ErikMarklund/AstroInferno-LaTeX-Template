@@ -1,9 +1,9 @@
 \RequirePackage {keycommand}
 
 \ExplSyntaxOn
-\NewDocumentCommand{\DndDeprecate}{ mmm }
+\NewDocumentCommand{\AIDeprecate}{ mmm }
   {
-    \__dnd_deprecated:nnn {#1} {#2} {#3}
+    \__AI_deprecated:nnn {#1} {#2} {#3}
   }
 \ExplSyntaxOff
 
@@ -30,7 +30,7 @@
 % Sets the themecolor and colors for all themed elements
 % If called without the optional color, resets the color of all themed elements to the current themecolor
 \newcommand{\setthemecolor}[1][themecolor]{%
-  \DndDeprecate{\noexpand\setthemecolor}{1.0.0}{Use \noexpand\DndSetThemeColor to set the theme color.}%
+  \AIDeprecate{\noexpand\setthemecolor}{1.0.0}{Use \noexpand\AISetThemeColor to set the theme color.}%
   \colorlet{themecolor}{#1}
   \colorlet{commentcolor}{#1}
   \colorlet{sidebarcolor}{#1}
@@ -55,13 +55,13 @@
 \ExplSyntaxOn
 \DeclareTColorBox{commentbox}{O{} m O{commentboxcolor}}{%
   before~upper={%
-    \bool_if:NT \l__dnd_layout_bool
+    \bool_if:NT \l__AI_layout_bool
       {
-        \bool_if:NF \l__dnd_justified_bool
+        \bool_if:NF \l__AI_justified_bool
           { \RaggedRight }
       }
   },
-  code={\DndDeprecate{\noexpand\commentbox}{1.0.0}{Use~\noexpand\DndComment~for~breakable~comment~boxes.}\linespread{.9}},
+  code={\AIDeprecate{\noexpand\commentbox}{1.0.0}{Use~\noexpand\AIComment~for~breakable~comment~boxes.}\linespread{.9}},
   frame~hidden,
   boxrule=0pt,
   breakable,
@@ -74,9 +74,9 @@
   top=0pt,
   bottom=2pt,
   sharp~corners,
-  fonttitle=\DndFontCommentTitle,
-  fontupper=\DndFontCommentBody,
-  fontlower=\DndFontCommentBody,
+  fonttitle=\AIFontCommentTitle,
+  fontupper=\AIFontCommentBody,
+  fontlower=\AIFontCommentBody,
   title={#2},
   parbox=false,
   colback=#3,
@@ -93,7 +93,7 @@
 
 % Fancy DnD 5e stat block rule
 \newcommand{\dndline}{%
-  \DndDeprecate{\noexpand\dndline}{1.0.0}{Use \noexpand\DndMonsterLine for stat block rules.}%
+  \AIDeprecate{\noexpand\dndline}{1.0.0}{Use \noexpand\AIMonsterLine for stat block rules.}%
   \noindent
   \begin{tikzpicture}[]
     \draw [rulered, fill=rulered] (0, 0) --(0,0.1) -- (\textwidth, 0.05);
@@ -107,7 +107,7 @@
 % Macro to print stats with auto-computed modifier
 % e.g. \stat{12} prints "12 (+1)"
 \newcommand{\stat}[1]{%
-  \DndDeprecate{\noexpand\stat}{1.0.0}{Use \noexpand\DndMonsterAbilityScores for the stat block ability score table.}%
+  \AIDeprecate{\noexpand\stat}{1.0.0}{Use \noexpand\AIMonsterAbilityScores for the stat block ability score table.}%
   \FPeval{\mod}{(#1 - 10)/2}%
   \FPifpos\mod%
   \FPeval{\mod}{clip(trunc(mod,0))}#1\ (+\mod)%
@@ -119,7 +119,7 @@
 % Macro to print avarage dice based value
 % e.g. \dice{2d6+3} prints "10 (2d6 + 3)"
 \newcommand{\dice}[1]{%
-  \DndDeprecate{\noexpand\dice}{1.0.0}{Use \noexpand\DndDice to typeset a dice roll with the average value.}%
+  \AIDeprecate{\noexpand\dice}{1.0.0}{Use \noexpand\AIDice to typeset a dice roll with the average value.}%
   \StrSubstitute{#1}{ }{}[\DiceArg]%				strip whitespaces
   \StrCut{\DiceArg}{d}\DiceNum\DiceSides%			split string
   \StrCut{\DiceSides}{+}\DiceSides\DiceAddMod%
@@ -143,7 +143,7 @@
 % Stat block without the background
 \newtcolorbox{monsterboxnobg}[2][]{
   enhanced,
-  code={\DndDeprecate{\noexpand\monsterboxnobg}{1.0.0}{Use \noexpand\DndMonsterNoBg for stat blocks without a background.}},
+  code={\AIDeprecate{\noexpand\monsterboxnobg}{1.0.0}{Use \noexpand\AIMonsterNoBg for stat blocks without a background.}},
   frame hidden,
   boxrule=0pt,
   breakable,
@@ -155,9 +155,9 @@
   sharp corners,
   opacityback=0,
   colframe=titlered,
-  fonttitle=\DndFontStatBlockTitle,
-  fontupper=\DndFontStatBlockBody,
-  fontlower=\DndFontStatBlockBody,
+  fonttitle=\AIFontStatBlockTitle,
+  fontupper=\AIFontStatBlockBody,
+  fontlower=\AIFontStatBlockBody,
   title=#2,
   coltitle=titlered,
   #1
@@ -166,7 +166,7 @@
 % Stat block with background
 \newtcolorbox{monsterboxbg}[2][]{
   enhanced,
-  code={\DndDeprecate{\noexpand\monsterboxbg}{1.0.0}{Use \noexpand\DndMonsterBg for stat blocks with a background.}},
+  code={\AIDeprecate{\noexpand\monsterboxbg}{1.0.0}{Use \noexpand\AIMonsterBg for stat blocks with a background.}},
   frame hidden,
   before skip=12pt plus 3pt minus 3pt,
   boxrule=0pt,
@@ -187,16 +187,16 @@
   colback=statblockbg,
   colbacktitle=statblockbg,
   colframe=titlered,
-  fonttitle=\DndFontStatBlockTitle,
+  fonttitle=\AIFontStatBlockTitle,
   coltitle=titlered,
-  fontupper=\DndFontStatBlockBody,
-  fontlower=\DndFontStatBlockBody,
+  fontupper=\AIFontStatBlockBody,
+  fontlower=\AIFontStatBlockBody,
   title=#2,
   #1
 }
 
 \ExplSyntaxOn
-\bool_if:NTF \l__dnd_show_background_bool
+\bool_if:NTF \l__AI_show_background_bool
   {
     \let\monsterbox\monsterboxbg%
     \let\endmonsterbox\endmonsterboxbg%
@@ -210,10 +210,10 @@
 
 % Define Monster subsection header style
 \newcommand{\monstersection}[1]{%
-  \DndDeprecate{\noexpand\monstersection}{1.0.0}{Use \noexpand\DndMonsterSection for stat blocks sections.}%
+  \AIDeprecate{\noexpand\monstersection}{1.0.0}{Use \noexpand\AIMonsterSection for stat blocks sections.}%
   \begingroup
     \par\medskip\noindent
-    \DndFontStatBlockSection #1
+    \AIFontStatBlockSection #1
     % \rule is a horizontal command, so placing it under the title incurs extra
     % line spacing. Use \hrule (a vertical command) instead.
     \vspace{3pt}
@@ -223,7 +223,7 @@
 }
 
 \NewDocumentEnvironment{monsteraction}{o}{%
-  \DndDeprecate{\noexpand\monsteraction}{1.0.0}{Use \noexpand\DndMonsterAction for stat block actions.}%
+  \AIDeprecate{\noexpand\monsteraction}{1.0.0}{Use \noexpand\AIMonsterAction for stat block actions.}%
   \IfValueTF{#1}{%
     \par\medskip\noindent\emph{\textbf{#1.}}%
   }{\unskip}%
@@ -236,8 +236,8 @@
 
 \setlist[dnd@monsterattrs]{
   before=\color{titlered},
-  font=\DndFontStatBlockBody,
-  labelsep=\l__dnd_space_dim,
+  font=\AIFontStatBlockBody,
+  labelsep=\l__AI_space_dim,
   noitemsep,
   nosep,
 }
@@ -261,7 +261,7 @@
 % Macros for use within the monster environment
 %
 \newkeycommand\basics[armorclass=0, hitpoints=0, speed=0]{%
-  \DndDeprecate{\noexpand\basics}{1.0.0}{Use \noexpand\DndMonsterBasics for stat block AC, HP, and speed.}%
+  \AIDeprecate{\noexpand\basics}{1.0.0}{Use \noexpand\AIMonsterBasics for stat block AC, HP, and speed.}%
   \begin{dnd@monsterattrs}
     \dnd@monsterattr{armorclass}{\armorclassname}
     \dnd@monsterattr{hitpoints}{\hitpointsname}
@@ -277,7 +277,7 @@
   INT=\stat{10},
   WIS=\stat{10},
   CHA=\stat{10}]{%
-  \DndDeprecate{\noexpand\stats}{1.0.0}{Use \noexpand\DndMonsterAbilityScores for the stat block ability score table.}%
+  \AIDeprecate{\noexpand\stats}{1.0.0}{Use \noexpand\AIMonsterAbilityScores for the stat block ability score table.}%
   \begingroup%
     \color{titlered}%
     \par\vspace{5pt}\noindent%
@@ -310,7 +310,7 @@
   languages=---,
   challenge=1,
   ]{%
-  \DndDeprecate{\noexpand\details}{1.0.0}{Use \noexpand\DndMonsterDetails for stat block details like resistances and CR.}%
+  \AIDeprecate{\noexpand\details}{1.0.0}{Use \noexpand\AIMonsterDetails for stat block details like resistances and CR.}%
   \begin{dnd@monsterattrs}
     \dnd@ifmonsterattr{savingthrows}{\savesname}
     \dnd@ifmonsterattr{skills}{\skillsname}
@@ -320,13 +320,13 @@
     \dnd@ifmonsterattr{conditionimmunities}{\cimmname}
     \dnd@monsterattr{senses}{\sensesname}
     \dnd@monsterattr{languages}{\languagesname}
-    \item[\challengename] \DndCRExp{\commandkey{challenge}}
+    \item[\challengename] \AICRExp{\commandkey{challenge}}
   \end{dnd@monsterattrs}%
 }
 
 \ExplSyntaxOn
 \newcommand{\dnd@hit}[1]{%
-  \__dnd_caption:nn {\tohitname} {#1}
+  \__AI_caption:nn {\tohitname} {#1}
 }
 \ExplSyntaxOff
 
@@ -417,12 +417,12 @@
     ordmgwhen=,
     extra=,
   ]{%
-  \DndDeprecate{\noexpand\monsterattack}{1.0.0}{Use \noexpand\DndMonsterMelee, \noexpand\DndMonsterRanged, or \noexpand\DndMonsterAttack for attacks that are melee, ranged, or both, respectively.}%
+  \AIDeprecate{\noexpand\monsterattack}{1.0.0}{Use \noexpand\AIMonsterMelee, \noexpand\AIMonsterRanged, or \noexpand\AIMonsterAttack for attacks that are melee, ranged, or both, respectively.}%
   \begin{monsteraction}[\commandkey{name}]
     \IfStrEqCase{\commandkey{type}}{%
-      {melee}{\textit{\DndCaption{\meleeattackname}{\weaponname}:} \dnd@hit{mod}, \reachname\ \commandkey{reach} \unitsname}%
-      {ranged}{\textit{\DndCaption{\rangedattackname}{\weaponname}:} \dnd@hit{mod}, \rangename\ \commandkey{range} \unitsname}%
-      {both}{\textit{\DndCaption{\meleeorrangedattackname}{\weaponname}:} \dnd@hit{mod}, \reachname\ \commandkey{reach} \unitsname\ \orname\ \rangename\ \commandkey{range} \unitsname}%
+      {melee}{\textit{\AICaption{\meleeattackname}{\weaponname}:} \dnd@hit{mod}, \reachname\ \commandkey{reach} \unitsname}%
+      {ranged}{\textit{\AICaption{\rangedattackname}{\weaponname}:} \dnd@hit{mod}, \rangename\ \commandkey{range} \unitsname}%
+      {both}{\textit{\AICaption{\meleeorrangedattackname}{\weaponname}:} \dnd@hit{mod}, \reachname\ \commandkey{reach} \unitsname\ \orname\ \rangename\ \commandkey{range} \unitsname}%
     }[]%
     , \commandkey{targets}.
     \textit{\hitname:} \dnd@damage{dmg}{dmgtype}%
@@ -439,13 +439,13 @@
 \ExplSyntaxOn
 \DeclareTColorBox{paperbox}{O{} m O{paperboxcolor}}{%
   before~upper={%
-    \bool_if:NT \l__dnd_layout_bool
+    \bool_if:NT \l__AI_layout_bool
       {
-        \bool_if:NF \l__dnd_justified_bool
+        \bool_if:NF \l__AI_justified_bool
           {\RaggedRight}
       }
   },
-  code={\DndDeprecate{\noexpand\paperbox}{1.0.0}{Use \noexpand\DndSidebar for sidebars.}\linespread{.9}},
+  code={\AIDeprecate{\noexpand\paperbox}{1.0.0}{Use \noexpand\AISidebar for sidebars.}\linespread{.9}},
   frame~hidden,
   boxrule=0pt,
   enhanced,
@@ -456,9 +456,9 @@
   right=6pt,
   top=0pt,
   bottom=3pt,
-  fonttitle=\DndFontSidebarTitle,
-  fontupper=\DndFontSidebarBody,
-  fontlower=\DndFontSidebarBody,
+  fonttitle=\AIFontSidebarTitle,
+  fontupper=\AIFontSidebarBody,
+  fontlower=\AIFontSidebarBody,
   title={#2},
   sharp~corners,
   parbox=false,
@@ -486,13 +486,13 @@
 \ExplSyntaxOn
 \DeclareTColorBox{quotebox}{O{} O{quoteboxcolor}}{%
   before~upper={%
-    \bool_if:NT \l__dnd_layout_bool
+    \bool_if:NT \l__AI_layout_bool
       {
-        \bool_if:NF \l__dnd_justified_bool
+        \bool_if:NF \l__AI_justified_bool
           {\RaggedRight}
       }
   },
-  code={\DndDeprecate{\noexpand\quotebox}{1.0.0}{Use~\noexpand\DndReadAloud~for~read-aloud~text.}\linespread{1.1}},
+  code={\AIDeprecate{\noexpand\quotebox}{1.0.0}{Use~\noexpand\AIReadAloud~for~read-aloud~text.}\linespread{1.1}},
   enhanced~jigsaw,
   frame~hidden,
   boxrule=0pt,
@@ -509,8 +509,8 @@
   parbox=false,
   borderline~west={1pt}{-0.5pt}{titlered},
   borderline~east={1pt}{-0.5pt}{titlered},
-  fontupper=\DndFontReadAloud,
-  fontlower=\DndFontReadAloud,
+  fontupper=\AIFontReadAloud,
+  fontlower=\AIFontReadAloud,
   overlay={%
     \foreach\n in {north~east,north~west,south~east,south~west}
     {\draw[titlered, fill=titlered] (frame.\n) circle (1.5pt); }; },
@@ -525,7 +525,7 @@
 
 % Special command for magic items, traps, and the like.
 \newcommand{\subtitlesection}[2]{%
-  \DndDeprecate{\noexpand\subtitlesection}{1.0.0}{Use \noexpand\DndItemHeader for item headers.}%
+  \AIDeprecate{\noexpand\subtitlesection}{1.0.0}{Use \noexpand\AIItemHeader for item headers.}%
   \subsubsection{#1}%
   \textit{#2}
   \par\vspace{3pt plus 1pt minus 1pt}\noindent\ignorespaces}
@@ -539,12 +539,12 @@
 
 \newcounter{Area}
 \newcommand\ResetAreas{%
-  \DndDeprecate{\noexpand\ResetAreas}{1.0.0}{Use \noexpand\DndResetAreas to reset area counters.}%
+  \AIDeprecate{\noexpand\ResetAreas}{1.0.0}{Use \noexpand\AIResetAreas to reset area counters.}%
   \setcounter{Area}{0}
 }
 
 \NewDocumentCommand\area{mo}{%
-  \DndDeprecate{\noexpand\area}{1.0.0}{Use \noexpand\DndArea to typeset a section with an area counter.}%
+  \AIDeprecate{\noexpand\area}{1.0.0}{Use \noexpand\AIArea to typeset a section with an area counter.}%
   \refstepcounter{Area}%
   \IfNoValueTF{#2}%
     {\label{\AreaLabel@Prefix:#1}}%
@@ -556,7 +556,7 @@
 \newcounter{SubArea}[Area]
 
 \NewDocumentCommand\subarea{mo}{%
-  \DndDeprecate{\noexpand\subarea}{1.0.0}{Use \noexpand\DndSubArea to typeset a section with an sub-area counter.}%
+  \AIDeprecate{\noexpand\subarea}{1.0.0}{Use \noexpand\AISubArea to typeset a section with an sub-area counter.}%
   \refstepcounter{SubArea}%
   \IfNoValueTF{#2}%
     {\label{\AreaLabel@Prefix:#1}}%
@@ -577,7 +577,7 @@
 % dndspell.sty - to be removed in version 1.0.0
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\spellheader}[6]{%
-  \DndDeprecate{\noexpand\spellheader}{1.0.0}{Use \noexpand\DndSpellHeader to typeset a spell header.}%
+  \AIDeprecate{\noexpand\spellheader}{1.0.0}{Use \noexpand\AISpellHeader to typeset a spell header.}%
   \subtitlesection{#1}{#2}
   \begin{description}[noitemsep,nosep,after=\smallskip,leftmargin=1em]
     \item[\spellcastingtimename:] #3
@@ -600,17 +600,17 @@
 \begingroup%
 \par\vspace{10pt plus 3 pt minus 3pt}%
 \noindent%
-\DndFontTableTitle%
+\AIFontTableTitle%
 #1%
 \endgroup%
 }
 
 % Table Environment
 \NewDocumentEnvironment{dndtable}{O{XX} O{tablecolor}}{%
-  \DndDeprecate{\noexpand\dndtable}{1.0.0}{Use \noexpand\DndTable for tables.}%
+  \AIDeprecate{\noexpand\dndtable}{1.0.0}{Use \noexpand\AITable for tables.}%
   \par\vspace{2pt plus 1pt minus 1pt}%
   \noindent%
-  \DndFontTableBody%
+  \AIFontTableBody%
   \setlength{\extrarowheight}{3pt}%
   \rowcolors{1}{}{#2}%
   \tabularx{\linewidth}{#1}%
