@@ -19,6 +19,7 @@
 \RequirePackage {tikz} % drawing ornaments and lines
 \RequirePackage {xcolor}
 \RequirePackage {xparse} % \NewDocumentCommand and expl3
+\RequirePackage {fontawesome7}
 
 \sys_if_engine_luatex:T
   {
@@ -74,6 +75,7 @@
 \RequirePackage {lib/astroinfernocolors}     % color definitions
 \RequirePackage {lib/astroinfernofonts}      % font definitions
 \RequirePackage {lib/astroinfernostrings}    % Load document strings
+\RequirePackage {lib/astroinfernosymbols}    % Load document symbols
 
 % Conditionally load deprecated code for backwards compatibility
 \bool_if:NF \l__AI_no_deprecated_code_bool

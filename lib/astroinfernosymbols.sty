@@ -1,0 +1,21 @@
+% Define special symbols. See https://astroinferno.com/astro_coven/srd/srd.html#symbols
+% Preferably use fontawesome6 or comonly available packages, then tikz if needed.
+
+% ==== Core stat tokens
+\newcommand\AIheartsymbol{\faHeart}
+\newcommand\AIeyesymbol{\faEye}
+\newcommand\AImoonymbol{\faMoon}
+\newcommand\AIspsymbol{\faHexagon} % Uses fallback from faHexagonPlus (pro)
+\newcommand\AIlimitsymbol{\faHourglassHalf}
+
+% Wrappers
+\newcommand\AIlifesymbol{\AIheartsymbol}
+\newcommand\AIsanitysymbol{\AIeyesymbol}
+\newcommand\AIaurasymbol{\AImoonsymbol}
+
+% ==== Combat stat tokens
+\newcommand\AIdamagesymbol{\faCrossHairs} % Alt faBullsEye
+\newcommand\AImortalitysymbol{\faSkullCrossbones} % Uses fallback from faTombStone (pro )(v7 faHeadstone)
+\newcommand\AIbonessymbol{\faShield}
+\newcommand\AIchestsymbol{\faBox} % Not great fallback
+
