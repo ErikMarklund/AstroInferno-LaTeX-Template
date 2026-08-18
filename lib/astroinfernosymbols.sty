@@ -1,11 +1,15 @@
 % Define special symbols. See https://astroinferno.com/astro_coven/srd/srd.html#symbols
 % Preferably use fontawesome6 or comonly available packages, then tikz if needed.
 
+%\input{lib/astroinfernotikzsymbols.sty}
+
 % ==== Core stat tokens
 \newcommand\AIheartsymbol{\faHeart}
 \newcommand\AIeyesymbol{\faEye}
-\newcommand\AImoonymbol{\faMoon}
-\newcommand\AIspsymbol{\faHexagon} % Uses fallback from faHexagonPlus (pro)
+\newcommand\AImoonsymbol{\faMoon}
+%\newcommand\AIspsymbol{\faHexagon} % Uses fallback from faHexagonPlus
+%(pro)
+\newcommand{\AIspsymbol}{\AIspsymboltikz}
 \newcommand\AIlimitsymbol{\faHourglassHalf}
 
 % Wrappers
@@ -15,7 +19,19 @@
 
 % ==== Combat stat tokens
 \newcommand\AIdamagesymbol{\faCrosshairs} % Alt faBullsEye
-\newcommand\AImortalitysymbol{\faSkullCrossbones} % Uses fallback from faTombStone (pro )(v7 faHeadstone)
+%\newcommand\AImortalitysymbol{\faSkullCrossbones} % Uses fallback from faTombStone (pro )(v7 faHeadstone)
+\newcommand\AImortalitysymbol{\AImortalitysymboltikz}
 \newcommand\AIbonessymbol{\faShield}
-\newcommand\AIchestsymbol{\faBox} % Not great fallback
+% \newcommand\AIchestsymbol{\faBox} % Not great fallback
+\newcommand\AIchestsymbol{\AIchesttikzsymbol}
 
+
+% ==== Loot skill tokens
+\newcommand{\AIalchemysymbol}{\faScaleBalanced}
+\newcommand{\AIancientsymbol}{\AIancienttikzsymbol}
+\newcommand{\AIsecularsymbol}{\AIseculartikzsymbol}
+\newcommand{\AIgenesissymbol}{\faRainbow}
+\newcommand{\AIharrowedsymbol}{\faSkull}
+\newcommand{\AIapotecharysymbol}{\faFlask} % fallback from% fa-flask-round-potion.
+\newcommand{\AIdominionsymbol}{\faBook}
+\newcommand{\AIscroungesymbol}{\faCircleQuestion}

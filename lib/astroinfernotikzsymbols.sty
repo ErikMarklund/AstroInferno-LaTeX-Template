@@ -1,0 +1,202 @@
+\ExplSyntaxOn
+
+% tikz expects ':' but \ExplSyntaxOn messes with spaces and ':'.
+% Need to insert the colon in another way using \c_colon_str and the local variable defined below.
+% Spaces are solved with ~.
+\tl_set_eq:NN \: \c_colon_str
+
+
+% ==== Story point symbol (hexagon+)
+\newcommand{\AIspsymboltikz}{
+  \begin{tikzpicture}[
+    % Set (0,0) as the true typographical baseline floor.
+    % Perfect Sync: Bottom sits exactly at Y = -0.11em, Top sits exactly at Y = 0.68em.
+    baseline={(0,0)}, 
+    scale=1.0, 
+    every~path/.style={line~join=round}
+  ]
+
+    \fill[fill=., even~odd~rule] 
+      % Hexagon
+      (0.0000em, 0.6800em)   -- (0.1848em, 0.6800em) 
+      arc (90\:30\:0.0750em)   -- (0.4345em, 0.3225em) 
+      arc (30\:-30\:0.0750em)  -- (0.2497em, -0.0725em) 
+      arc (330\:270\:0.0750em) -- (-0.1848em, -0.1100em) 
+      arc (270\:210\:0.0750em) -- (-0.4345em, 0.2475em) 
+      arc (210\:150\:0.0750em) -- (-0.2497em, 0.6425em) 
+      arc (150\:90\:0.0750em)  -- cycle
+      
+      % Plus sign
+      (-0.0658em, 0.3508em) -- 
+      (-0.2250em, 0.3508em) arc (90\:180\:0.0120em) -- 
+      (-0.2370em, 0.2312em) arc (180\:270\:0.0120em) -- 
+      (-0.0658em, 0.2192em) -- 
+      (-0.0658em, 0.0600em) arc (180\:270\:0.0120em) -- 
+      (0.0538em,  0.0480em) arc (270\:360\:0.0120em) -- 
+      (0.0658em,  0.2192em) -- 
+      (0.2250em,  0.2192em) arc (270\:360\:0.0120em) -- 
+      (0.2370em,  0.3388em) arc (0\:90\:0.0120em) -- 
+      (0.0658em,  0.3508em) -- 
+      (0.0658em,  0.5100em) arc (0\:90\:0.0120em) -- 
+      (-0.0538em, 0.5220em) arc (90\:180\:0.0120em) -- cycle;
+
+  \end{tikzpicture}
+}
+
+
+% ==== Mortality symbol (tombstone)
+\newcommand{\AImortalitysymboltikz}{
+  \begin{tikzpicture}[
+    % Set (0,0) as the true typographical baseline floor. 
+    % The top of the capsule base aligns exactly with the bottom of letters.
+    baseline={(0,0)}, 
+    scale=1.0, 
+    every~path/.style={line~join=round}
+  ]
+    % A single, clean fill command using the even-odd subtraction rule.
+    % The cross center stays completely hollow and its inner corners stay perfectly sharp.
+    \fill[fill=., even~odd~rule]
+      % Base (Height = 0.11em, Tuned Width = 0.88em)
+      [rounded~corners=0.025em] (-0.44em, -0.11em) rectangle (0.44em, 0.0em)
+      
+      % Actual tombstone (Total Width = 0.66em, Peak Height = 0.74em)
+      [rounded~corners=0em] (-0.33em, 0.05em) -- (-0.33em, 0.41em) 
+      arc (180\:0\:0.33em) -- (0.33em, 0.05em) -- cycle
+      
+      % Cross
+      (-0.04em, 0.48em) -- 
+      (-0.136em, 0.48em) arc (90\:180\:0.024em) -- 
+      (-0.160em, 0.424em) arc (180\:270\:0.024em) -- 
+      (-0.04em, 0.40em) -- 
+      (-0.04em, 0.184em) arc (180\:270\:0.024em) -- 
+      (0.016em,  0.160em) arc (270\:360\:0.024em) -- 
+      (0.04em,  0.40em) -- 
+      (0.136em,  0.40em) arc (270\:360\:0.024em) -- 
+      (0.160em,  0.456em) arc (0\:90\:0.024em) -- 
+      (0.04em,  0.48em) -- 
+      (0.04em,  0.566em) arc (0\:90\:0.024em) -- 
+      (-0.016em, 0.590em) arc (90\:180\:0.024em) -- cycle;
+
+  \end{tikzpicture}
+}
+
+
+% ==== Loot / chest symbol
+\newcommand{\AIchesttikzsymbol}{
+  \begin{tikzpicture}[
+    % Pin coordinate (0,0) straight to the typographical text baseline
+    baseline={(0,0)}, 
+    scale=1.0
+  ]
+
+    % Lower left
+    \fill (-0.3725em, 0.2525em) -- (-0.5445em, 0.2525em) -- (-0.5445em, -0.07em) 
+          arc (180\:270\:0.04em) -- (-0.3725em, -0.11em) -- cycle;
+    % Lower right
+    \fill (0.3725em, 0.2525em) -- (0.5445em, 0.2525em) -- (0.5445em, -0.07em) 
+          arc (0\:-90\:0.04em) -- (0.3725em, -0.11em) -- cycle;
+    % Lower center
+    \fill (-0.3075em, -0.11em) -- (0.3075em, -0.11em) -- (0.3075em, 0.2525em)
+          -- (0.12em, 0.2525em) -- (0.12em, 0.165em) 
+          arc (0\:-90\:0.03em) -- (-0.09em, 0.135em) 
+          arc (270\:180\:0.03em) -- (-0.12em, 0.2525em) 
+          -- (-0.3075em, 0.2525em) -- cycle;
+    % Upper left
+    \fill (-0.5445em, 0.3175em) -- (-0.3725em, 0.3175em) -- (-0.3725em, 0.74em)
+          arc (90\:180\:0.172em) -- cycle;
+    % Upper right
+    \fill (0.5445em, 0.3175em) -- (0.3725em, 0.3175em) -- (0.3725em, 0.74em)
+          arc (90\:0\:0.172em) -- cycle;
+    % Upper center
+    \fill (-0.3075em, 0.3175em) -- (-0.12em, 0.3175em) -- (-0.12em, 0.405em) 
+          arc (180\:90\:0.03em) -- (0.09em, 0.435em) 
+          arc (90\:0\:0.03em) -- (0.12em, 0.3175em) 
+          -- (0.3075em, 0.3175em) -- (0.3075em, 0.74em) -- (-0.3075em, 0.74em) -- cycle;
+    % Lock pin
+    \fill[rounded~corners=0.025em] (-0.03em, 0.20em) rectangle (0.03em, 0.37em);
+  \end{tikzpicture}
+}
+
+
+% ==== Ancient symbol (Hamsa; not awesome)
+\newcommand{\AIancienttikzsymbol}{
+  \begin{tikzpicture}[
+    % Set (0,0) as the true typographical baseline floor.
+    % Perfect Sync: Bottom sits exactly at Y = -0.11em, Top peaks exactly at Y = 0.74em.
+    baseline={(0,0)}, 
+    scale=1.0, 
+    every~path/.style={line~join=round}
+  ]
+    \fill[fill=., even~odd~rule]
+      % Outer
+      % Start at the left outer finger base wall (X = -0.25em, Y = 0.28em)
+      (-0.25em, 0.28em) -- 
+      % Left Finger Column (Capsule top peaking at Y = 0.64em)
+      (-0.25em, 0.58em) arc (180\:0\:0.06em) -- 
+      % Left Index Gap Floor (Shortened vertically, then sweeping into a 0.024em arc)
+      (-0.13em, 0.404em) arc (180\:270\:0.024em) --
+      % Middle Finger Left Wall (Sweeping smoothly back up into the center column)
+      (-0.089em, 0.380em) arc (270\:360\:0.024em) -- 
+      % Middle Finger Main Column (Capsule top peaking at Y = 0.74em)
+      (-0.065em, 0.675em) arc (180\:0\:0.065em) -- 
+      % Middle Finger Right Wall (Dropping down into the right valley)
+      (0.065em, 0.404em) arc (180\:270\:0.024em) --
+      % Right Index Gap Floor (Sweeping smoothly back up into the right column)
+      (0.106em, 0.380em) arc (270\:360\:0.024em) --
+      % Right Finger Column (Capsule top peaking at Y = 0.64em)
+      (0.13em, 0.58em) arc (180\:0\:0.06em) -- 
+      % Right Outer Finger Base Wall
+      (0.25em, 0.28em) --
+      % Right Outer Thumb Step
+      (0.35em, 0.28em) 
+      % Rounded Right Thumb Tip Flare (Smooth continuous 180-degree sweep)
+      arc (90\:-90\:0.06em)
+      % Straight 45-degree angle line sloping down inwardly from the thumb floor tangent
+      -- (0.1366em, -0.0534em)
+      % Mathematically locked connecting arc (Radius: 0.19315em, Centered exactly at X=0)
+      arc (315\:225\:0.19315em)
+      % Symmetrical straight 45-degree angle line rising up to the left thumb floor tangent
+      -- (-0.35em, 0.16em)
+      % Rounded Left Thumb Tip Flare (Smooth continuous 180-degree sweep)
+      arc (270\:180\:0.06em)
+      arc (180\:90\:0.06em) -- (-0.35em, 0.28em) -- cycle
+
+      % Eye cut out
+      (-0.16em, 0.15em) arc (210\:330\:0.1848em)
+                        arc (30\:150\:0.1848em) -- cycle
+
+      % Pupil
+      (0.0em, 0.11em) arc (-90\:270\:0.04em) -- cycle;
+
+  \end{tikzpicture}
+}
+
+
+% ==== Secular symbol (sword)
+\newcommand{\AIseculartikzsymbol}{
+  % \nopagebreak % keep? Add to the others?
+  \begin{tikzpicture}[
+    baseline={(0,0)}, 
+    scale=1.0, 
+    every~path/.style={line~join=round, line~cap=round, miter~limit=1.5}
+  ]
+    % 1. Blade Path
+    \fill[fill=., even~odd~rule] 
+      (-0.065em,0.344em)
+      -- (0.315em,0.724em)
+      [rounded~corners=0.040em] -- (0.505em,0.755em) 
+      [sharp~corners]          -- (0.474em,0.565em)
+      -- (0.094em,0.185em)
+      -- cycle;
+        
+    % 2. Hilt / Crossguard Path
+    \fill[fill=.]
+      (-0.184em,0.385em) 
+      [rounded~corners=0.018em] -- (0.138em,0.065em) -- (0.073em,-0.001em) 
+      [sharp~corners]          -- (-0.077em,0.099em) -- (-0.165em,0.007em) 
+      [rounded~corners=0.018em] -- (-0.135em,-0.055em) -- (-0.190em,-0.110em) -- (-0.357em,0.057em) -- (-0.302em,0.112em) 
+      [sharp~corners]          -- (-0.239em,0.082em) -- (-0.149em,0.168em) 
+      [rounded~corners=0.018em] -- (-0.250em,0.320em) 
+      -- cycle;
+  \end{tikzpicture}
+}
