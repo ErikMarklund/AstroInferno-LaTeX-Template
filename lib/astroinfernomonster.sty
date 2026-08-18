@@ -130,6 +130,12 @@
     \end {hangingpar}
   }
 
+\NewDocumentCommand{\AIMonsterBeing} {m}
+  {
+    % Same format as AIMonsterClass. See rulebook.
+    \AIMonsterClass{#1}
+  }
+
 % Fancy DnD 5e stat block rule
 \NewDocumentCommand {\AIMonsterLine} {}
   {
@@ -194,9 +200,9 @@
       %\end {__AI_monster_attributes}
     \begin{center}
       \hfill
-      \AIdamagesymbol\hspace{0.5em}\l__damage_tl\hspace{2em}
-      \AImortalitysymbol\hspace{0.5em}\l__mortality_tl\hspace{2em}
-      \AIbonessymbol\hspace{0.5em}\l__bones_tl \hfill\null
+      \l__damage_tl\hspace{0.5em}\AIdamagesymbol\hspace{2em}
+      \l__mortality_tl\hspace{0.5em}\AImortalitysymbol\hspace{2em}
+      \l__bones_tl\hspace{0.5em}\AIbonessymbol\hfill\null
     \end{center}
   }
 
@@ -204,9 +210,10 @@
   {
     \group_begin:
       \keys_set:nn { astroinferno / monster / basics } {#1}
-      \AIMonsterLine
+      % No line in AI.
+      % \AIMonsterLine
       \__AI_monster_basics:
-      \AIMonsterLine
+      %\AIMonsterLine
     \group_end:
   }
 
@@ -371,6 +378,76 @@
             {\l__proficiency_tl}
         }
     \end {__AI_monster_attributes}
+}
+
+\NewDocumentCommand {\AIMonsterTroubles} {m m}
+{
+  \noindent
+  \begin{minipage}[t]{0.49\columnwidth}
+    \textbf{Troubles}\\
+    \it
+    % Map through the list and add a newline after each item
+    \clist_map_inline:nn { #1 } { ##1 \\ }
+  \end{minipage}
+  \hfill
+  \begin{minipage}[t]{0.49\columnwidth}
+    \raggedleft
+    \textbf{End~trouble}\\
+    \it
+    % Map through the list and add a newline after each item
+    \clist_map_inline:nn { #2 } { ##1 \\ }
+  \end{minipage}
+  
+  \vspace{\baselineskip} % Add vertical space after the lists
+}
+
+\NewDocumentCommand {\AIMonsterTraits} {m}
+{
+  % Looks like AIMonsterType. See rulebook
+  \AIMonsterType{#1}
+}
+
+\NewDocumentCommand {\AIMonsterDescription} {m}
+{
+  \noindent
+  {#1}
+}
+
+\NewDocumentCommand {\AIMonsterHarvest} {m m}
+{
+  \noindent
+
+  % 1. Split the left side by commas into individual pairs
+  \seq_set_split:Nnn \l_left_pairs_seq { , } { #1 }
+  % 2. Split the right side by commas normally
+  \seq_set_split:Nnn \l_right_list_seq { , } { #2 }
+
+  % Left Column
+  \begin{minipage}[t]{0.60\textwidth}
+    \textbf{Harvesting}~{\tiny(Choose~one)}\\
+    % Loop through each pair element
+    \seq_map_inline:Nn \l_left_pairs_seq 
+     {
+      % Split the single pair string using "/" as the internal divider
+      \seq_set_split:Nnn \l_single_pair_seq { , } { ##1 }
+      
+      % Print item 1, push to the right edge, print item 2, start new line
+      \seq_item:Nn \l_single_pair_seq { 1 } 
+      \hfill 
+      \seq_item:Nn \l_single_pair_seq { 2 } \\
+    }
+  \end{minipage}
+  \hfill
+  
+  % Right Column
+  \begin{minipage}[t]{0.38\columnwidth}
+    \raggedleft
+    \textbf{Looting}\\
+    % Map through the list and add a newline after each item
+    \seq_map_inline:Nn \l_right_list_seq { ##1 \\ }
+  \end{minipage}
+  
+  \vspace{\baselineskip} % Add vertical space after the lists
 }
 
 \NewDocumentCommand {\AIMonsterDetails} {o}
