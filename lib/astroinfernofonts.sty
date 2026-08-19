@@ -9,12 +9,19 @@
 
 \bool_if:NT \l__AI_layout_bool
   {
-    \RequirePackage{bookman}
+    % \RequirePackage{bookman}
+    \RequirePackage{fontspec}
+    \RequirePackage{lato}
     \RequirePackage[type1]{gillius2}
     \RequirePackage[notext,nomath,nott]{kpfonts}
     \RequirePackage[T1]{fontenc}
     \renewcommand{\sfdefault}{jkpss}
+    \setmainfont{Lato}
+    \setsansfont{Lato}
+    \renewcommand{\familydefault}{\rmdefault}
   }
+
+
 
 \cs_new_protected:Npn \__AI_sf_initial_family:
   {
