@@ -410,7 +410,7 @@
 \NewDocumentCommand {\AIMonsterDescription} {m}
 {
   \noindent
-  {#1}
+  {#1\\}
 }
 
 \NewDocumentCommand {\AIMonsterHarvest} {m m}
@@ -424,6 +424,7 @@
 
   % Left Column
   \begin{minipage}[t]{0.60\textwidth}
+    \raggedright
     \textbf{Harvesting}~{\tiny(Choose~one)}\\
     % Loop through each pair element
     \seq_map_inline:Nn \l_left_pairs_seq 
