@@ -20,16 +20,16 @@
   \titleformat {\part}
     [display]
     { \centering \AIFontPart } % format
-    { \AIContour{\partname\ \thepart} } % label
+    { \partname\ \thepart } % label
     { 2ex } % sep
-    { \AIContour } % before-code
+    {} % before-code
 
   % Chapter
   \titleformat {\chapter}
     { \AIFontChapter } % format
-    { \AIContour{\chaptertitlename\ \thechapter :} } % label
+    { \chaptertitlename\ \thechapter : } % label
     { \wordsep } % sep
-    { \AIContour } % before-code
+    {} % before-code
 
   \titlespacing* {\chapter}
     { 0pt }  % left
