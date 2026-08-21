@@ -149,27 +149,31 @@ The |AITable| colors the even rows and is set to the width of a line by default.
 \chapter{Monsters and NPCs}
 
 % Monster stat block
-\begin{AIMonster}[float*=b,width=\columnwidth]{Monster Foo}
-    \AIMonsterType{Souls, imps}
+\begin{AIMonster}[float=htb,width=\columnwidth]{Void cult accolyte}
+    \AIMonsterType{Souls - imps}
     \AIMonsterClass{Minions}
     \AIMonsterBeing{Ashen souls}
-    % If you want to use commas in the key values, enclose the values in braces.
-    \AIMonsterBasics[
-        damage = {3},
-        mortality  = {12},
-        bones       = {3},
-      ]
-
+    \AIMonsterBasics[damage = {3}, mortality  = {12}, bones       = {3}]
     \AIMonsterTroubles{Shoot: 6~\AIdamagesymbol, Cower: \AIbonessymbol +1}{{Suicide bomb: 15~\AIdamagesymbol,
         area}, Frenzy: \AIdamagesymbol +3}
-    \AIMonsterTraits{Trigger happy, volatile}
+    \AIMonsterTraits{Trigger happy - volatile}
     \AIMonsterDescription{Fanatic minions, both cowards and suicidal
       at the same time.}
+    % For the harvesting and looting, provide the former as a
+    % nested comma-separated list as first argument, the latter as a
+    % comma-separated list as second argument. The third argument is
+    % how many items can be chosen from the harvesting table:
+    % \AIMonsterHarvest{ {h1, ammount1} , {h2, ammount2} , ... }
+    % {loot, blood}
+    % {one}
+    % As of now, the dice rolls must be manually formatted to look
+    % similar to the rule book by using {\scriptsize{die} /
+    % SP}. Automatic formatting might become overly complex.
     \AIMonsterHarvest
-    {{\AIapotecharysymbol~Unlight tobacco, 1D6/\AIspsymbol},
-     {\AIsecularsymbol~Erthian ingots, 1D6/\AIspsymbol}}
-    {\AIchestsymbol~{-4},\AIbloodsymbol~Soiled blood}
-    
+    {{\AIapotecharysymbol~Unlight tobacco, {\scriptsize 1D6}/\AIspsymbol},
+     {\AIsecularsymbol~Erthian ingots, {\scriptsize 1D6}/\AIspsymbol}}
+    {\AIchestsymbol~{(-4)},\AIbloodsymbol~Soiled blood}
+    {one}
 \end{AIMonster}
 
 The |AIMonster| environment is used to typeset monster and NPC stat blocks. The module supplies many functions to easily typeset the contents of the stat block
