@@ -376,19 +376,22 @@
   {\small{#1}\\[0.4em]}
 }
 
-\NewDocumentCommand {\AIMonsterHarvest} {m m m}
+% Optional argument gives number of choices from harvest table.
+% m1 is pairs of harvest table entries {{h1, ammount1}, {h2, ammount2}, ... }
+% m2 is loot and blood.
+\NewDocumentCommand {\AIMonsterHarvest} {O{one} m m}
 {
   \noindent
   \small
   % 1. Split the left side by commas into individual pairs
-  \seq_set_split:Nnn \l_left_pairs_seq { , } { #1 }
+  \seq_set_split:Nnn \l_left_pairs_seq { , } { #2 }
   % 2. Split the right side by commas normally
-  \seq_set_split:Nnn \l_right_list_seq { , } { #2 }
+  \seq_set_split:Nnn \l_right_list_seq { , } { #3 }
 
   % Left Column
   \begin{minipage}[t]{0.60\textwidth}
     \raggedright
-    \textbf{Harvesting}~{\scriptsize(Choose~{#3})}\\
+    \textbf{Harvesting}~{\scriptsize(Choose~{#1})}\\
     % Loop through each pair element
     \seq_map_inline:Nn \l_left_pairs_seq 
      {
