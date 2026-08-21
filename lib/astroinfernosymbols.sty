@@ -1,4 +1,6 @@
-% Define special symbols. See https://astroinferno.com/astro_coven/srd/srd.html#symbols
+\ExplSyntaxOn
+
+%Define special symbols. See https://astroinferno.com/astro_coven/srd/srd.html#symbols
 % Preferably use fontawesome6 or comonly available packages, then tikz if needed.
 
 %\input{lib/astroinfernotikzsymbols.sty}
@@ -38,3 +40,33 @@
 
 % ==== Other
 \newcommand{\AIbloodsymbol}{\faDroplet}
+
+%=============================
+%========= Useful macros ==========
+\NewDocumentCommand{\AIsymbolprinter}{o m m}
+{
+  \str_case:nnF {#1}
+  {
+    { + } {{#2}+{#3}}
+    { - } {{#2}-{#3}}
+  }
+  { {#3} \nobreakspace {#2} }
+}
+
+\NewDocumentCommand{\AIlife}{o m} {\AIsymbolprinter[#1]{\AIlifesymbol}{#2}}
+\NewDocumentCommand{\AIsanity}{o m} {\AIsymbolprinter[#1]{\AIsanitysymbol}{#2}}
+\NewDocumentCommand{\AIaura}{o m} {\AIsymbolprinter[#1]{\AIaurasymbol}{#2}}
+
+\NewDocumentCommand{\AIdamage}{o m} {\AIsymbolprinter[#1]{\AIdamagesymbol}{#2}}
+\NewDocumentCommand{\AImortality}{o m} {\AIsymbolprinter[#1]{\AImortalitysymbol}{#2}}
+\NewDocumentCommand{\AIbones}{o m} {\AIsymbolprinter[#1]{\AIbonessymbol}{#2}}
+
+\NewDocumentCommand{\AIloot}{o m}
+{
+  \str_case:nnF {#1}
+  {
+    { + } {\AIchestsymbol \nobreakspace (+{#2})}
+    { - } {\AIchestsymbol \nobreakspace (-{#2})}
+  }
+  {{#2}}
+}

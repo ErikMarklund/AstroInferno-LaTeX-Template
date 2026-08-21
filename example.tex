@@ -154,8 +154,13 @@ The |AITable| colors the even rows and is set to the width of a line by default.
     \AIMonsterClass{Minions}
     \AIMonsterBeing{Ashen souls}
     \AIMonsterBasics{3}{12}{3} % damage, mortality, bones
-    \AIMonsterTroubles{Shoot: 6~\AIdamagesymbol, Cower: \AIbonessymbol +1}{{Suicide bomb: 15~\AIdamagesymbol,
-        area}, Frenzy: \AIdamagesymbol +3}
+    \AIMonsterTroubles {
+      Shoot: \AIdamage{6},
+      Cower: \AIbones[+]{1}
+    } {
+      {Suicide bomb: \AIdamage{15}, area},
+      Frenzy: \AIdamage[+]{3}
+    }
     \AIMonsterTraits{Trigger happy - volatile}
     \AIMonsterDescription{Fanatic minions, both cowards and suicidal
       at the same time.}
@@ -172,7 +177,7 @@ The |AITable| colors the even rows and is set to the width of a line by default.
     \AIMonsterHarvest
     {{\AIapotecharysymbol~Unlight tobacco, {\scriptsize 1D6}/\AIspsymbol},
      {\AIsecularsymbol~Erthian ingots, {\scriptsize 1D6}/\AIspsymbol}}
-    {\AIchestsymbol~{(-4)},\AIbloodsymbol~Soiled blood}
+    {\AIloot[-]{4},\AIbloodsymbol~Soiled blood}
     {one}
 \end{AIMonster}
 
@@ -185,8 +190,14 @@ change the title font for our Void cult demagogue to Feather\-graphy Decoration.
     \AIMonsterClass{Champions}
     \AIMonsterBeing{Greater souls}
     \AIMonsterBasics{6}{6}{3}
-    \AIMonsterTroubles{Punishment: 10~\AIdamagesymbol, Glossolalia:
-      \AIdamagesymbol +2, Support: +5 Accolytes}{Possess one character, Curse: Party disadvantage}
+    \AIMonsterTroubles{
+      Punishment: \AIdamage{10},
+      Glossolalia:\AIdamage[+]{2},
+      Support: +5~Accolytes
+    } {
+      Possess one character,
+      Curse: Party disadvantage
+    }
     \AIMonsterTraits{Insane - zealous - devoted}
     \AIMonsterDescription{Zealot mid-level leaders in the cult. Will
       never retreat, ready to sacrifice themselves for the greater evil.}
@@ -194,7 +205,7 @@ change the title font for our Void cult demagogue to Feather\-graphy Decoration.
     {{\AIapotecharysymbol~Excellent III Elixir, {\scriptsize 1}/\AIspsymbol},
      {\AIalchemysymbol~Exotic ingredient, {\scriptsize 2}/\AIspsymbol},
      {\AIancientsymbol~Excellent III Valuable, {\scriptsize 1D4}/\AIspsymbol}}
-    {\AIchestsymbol~{(-4)},\AIbloodsymbol~Normal blood}
+    {\AIloot[-]{4},\AIbloodsymbol~Normal blood}
     {one}
 \end{AIMonster}
 \part{Customization}
