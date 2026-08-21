@@ -153,7 +153,7 @@ The |AITable| colors the even rows and is set to the width of a line by default.
     \AIMonsterType{Souls - imps}
     \AIMonsterClass{Minions}
     \AIMonsterBeing{Ashen souls}
-    \AIMonsterBasics[damage = {3}, mortality  = {12}, bones       = {3}]
+    \AIMonsterBasics{3}{12}{3} % damage, mortality, bones
     \AIMonsterTroubles{Shoot: 6~\AIdamagesymbol, Cower: \AIbonessymbol +1}{{Suicide bomb: 15~\AIdamagesymbol,
         area}, Frenzy: \AIdamagesymbol +3}
     \AIMonsterTraits{Trigger happy - volatile}
@@ -177,7 +177,26 @@ The |AITable| colors the even rows and is set to the width of a line by default.
 \end{AIMonster}
 
 The |AIMonster| environment is used to typeset monster and NPC stat blocks. The module supplies many functions to easily typeset the contents of the stat block
+One can pass |tcolorbox| options to |AIMonster|. For example, we can
+change the title font for our Void cult demagogue to Feather\-graphy Decoration.
 
+\begin{AIMonster}[float=htb,width=\columnwidth, fonttitle=\fontsize{30}{35}\AIfontFeathergraphyDecoration]{Void cult demagogue}
+    \AIMonsterType{Void priests - Obliviation deacons}
+    \AIMonsterClass{Champions}
+    \AIMonsterBeing{Greater souls}
+    \AIMonsterBasics{6}{6}{3}
+    \AIMonsterTroubles{Punishment: 10~\AIdamagesymbol, Glossolalia:
+      \AIdamagesymbol +2, Support: +5 Accolytes}{Possess one character, Curse: Party disadvantage}
+    \AIMonsterTraits{Insane - zealous - devoted}
+    \AIMonsterDescription{Zealot mid-level leaders in the cult. Will
+      never retreat, ready to sacrifice themselves for the greater evil.}
+    \AIMonsterHarvest
+    {{\AIapotecharysymbol~Excellent III Elixir, {\scriptsize 1}/\AIspsymbol},
+     {\AIalchemysymbol~Exotic ingredient, {\scriptsize 2}/\AIspsymbol},
+     {\AIancientsymbol~Excellent III Valuable, {\scriptsize 1D4}/\AIspsymbol}}
+    {\AIchestsymbol~{(-4)},\AIbloodsymbol~Normal blood}
+    {one}
+\end{AIMonster}
 \part{Customization}
 
 \chapter{Colors}

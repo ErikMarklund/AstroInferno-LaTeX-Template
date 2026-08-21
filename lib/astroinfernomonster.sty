@@ -172,12 +172,12 @@
     bones .value_required:n   = true,
   }
 
-\NewDocumentCommand {\AIMonsterBasics} {o}
+\NewDocumentCommand {\AIMonsterBasics} {m m m}
 {
       \hfill
-      \l__damage_tl\hspace{0.5em}\AIdamagesymbol\hspace{2em}
-      \l__mortality_tl\hspace{0.5em}\AImortalitysymbol\hspace{2em}
-      \l__bones_tl\hspace{0.5em}\AIbonessymbol\hfill\null\\
+      {#1}\hspace{0.5em}\AIdamagesymbol\hspace{2em}
+      {#2}\hspace{0.5em}\AImortalitysymbol\hspace{2em}
+      {#3}\hspace{0.5em}\AIbonessymbol\hfill\null\\
   }
 
 %% Monster CR/XP helper
