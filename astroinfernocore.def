@@ -77,6 +77,7 @@
 \RequirePackage {lib/astroinfernostrings}    % Load document strings
 \RequirePackage {lib/astroinfernosymbols}    % Load document symbols
 \RequirePackage {lib/astroinfernotikzsymbols}    % Load document symbols
+\RequirePackage {lib/astroinfernodarkpages}  % Fiat lux
 
 % Conditionally load deprecated code for backwards compatibility
 \bool_if:NF \l__AI_no_deprecated_code_bool

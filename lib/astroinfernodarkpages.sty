@@ -1,0 +1,19 @@
+\ExplSyntaxOn
+
+\definecolor{AIcurrentcolour}{rgb}{0,255,0}
+
+\NewDocumentCommand{\AIMakeDark} {s}
+{
+  \bool_if:NF{#1}
+  {\clearpage}
+  \colorlet{AIcurrentcolour}{white}
+  \addfontfeature{Color=AIcurrentcolour}
+}
+
+\NewDocumentCommand{\AIMakeLight} {s}
+{
+  \bool_if:NF{#1}
+  {\clearpage}
+  \colorlet{AIcurrentcolour}{black}
+  \addfontfeature{Color=AIcurrentcolour}
+}

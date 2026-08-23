@@ -58,40 +58,42 @@
     part-style .value_required:n = true,
     % Chapter
     chapter-family .tl_set:N         = \l__AI_chapter_family_tl,
-    chapter-family .initial:n        = \AIchapterfont,
+    chapter-family .initial:n        = \color{AIcurrentcolour} \AIchapterfont,
     chapter-family .value_required:n = true,
     chapter-style .tl_set:N         = \l__AI_chapter_style_tl,
     chapter-style .initial:n        = \linespread{.9} \Huge \scshape,
     chapter-style .value_required:n = true,
     % Section
     section-family .tl_set:N         = \l__AI_section_family_tl,
-    section-family .initial:n        = \AIsectionfont, %\normalfont,
+    section-family .initial:n        = \color{AIcurrentcolour} \AIsectionfont, %\normalfont,
     section-family .value_required:n = true,
     section-style .tl_set:N         = \l__AI_section_style_tl,
     section-style .initial:n        = \linespread{.9} \huge \scshape \RaggedRight,
     section-style .value_required:n = true,
     % Subsection
     subsection-family .tl_set:N         = \l__AI_subsection_family_tl,
-    subsection-family .initial:n        = \AIsubsectionfont, %\normalfont,
+    subsection-family .initial:n        = \color{AIcurrentcolour}\AIsubsectionfont, %\normalfont,
     subsection-family .value_required:n = true,
     subsection-style .tl_set:N         = \l__AI_subsection_style_tl,
     subsection-style .initial:n        = \linespread{.9} \Large \scshape \RaggedRight,
     subsection-style .value_required:n = true,
     % subsubsection
     subsubsection-family .tl_set:N         = \l__AI_subsubsection_family_tl,
-    subsubsection-family .initial:n        = \AIsubsectionfont, %\normalfont,
+    subsubsection-family .initial:n        = \color{AIcurrentcolour}\AIsubsectionfont, %\normalfont,
     subsubsection-family .value_required:n = true,
     subsubsection-style .tl_set:N         = \l__AI_subsubsection_style_tl,
     subsubsection-style .initial:n        = \linespread{.9} \large \scshape \RaggedRight,
     subsubsection-style .value_required:n = true,
     % paragraph
     paragraph-family .tl_set:N         = \l__AI_paragraph_family_tl,
+    paragraph-family.initial:n          = \color{AIcurrentcolour} \normalfont,
     paragraph-family .value_required:n = true,
     paragraph-style .tl_set:N         = \l__AI_paragraph_style_tl,
     paragraph-style .initial:n        = \bfseries \slshape,
     paragraph-style .value_required:n = true,
     % subparagraph
     subparagraph-family .tl_set:N         = \l__AI_subparagraph_family_tl,
+    subparagraph-family.initial:n          = \color{AIcurrentcolour} \normalfont,
     subparagraph-family .value_required:n = true,
     subparagraph-style .tl_set:N         = \l__AI_subparagraph_style_tl,
     subparagraph-style .initial:n        = \bfseries \slshape,
@@ -101,21 +103,21 @@
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     % Table title
     table-title-family .tl_set:N         = \l__AI_table_title_family_tl,
-    table-title-family .initial:n        = \sffamily,
+    table-title-family .initial:n        = \color{AIcurrentcolour} \sffamily,
     table-title-family .value_required:n = true,
     table-title-style .tl_set:N         = \l__AI_table_title_style_tl,
     table-title-style .initial:n        = \bfseries \scshape \large,
     table-title-style .value_required:n = true,
     % Table header
     table-header-family .tl_set:N         = \l__AI_table_header_family_tl,
-    table-header-family .initial:n        = \sffamily,
+    table-header-family .initial:n        = \color{AIcurrentcolour}\sffamily,
     table-header-family .value_required:n = true,
     table-header-style .tl_set:N         = \l__AI_table_header_style_tl,
     table-header-style .initial:n        = \bfseries,
     table-header-style .value_required:n = true,
     % Table body
     table-body-family .tl_set:N         = \l__AI_table_body_family_tl,
-    table-body-family .initial:n        = \__AI_sf_initial_family:,
+    table-body-family .initial:n        = \color{AIcurrentcolour}\__AI_sf_initial_family:,
     table-body-family .value_required:n = true,
     table-body-style .tl_set:N         = \l__AI_table_body_style_tl,
     table-body-style .initial:n        = \small,
@@ -125,14 +127,14 @@
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     % Comment title
     comment-title-family .tl_set:N         = \l__AI_comment_title_family_tl,
-    comment-title-family .initial:n        = \sffamily,
+    comment-title-family .initial:n        = \color{AIcurrentcolour}\sffamily,
     comment-title-family .value_required:n = true,
     comment-title-style .tl_set:N         = \l__AI_comment_title_style_tl,
     comment-title-style .initial:n        = \bfseries \scshape,
     comment-title-style .value_required:n = true,
     % Comment body
     comment-body-family .tl_set:N         = \l__AI_comment_body_family_tl,
-    comment-body-family .initial:n        = \__AI_sf_initial_family:,
+    comment-body-family .initial:n        = \color{AIcurrentcolour}\__AI_sf_initial_family:,
     comment-body-family .value_required:n = true,
     comment-body-style .tl_set:N         = \l__AI_comment_body_style_tl,
     comment-body-style .initial:n        = \small,
@@ -142,14 +144,14 @@
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     % Sidebar title
     sidebar-title-family .tl_set:N         = \l__AI_sidebar_title_family_tl,
-    sidebar-title-family .initial:n        = \sffamily,
+    sidebar-title-family .initial:n        = \color{AIcurrentcolour}\sffamily,
     sidebar-title-family .value_required:n = true,
     sidebar-title-style .tl_set:N         = \l__AI_sidebar_title_style_tl,
     sidebar-title-style .initial:n        = \bfseries \scshape,
     sidebar-title-style .value_required:n = true,
     % Sidebar body
     sidebar-body-family .tl_set:N         = \l__AI_sidebar_body_family_tl,
-    sidebar-body-family .initial:n        = \__AI_sf_initial_family:,
+    sidebar-body-family .initial:n        = \color{AIcurrentcolour}\__AI_sf_initial_family:,
     sidebar-body-family .value_required:n = true,
     sidebar-body-style .tl_set:N         = \l__AI_sidebar_body_style_tl,
     sidebar-body-style .initial:n        = \small,
@@ -158,7 +160,7 @@
     % Read-aloud boxes
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     readaloud-family .tl_set:N         = \l__AI_readaloud_family_tl,
-    readaloud-family .initial:n        = \__AI_sf_initial_family:,
+    readaloud-family .initial:n        = \color{AIcurrentcolour}\__AI_sf_initial_family:,
     readaloud-family .value_required:n = true,
     readaloud-style .tl_set:N         = \l__AI_readaloud_style_tl,
     readaloud-style .initial:n        = \small,
@@ -168,21 +170,21 @@
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     % Part
     toc-part-family .tl_set:N         = \l__AI_toc_part_family_tl,
-    toc-part-family .initial:n        = \normalfont,
+    toc-part-family .initial:n        = \color{AIcurrentcolour}\normalfont,
     toc-part-family .value_required:n = true,
     toc-part-style .tl_set:N         = \l__AI_toc_part_style_tl,
     toc-part-style .initial:n        = \Large \scshape,
     toc-part-style .value_required:n = true,
     % Chapter
     toc-chapter-family .tl_set:N         = \l__AI_toc_chapter_family_tl,
-    toc-chapter-family .initial:n        = \normalfont,
+    toc-chapter-family .initial:n        = \color{AIcurrentcolour}\normalfont,
     toc-chapter-family .value_required:n = true,
     toc-chapter-style .tl_set:N         = \l__AI_toc_chapter_style_tl,
     toc-chapter-style .initial:n        = \large \scshape,
     toc-chapter-style .value_required:n = true,
     % Section
     toc-section-family .tl_set:N         = \l__AI_toc_section_family_tl,
-    toc-section-family .initial:n        = \normalfont,
+    toc-section-family .initial:n        = \color{AIcurrentcolour}\normalfont,
     toc-section-family .value_required:n = true,
     toc-section-style .tl_set:N         = \l__AI_toc_section_style_tl,
     toc-section-style .initial:n        = \normalsize,
@@ -192,21 +194,21 @@
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     % Stat block title
     stat-block-title-family .tl_set:N         = \l__AI_stat_block_title_family_tl,
-    stat-block-title-family .initial:n        = \normalfont,
+    stat-block-title-family .initial:n        = \color{AIcurrentcolour}\normalfont,
     stat-block-title-family .value_required:n = true,
     stat-block-title-style .tl_set:N         = \l__AI_stat_block_title_style_tl,
     stat-block-title-style .initial:n        = \bfseries \fontsize{30}{35} \scshape,
     stat-block-title-style .value_required:n = true,
     % Stat block body
     stat-block-body-family .tl_set:N         = \l__AI_stat_block_body_family_tl,
-    stat-block-body-family .initial:n        = \normalfont,
+    stat-block-body-family .initial:n        = \color{AIcurrentcolour}\normalfont,
     stat-block-body-family .value_required:n = true,
     stat-block-body-style .tl_set:N         = \l__AI_stat_block_body_style_tl,
     stat-block-body-style .initial:n        = \small,
     stat-block-body-style .value_required:n = true,
     % Stat block section
     stat-block-section-family .tl_set:N         = \l__AI_stat_block_section_family_tl,
-    stat-block-section-family .initial:n        = \sffamily,
+    stat-block-section-family .initial:n        = \color{AIcurrentcolour}\sffamily,
     stat-block-section-family .value_required:n = true,
     stat-block-section-style .tl_set:N         = \l__AI_stat_block_section_style_tl,
     stat-block-section-style .initial:n        = \scshape \large,
@@ -216,21 +218,21 @@
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     % Footer
     footer-family .tl_set:N         = \l__AI_footer_family_tl,
-    footer-family .initial:n        = \normalfont,
+    footer-family .initial:n        = \color{AIcurrentcolour}\normalfont,
     footer-family .value_required:n = true,
     footer-style .tl_set:N         = \l__AI_footer_style_tl,
     footer-style .initial:n        = \scriptsize \textcolor{pagegold},
     footer-style .value_required:n = true,
     % Page number
     page-number-family .tl_set:N         = \l__AI_page_number_family_tl,
-    page-number-family .initial:n        = \normalfont,
+    page-number-family .initial:n        = \color{AIcurrentcolour}\normalfont,
     page-number-family .value_required:n = true,
     page-number-style .tl_set:N         = \l__AI_page_number_style_tl,
     page-number-style .initial:n        = \scriptsize \textcolor{pagegold},
     page-number-style .value_required:n = true,
     % Drop caps
     drop-cap-family .tl_set:N         = \l__AI_drop_cap_family_tl,
-    drop-cap-family .initial:n        = \Royal,
+    drop-cap-family .initial:n        = \color{AIcurrentcolour}\Royal,
     drop-cap-family .value_required:n = true,
     drop-cap-style .tl_set:N         = \l__AI_drop_cap_style_tl,
     drop-cap-style .value_required:n = true,
