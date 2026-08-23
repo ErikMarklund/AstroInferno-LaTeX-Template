@@ -20,6 +20,8 @@
 \RequirePackage {xcolor}
 \RequirePackage {xparse} % \NewDocumentCommand and expl3
 \RequirePackage {fontawesome7}
+\RequirePackage {eso-pic}
+\RequirePackage {luacolor}
 
 \sys_if_engine_luatex:T
   {

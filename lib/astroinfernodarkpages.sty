@@ -1,19 +1,54 @@
 \ExplSyntaxOn
 
-\definecolor{AIcurrentcolour}{rgb}{0,255,0}
+\definecolor{AIcurrentcolour}{rgb}{0.01,0.01,0.01}
+\definecolor{AIblack}{rgb}{0.01,0.01,0.01}
+\definecolor{AIwhite}{rgb}{0.99,0.99,0.99}
+\definecolor{AIdarkbox}{rgb}{0.3,0.3,0.3}
+\definecolor{AIlightbox}{rgb}{0.7,0.7,0.7}
 
-\NewDocumentCommand{\AIMakeDark} {s}
+% Provide a default initial color name so fontspec doesn't crash during preamble compilation
+\gdef\AICurrentThemeColorName{AIblack}
+
+% Updated to NewDocumentCommand with a mandatory argument 'm'
+\NewDocumentCommand{\AISSetGlobalColor}{ m }
+{
+  \color{#1}% Set local color
+  \global\let\default@color\current@color % Force it into floats and tables
+  % Save the color name to a flat, underscore-free standard macro name globally
+  \gdef\AICurrentThemeColorName{#1}% 
+}
+
+\NewDocumentCommand{\AIMakeDark} {s O{img/paper-darkred}}
 {
   \bool_if:NF{#1}
   {\clearpage}
-  \colorlet{AIcurrentcolour}{white}
-  \addfontfeature{Color=AIcurrentcolour}
+  \colorlet{AIcurrentcolour}{AIwhite}
+  \AISSetGlobalColor{AIwhite}
+  \AISetThemeColor[AIdarkbox]
+  \AddToShipoutPictureBG{%
+    \AtPageLowerLeft{%
+      \includegraphics[width=\paperwidth,height=\paperheight]{#2}%
+    }%
+  }
 }
 
-\NewDocumentCommand{\AIMakeLight} {s}
+\NewDocumentCommand{\AIMakeLight} {s O{img/paper}}
 {
   \bool_if:NF{#1}
   {\clearpage}
-  \colorlet{AIcurrentcolour}{black}
-  \addfontfeature{Color=AIcurrentcolour}
+  \colorlet{AIcurrentcolour}{AIblack}
+  \AISSetGlobalColor{AIblack}
+  \AISetThemeColor[AIlightbox]
+  \AddToShipoutPictureBG{%
+    \AtPageLowerLeft{%
+      \includegraphics[width=\paperwidth,height=\paperheight]{#2}%
+    }%
+  }
 }
+
+\ExplSyntaxOff % Step out of LaTeX3 mode safely
+
+% Classic LaTeX2e hook to intercept \normalfont using the underscore-free macro
+\makeatletter
+\g@addto@macro\normalfont{\color{\AICurrentThemeColorName}}
+\makeatother
