@@ -7,6 +7,7 @@
 \usepackage{listings}
 \usepackage{shortvrb}
 \usepackage{stfloats}
+\usepackage[normalem]{ulem} % For strikethrough
 
 \captionsetup[table]{labelformat=empty,font={sf,sc,bf,},skip=0pt}
 
@@ -17,6 +18,8 @@
   language=[LaTeX]{TeX},
   breaklines=true,
 }
+
+\newcommand{\so}[1]{\sout{\color{gray}{#1}}}
 
 \begin{document}
 \AIMakeLight*
@@ -53,6 +56,7 @@
 \section{Astro Inferno features}
 \subsection{Cosmetic}
 \begin{itemize}
+\item[x] \so{Load font for quotes/verses. Should resemble 1651 Alchemy.}
 \item Page numbers in Avalen Rekas, placed in corners
 \item Define new colours
 \item Provide some more background images for light and dark pages

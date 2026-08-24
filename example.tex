@@ -41,10 +41,6 @@
     ItalicFont = Berylium_Rg_It,     % Change to your exact italic file name
     BoldItalicFont = Berylium_Bd_It  % Change to your exact bold-italic file name
 ]
-\title{\AIfontBeryllium The Infernal \LaTeX{} \\[0.5em]
-\large An Example of the astroinfernobook Class}
-\author{\AIfontBeryllium Erik Marklund}
-\date{\AIfontBeryllium \today}
 
 \begin{document}
 
@@ -52,7 +48,34 @@
 
 \frontmatter
 
-\maketitle
+\begin{titlepage}
+  
+  \begin{center}
+    \vspace*{\stretch{1}}
+    \AIfontBeryllium
+    {\Huge The Infernal \LaTeX{}\\[0.5em]}
+    {\large An Example of the astroinfernobook Class\\[1.5em]}
+    Erik Marklund\\
+    \today \\
+    \vspace{3cm}
+    \hfill
+    \begin{minipage}[t]{0.3\textwidth}{
+        \it
+        \AIquoteFont
+        \begin{center}
+          "I scream in the dark,\\
+          To find true salvation,\\
+          But the only thing I hear,\\
+          Is your final salutation."\\
+        \end{center}
+        \hfill Totalt Jävla Mörker
+      }
+    \end{minipage}
+    \hfill\null
+    \vspace*{\stretch{1}}
+  \end{center}
+
+\end{titlepage}
 
 \tableofcontents
 
