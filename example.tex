@@ -31,10 +31,20 @@
   breaklines=true,
 }
 
-\title{The Dark \LaTeX{} \\
-\large An Example of the dndbook Class}
-\author{The rpgTeX Team}
-\date{2020/04/21}
+% Custom loading Berylium font. Not needed for the template, but used
+% in example.tex.
+\newfontfamily\AIfontBeryllium{Berylium_Rg.otf}[
+    Path = berylium/,
+    Extension = .otf,
+    UprightFont = *,
+    BoldFont = Berylium_Bd,       % Change to your exact bold file name
+    ItalicFont = Berylium_Rg_It,     % Change to your exact italic file name
+    BoldItalicFont = Berylium_Bd_It  % Change to your exact bold-italic file name
+]
+\title{\AIfontBeryllium The Infernal \LaTeX{} \\[0.5em]
+\large An Example of the astroinfernobook Class}
+\author{\AIfontBeryllium Erik Marklund}
+\date{\AIfontBeryllium \today}
 
 \begin{document}
 
