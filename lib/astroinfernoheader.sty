@@ -14,17 +14,7 @@
   {
     \renewcommand*{\chaptermark}[1]
       {
-        \markboth
-          {
-            \MakeUppercase
-              {
-                \ifnum\value{secnumdepth}>-1
-                  \chaptertitlename\ \thechapter :~
-                \fi
-                #1
-              }
-          }
-          {}
+        \markboth{}{}
       }
   }
 
@@ -37,9 +27,6 @@
 \fancyfoot[LE]{%
     \AIFontFooter \leftmark
     \begin{tikzpicture}[remember~picture,overlay]
-      \bool_if:NT \l__AI_show_footer_scroll_bool {
-        \node[xscale=-1,inner~sep=0pt,anchor=south,nearly~opaque] at (current~page.south) {\includegraphics[width=\paperwidth,height=.6in]{img/footerscroll}};
-      }
       \node[inner~sep=0pt,anchor=south,xshift=.28in,yshift=.39in] at (current~page.south~west) {\AIFontPageNumber \thepage};
     \end{tikzpicture}
   }
@@ -48,9 +35,6 @@
 \fancyfoot[RO]{%
     \AIFontFooter \leftmark
     \begin{tikzpicture}[remember~picture,overlay]
-      \bool_if:NT \l__AI_show_footer_scroll_bool {
-        \node[inner~sep=0pt,anchor=south,nearly~opaque] at (current~page.south) {\includegraphics[width=\paperwidth,height=.6in]{img/footerscroll}};
-      }
       \node[inner~sep=0pt,anchor=south,xshift=-.28in,yshift=.39in] at (current~page.south~east) {\AIFontPageNumber \thepage};
     \end{tikzpicture}
   }
