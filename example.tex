@@ -88,7 +88,16 @@
 
 \end{titlepage}
 
-\tableofcontents
+% This construct is needed to eliminate a CONTENTS showing up in the
+% footer on the TOC page.
+\clearpage % Protects previous page
+\begingroup
+  \markboth{}{}
+  \renewcommand{\markboth}[2]{}
+  \renewcommand{\markright}[1]{}
+  \tableofcontents
+  \clearpage % Needed for longer TOCs. Doesn't matter for shorter ones.
+\endgroup
 
 \mainmatter%
 
