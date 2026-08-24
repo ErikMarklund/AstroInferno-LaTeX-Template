@@ -1,0 +1,72 @@
+\documentclass[letterpaper,twocolumn,openany,nodeprecatedcode]{astroinfernobook}
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[singlelinecheck=false]{caption}
+\usepackage{lipsum}
+\usepackage{listings}
+\usepackage{shortvrb}
+\usepackage{stfloats}
+
+\captionsetup[table]{labelformat=empty,font={sf,sc,bf,},skip=0pt}
+
+\MakeShortVerb{|}
+
+\lstset{%
+  basicstyle=\ttfamily,
+  language=[LaTeX]{TeX},
+  breaklines=true,
+}
+
+\begin{document}
+\AIMakeLight*
+%
+\onecolumn{
+  {\hfill\Huge Backlog \hfill\null}
+  \vspace{2cm}
+}
+\section{General}
+\begin{itemize}
+\item Make own README.md
+\item Rework CONTRIBUTING.md
+\item Some specifics:
+  \begin{itemize}
+  \item Point to Astro Inferno Third Party License
+  \item Incorporate the exact licence text
+  \item Incorporate Astro Inferno logo
+  \item Mention font licenses
+  \item Specify that this is made for LuaLaTeX, not tested with pdfLaTeX
+  \end{itemize}
+\end{itemize}
+
+\section{Cleanup}
+\begin{itemize}
+\item Remove all DnD references and examples of DnD specific functionality
+\item Remove redundant functions
+  \begin{itemize}
+  \item Spells
+  \item Various colours
+  \end{itemize}
+\item
+\end{itemize}
+
+\section{Astro Inferno features}
+\subsection{Cosmetic}
+\begin{itemize}
+\item Page numbers in Avalen Rekas, placed in corners
+\item Define new colours
+\item Provide some more background images for light and dark pages
+\item Remove footer line
+\end{itemize}
+
+\subsection{Functionality}
+\begin{itemize}
+\item Replace |AISetThemeColor[AIdarkbox]| with separate calls to set different colours for different elements.
+\end{itemize}
+
+\subsection{Examples}
+\begin{itemize}
+\item |AIMakeDark| and |AIMakeLight|
+\item Symbols and macros for calling them (|AIdamage|, \ldots)
+\end{itemize}
+\end{document}

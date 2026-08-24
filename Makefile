@@ -10,5 +10,7 @@ clean:
 lint:
 	npx eclint check *.cls *.sty *.tex lib/
 
+backlog:	backlog.pdf
+
 %.pdf: %.tex
 	latexmk --interaction=nonstopmode --pdf --pdflatex=$(LATEX) $<
