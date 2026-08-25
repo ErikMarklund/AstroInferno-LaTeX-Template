@@ -6,6 +6,8 @@
 \definecolor{AIdarkbox}{rgb}{0.3,0.3,0.3}
 \definecolor{AIlightbox}{rgb}{0.7,0.7,0.7}
 
+\bool_new:N \g_AI_dark_mode_bool
+
 % Provide a default initial color name so fontspec doesn't crash during preamble compilation
 \gdef\AICurrentThemeColorName{AIblack}
 
@@ -20,6 +22,7 @@
 
 \NewDocumentCommand{\AIMakeDark} {s O{img/paper-darkred}}
 {
+  \bool_set_true:N \g_AI_dark_mode_bool
   \bool_if:NF{#1}
   {\clearpage}
   \colorlet{AIcurrentcolour}{AIwhite}
@@ -34,6 +37,7 @@
 
 \NewDocumentCommand{\AIMakeLight} {s O{img/paper}}
 {
+  \bool_set_false:N \g_AI_dark_mode_bool
   \bool_if:NF{#1}
   {\clearpage}
   \colorlet{AIcurrentcolour}{AIblack}
@@ -54,4 +58,12 @@
 \makeatother
 
 \ExplSyntaxOn
+
+% Call this to execute #1 if dark mode is on, #2 otherwise
+\NewDocumentCommand{\AIIsDarkMode}{mm}
+  {
+    \bool_if:NTF \g_AI_dark_mode_bool {#1} {#2}
+  }
+
+% Initialise light mode to begin with.
 \AIMakeLight*
