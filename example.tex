@@ -202,6 +202,11 @@ as it will have notable implications for downstream typesetting.
 used for initialisation in the preamble because of the layout problems
 they cause if used mid document.
 
+\subsection{New Background Without Switching}
+One can also insert a new background without switching mode using |\AIPlaceNewBackground|.
+The starred version |\AIPlaceNewBackground*| will do the same, but for one page only.
+Both commands do \emph{not} cause a page break.
+
 \subsection{Detecting Dark Mode}
 The function |\AIIsDarkMode{}{}| can be used to detect if dark mode is
 on. For example, |\AIIsDarkMode{yes}{no}|:\\[1em]
@@ -211,7 +216,7 @@ on. For example, |\AIIsDarkMode{yes}{no}|:\\[1em]
 This is used above to choose between loading black or white logos
 depending on whether dark mode is on or not.
 
-We will switch to dark mode here, and switch back at
+We will switch to dark mode here, insert a new background for a single page at the start of section~\ref{chap:text_boxes}, then switch back to light mode at
 part~\ref{part:customization}.
 \AIMakeDark
 
@@ -277,7 +282,8 @@ This ditch has a board spanning it. Someone has rubbed it down with grease.
 \AISubArea{Gate}
 The gate is four meters wide and twice as tall. An ominous portcullis looking like a gilloutine blade hangs over any souls passing through.
 
-\chapter{Text Boxes}
+\chapter{Text Boxes} \label{chap:text_boxes}
+\AIPlaceNewBackground*{img/paper-darkgreen.jpg}
 
 The module has three environments for setting text apart so that it is drawn to the reader's attention. |AIReadAloud| is used for text that a game master would read aloud.
 

@@ -52,6 +52,25 @@
   }
 }
 
+\NewDocumentCommand{\AIPlaceNewBackground} {s m}
+{
+  \RemoveFromHook{shipout/background} % Must clear earlier background, or the page number position will be broken.
+  \bool_if:NTF{#1}
+  {
+    \AddToShipoutPictureBG*{%
+      \AtPageLowerLeft{%
+        \includegraphics[width=\paperwidth,height=\paperheight]{#2}%
+      }%
+    }
+  } {
+    \AddToShipoutPictureBG{%
+      \AtPageLowerLeft{%
+        \includegraphics[width=\paperwidth,height=\paperheight]{#2}%
+      }%
+    }
+  }
+}
+
 \ExplSyntaxOff % Step out of LaTeX3 mode safely
 
 % Classic LaTeX2e hook to intercept \normalfont using the underscore-free macro
