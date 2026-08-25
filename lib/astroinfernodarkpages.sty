@@ -28,6 +28,7 @@
   \colorlet{AIcurrentcolour}{AIwhite}
   \AISSetGlobalColor{AIwhite}
   \AISetThemeColor[AIdarkbox]
+  \RemoveFromHook{shipout/background} % Must clear earlier background, or the page number position will be broken.
   \AddToShipoutPictureBG{%
     \AtPageLowerLeft{%
       \includegraphics[width=\paperwidth,height=\paperheight]{#2}%
@@ -43,6 +44,7 @@
   \colorlet{AIcurrentcolour}{AIblack}
   \AISSetGlobalColor{AIblack}
   \AISetThemeColor[AIlightbox]
+  \RemoveFromHook{shipout/background} % Must clear earlier background, or the page number position will be broken.
   \AddToShipoutPictureBG{%
     \AtPageLowerLeft{%
       \includegraphics[width=\paperwidth,height=\paperheight]{#2}%
