@@ -311,7 +311,7 @@ The |AITable| colors the even rows and is set to the width of a line by default.
 \chapter{Monsters and NPCs}
 
 % Monster stat block
-\begin{AIMonster}[float=htb,width=\columnwidth]{Void cult accolyte}
+\begin{AIMonster}[width=\columnwidth]{Void cult accolyte}
     \AIMonsterType{Souls - imps}
     \AIMonsterClass{Minions}
     \AIMonsterBeing{Ashen souls}
@@ -341,12 +341,8 @@ The |AITable| colors the even rows and is set to the width of a line by default.
      {\AIsecularsymbol~Erthian ingots, {\scriptsize 1D6}/\AIspsymbol}}
     {\AIloot[-]{4},\AIbloodsymbol~Soiled blood}
 \end{AIMonster}
-
-The |AIMonster| environment is used to typeset monster and NPC stat blocks. The module supplies many functions to easily typeset the contents of the stat block
-One can pass |tcolorbox| options to |AIMonster|. For example, we can
-change the title font for our Void cult demagogue to Berylium.
-
-\begin{AIMonster}[float=htb,width=\columnwidth, fonttitle=\color{AIcurrentcolour}\fontsize{30}{35}\AIfontBeryllium]{Void cult demagogue}
+\vfill
+\begin{AIMonster}[width=\columnwidth, fonttitle=\color{AIcurrentcolour}\fontsize{30}{35}\AIfontBeryllium]{Void cult demagogue}
     \AIMonsterType{Void priests - Obliviation deacons}
     \AIMonsterClass{Champions}
     \AIMonsterBeing{Greater souls}
@@ -368,6 +364,13 @@ change the title font for our Void cult demagogue to Berylium.
      {\AIancientsymbol~Excellent III Valuable, {\scriptsize 1D4}/\AIspsymbol}}
     {\AIloot[-]{4},\AIbloodsymbol~Normal blood}
 \end{AIMonster}
+\newpage
+The |\AIMonster| environment is used to typeset monster and NPC stat blocks. The module supplies many functions to easily typeset the contents of the stat block
+One can pass |\tcolorbox| options to |\AIMonster|. For example, we can
+change the title font for our Void cult demagogue to Berylium.
+
+It might be best to \emph{not} make |\AIMonster| a float. That is, do not pass |float=htb| as an option. Floats can be great in \LaTeX, but they make it difficult to position the adversary blocks correctly.
+
 \AIMakeLight
 \part{Customization} \label{part:customization}
 
