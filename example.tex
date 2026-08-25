@@ -192,11 +192,10 @@ Use |\AIMakeDark| and |\AIMakeLight| to
 switch between the two styles. An optional argument providing an
 alternative background image can be provided:\\[1em]
 |\AIMakeDark{img/your_cool_image.jpg}|\\[1em]
-Note that these commands will issue a
-|\clearpage|, causing a page break. Switching between the dark and
-light modes should probably be introduced at a relatively late stage,
-as it will have notable implications for downstream typesetting due to
-their use of |\clearpage|.
+Note that these commands will cause a page break. Thus, switching between the dark and
+light modes should probably be introduced at a relatively late stage
+in the qwriting process, when most of the content is finished,
+as it will have notable implications for downstream typesetting.
 
 |\AIMakeDark*| and
 |\AIMakeLight*| suppress the page breaks, but should only be
@@ -208,6 +207,9 @@ The function |\AIIsDarkMode{}{}| can be used to detect if dark mode is
 on. For example, |\AIIsDarkMode{yes}{no}|:\\[1em]
 
 \AIIsDarkMode{yes}{no}.\\[1em]
+
+This is used above to choose between loading black or white logos
+depending on whether dark mode is on or not.
 
 We will switch to dark mode here, and switch back at
 part~\ref{part:customization}.
