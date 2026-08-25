@@ -1,6 +1,6 @@
-# Contributing to dndbook
+# Contributing to astroinfernobook
 
-First off, thank you for considering contributing to dndbook. It's people like you that make dndbook a great LaTeX package. There are many ways to contribute:
+First off, thank you for considering contributing to astroinfernobook. It's people like you that make astroinfernobook a great LaTeX package. There are many ways to contribute:
 
 * Reporting a bug
 * Discussing the current state of the code
@@ -9,17 +9,17 @@ First off, thank you for considering contributing to dndbook. It's people like y
 
 ## We Develop on and Interact with Github
 
-We use github to host code, to track issues and feature requests, as well as accept pull requests. It is also where our community is hosted and where you can ask questions about dndbook through Github's [issues](https://github.com/rpgtex/DND-5e-LaTeX-Template/issues).
+We use github to host code, to track issues and feature requests, as well as accept pull requests. It is also where our community is hosted and where you can ask questions about astroinfernobook through Github's [issues](https://github.com/ErikMarklund/AstroInferno-LaTeX-Template/issues).
 
 As you interact with the community, please follow our [Code of Conduct](CODE-OF-CONDUCT.md).
 
 ## Have a Great Idea? Let Us Know
 
-If you find yourself wishing for a feature that doesn't exist in dndbook, you are probably not alone. There are bound to be others out there with similar needs. Many of the features that dndbook has today have been added because our users saw the need. [Open an issue](https://github.com/rpgtex/DND-5e-LaTeX-Template/issues/new) on our issues list on GitHub which describes the feature you would like to see, why you need it, and how it should work.
+If you find yourself wishing for a feature that doesn't exist in astroinfernobook, you are probably not alone. There are bound to be others out there with similar needs. Many of the features that astroinfernobook has today have been added because our users saw the need. [Open an issue](https://github.com/ErikMarklund/AstroInferno-LaTeX-Template/issues/new) on our issues list on GitHub which describes the feature you would like to see, why you need it, and how it should work.
 
 ## Report Bugs Using Github's Issues
 
-We use GitHub issues to track public bugs. Report a bug by [opening a new issue](https://github.com/rpgtex/DND-5e-LaTeX-Template/issues/new); it's that easy!
+We use GitHub issues to track public bugs. Report a bug by [opening a new issue](https://github.com/ErikMarklund/AstroInferno-LaTeX-Template/issues/new); it's that easy!
 
 **Great Bug Reports** tend to have:
 
@@ -32,7 +32,7 @@ We use GitHub issues to track public bugs. Report a bug by [opening a new issue]
 Your MWE might be as simple as the following:
 
 ```latex
-\documentclass[letterpaper,twocolumn,openany,nodeprecatedcode]{dndbook}
+\documentclass[letterpaper,twocolumn,openany,nodeprecatedcode]{astroinfernobook}
 
 \begin{document}
 
@@ -41,7 +41,7 @@ Your MWE might be as simple as the following:
 \end{document}
 ```
 
-If you have a problem that is not strictly dndbook specific, there are some other resources available. Overleaf has a good [tutorial](https://www.overleaf.com/learn/latex/Learn_LaTeX_in_30_minutes) to get you up to speed with LaTeX, and [tex.stackexchange.com](https://tex.stackexchange.com/) is a great resource for getting help with other LaTeX packages.
+If you have a problem that is not strictly astroinfernobook specific, there are some other resources available. Overleaf has a good [tutorial](https://www.overleaf.com/learn/latex/Learn_LaTeX_in_30_minutes) to get you up to speed with LaTeX, and [tex.stackexchange.com](https://tex.stackexchange.com/) is a great resource for getting help with other LaTeX packages.
 
 ## We Use [Github Flow](https://guides.github.com/introduction/flow/index.html), So All Code Changes Happen Through Pull Requests
 
