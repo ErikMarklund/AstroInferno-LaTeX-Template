@@ -105,6 +105,36 @@
 
 \part{Layout}
 
+\chapter{Fiat Tenebrae}
+\noindent
+The Astro Inferno rule book switches between light and dark pages, and
+this template can do this too!
+\subsection{Switching Between Dark and Light Mode}
+Use |\AIMakeDark| and |\AIMakeLight| to
+switch between the two styles. An optional argument providing an
+alternative background image can be provided:\\[1em]
+|\AIMakeDark{img/your_cool_image.jpg}|\\[1em]
+Note that these commands will issue a
+|\clearpage|, causing a page break. Switching between the dark and
+light modes should probably be introduced at a relatively late stage,
+as it will have notable implications for downstream typesetting due to
+their use of |\clearpage|.
+
+|\AIMakeDark*| and
+|\AIMakeLight*| suppress the page breaks, but should only be
+used for initialisation in the preamble because of the layout problems
+they cause if used mid document.
+
+\subsection{Detecting Dark Mode}
+The function |\AIIsDarkMode{}{}| can be used to detect if dark mode is
+on. For example, |\AIIsDarkMode{yes}{no}|:\\[1em]
+
+\AIIsDarkMode{yes}{no}.\\[1em]
+
+We will switch to dark mode here, and switch back at
+part~\ref{part:customization}.
+\AIMakeDark
+
 \chapter{Sections}
 
 \AIDropCapLine{T}{his package is designed to aid you in} writing beautifully typeset documents for the fifth edition of the world's greatest roleplaying game. It starts by adjusting the section formatting from the defaults in \LaTeX{} to something a bit more familiar to the reader. The chapter formatting is displayed above.
@@ -123,7 +153,7 @@ The paragraph format is seldom used in the core books, but is available if you p
 
 \subparagraph{Subparagraph}
 The subparagraph format with the paragraph indent is likely going to be more familiar to the reader.
-\AIMakeDark
+
 \section{Special Sections}
 The module also includes functions to aid in the proper typesetting of multi-line section headers: |\AIFeatHeader| for feats, |\AIItemHeader| magic items and traps.
 
@@ -253,7 +283,7 @@ change the title font for our Void cult demagogue to Berylium.
     {\AIloot[-]{4},\AIbloodsymbol~Normal blood}
 \end{AIMonster}
 \AIMakeLight
-\part{Customization}
+\part{Customization} \label{part:customization}
 
 \chapter{Colors}
 
