@@ -282,9 +282,10 @@ This ditch has a board spanning it. Someone has rubbed it down with grease.
 \AISubArea{Gate}
 The gate is four meters wide and twice as tall. An ominous portcullis looking like a gilloutine blade hangs over any souls passing through.
 
-\chapter{Text Boxes} \label{chap:text_boxes}
+\chapter{Boxes and Symbols} \label{chap:text_boxes}
 \AIPlaceNewBackground*{img/paper-darkgreen.jpg}
 
+\section{Text Boxes}
 The module has three environments for setting text apart so that it is drawn to the reader's attention. |AIReadAloud| is used for text that a game master would read aloud.
 
 \begin{AIReadAloud}[colback=AIdarkbox] % Not sure why its colour needs to be set explicitly.
@@ -312,6 +313,58 @@ The |AITable| colors the even rows and is set to the width of a line by default.
     Some value  & Some value \\
     Some value  & Some value \\
     Some value  & Some value
+\end{AITable}
+
+\newpage % Actually new column
+\section{Symbols}
+Astro Inferno uses various special symbols. The template has commands for those:
+
+\begin{AITable}[header=Core Stat Tokens]{XX}
+  Command & Result \\
+  |\AIlifesymbol| & \AIlifesymbol \\
+  |\AIsanitysymbol| & \AIsanitysymbol \\
+  |\AIaurasymbol| & \AIaurasymbol \\
+  |\AIchestsymbol| & \AIchestsymbol
+\end{AITable}
+
+\begin{AITable}[header=Combat Stat Tokens]{XX}
+  Command & Result \\
+  |\AIspsymbol| & \AIspsymbol\\
+  |\AIlimitsymbol| & \AIlimitsymbol
+\end{AITable}
+
+\begin{AITable}[header=Loot Skill Tokens]{XX}
+  Command & Result \\
+  |\AIalchemysymbol| & \AIalchemysymbol\\
+  |\AIancientsymbol| & \AIancientsymbol\\
+  |\AIsecularsymbol| & \AIsecularsymbol\\
+  |\AIgenesissymbol| & \AIgenesissymbol\\
+  |\AIharrowedsymbol| & \AIharrowedsymbol\\
+  |\AIapotecharysymbol| & \AIapotecharysymbol\\
+  |\AIdominionsymbol| & \AIdominionsymbol\\
+  |\AIscroungesymbol| & \AIscroungesymbol
+\end{AITable}
+
+\begin{AITable}[header=Other]{XX}
+  Command & Result \\
+  |\AIbloodsymbol| & \AIbloodsymbol
+\end{AITable}
+
+Some symbols additionally have helper functions for consistent layout, e.g., of modifiers.
+\begin{AITable}[header=AIlife Helper Function]{XX}
+  Command & Result \\
+  |\AIlife{3}| & \AIlife{3}\\
+  |\AIlife[+]{1}| & \AIlife[+]{1}\\
+  |\AIlife[-]{2}| & \AIlife[-]{2}
+\end{AITable}
+
+Analogous commands are |\AIsanity|, |\AIaura|, |\AIdamage|, |\AImortality|, and |\AIbones|.
+|\AIloot| is similar, but non identical:
+\begin{AITable}[header=Loot Helper Function]{XX}
+  Command & Result \\
+  |\AIloot{}| & \AIloot{}\\
+  |\AIloot[+]{1}| & \AIloot[+]{1}\\
+  |\AIloot[-]{2}| & \AIloot[-]{2}
 \end{AITable}
 
 \chapter{Monsters and NPCs}
