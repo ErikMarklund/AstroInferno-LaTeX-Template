@@ -78,7 +78,6 @@
     { \theparagraph \quad } % label
     {0pt} % sep
     {}    % before-code
-    [.]   % after-code
 
   \titlespacing* {\paragraph}
     {0pt}      % left
@@ -91,7 +90,6 @@
     { \thesubparagraph \quad } % label
     {0pt} % sep
     {}    % before-code
-    [.]   % after-code
 
   \titlespacing* {\subparagraph}
     {\parindent} % left
@@ -215,3 +213,7 @@
       #2 ~ ( \pageabbreviationname\ \pageref { \l__AI_region_tl \l__AI_sub_area_label_tl : #2 } )
     \group_end:
   }
+
+% Definition of iparagraph, an italized paragraph
+\NewDocumentCommand{\iparagraph}{m}{\paragraph{\textit{#1}}}
+\NewDocumentCommand{\subiparagraph}{m}{\subparagraph{\textit{#1}}}

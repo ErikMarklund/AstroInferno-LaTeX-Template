@@ -216,8 +216,8 @@ part~\ref{part:customization}.
 \AIMakeDark
 
 \chapter{Sections}
-
-\AIDropCapLine{T}{his package is designed to aid you in} writing beautifully typeset documents for the fifth edition of the world's greatest roleplaying game. It starts by adjusting the section formatting from the defaults in \LaTeX{} to something a bit more familiar to the reader. The chapter formatting is displayed above.
+\noindent
+This package is designed to aid you in writing beautifully typeset documents for Astro Inferno. It starts by adjusting the section formatting from the defaults in \LaTeX{} to something a bit more familiar to the reader. The chapter formatting is displayed above.
 
 \section{Section}
 Sections break up chapters into large groups of associated text.
@@ -229,20 +229,26 @@ Subsections further break down the information for the reader.
 Subsubsections are the furthest division of text that still have a block header. Below this level, headers are displayed inline.
 
 \paragraph{Paragraph}
-The paragraph format is seldom used in the core books, but is available if you prefer it to the ``normal'' style.
+is used, for example, on p.~163 in the Core Rulebook.
+
+\iparagraph{Italized paragraph}
+is used, for example, on p.~157 in the Core Rulebook.
 
 \subparagraph{Subparagraph}
-The subparagraph format with the paragraph indent is likely going to be more familiar to the reader.
+is not really used in existing Astro Inferno material, but might be useful
+
+\subparagraph{Subiparagraph} is an itaized version of |\subparagraph|. Not really used in Astro Inferno.
+
 
 \section{Special Sections}
-The module also includes functions to aid in the proper typesetting of multi-line section headers: |\AIFeatHeader| for feats, |\AIItemHeader| magic items and traps.
+The module also includes functions to aid in the proper typesetting of multi-line section headers: |\AIFeatHeader| for feats, |\AIItemHeader| for items and traps.
 
 \AIFeatHeader{Typesetting Savant}[Prerequisite: \LaTeX{} distribution]
 You have acquired a package which aids in typesetting source material for one of your favorite games, giving you the following benefits:
 
 \begin{itemize}
-  \item You have advantage on Intelligence checks to typeset new content.
-  \item When you fail an Intelligence check to typeset new content, you can ask questions online at the package's website.
+  \item You have advantage on COG checks to typeset new content.
+  \item When you fail an COG check to typeset new content, you can ask questions online at the package's website.
 \end{itemize}
 
 \AIItemHeader{Foo's Quill}{Wondrous item, rare}
@@ -253,30 +259,30 @@ The quill regains 1d3 expended charges daily at dawn.
 \section{Map Regions}
 The map region functions |\AIArea| and |\AISubArea| provide automatic numbering of areas.
 
-\AIArea{Village of Hommlet}
-This is the village of hommlet.
+\AIArea{Void Forge}
+This is the dreaded Void Forge.
 
-\AISubArea{Inn of the Welcome Wench}
-Inside the village is the inn of the Welcome Wench.
+\AISubArea{House of the Setting Sun}
+At the edge of the Void Forge is the House of the Setting sun.
 
-\AISubArea{Blacksmith's Forge}
-There's a blacksmith in town, too.
+\AISubArea{Soul Smelter}
+The Soul Smelter is shunned by most visitors.
 
-\AIArea{Foo's Castle}
-This is foo's home, a hovel of mud and sticks.
+\AIArea{The Baroness' Palace}
+This is where the Baroness spends most of her time. Walls of glassy black stone.
 
 \AISubArea{Moat}
-This ditch has a board spanning it.
+This ditch has a board spanning it. Someone has rubbed it down with grease.
 
-\AISubArea{Entrance}
-A five-foot hole reveals the dirt floor illuminated by a hole in the roof.
+\AISubArea{Gate}
+The gate is four meters wide and twice as tall. An ominous portcullis looking like a gilloutine blade hangs over any souls passing through.
 
 \chapter{Text Boxes}
 
 The module has three environments for setting text apart so that it is drawn to the reader's attention. |AIReadAloud| is used for text that a game master would read aloud.
 
 \begin{AIReadAloud}[colback=AIdarkbox] % Not sure why its colour needs to be set explicitly.
-  As you approach this module you get a sense that the blood and tears of many generations went into its making. A warm feeling welcomes you as you type your first words.
+  As you approach this module you get a sense that the blood and tears of many generations went into its making. A cold feeling descends upon you as you type your first words.
 \end{AIReadAloud}
 
 \section{As an Aside}
