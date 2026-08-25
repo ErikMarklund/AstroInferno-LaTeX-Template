@@ -20,6 +20,7 @@
 \usepackage{listings}
 \usepackage{shortvrb}
 \usepackage{stfloats}
+\usepackage[hidelinks]{hyperref}
 
 \captionsetup[table]{labelformat=empty,font={sf,sc,bf,},skip=0pt}
 
@@ -116,6 +117,69 @@
            % ones. Also needed as TOC's own \clearpage was disabled above.
 \twocolumn
 \mainmatter%
+
+\section*{Origins}
+% We manually add this unnumbered section to the TOC
+\addcontentsline{toc}{section}{Origins}
+\noindent
+This template is for making third-party content for the Astro Inferno roleplaying game
+(\url{https://astroinferno.com/}). The template itself was derived
+from the DnD5e LaTeX Template from the rpgtex team
+(https://github.com/rpgtex/DND-5e-LaTeX-Template). We are very
+grateful for their exelent work, without which this template probably
+would not have existed. Some DnD-specifc features have been removed,
+other remain funcitonal but without documentation awaiting
+resurrection, removal, or are just hidden but available for the more
+adventurous TeXers. But most of all, the remaining features have been adapted
+for Astro Inferno and new features have been added to enable
+good-looking documents that mimics the styles seen in the Astro Inferno
+Core Rulebook and various associated material such as Crown of Ruin.
+
+The official Astro Inferno material employs a lot of advanced layout
+features that require both expertise, specialised software, and manual
+work (see for example the tilted column margins in the Core Rulebook).
+This template will unfortunately never be able to reproduce or mimic
+all such features, but we hope it will be a useful tool for producing
+stunning campaign modules etc. Its key features are demonstrated here
+in |example.tex|, and it contains some useful hacks that can be used
+to go beyond the standard title page, table of contents, and more.
+
+\newpage % Actually only breaks column.
+\section*{Licenses}
+% We manually add this unnumbered section to the TOC
+\addcontentsline{toc}{section}{Licenses}
+\noindent
+Some components of this template are subject to licensing. It is fine
+to use the template for personal use, and also to distribute it
+(subject to the template's licence). For other uses, make sure to not
+violate the licenses of any components included in the template, for example,
+specific fonts.
+
+\subsection{This Template}
+This template itself is released under an MIT license (see
+|LICENSE|). It contains some fonts that are released under
+compatible licenses.
+
+\subsection{Astro Inferno}
+Make sure to read the Astro Inferno Third Party
+License\footnote{\url{https://astroinferno.com/astro_coven/srd/license.html}},
+implement all that is required, and stay within the boundaries of what
+it allows.
+
+\subsection{Some words about fonts}
+Astro Inferno uses some fonts that are not included in this
+template. You can add those fonts yourself, just make sure you have
+obtained the required licenses.
+
+Some fonts included with the template are only free for personal use. If
+you intend to distribute your document, make sure to replace those
+fonts with other ones for which you have a license, or obtain
+appropriate licenses for the included fonts where needed.
+
+\subsection{Misc}
+Some useful information about symbols, can be found in the Astro
+Inferno Rules Reference
+\footnote{\url{https://astroinferno.com/astro_coven/srd/srd.html\#symbols}}.
 
 \part{Layout}
 
