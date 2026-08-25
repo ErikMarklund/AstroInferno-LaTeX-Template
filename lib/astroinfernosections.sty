@@ -123,32 +123,6 @@
   }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Special command for spells.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% #1 - Name
-% #2 - Level and school
-% #3 - Casting time
-% #4 - Range
-% #5 - Components
-% #6 - Duration
-\NewDocumentCommand {\AISpellHeader} { m m m m m m }
-  {
-    \AIItemHeader {#1} {#2}
-
-    \begin{description}
-      [
-        nosep,
-        labelsep = \l__AI_space_dim,
-        after    = { \vspace{4pt plus 1pt minus 1pt} },
-      ]
-      \item [ \spellcastingtimename : ] #3
-      \item [ \spellrangename       : ] #4
-      \item [ \spellcomponentsname  : ] #5
-      \item [ \spelldurationname    : ] #6
-    \end{description}
-  }
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Map Areas and their References
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

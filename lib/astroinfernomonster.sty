@@ -528,72 +528,6 @@
     \noindent \ignorespaces
   }
 
-% Spellcasting levels
-\newlist {AIMonsterSpells} {description} {1}
-\setlist [AIMonsterSpells]
-  {
-    font     = \normalfont \AIFontStatBlockBody,
-    labelsep = \l__AI_space_dim,
-    noitemsep,
-    topsep   = 6pt plus 2pt minus 2pt,
-  }
-
-\NewDocumentCommand {\AIEmphSpellString} {m}
-  {
-    \group_begin:
-      \seq_set_from_clist:Nn \l_tmpa_seq {#1}
-      \seq_set_map:NNn \l_tmpb_seq \l_tmpa_seq { \exp_not:n { \emph {##1} } }
-      \seq_use:Nn \l_tmpb_seq { ,~ }
-    \group_end:
-  }
-
-\NewDocumentCommand {\AIInnateSpellLevel} { O {\innateatwillname} m }
-  {
-    \item
-      [
-        \regex_match:NnTF \c__pos_int_regex {#1}
-        {
-          \str_if_in:NnTF {#2} {,}
-          { \__AI_caption:nn {\numberperdayeachname} {#1} }
-          { \__AI_caption:nn {\numberperdayname} {#1} }
-        }
-        {#1}
-        :
-      ]
-      \AIEmphSpellString {#2}
-  }
-
-\NewDocumentCommand {\AIMonsterSpellLevel} { O{\spellcantripsname} O{\spellatwillname} m }
-  {
-    \item
-      [
-        \str_case_e:nnF {#1}
-          {
-            {1} {\spellfirstlevelname}
-            {2} {\spellsecondlevelname}
-            {3} {\spellthirdlevelname}
-            {4} {\spellfourthlevelname}
-            {5} {\spellfifthlevelname}
-            {6} {\spellsixthlevelname}
-            {7} {\spellseventhlevelname}
-            {8} {\spelleighthlevelname}
-            {9} {\spellninthlevelname}
-          }
-          {#1}
-        {~}(
-        \str_case_e:nnF {#2}
-          {
-            {1} {\spelloneslotname}
-            {2} {\spelltwoslotsname}
-            {3} {\spellthreeslotsname}
-            {4} {\spellfourslotsname}
-          }
-          {#2}
-        ) :
-      ]
-    \AIEmphSpellString{#3}
-  }
-
 %% Monster attacks
 \tl_new:N \l__AI_attack_distance_tl
 \tl_new:N \l__AI_attack_type_tl
@@ -609,7 +543,6 @@
     distance .initial:n  = both,
     type .choice:,
     type / weapon .code:n = { \tl_set:Nn \l__AI_attack_type_tl {\weaponname} },
-    type / spell .code:n = { \tl_set:Nn \l__AI_attack_type_tl {\spellname} },
     type .initial:n  = weapon,
     mod .tl_set:N         = \l__mod_tl,
     mod .value_required:n = true,
