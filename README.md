@@ -1,17 +1,16 @@
-# DnD 5e LaTeX Template
+# Astro Inferno LaTeX Template
 
-[![Latest release](https://img.shields.io/github/release/rpgtex/DND-5e-LaTeX-Template/all.svg)](https://github.com/rpgtex/DND-5e-LaTeX-Template/releases/latest)
-[![Build Status](https://img.shields.io/circleci/project/github/rpgtex/DND-5e-LaTeX-Template/master.svg?style=flat)](https://circleci.com/gh/rpgtex/DND-5e-LaTeX-Template)
+[![Development branch](https://github.com/ErikMarklund/AstroInferno-LaTeX-Template)](https://github.com/ErikMarklund/AstroInferno-LaTeX-Template)
 
-This is a LaTeX template for typesetting documents in the style of the fifth edition of the "world's greatest roleplaying game".
+This is a LaTeX template for typesetting documents in the style of the Astro Inferno roleplaying game. It was derived from the DnD 5e LaTeX Template https://github.com/rpgtex/DND-5e-LaTeX-Template.
 
 ## Features
 
 * Color schemes, fonts, and layout are close to the core books (but not exactly the same).
-* TeX Live includes the default fonts.
-* Works with pdfTeX, LuaTeX, and XeTeX.
+* Needed fonts are included, or provided with TeX Live.
+* Developed for LuaTeX. Not tested with other engines.
 
-![Preview](scrot.jpg)
+[comment]: <>![Preview](scrot.jpg)
 
 ## Installation
 
@@ -34,19 +33,19 @@ LaTeX will find the package automatically.
     mkdir "$(kpsewhich -var-value TEXMFHOME)/tex/latex/"
     ```
 
-2. Download the [latest release](https://github.com/rpgtex/DND-5e-LaTeX-Template/releases/latest) and extract it in `$TEXMFHOME/tex/latex/`.
+2. Download the [latest release](https://github.com/ErikMarklund/AstroInferno-LaTeX-Template) and extract it in `$TEXMFHOME/tex/latex/`.
 
     ```sh
-    wget https://github.com/rpgtex/DND-5e-LaTeX-Template/archive/master.zip
-    unzip -d "$(kpsewhich -var-value TEXMFHOME)/tex/latex/" master.zip
+    wget https://github.com/ErikMarklund/AstroInferno-LaTeX-Template/archive/dev.zip
+    unzip -d "$(kpsewhich -var-value TEXMFHOME)/tex/latex/" dev.zip
     cd "$(kpsewhich -var-value TEXMFHOME)/tex/latex/"
-    mv DND-5e-LaTeX-Template-master dnd
+    mv AstroInferno-LaTeX-Template-dev astroinferno
     ```
 
     Alternatively, clone the repo to the same location:
 
     ```sh
-    git clone https://github.com/rpgtex/DND-5e-LaTeX-Template.git "$(kpsewhich -var-value TEXMFHOME)/tex/latex/dnd"
+    git clone https://github.com/ErikMarklund/AstroInferno-LaTeX-Template.git "$(kpsewhich -var-value TEXMFHOME)/tex/latex/astroinferno"
     ```
 
 ### Using Overleaf
@@ -68,7 +67,7 @@ You can also clone a copy of the repository to each LaTeX project. For example, 
 
 ```sh
 mkdir lib/
-git clone https://github.com/rpgtex/DND-5e-LaTeX-Template.git lib/dnd
+git clone https://github.com/ErikMarklund/AstroInferno-LaTeX-Template .git lib/atroinferno
 ```
 
 LaTeX will not find the template automatically. Set `TEXINPUTS` when compiling your project to locate the package:
@@ -81,10 +80,10 @@ TEXINPUTS=./lib//: pdflatex project.tex
 
 ### Class (recommended)
 
-Load the `dndbook` class in your preamble:
+Load the `astroinfernobook` class in your preamble:
 
 ```tex
-\documentclass[10pt,twoside,twocolumn,openany,nodeprecatedcode]{dndbook}
+\documentclass[10pt,twoside,twocolumn,openany,nodeprecatedcode]{astroinfernobook}
 
 \usepackage[english]{babel}
 \usepackage[utf8]{inputenc}
@@ -95,8 +94,8 @@ Load the `dndbook` class in your preamble:
 
 ### Package
 
-You can also load the `dnd` package directly to use it with another class.
-Note that the package has only been tested with the `book` class.
+You can also load the `astroinferno` package directly to use it with another class.
+Note that the upstream dnd package has only been tested with the `book` class, and astroinferno has not been tested like this at all.
 
 ```tex
 \documentclass[10pt,twoside,twocolumn,openany]{book}
@@ -104,7 +103,7 @@ Note that the package has only been tested with the `book` class.
 \usepackage[english]{babel}
 \usepackage[utf8]{inputenc}
 
-\usepackage[layout=true]{dnd}
+\usepackage[layout=true]{astroinferno}
 
 \begin{document}
 % ...
@@ -112,7 +111,7 @@ Note that the package has only been tested with the `book` class.
 
 ### Options
 
-| Option         | Package `dnd`   | Class `dndbook`   |
+| Option         | Package `astroinferno`   | Class `astroinferno`   |
 | -------------- | :-------------: | :---------------: |
 | `bg`           | ✓               | ✓                 |
 | `justified`    | ✓               | ✓                 |
@@ -120,12 +119,13 @@ Note that the package has only been tested with the `book` class.
 | `nomultitoc`   | ✓               | ✓                 |
 | `nodeprecatedcode`   | ✓               | ✓                 |
 
-The `dndbook` class also supports all the options of the `book` class.
+The `astroinfernobook` class also supports all the options of the `book` class.
 
 #### `bg`
 
 Declare how to load background and footer images. This is a key-value option with the following possible values:
 
+**This is a legacy feature inherited from `dndbook`. Deprecated.**
 * `full`: Load both background and footer images. (**default**)
 * `none`: Removes both background and footer images.
 * `print`: Loads only the footer images.
@@ -136,6 +136,7 @@ Justify column copy.
 
 #### `layout`
 
+**This is a legacy feature inherited from `dndbook`. Deprecated.**
 Controls whether loading the `dnd` package also modifies the document layout (geometry, colors, typography, etc.).
 This is a boolean option with the following possible values:
 
