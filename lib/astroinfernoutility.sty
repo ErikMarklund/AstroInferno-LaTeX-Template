@@ -72,3 +72,47 @@
         { \msg_error:nnnn { astroinferno } { key_required } { #2 } { #3 } }
     \group_end:
   }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Print tiers, distances, bonuses consistently
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Print uppercase roman numerals
+\NewDocumentCommand\ROM{m}
+{\uppercase\expandafter{\romannumeral #1\relax}}
+
+\msg_new:nnnn { astroinferno } { invalid-tier }
+{ Invalid~tier~'#1'~provided! }
+{ Tier~must~be~an~integer~between~1~and~5. }
+
+% Print tiers (e.g., Ordinary II).
+\NewDocumentCommand\AITier{m}
+{
+  \int_case:nnF {\int_eval:n {#1}} {
+    {1} {Mundane~\ROM{#1}}
+    {2} {Ordinary~\ROM{#1}}
+    {3} {Excellent~\ROM{#1}}
+    {4} {Masterful~\ROM{#1}}
+    {5} {Excellent~\ROM{#1}}
+  } {\msg_error:nnn { astroinferno } { invalid-tier } { #1 }}
+}
+
+% Print distances (e.g., Room II).
+\NewDocumentCommand\AIDist{m}
+{
+  \int_case:nnF {\int_eval:n {#1}} {
+    {1} {Intimate~\ROM{#1}}
+    {2} {Room~\ROM{#1}}
+    {3} {Hall~\ROM{#1}}
+    {4} {Palace~\ROM{#1}}
+    {5} {City~\ROM{#1}}
+  } {\msg_error:nnn { astroinferno } { invalid-tier } { #1 }}
+}
+
+% Print bonuses. 3 -> +3, -2 -> -2, 0 -> +0. Mainly for internal use.
+\NewDocumentCommand\AIBonus{m}
+{
+  \int_compare:nTF {\int_eval:n {#1} > -1 }
+  {+ #1}
+  {#1}
+}
