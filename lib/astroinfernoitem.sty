@@ -1,0 +1,262 @@
+\ExplSyntaxOn
+
+% Proper environment for Astro Inferno items.
+
+\DeclareTColorBox {__AIItem} { O{} }
+{
+  enhanced,
+  frame~hidden,
+  boxrule     = 0pt,
+  unbreakable,
+  parbox      = false,
+  boxsep      = 0pt,
+  toptitle    = 3mm,
+  left        = 0pt,
+  right       = 0pt,
+  sharp~corners,
+  opacityback = 0,
+  colframe    = titlered,
+  % fonttitle   = \AIFontItemTitle,
+  fontupper   = \AIFontItemBody,
+  fontlower   = \AIFontItemBody,
+  % title            = {},
+  coltitle    = .,
+  #1
+}
+
+% We need a variable to store the title passed to the wrapper environment AIItem,
+% Then read the variable in AIItemData.
+\str_new:N  \l_item_title_str
+\str_set:Nn  \l_item_title_str {unset}
+
+\NewDocumentEnvironment{AIItem}{O{} m }
+{
+    \str_set:Nn  \l_item_title_str {#2}
+    \begin{__AIItem}[#1]
+  }
+  {
+  \end{__AIItem}
+  }
+
+\NewDocumentEnvironment{AIItem*}{O{} m }
+  {
+    \str_set:Nn  \l_item_title_str {#2}
+    \begin{__AIItem}[float*=b, width=\textwidth, #1]
+  }
+  {
+  \end{__AIItem}
+  }
+  
+\keys_define:nn { astroinferno / item / itemdata }
+{
+  % We want this to set up the font for the title.
+  % We should do the same to set a default size, otherwise overriding the default font
+  % will lead to a tiny font.
+  fonttitle .code:n = {\tl_set:Nn \l_item_fonttitle_tl { #1 \selectfont }},
+  fonttitle .initial:n = \l__AI_item_title_family_tl,
+  titlestyle .code:n = {\tl_set:Nn \l_item_titlestyle_tl { #1 \selectfont }},
+  titlestyle .initial:n = \l__AI_item_title_style_tl,
+  % 
+  description .tl_set:N  = \l_item_description_tl,
+  description .initial:n  = unknown,
+  %
+  tier .tl_set:N  = \l_item_tier_int,
+  tier .initial:n  = 1,
+  tier .value_required:n  = true,
+  attack .tl_set:N  = \l_item_attack_int,
+  attack .initial:n  = 0,
+  attack .value_required:n  = true,
+  augment .tl_set:N  = \l_item_augment_int,
+  augment .initial:n  = 0,
+  augment .value_required:n  = true,
+  damage .tl_set:N  = \l_item_damage_int,
+  damage .initial:n  = 1,
+  damage .value_required:n  = true,
+  targets .tl_set:N  = \l_item_targets_int,
+  targets .initial:n  = 1,
+  targets .value_required:n  = true,
+  grade .tl_set:N  = \l_item_grade_int,
+  grade .initial:n  = 1,
+  grade .value_required:n  = true,
+  skill .tl_set:N  = \l_item_skill_str,
+  skill .initial:n  = unset,
+  skill .value_required:n  = true,
+  %
+  features .clist_set:N  = \l_item_features_clist,
+  features .initial:n  = {},
+}
+
+
+% This is a local rendering pattern that cleanly maps the SplitArgument results
+\cs_new:Nn \__ai_render_pair:nn
+{
+  \textbf{#1}:~#2 \\
+}
+
+\dim_new:N \l_titlebox_dim
+\dim_new:N \l_backstep_dim
+\dim_new:N \l_statbox_dim
+\dim_new:N \l_datatextbox_dim
+\dim_new:N \l_datagap_dim
+\dim_new:N \l_databox_dim
+\dim_new:N \l_datafeaturegap_dim
+\dim_new:N \l_featurebox_dim
+\dim_new:N \l_minitextgap_dim % Tiny spacing between colorbox edge and text
+\tl_new:N  \l_data_text_tl
+\tl_new:N  \l_data_values_tl
+\tl_new:N  \l_features_tl
+
+\box_new:N \l_left_box
+\box_new:N \l_right_box
+\dim_new:N \l_max_height_dim
+
+% Starred version for page-spanning layout (not implemented)
+\NewDocumentCommand{\AIItemData}{s o}
+{
+  \group_begin:
+  \keys_set:nn { astroinferno / item / itemdata } {#2}
+  
+  % Some things are constant.
+  \settowidth{\l_statbox_dim}{\sffamily \textbf{STATS}}
+  \settowidth{\l_datatextbox_dim}{Augment}
+  \dim_set:Nn \l_databox_dim {1.7cm}
+  \dim_set:Nn \l_datagap_dim {0.2cm}
+  \dim_set:Nn \l_datafeaturegap_dim {0.4cm}
+  \dim_set:Nn \l_minitextgap_dim {0.05cm}
+  
+  \bool_if:NTF {#1} {
+    \dim_set:Nn \l_titlebox_dim {0.55\linewidth}
+    \dim_set:Nn \l_backstep_dim {-0.1\linewidth}
+  } {
+    \dim_set:Nn \l_titlebox_dim {0pt}
+    \dim_set:Nn \l_backstep_dim {0pt}
+  }
+
+  \dim_set:Nn \l_featurebox_dim {\linewidth
+    - \l_titlebox_dim
+    - \l_backstep_dim
+    - \l_statbox_dim
+    - \l_datatextbox_dim
+    - \l_datagap_dim
+    - \l_databox_dim
+    - \l_datafeaturegap_dim
+    - 4\l_minitextgap_dim
+    - 4\fboxsep
+    - 6pt}  % Not sure why I need to subtract 6pt for them to fit.
+
+  \bool_if:NTF {#1} {
+    \begin{minipage}[t]{\l_titlebox_dim}
+      {\l_item_titlestyle_tl \l_item_fonttitle_tl \vspace{-0.25ex}}
+      % \vspace to force top-edge alignment, and to raise the title
+      % text slightly, because there is some emptiness above the letters.
+      {\l_item_titlestyle_tl \l_item_fonttitle_tl \l_item_title_str\\[0.3cm]}
+      {\bfseries \sffamily \footnotesize \MakeUppercase
+        {
+          \textls[300]{\AITier{\l_item_tier_int}}\\
+          \textls[300]{\l_item_description_tl}
+        }
+      }
+    \end{minipage} \hspace{\l_backstep_dim}
+  } {
+    \begin{center}
+      {\l_item_titlestyle_tl \l_item_fonttitle_tl \l_item_title_str}\\[0.2cm]
+      {\bfseries \sffamily \footnotesize \MakeUppercase
+        {
+          \textls[300]{\AITier{\l_item_tier_int}}\\
+          \textls[300]{{\l_item_description_tl}}\\
+        }
+      }
+    \end{center}
+  }
+    
+  \tl_set:Nn \l_data_text_tl
+  {
+    \RaggedLeft
+    Tier\\
+    Attack\\
+    Augment\\
+    Damage\\
+    Targets\\
+    Grade\\
+    Skill\par
+  }
+
+  \tl_set:Nn \l_data_values_tl
+  {
+    \ROM{\l_item_tier_int}\\
+    \AIBonus{\l_item_attack_int}\\
+    \AIBonus{\l_item_augment_int}\\
+    \l_item_damage_int\\
+    \l_item_targets_int\\
+    \AIBonus{\l_item_grade_int}\\
+    \l_item_skill_str
+  }
+
+  \tl_set:Nn \l_features_tl
+  {
+    Features:
+    \clist_map_variable:NNn \l_item_features_clist \l_tmp_tl
+    {
+      \\[\baselineskip]
+      % Split the pair by its internal comma into a temporary sequence
+      \seq_set_split:NnV \l__ai_tmp_pair_seq { , } \l_tmp_tl
+      
+      % Print item 1 and item 2 cleanly
+      \seq_item:Nn \l__ai_tmp_pair_seq { 1 } \\
+      \textit{\seq_item:Nn \l__ai_tmp_pair_seq { 2 }}
+    }
+  }
+
+  % Set colorbox margins
+  \dim_set:Nn \fboxsep { \fboxsep + \l_minitextgap_dim }
+
+  % Render data text and data values in virtual boxes, measure the
+  % resulting heights, pick the largest one as the height to use.
+  \vbox_set:Nn \l_left_box {
+    \begin{minipage}{\l_databox_dim}
+      {\tl_use:N \l_data_values_tl}
+    \end{minipage}
+  }
+  \vbox_set:Nn \l_right_box 
+  {
+    \begin{minipage}{\l_featurebox_dim}
+      {\tl_use:N \l_features_tl}
+    \end{minipage}
+  }
+
+  % Get the max height
+  \dim_set:Nn \l_max_height_dim {
+    % Both box height and box depth need to be added together for the
+    % actual height.
+    \dim_max:nn
+    { \box_ht:N \l_left_box + \box_dp:N \l_left_box }
+    { \box_ht:N \l_right_box + \box_dp:N \l_right_box }
+  }
+  
+  \dim_set:Nn \fboxsep { \fboxsep + \l_minitextgap_dim }
+  \begin{minipage}[t]{\l_statbox_dim}
+    \vspace{0pt} % Force top-edge alignment
+    {\vspace{-0.22cm}\par
+      \sffamily \textbf{STATS}}
+  \end{minipage}
+  \begin{minipage}[t]{\l_datatextbox_dim}
+    \vspace{0pt} % Force top-edge alignment
+    {\tl_use:N \l_data_text_tl}
+  \end{minipage}
+  \hspace{\l_datagap_dim}
+
+  \colorbox{themecolor}{
+    \begin{minipage}[t][\l_max_height_dim][t]{\l_databox_dim}
+      \vspace{0pt} % Force top-edge alignment
+      {\tl_use:N \l_data_values_tl}
+    \end{minipage}
+  }%
+  \hspace{\l_datafeaturegap_dim}
+  \colorbox{themecolor}{
+    \begin{minipage}[t][\l_max_height_dim][t]{\l_featurebox_dim}
+      \vspace{0pt} % Force top-edge alignment
+      {\tl_use:N \l_features_tl}
+    \end{minipage}
+  }%
+  \group_end:
+}

@@ -367,7 +367,23 @@ Analogous commands are |\AIsanity|, |\AIaura|, |\AIdamage|, |\AImortality|, and 
   |\AIloot[-]{2}| & \AIloot[-]{2}
 \end{AITable}
 
-\chapter{Monsters and NPCs}
+\chapter{Adversaries and Items}
+
+\section{Adversaries}
+%
+% We place this AIItem already here, or it will probably render on a separate page.
+\begin{AIItem*}{Cyclopean club}
+  \AIItemData*[
+  description={Titan great hammer of the Sea},
+  tier=4,
+  attack=0,
+  damage=6,
+  targets=1,
+  grade=1,
+  skill=Crushing,
+  features={{Heavy, Phew!},{Hard, Rock hard indeed}}
+  ]
+\end{AIItem*}
 
 % Monster stat block
 \begin{AIMonster}[width=\columnwidth]{Void cult accolyte}
@@ -429,6 +445,45 @@ One can pass |\tcolorbox| options to |\AIMonster|. For example, we can
 change the title font for our Void cult demagogue to Berylium.
 
 It might be best to \emph{not} make |\AIMonster| a float. That is, do not pass |float=htb| as an option. Floats can be great in \LaTeX, but they make it difficult to position the adversary blocks correctly.
+
+\section{Weapons}
+There is an |AIItem| environment for typesetting items in twocolumn mode, similar to |AIMonster|.
+|AIIitem*| creates a float that spans both columns, resembling items under the Gear section in the Rulebook.
+Background images are not (yet) implemented.
+
+\begin{AIItem}{Soul dicer}
+  \AIItemData[
+  description={Sinful dagger of Tiamat},
+  tier=3,
+  attack=3,
+  damage=4,
+  targets=2,
+  grade=1,
+  skill=Slashing,
+  features={{Quick, 2~targets hit/~\AIspsymbol~spent},{Sharp, Yikes!}}]
+\end{AIItem}
+
+% Let's do two full-width weapons on a separate float page.
+\begin{AIItem*}[floatplacement=p]{Primo}
+  \AIItemData*[
+  tier=3,
+  attack=3,
+  damage=4,
+  targets=2,
+  grade=1,
+  skill=Slashing,
+  features={{Quick, 2~targets hit/~\AIspsymbol~spent},{Sharp, Yikes!}}]
+\end{AIItem*}
+\begin{AIItem*}[floatplacement=p]{Secundo}
+  \AIItemData*[
+  tier=3,
+  attack=3,
+  damage=4,
+  targets=2,
+  grade=1,
+  skill=Slashing,
+  features={{Quick, 2~targets hit/~\AIspsymbol~spent},{Sharp, Yikes!}}]
+\end{AIItem*}
 
 \AIMakeLight
 \part{Customization} \label{part:customization}

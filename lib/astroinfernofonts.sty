@@ -36,6 +36,11 @@
     ItalicFont = IMFellEnglish-Italic
     ]
     \newcommand{\AIquoteFont}{\AIfontIMFellEnglish}
+
+    \newfontfamily\AIfontEroded{ERODED~PERSONAL~USE.ttf}[
+    Path = eroded-personal-use/,
+    Extension = .ttf,
+    UprightFont = *]
   }
 
 
@@ -217,6 +222,30 @@
     stat-block-section-style .initial:n        = \scshape \large,
     stat-block-section-style .value_required:n = true,
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    % Items
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    % Item title
+    item-title-family .tl_set:N         = \l__AI_item_title_family_tl,
+    item-title-family .initial:n        = \color{AIcurrentcolour}\AIfontEroded,
+    item-title-family .value_required:n = true,
+    item-title-style .tl_set:N         = \l__AI_item_title_style_tl,
+    item-title-style .initial:n        = \bfseries \fontsize{60}{68} \scshape,
+    item-title-style .value_required:n = true,
+    % Item body
+    item-body-family .tl_set:N         = \l__AI_item_body_family_tl,
+    item-body-family .initial:n        = \color{AIcurrentcolour}\AIquoteFont,
+    item-body-family .value_required:n = true,
+    item-body-style .tl_set:N         = \l__AI_item_body_style_tl,
+    item-body-style .initial:n        = \normalsize,
+    item-body-style .value_required:n = true,
+    % Item section
+    item-section-family .tl_set:N         = \l__AI_item_section_family_tl,
+    item-section-family .initial:n        = \color{AIcurrentcolour}\sffamily,
+    item-section-family .value_required:n = true,
+    item-section-style .tl_set:N         = \l__AI_item_section_style_tl,
+    item-section-style .initial:n        = \scshape \large,
+    item-section-style .value_required:n = true,
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     % Miscellaneous
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     % Footer
@@ -319,6 +348,17 @@
 \NewDocumentCommand{\AIFontStatBlockSection}{}
   { \l__AI_stat_block_section_family_tl \l__AI_stat_block_section_style_tl }
 
+% Items
+\NewDocumentCommand{\AIFontItemTitle}{}
+  { \l__AI_item_title_family_tl \l__AI_item_title_style_tl }
+
+\NewDocumentCommand{\AIFontItemBody}{}
+  { \l__AI_item_body_family_tl \l__AI_item_body_style_tl }
+
+\NewDocumentCommand{\AIFontItemSection}{}
+  { \l__AI_item_section_family_tl \l__AI_item_section_style_tl }
+
+  
 % Miscellaneous
 \NewDocumentCommand{\AIFontFooter}{}
   { \l__AI_footer_family_tl \l__AI_footer_style_tl }

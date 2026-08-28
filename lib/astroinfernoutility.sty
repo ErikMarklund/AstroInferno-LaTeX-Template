@@ -78,15 +78,15 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Print uppercase roman numerals
-\NewDocumentCommand\ROM{m}
-{\uppercase\expandafter{\romannumeral #1\relax}}
+\NewExpandableDocumentCommand\ROM{m}
+  { \int_to_Roman:n {#1} } 
 
 \msg_new:nnnn { astroinferno } { invalid-tier }
 { Invalid~tier~'#1'~provided! }
 { Tier~must~be~an~integer~between~1~and~5. }
 
 % Print tiers (e.g., Ordinary II).
-\NewDocumentCommand\AITier{m}
+\NewExpandableDocumentCommand\AITier{m}
 {
   \int_case:nnF {\int_eval:n {#1}} {
     {1} {Mundane~\ROM{#1}}
@@ -94,11 +94,11 @@
     {3} {Excellent~\ROM{#1}}
     {4} {Masterful~\ROM{#1}}
     {5} {Excellent~\ROM{#1}}
-  } {\msg_error:nnn { astroinferno } { invalid-tier } { #1 }}
+  } {}
 }
 
 % Print distances (e.g., Room II).
-\NewDocumentCommand\AIDist{m}
+\NewExpandableDocumentCommand\AIDist{m}
 {
   \int_case:nnF {\int_eval:n {#1}} {
     {1} {Intimate~\ROM{#1}}

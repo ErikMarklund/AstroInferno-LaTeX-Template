@@ -94,3 +94,4 @@
 \RequirePackage {lib/astroinfernosidebar}    % sidebars
 \RequirePackage {lib/astroinfernotable}      % tables
 \RequirePackage {lib/astroinfernotoc}        % table of contents styling
+\RequirePackage {lib/astroinfernoitem}       % items
