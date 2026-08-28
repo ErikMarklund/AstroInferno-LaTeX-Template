@@ -4,46 +4,47 @@
 % Define colors, sampled from the books.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Page
-\definecolor {bgtan}    {HTML} {F7F2E5}	% AIReadAloud background
-\definecolor {bgtan2018}{HTML} {F9EFD6} % lighter version of bgtan from the 2018 Basic Rules
-\definecolor {pagegold} {HTML} {B89A67} % pagenumbers and footer
-
-% Type
-\definecolor {titlered}    {HTML} {58180D} % titles
-\definecolor {titlegold}   {HTML} {C9AD6A} % titlerules
-\definecolor {rulered}     {HTML} {9C2B1B} % triangular rule in statsblock
-\definecolor {contourgray} {HTML} {CACCBE} % outline color in part & chapter font
-
-% Type aliases
-\colorlet {contourgrey} {contourgray}
-
-% Trim
-\definecolor {BrGreen}       {HTML} {E8E6DC} % Basic Rules
-\definecolor {PhbLightGreen} {HTML} {E0E5C1} % PHB Part 1
-\definecolor {PhbLightCyan}  {HTML} {B5CEB8} % PHB Part 2
-\definecolor {PhbMauve}      {HTML} {DCCCC5} % PHB Part 3
-\definecolor {PhbTan}        {HTML} {E5D5AC} % PHB appendix
-\definecolor {DmgLavender}   {HTML} {E3CED3} % DMG Part 1
-\definecolor {DmgCoral}      {HTML} {F3D7C1} % DMG Part 2
-\definecolor {DmgSlateGray}  {HTML} {DBE4E4} % DMG Part 3
-\definecolor {DmgLilac}      {HTML} {D7D4D6} % DMG appendix
-
-% Trim aliases
-\colorlet {DmgSlateGrey} {DmgSlateGray}
+\definecolor {AIblack} {HTML} {000000}
+\definecolor {AIwhite} {HTML} {FFFFFF}
+\definecolor {AIlogored} {HTML} {EC1C24}
+\definecolor {AIdeepred} {HTML} {A2272B}
+\definecolor {AIbrightred} {HTML} {BC6363}
+\definecolor {AIorange} {HTML} {F8A320}
+\definecolor {AIyellow} {HTML} {FEC315}
+\definecolor {AIundyingblue} {HTML} {00AEEF}
+\definecolor {AIpaleblue} {HTML} {7ECCE7} % Seen in Destiny section
+\definecolor {AIpetroleum} {HTML} {00A3DA} % Seen in Destiny section
+\definecolor {AIlightteal} {HTML} {E7E7E7} % Used in some tables, boxes
+\definecolor {AImidteal} {HTML} {D6D0BF}  % Used in some tables, boxes
+\definecolor {AIdarkteal} {HTML} {D0C6B0} % Used in weapon boxes
+\definecolor {AImidgraybrown} {HTML} {625C4F} % Used in some boxes
+\definecolor {AIdarkgraybrown} {HTML} {2A2822} % Used in some boxes
+\definecolor {AIlightgray} {HTML} {E9E8E7} % Used in some tables
+\definecolor {AImidgray} {HTML} {B5B6B6} % Used in some tables
+\definecolor {AImidsteelgray} {HTML} {394044} % Used in some boxes
+\definecolor {AIdarksteelgray} {HTML} {171B27} % Used in some boxes
 
 % The color used in \AISetThemeColor when a new color is not set
-\colorlet {themecolor} {PhbLightGreen} % Set the default theme to Part 1 of the PHB.
+\colorlet {themecolor} {AIlightteal}
 
+\NewDocumentCommand{\AIDarkColors} {} {
+  \colorlet {AItableodd} {AIdeepred}
+  \colorlet {AItableeven} {AIbrightred}
+  \colorlet {commentcolor} {AImidgraybrown}
+  \colorlet {readaloudcolor} {AImidsteelgray}
+  \colorlet {sidebarcolor} {AIdeepred}
+}
+\NewDocumentCommand{\AILightColors} {} {
+  \colorlet {AItableodd} {AIlightgray}
+  \colorlet {AItableeven} {AImidgray}
+  \colorlet {commentcolor} {AImidgraybrown}
+  \colorlet {readaloudcolor} {AIlightteal}
+  \colorlet {sidebarcolor} {AIlightgray}
+}
 % Element colors that change when \AISetThemeColor is used
 \colorlet {commentcolor} {themecolor} % AIComment background
 \colorlet {sidebarcolor} {themecolor} % AISidebar background
 \colorlet {tablecolor}   {themecolor} % AITable even row background
-
-% Element colors that do not respond to \AISetThemeColor
-\colorlet {readaloudcolor} {bgtan} % AIReadAloud background
-\definecolor {statblockribbon} {HTML} {E69A28} % stat block top/bottom borders (gold)
-\definecolor {statblockbg}     {HTML} {FDF1DC} % stat block background (tan)
 
 % Sets the themecolor and colors for all themed elements
 % If called without the optional color, resets the color of all themed elements to the current themecolor

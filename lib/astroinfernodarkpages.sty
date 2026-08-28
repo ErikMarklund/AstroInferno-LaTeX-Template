@@ -1,8 +1,6 @@
 \ExplSyntaxOn
 
 \definecolor{AIcurrentcolour}{rgb}{0,0,0}
-\definecolor{AIblack}{rgb}{0,0,0}
-\definecolor{AIwhite}{rgb}{1,1,1}
 \definecolor{AIdarkbox}{rgb}{0.3,0.3,0.3}
 \definecolor{AIlightbox}{rgb}{0.7,0.7,0.7}
 
@@ -27,7 +25,8 @@
   {\clearpage}
   \colorlet{AIcurrentcolour}{AIwhite}
   \AISSetGlobalColor{AIwhite}
-  \AISetThemeColor[AIdarkbox]
+  % \AISetThemeColor[AIdarkbox]
+  \AIDarkColors
   \RemoveFromHook{shipout/background} % Must clear earlier background, or the page number position will be broken.
   \AddToShipoutPictureBG{%
     \AtPageLowerLeft{%
@@ -43,7 +42,8 @@
   {\clearpage}
   \colorlet{AIcurrentcolour}{AIblack}
   \AISSetGlobalColor{AIblack}
-  \AISetThemeColor[AIlightbox]
+  % \AISetThemeColor[AIlightbox]
+  \AILightColors
   \RemoveFromHook{shipout/background} % Must clear earlier background, or the page number position will be broken.
   \AddToShipoutPictureBG{%
     \AtPageLowerLeft{%

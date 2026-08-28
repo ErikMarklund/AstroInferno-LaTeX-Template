@@ -16,15 +16,19 @@
 % Table options
 \keys_define:nn { astroinferno / table }
   {
-    color .tl_set:N            = \l__AI_table_color_tl,
-    color .initial:n           = tablecolor,
-    color .value_required:n    = true,
+    colorodd .tl_set:N            = \l__AI_table_color_odd_tl,
+    colorodd .initial:n           = AItableodd,
+    coloreven .tl_set:N            = \l__AI_table_color_even_tl,
+    coloreven .initial:n           = AItableeven,
     header .tl_set:N           = \l__AI_table_header_tl,
     header .value_required:n   = true,
     width .dim_set:N           = \l__AI_table_width_dim,
     width .value_required:n    = true,
   }
 
+\tl_new:N \l_use_color_odd_tl
+\tl_new:N \l_use_color_even_tl
+  
 % Table Definition
 \NewDocumentEnvironment {AITable} { o m }
 {
@@ -46,7 +50,9 @@
 
   \AIFontTableBody
 
-  \rowcolors {1} {} {\l__AI_table_color_tl}
+  % Expand the parameters straight into rowcolors. That allows empty
+  % colorodd and coloreven, making transparent rows.
+  \exp_args:Neee \rowcolors { 2 } { \l__AI_table_color_odd_tl } { \l__AI_table_color_even_tl }
 
   \regex_extract_all:NnNTF \c__preamble_regex {#2} \l_tmpa_seq
   {
@@ -55,7 +61,7 @@
     \rowstyle{\AIFontTableHeader}
   }
   {
-    \tabularx {\l__AI_table_width_dim} {#2}
+    \tabularx {\l__AI_table_width_dim} {2}
   }
 
 }

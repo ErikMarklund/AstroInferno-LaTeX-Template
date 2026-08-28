@@ -40,7 +40,7 @@
 % Backwards-compatible aliases and colours
 \colorlet {commentgreen}  {PhbLightGreen}
 \colorlet {itemtablepink} {DmgCoral}
-\colorlet {monstertan}    {statblockbg}
+\colorlet {monstertan}    {AIlightteal}
 \definecolor {monstertandark} {HTML} {F0DBB5}
 
 % Old interface
@@ -154,12 +154,12 @@
   right=0pt,
   sharp corners,
   opacityback=0,
-  colframe=titlered,
+  colframe=AIdeepred,
   fonttitle=\AIFontStatBlockTitle,
   fontupper=\AIFontStatBlockBody,
   fontlower=\AIFontStatBlockBody,
   title=#2,
-  coltitle=titlered,
+  coltitle=AIdeepred,
   #1
 }
 
@@ -180,15 +180,15 @@
   bottom=7pt,
   sharp corners,
   oversize=0pt,
-  borderline north={3pt}{0pt}{titlered},
-  borderline north={2pt}{0.5pt}{statblockribbon},
-  borderline south={3pt}{0pt}{titlered},
-  borderline south={2pt}{0.5pt}{statblockribbon},
+  borderline north={3pt}{0pt}{AIdeepred},
+  borderline north={2pt}{0.5pt}{AImidteal},
+  borderline south={3pt}{0pt}{AIdeepred},
+  borderline south={2pt}{0.5pt}{AImidteal},
   colback=statblockbg,
   colbacktitle=statblockbg,
-  colframe=titlered,
+  colframe=AIdeepred,
   fonttitle=\AIFontStatBlockTitle,
-  coltitle=titlered,
+  coltitle=AIdeepred,
   fontupper=\AIFontStatBlockBody,
   fontlower=\AIFontStatBlockBody,
   title=#2,
@@ -235,7 +235,7 @@
 \ExplSyntaxOn
 
 \setlist[astroinferno@monsterattrs]{
-  before=\color{titlered},
+  before=\color{AIdeepred},
   font=\AIFontStatBlockBody,
   labelsep=\l__AI_space_dim,
   noitemsep,
@@ -279,7 +279,7 @@
   CHA=\stat{10}]{%
   \AIDeprecate{\noexpand\stats}{1.0.0}{Use \noexpand\AIMonsterAbilityScores for the stat block ability score table.}%
   \begingroup%
-    \color{titlered}%
+    \color{AIdeepred}%
     \par\vspace{5pt}\noindent%
     \begin{tabularx}{\linewidth}{YYYYYY}
       \textbf{\strstatname} &
@@ -507,13 +507,13 @@
   colback=#2,
   sharp~corners,
   parbox=false,
-  borderline~west={1pt}{-0.5pt}{titlered},
-  borderline~east={1pt}{-0.5pt}{titlered},
+  borderline~west={1pt}{-0.5pt}{AIdeepred},
+  borderline~east={1pt}{-0.5pt}{AIdeepred},
   fontupper=\AIFontReadAloud,
   fontlower=\AIFontReadAloud,
   overlay={%
     \foreach\n in {north~east,north~west,south~east,south~west}
-    {\draw[titlered, fill=titlered] (frame.\n) circle (1.5pt); }; },
+    {\draw[AIdeepred, fill=AIdeepred] (frame.\n) circle (1.5pt); }; },
   after~skip=13pt plus 4pt minus 4pt,
   #1
 }

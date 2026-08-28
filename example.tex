@@ -315,6 +315,15 @@ The |AITable| colors the even rows and is set to the width of a line by default.
     Some value  & Some value
 \end{AITable}
 
+Odd and/or even rows can have transparent background.
+\begin{AITable}[header=Nice Table, colorodd]{XX}
+    Table head  & Table head \\
+    Some value  & Some value \\
+    Some value  & Some value \\
+    Some value  & Some value
+\end{AITable}
+
+
 \newpage % Actually new column
 \section{Symbols}
 Astro Inferno uses various special symbols. The template has commands for those:
@@ -495,24 +504,42 @@ Background images are not (yet) implemented.
 
   \begin{tabularx}{\linewidth}{lX}
     \textbf{Color}                  & \textbf{Description} \\
-    \rowcolor{PhbLightGreen}
-    |PhbLightGreen|                 & Light green used in PHB Part 1 (Default) \\
-    \rowcolor{PhbLightCyan}
-    |PhbLightCyan|                  & Light cyan used in PHB Part 2 \\
-    \rowcolor{PhbMauve}
-    |PhbMauve|                      & Pale purple used in PHB Part 3 \\
-    \rowcolor{PhbTan}
-    |PhbTan|                        & Light brown used in PHB appendix \\
-    \rowcolor{DmgLavender}
-    |DmgLavender|                   & Pale purple used in DMG Part 1 \\
-    \rowcolor{DmgCoral}
-    |DmgCoral|                      & Orange-pink used in DMG Part 2 \\
-    \rowcolor{DmgSlateGray}
-    |DmgSlateGray| (|DmgSlateGrey|) & Blue-gray used in PHB Part 3 \\
-    \rowcolor{DmgLilac}
-    |DmgLilac|                      & Purple-gray used in DMG appendix \\
-    \rowcolor{BrGreen}
-    |BrGreen|                       & Gray-green used for tables in Basic Rules\\
+    \rowcolor{AIlogored}
+    |AIlogored|                 & Astro Inferno logo red \\
+    \rowcolor{AIdeepred}
+    \textcolor{AIwhite}{|AIdeepred|} & \textcolor{AIwhite}{ Deep red seen all over the Rulebook}\\
+    \rowcolor{AIbrightred}
+    |AIbrightred|                 & Bright red (e.g., tables on p.~19)\\
+    \rowcolor{AIorange}
+    |AIorange|                 & Orange seen in Rulebook, Gear section\\
+    \rowcolor{AIyellow}
+    |AIyellow|                 & Yellow seen in Rulebook, Gear section\\
+    \rowcolor{AIundyingblue}
+    |AIundyingblue|                 & Blue used with Unying in Rulebook on p.~59\\
+    \rowcolor{AIpaleblue}
+    |AIpaleblue| & Pale blue seen in Rulebook, Destiny section \\
+    \rowcolor{AIpetroleum}
+    |AIpetroleum| & Petroleum blue seen in Rulebook, Destiny section \\
+    \rowcolor{AIlightteal}
+    |AIlightteal| & Light teal seen in tables, boxes \\
+    \rowcolor{AImidteal}
+    |AImidteal| & Light teal seen in tables, boxes \\
+    \rowcolor{AIdarkteal}
+    |AIdarkteal| & Light teal seen in weapon boxes \\
+    \rowcolor{AIlightgray}
+    \rowcolor{AImidgraybrown}
+    \textcolor{AIwhite}{|AImidgraybrown|} & \textcolor{AIwhite}{ Grayish brown seen in boxes} \\
+    \rowcolor{AIdarkgraybrown}
+    \textcolor{AIwhite}{|AIdarkgraybrown|} & \textcolor{AIwhite}{ Dark grayish brown seen in boxes} \\
+    |AIlightgray| & Light gray seen in tables \\
+    \rowcolor{AImidgray}
+    |AImidgray| & Gray seen in tables \\
+    \rowcolor{AImidsteelgray}
+    \textcolor{AIwhite}{|AImidsteelgray|} & \textcolor{AIwhite}{ Steel gray seen in boxes on dark pages} \\
+    \rowcolor{AIdarksteelgray}
+    \textcolor{AIwhite}{|AIdarksteelgray|} & \textcolor{AIwhite}{Dark steel gray seen in boxes on dark pages}\\
+
+     
   \end{tabularx}
 \end{table*}
 
@@ -529,7 +556,7 @@ This package provides several global color variables to style |AIComment|, |AIRe
 They also accept an optional color argument to set the color for a single instance. See Table~\ref{tab:colors} for a list of core book accent colors.
 
 \begin{lstlisting}
-\begin{AITable}[color=PhbLightCyan]{cX}
+\begin{AITable}[colorodd=AIpaleblue, coloreven]{cX}
   d8 & Item \\
   1  & Small wooden button \\
   2  & Red feather \\
@@ -542,7 +569,7 @@ They also accept an optional color argument to set the color for a single instan
 \end{AITable}
 \end{lstlisting}
 
-\begin{AITable}[color=PhbLightCyan]{cX}
+\begin{AITable}[colorodd=AIpaleblue, coloreven]{cX}
   d8 & Item \\
   1  & Small wooden button \\
   2  & Red feather \\
@@ -559,26 +586,26 @@ Use |\AISetThemeColor[<color>]| to set |commentcolor|, |readaloudcolor|, |sideba
 
 \begin{lstlisting}
 \begingroup
-\AISetThemeColor[PhbMauve]
+\AISetThemeColor[AIorange]
 
-\begin{AIComment}{This Comment Is in Mauve}
+\begin{AIComment}{This Comment Is in Orange}
   This comment is in the the new color.
 \end{AIComment}
 
-\begin{AISidebar}{This Sidebar Is Also Mauve}
+\begin{AISidebar}{This Sidebar Is Also Orange}
   The sidebar is also using the new theme color.
 \end{AISidebar}
 \endgroup
 \end{lstlisting}
 
 \begingroup
-\AISetThemeColor[PhbMauve]
+\AISetThemeColor[AIorange]
 
-\begin{AIComment}{This Comment Is in Mauve}
+\begin{AIComment}{This Comment Is in Orange}
   This comment is in the the new color.
 \end{AIComment}
 
-\begin{AISidebar}{This Sidebar Is Also Mauve}
+\begin{AISidebar}{This Sidebar Is Also Orange}
   The sidebar is also using the new theme color.
 \end{AISidebar}
 \endgroup
