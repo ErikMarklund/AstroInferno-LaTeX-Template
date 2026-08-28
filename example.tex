@@ -371,9 +371,9 @@ Analogous commands are |\AIsanity|, |\AIaura|, |\AIdamage|, |\AImortality|, and 
 
 \section{Adversaries}
 %
-% We place this AIItem already here, or it will probably render on a separate page.
-\begin{AIItem*}{Cyclopean club}
-  \AIItemData*[
+% We place this AIWeapon already here, or it will probably render on a separate page.
+\begin{AIWeapon*}{Cyclopean club}
+  \AIWeaponData*[
   description={Titan great hammer of the Sea},
   tier=4,
   attack=0,
@@ -383,7 +383,7 @@ Analogous commands are |\AIsanity|, |\AIaura|, |\AIdamage|, |\AImortality|, and 
   skill=Crushing,
   features={{Heavy, Phew!},{Hard, Rock hard indeed}}
   ]
-\end{AIItem*}
+\end{AIWeapon*}
 
 % Monster stat block
 \begin{AIMonster}[width=\columnwidth]{Void cult accolyte}
@@ -447,12 +447,12 @@ change the title font for our Void cult demagogue to Berylium.
 It might be best to \emph{not} make |\AIMonster| a float. That is, do not pass |float=htb| as an option. Floats can be great in \LaTeX, but they make it difficult to position the adversary blocks correctly.
 
 \section{Weapons}
-There is an |AIItem| environment for typesetting items in twocolumn mode, similar to |AIMonster|.
-|AIIitem*| creates a float that spans both columns, resembling items under the Gear section in the Rulebook.
+There is an |AIWeapon| environment for typesetting weapons in twocolumn mode, similar to |AIMonster|.
+|AIIweapon*| creates a float that spans both columns, resembling weapons under the Gear section in the Rulebook.
 Background images are not (yet) implemented.
 
-\begin{AIItem}{Soul dicer}
-  \AIItemData[
+\begin{AIWeapon}{Soul dicer}
+  \AIWeaponData[
   description={Sinful dagger of Tiamat},
   tier=3,
   attack=3,
@@ -461,11 +461,11 @@ Background images are not (yet) implemented.
   grade=1,
   skill=Slashing,
   features={{Quick, 2~targets hit/~\AIspsymbol~spent},{Sharp, Yikes!}}]
-\end{AIItem}
+\end{AIWeapon}
 
 % Let's do two full-width weapons on a separate float page.
-\begin{AIItem*}[floatplacement=p]{Primo}
-  \AIItemData*[
+\begin{AIWeapon*}[floatplacement=p]{Primo}
+  \AIWeaponData*[
   tier=3,
   attack=3,
   damage=4,
@@ -473,9 +473,9 @@ Background images are not (yet) implemented.
   grade=1,
   skill=Slashing,
   features={{Quick, 2~targets hit/~\AIspsymbol~spent},{Sharp, Yikes!}}]
-\end{AIItem*}
-\begin{AIItem*}[floatplacement=p]{Secundo}
-  \AIItemData*[
+\end{AIWeapon*}
+\begin{AIWeapon*}[floatplacement=p]{Secundo}
+  \AIWeaponData*[
   tier=3,
   attack=3,
   damage=4,
@@ -483,7 +483,7 @@ Background images are not (yet) implemented.
   grade=1,
   skill=Slashing,
   features={{Quick, 2~targets hit/~\AIspsymbol~spent},{Sharp, Yikes!}}]
-\end{AIItem*}
+\end{AIWeapon*}
 
 \AIMakeLight
 \part{Customization} \label{part:customization}

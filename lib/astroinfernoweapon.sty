@@ -1,8 +1,8 @@
 \ExplSyntaxOn
 
-% Proper environment for Astro Inferno items.
+% Proper environment for Astro Inferno weapons.
 
-\DeclareTColorBox {__AIItem} { O{} }
+\DeclareTColorBox {__AIWeapon} { O{} }
 {
   enhanced,
   frame~hidden,
@@ -16,73 +16,73 @@
   sharp~corners,
   opacityback = 0,
   colframe    = titlered,
-  % fonttitle   = \AIFontItemTitle,
-  fontupper   = \AIFontItemBody,
-  fontlower   = \AIFontItemBody,
+  % fonttitle   = \AIFontWeaponTitle,
+  fontupper   = \AIFontWeaponBody,
+  fontlower   = \AIFontWeaponBody,
   % title            = {},
   coltitle    = .,
   #1
 }
 
-% We need a variable to store the title passed to the wrapper environment AIItem,
-% Then read the variable in AIItemData.
-\str_new:N  \l_item_title_str
-\str_set:Nn  \l_item_title_str {unset}
+% We need a variable to store the title passed to the wrapper environment AIWeapon,
+% Then read the variable in AIWeaponData.
+\str_new:N  \l_weapon_title_str
+\str_set:Nn  \l_weapon_title_str {unset}
 
-\NewDocumentEnvironment{AIItem}{O{} m }
+\NewDocumentEnvironment{AIWeapon}{O{} m }
 {
-    \str_set:Nn  \l_item_title_str {#2}
-    \begin{__AIItem}[#1]
+    \str_set:Nn  \l_weapon_title_str {#2}
+    \begin{__AIWeapon}[#1]
   }
   {
-  \end{__AIItem}
+  \end{__AIWeapon}
   }
 
-\NewDocumentEnvironment{AIItem*}{O{} m }
+\NewDocumentEnvironment{AIWeapon*}{O{} m }
   {
-    \str_set:Nn  \l_item_title_str {#2}
-    \begin{__AIItem}[float*=b, width=\textwidth, #1]
+    \str_set:Nn  \l_weapon_title_str {#2}
+    \begin{__AIWeapon}[float*=b, width=\textwidth, #1]
   }
   {
-  \end{__AIItem}
+  \end{__AIWeapon}
   }
   
-\keys_define:nn { astroinferno / item / itemdata }
+\keys_define:nn { astroinferno / weapon / weapondata }
 {
   % We want this to set up the font for the title.
   % We should do the same to set a default size, otherwise overriding the default font
   % will lead to a tiny font.
-  fonttitle .code:n = {\tl_set:Nn \l_item_fonttitle_tl { #1 \selectfont }},
-  fonttitle .initial:n = \l__AI_item_title_family_tl,
-  titlestyle .code:n = {\tl_set:Nn \l_item_titlestyle_tl { #1 \selectfont }},
-  titlestyle .initial:n = \l__AI_item_title_style_tl,
+  fonttitle .code:n = {\tl_set:Nn \l_weapon_fonttitle_tl { #1 \selectfont }},
+  fonttitle .initial:n = \l__AI_weapon_title_family_tl,
+  titlestyle .code:n = {\tl_set:Nn \l_weapon_titlestyle_tl { #1 \selectfont }},
+  titlestyle .initial:n = \l__AI_weapon_title_style_tl,
   % 
-  description .tl_set:N  = \l_item_description_tl,
+  description .tl_set:N  = \l_weapon_description_tl,
   description .initial:n  = unknown,
   %
-  tier .tl_set:N  = \l_item_tier_int,
+  tier .tl_set:N  = \l_weapon_tier_int,
   tier .initial:n  = 1,
   tier .value_required:n  = true,
-  attack .tl_set:N  = \l_item_attack_int,
+  attack .tl_set:N  = \l_weapon_attack_int,
   attack .initial:n  = 0,
   attack .value_required:n  = true,
-  augment .tl_set:N  = \l_item_augment_int,
+  augment .tl_set:N  = \l_weapon_augment_int,
   augment .initial:n  = 0,
   augment .value_required:n  = true,
-  damage .tl_set:N  = \l_item_damage_int,
+  damage .tl_set:N  = \l_weapon_damage_int,
   damage .initial:n  = 1,
   damage .value_required:n  = true,
-  targets .tl_set:N  = \l_item_targets_int,
+  targets .tl_set:N  = \l_weapon_targets_int,
   targets .initial:n  = 1,
   targets .value_required:n  = true,
-  grade .tl_set:N  = \l_item_grade_int,
+  grade .tl_set:N  = \l_weapon_grade_int,
   grade .initial:n  = 1,
   grade .value_required:n  = true,
-  skill .tl_set:N  = \l_item_skill_str,
+  skill .tl_set:N  = \l_weapon_skill_str,
   skill .initial:n  = unset,
   skill .value_required:n  = true,
   %
-  features .clist_set:N  = \l_item_features_clist,
+  features .clist_set:N  = \l_weapon_features_clist,
   features .initial:n  = {},
 }
 
@@ -111,10 +111,10 @@
 \dim_new:N \l_max_height_dim
 
 % Starred version for page-spanning layout (not implemented)
-\NewDocumentCommand{\AIItemData}{s o}
+\NewDocumentCommand{\AIWeaponData}{s o}
 {
   \group_begin:
-  \keys_set:nn { astroinferno / item / itemdata } {#2}
+  \keys_set:nn { astroinferno / weapon / weapondata } {#2}
   
   % Some things are constant.
   \settowidth{\l_statbox_dim}{\sffamily \textbf{STATS}}
@@ -146,24 +146,24 @@
 
   \bool_if:NTF {#1} {
     \begin{minipage}[t]{\l_titlebox_dim}
-      {\l_item_titlestyle_tl \l_item_fonttitle_tl \vspace{-0.25ex}}
+      {\l_weapon_titlestyle_tl \l_weapon_fonttitle_tl \vspace{-0.25ex}}
       % \vspace to force top-edge alignment, and to raise the title
       % text slightly, because there is some emptiness above the letters.
-      {\l_item_titlestyle_tl \l_item_fonttitle_tl \l_item_title_str\\[0.3cm]}
+      {\l_weapon_titlestyle_tl \l_weapon_fonttitle_tl \l_weapon_title_str\\[0.3cm]}
       {\bfseries \sffamily \footnotesize \MakeUppercase
         {
-          \textls[300]{\AITier{\l_item_tier_int}}\\
-          \textls[300]{\l_item_description_tl}
+          \textls[300]{\AITier{\l_weapon_tier_int}}\\
+          \textls[300]{\l_weapon_description_tl}
         }
       }
     \end{minipage} \hspace{\l_backstep_dim}
   } {
     \begin{center}
-      {\l_item_titlestyle_tl \l_item_fonttitle_tl \l_item_title_str}\\[0.2cm]
+      {\l_weapon_titlestyle_tl \l_weapon_fonttitle_tl \l_weapon_title_str}\\[0.2cm]
       {\bfseries \sffamily \footnotesize \MakeUppercase
         {
-          \textls[300]{\AITier{\l_item_tier_int}}\\
-          \textls[300]{{\l_item_description_tl}}\\
+          \textls[300]{\AITier{\l_weapon_tier_int}}\\
+          \textls[300]{{\l_weapon_description_tl}}\\
         }
       }
     \end{center}
@@ -183,19 +183,19 @@
 
   \tl_set:Nn \l_data_values_tl
   {
-    \ROM{\l_item_tier_int}\\
-    \AIBonus{\l_item_attack_int}\\
-    \AIBonus{\l_item_augment_int}\\
-    \l_item_damage_int\\
-    \l_item_targets_int\\
-    \AIBonus{\l_item_grade_int}\\
-    \l_item_skill_str
+    \ROM{\l_weapon_tier_int}\\
+    \AIBonus{\l_weapon_attack_int}\\
+    \AIBonus{\l_weapon_augment_int}\\
+    \l_weapon_damage_int\\
+    \l_weapon_targets_int\\
+    \AIBonus{\l_weapon_grade_int}\\
+    \l_weapon_skill_str
   }
 
   \tl_set:Nn \l_features_tl
   {
     Features:
-    \clist_map_variable:NNn \l_item_features_clist \l_tmp_tl
+    \clist_map_variable:NNn \l_weapon_features_clist \l_tmp_tl
     {
       \\[\baselineskip]
       % Split the pair by its internal comma into a temporary sequence

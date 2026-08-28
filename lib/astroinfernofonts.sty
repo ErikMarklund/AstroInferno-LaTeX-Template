@@ -222,29 +222,29 @@
     stat-block-section-style .initial:n        = \scshape \large,
     stat-block-section-style .value_required:n = true,
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    % Items
+    % Weapons
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    % Item title
-    item-title-family .tl_set:N         = \l__AI_item_title_family_tl,
-    item-title-family .initial:n        = \color{AIcurrentcolour}\AIfontEroded,
-    item-title-family .value_required:n = true,
-    item-title-style .tl_set:N         = \l__AI_item_title_style_tl,
-    item-title-style .initial:n        = \bfseries \fontsize{60}{68} \scshape,
-    item-title-style .value_required:n = true,
-    % Item body
-    item-body-family .tl_set:N         = \l__AI_item_body_family_tl,
-    item-body-family .initial:n        = \color{AIcurrentcolour}\AIquoteFont,
-    item-body-family .value_required:n = true,
-    item-body-style .tl_set:N         = \l__AI_item_body_style_tl,
-    item-body-style .initial:n        = \normalsize,
-    item-body-style .value_required:n = true,
-    % Item section
-    item-section-family .tl_set:N         = \l__AI_item_section_family_tl,
-    item-section-family .initial:n        = \color{AIcurrentcolour}\sffamily,
-    item-section-family .value_required:n = true,
-    item-section-style .tl_set:N         = \l__AI_item_section_style_tl,
-    item-section-style .initial:n        = \scshape \large,
-    item-section-style .value_required:n = true,
+    % Weapon title
+    weapon-title-family .tl_set:N         = \l__AI_weapon_title_family_tl,
+    weapon-title-family .initial:n        = \color{AIcurrentcolour}\AIfontEroded,
+    weapon-title-family .value_required:n = true,
+    weapon-title-style .tl_set:N         = \l__AI_weapon_title_style_tl,
+    weapon-title-style .initial:n        = \bfseries \fontsize{60}{68} \scshape,
+    weapon-title-style .value_required:n = true,
+    % Weapon body
+    weapon-body-family .tl_set:N         = \l__AI_weapon_body_family_tl,
+    weapon-body-family .initial:n        = \color{AIcurrentcolour}\AIquoteFont,
+    weapon-body-family .value_required:n = true,
+    weapon-body-style .tl_set:N         = \l__AI_weapon_body_style_tl,
+    weapon-body-style .initial:n        = \normalsize,
+    weapon-body-style .value_required:n = true,
+    % Weapon section
+    weapon-section-family .tl_set:N         = \l__AI_weapon_section_family_tl,
+    weapon-section-family .initial:n        = \color{AIcurrentcolour}\sffamily,
+    weapon-section-family .value_required:n = true,
+    weapon-section-style .tl_set:N         = \l__AI_weapon_section_style_tl,
+    weapon-section-style .initial:n        = \scshape \large,
+    weapon-section-style .value_required:n = true,
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     % Miscellaneous
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -348,15 +348,15 @@
 \NewDocumentCommand{\AIFontStatBlockSection}{}
   { \l__AI_stat_block_section_family_tl \l__AI_stat_block_section_style_tl }
 
-% Items
-\NewDocumentCommand{\AIFontItemTitle}{}
-  { \l__AI_item_title_family_tl \l__AI_item_title_style_tl }
+% Weapons
+\NewDocumentCommand{\AIFontWeaponTitle}{}
+  { \l__AI_weapon_title_family_tl \l__AI_weapon_title_style_tl }
 
-\NewDocumentCommand{\AIFontItemBody}{}
-  { \l__AI_item_body_family_tl \l__AI_item_body_style_tl }
+\NewDocumentCommand{\AIFontWeaponBody}{}
+  { \l__AI_weapon_body_family_tl \l__AI_weapon_body_style_tl }
 
-\NewDocumentCommand{\AIFontItemSection}{}
-  { \l__AI_item_section_family_tl \l__AI_item_section_style_tl }
+\NewDocumentCommand{\AIFontWeaponSection}{}
+  { \l__AI_weapon_section_family_tl \l__AI_weapon_section_style_tl }
 
   
 % Miscellaneous
