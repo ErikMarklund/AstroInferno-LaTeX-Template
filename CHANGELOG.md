@@ -13,6 +13,8 @@ This changelog is now flushed to only incorporate changes for the Astro Inferno 
 
 ### Added
 
+- AIWeapon environment
+
 ### Changed
 
 ## [Before flushing changelog]
