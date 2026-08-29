@@ -454,7 +454,7 @@ Analogous commands are |\AIsanity|, |\AIaura|, |\AIdamage|, |\AImortality|, and 
     {\AIloot[-]{4},\AIbloodsymbol~Normal blood}
 \end{AIMonster}
 \newpage
-The |\AIMonster| environment is used to typeset monster and NPC stat blocks. The module supplies many functions to easily typeset the contents of the stat block
+The |\AIMonster| environment is used to typeset monster and NPC stat blocks. The module supplies many functions to easily typeset the contents of the stat block.
 One can pass |\tcolorbox| options to |\AIMonster|. For example, we can
 change the title font for our Void cult demagogue to 'Minster'.
 
@@ -560,7 +560,9 @@ This package provides several global color variables to style |AIComment|, |AIRe
 They also accept an optional color argument to set the color for a single instance. See Table~\ref{tab:colors} for a list of core book accent colors.
 
 \begin{lstlisting}
-\begin{AITable}[colorodd=AIpaleblue, coloreven]{cX}
+\begin{AITable}[
+  colorodd=AIpaleblue,
+  coloreven]{cX}
   d8 & Item \\
   1  & Small wooden button \\
   2  & Red feather \\
@@ -573,7 +575,9 @@ They also accept an optional color argument to set the color for a single instan
 \end{AITable}
 \end{lstlisting}
 
-\begin{AITable}[colorodd=AIpaleblue, coloreven]{cX}
+\begin{AITable}[
+  colorodd=AIpaleblue,
+  coloreven]{cX}
   d8 & Item \\
   1  & Small wooden button \\
   2  & Red feather \\
@@ -592,12 +596,15 @@ Use |\AISetThemeColor[<color>]| to set |commentcolor|, |readaloudcolor|, |sideba
 \begingroup
 \AISetThemeColor[AIorange]
 
-\begin{AIComment}{This Comment Is in Orange}
+\begin{AIComment}
+  {This Comment Is in Orange}
   This comment is in the the new color.
 \end{AIComment}
 
-\begin{AISidebar}{This Sidebar Is Also Orange}
-  The sidebar is also using the new theme color.
+\begin{AISidebar}
+  {This Sidebar Is Also Orange}
+  The sidebar is also using the new
+  theme color.
 \end{AISidebar}
 \endgroup
 \end{lstlisting}
@@ -605,12 +612,15 @@ Use |\AISetThemeColor[<color>]| to set |commentcolor|, |readaloudcolor|, |sideba
 \begingroup
 \AISetThemeColor[AIorange]
 
-\begin{AIComment}{This Comment Is in Orange}
+\begin{AIComment}
+  {This Comment Is in Orange}
   This comment is in the the new color.
 \end{AIComment}
 
-\begin{AISidebar}{This Sidebar Is Also Orange}
-  The sidebar is also using the new theme color.
+\begin{AISidebar}
+  {This Sidebar Is Also Orange}
+  The sidebar is also using the new
+  theme color.
 \end{AISidebar}
 \endgroup
 
