@@ -4,7 +4,6 @@
 % Font definitions
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \RequirePackage{lettrine}
-\RequirePackage{Royal}
 \RequirePackage[auto]{contour}
 
 \bool_if:NT \l__AI_layout_bool
@@ -19,6 +18,9 @@
     \setmainfont{Lato}
     \setsansfont{Lato}
     \renewcommand{\familydefault}{\rmdefault}
+
+    \newfontfamily{\AIfontQTCloisteredMonk}{qtcloisteredmonk}
+    \newcommand{\AIoldenglishFont}{\AIfontQTCloisteredMonk}
 
     \newfontfamily\AIfontAvalenRekas{Avalen~Rekas.ttf}
     \newcommand{\AIpartfont}{\AIfontAvalenRekas}
@@ -42,7 +44,6 @@
     Extension = .ttf,
     UprightFont = *]
   }
-
 
 
 \cs_new_protected:Npn \__AI_sf_initial_family:
@@ -264,7 +265,7 @@
     page-number-style .value_required:n = true,
     % Drop caps
     drop-cap-family .tl_set:N         = \l__AI_drop_cap_family_tl,
-    drop-cap-family .initial:n        = \color{AIcurrentcolour}\Royal,
+    drop-cap-family .initial:n        = \color{AIcurrentcolour}\AIoldenglishFont,
     drop-cap-family .value_required:n = true,
     drop-cap-style .tl_set:N         = \l__AI_drop_cap_style_tl,
     drop-cap-style .value_required:n = true,
