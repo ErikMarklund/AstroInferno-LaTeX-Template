@@ -546,23 +546,25 @@ Background images are not (yet) implemented.
 
   \end{tabularx}
 \end{table*}
-
-This package provides several global color variables to style |AIComment|, |AIReadAloud|, |AISidebar|, and |AITable| environments.
+\noindent
+Global color variables to style |AIComment|, |AIReadAloud|, |AISidebar|, and |AITable| environments are provided.
 
 \begin{AITable}[header=Box Colors]{lX}
   Color            &  Description \\
   |commentcolor|   & |AIComment| background \\
   |readaloudcolor| & |AIReadAloud| background \\
   |sidebarcolor|   & |AISidebar| background \\
-  |tablecolor|     & background of even |AITable| rows \\
+  |AItableodd| & |AITable| odd rows \\
+  |AItableeven| & |AITable| even rows
 \end{AITable}
 
-They also accept an optional color argument to set the color for a single instance. See Table~\ref{tab:colors} for a list of core book accent colors.
+\noindent
+Those environemnts also accept an optional color argument to set the color for a single instance.
+|AITable| instead takes |colorodd| and |coloreven|. See table of predefined colors.
 
 \begin{lstlisting}
 \begin{AITable}[
-  colorodd=AIpaleblue,
-  coloreven]{cX}
+  colorodd=AIpaleblue,coloreven]{cX}
   d8 & Item \\
   1  & Small wooden button \\
   2  & Red feather \\
@@ -576,17 +578,14 @@ They also accept an optional color argument to set the color for a single instan
 \end{lstlisting}
 
 \begin{AITable}[
-  colorodd=AIpaleblue,
-  coloreven]{cX}
-  d8 & Item \\
-  1  & Small wooden button \\
-  2  & Red feather \\
+  colorodd=AIpaleblue,coloreven]{cX}
+  d6 & Item \\
+  1  & 1~Ct \\
+  2  & Unlight tobacco \\
   3  & Human tooth \\
   4  & Vial of green liquid \\
   5  & Loaded dice \\
-  6  & Tasty biscuit \\
-  7  & Broken axe handle \\
-  8  & Tarnished silver locket \\
+  6  & Nine inch nails
 \end{AITable}
 
 \section{Themed Colors}
