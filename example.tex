@@ -42,6 +42,11 @@
     ItalicFont = Berylium_Rg_It,     % Change to your exact italic file name
     BoldItalicFont = Berylium_Bd_It  % Change to your exact bold-italic file name
 ]
+\newfontfamily\AIfontMinster{minster6.ttf}[
+Path = minster/,
+Extension = .ttf
+]
+
 
 \begin{document}
 
@@ -426,7 +431,7 @@ Analogous commands are |\AIsanity|, |\AIaura|, |\AIdamage|, |\AImortality|, and 
     {\AIloot[-]{4},\AIbloodsymbol~Soiled blood}
 \end{AIMonster}
 \vfill
-\begin{AIMonster}[width=\columnwidth, fonttitle=\color{AIcurrentcolour}\fontsize{30}{35}\AIfontBeryllium]{Void cult demagogue}
+\begin{AIMonster}[width=\columnwidth, fonttitle=\color{AIcurrentcolour}\fontsize{40}{46}\AIfontMinster]{Void cult demagogue}
     \AIMonsterType{Void priests - Obliviation deacons}
     \AIMonsterClass{Champions}
     \AIMonsterBeing{Greater souls}
@@ -451,7 +456,7 @@ Analogous commands are |\AIsanity|, |\AIaura|, |\AIdamage|, |\AImortality|, and 
 \newpage
 The |\AIMonster| environment is used to typeset monster and NPC stat blocks. The module supplies many functions to easily typeset the contents of the stat block
 One can pass |\tcolorbox| options to |\AIMonster|. For example, we can
-change the title font for our Void cult demagogue to Berylium.
+change the title font for our Void cult demagogue to 'Minster'.
 
 It might be best to \emph{not} make |\AIMonster| a float. That is, do not pass |float=htb| as an option. Floats can be great in \LaTeX, but they make it difficult to position the adversary blocks correctly.
 
@@ -523,14 +528,14 @@ Background images are not (yet) implemented.
     \rowcolor{AIlightteal}
     |AIlightteal| & Light teal seen in tables, boxes \\
     \rowcolor{AImidteal}
-    |AImidteal| & Light teal seen in tables, boxes \\
+    |AImidteal| & Mid teal seen in tables, boxes \\
     \rowcolor{AIdarkteal}
-    |AIdarkteal| & Light teal seen in weapon boxes \\
-    \rowcolor{AIlightgray}
+    |AIdarkteal| & Dark teal seen in weapon boxes \\
     \rowcolor{AImidgraybrown}
     \textcolor{AIwhite}{|AImidgraybrown|} & \textcolor{AIwhite}{ Grayish brown seen in boxes} \\
     \rowcolor{AIdarkgraybrown}
     \textcolor{AIwhite}{|AIdarkgraybrown|} & \textcolor{AIwhite}{ Dark grayish brown seen in boxes} \\
+    \rowcolor{AIlightgray}
     |AIlightgray| & Light gray seen in tables \\
     \rowcolor{AImidgray}
     |AImidgray| & Gray seen in tables \\
@@ -539,7 +544,6 @@ Background images are not (yet) implemented.
     \rowcolor{AIdarksteelgray}
     \textcolor{AIwhite}{|AIdarksteelgray|} & \textcolor{AIwhite}{Dark steel gray seen in boxes on dark pages}\\
 
-     
   \end{tabularx}
 \end{table*}
 
@@ -610,4 +614,35 @@ Use |\AISetThemeColor[<color>]| to set |commentcolor|, |readaloudcolor|, |sideba
 \end{AISidebar}
 \endgroup
 
+\chapter{Fonts and Text Features}
+\noindent
+This template uses various fonts that are identical to, or similar to, the most common ones in Astro Inferno.
+Some fonts are excluded due to licencing issues, whereas others are omitted because they are only used sparingly.
+\section{Included Fonts}
+\begin{AITable}[header=Fonts in template, colorodd=AImidteal, coloreven]{lX}
+  Macro Name    & Font name and look \\
+  |\normalfont|  & Lato \\
+  |\AIfontAvalenRekas| & {\AIfontAvalenRekas Avalen Rekas} \\
+  |\AIfontMuara| & {\AIfontMuara Muara} \\
+  |\AIfontIMFellEnglish| & {\AIfontIMFellEnglish IMFellEnglish} \\
+  |\AIfontEroded| & {\AIfontEroded Eroded}
+\end{AITable}
+See |lib/astroinfernofonts.sty| for aliases.
+
+\section{Adding Fonts}
+%\newfontfamily\AIfontMinster{minster/minster6.ttf}
+New fonts can be added using native \LaTeX functions.
+For example, this document loads the font Minster through
+|\newfontfamily\AIfontMinster{minster6.ttf}[|\\
+|Path = minster/,|\\
+|Extension = .ttf|\\
+|]|\\
+and uses it for the Void Cult Demagogue title.
+Similarly, the Berylium font is used on the titlepage.
+Technically, Minster1-6 and Berylium are included with the Template,
+but not automatically loaded, as they do not correspond to particular
+Astro Inferno fonts.
+
+\section{Drop Caps}
+\AIDropCapLine{D}{ropcaps are not native to Astro Inferno, but it is a neat feature from the DnD5e Template that was kept. The 'Royal' font is still loaded by the Template for this purpose, but might be changed to another one that better fits the everall theme.}
 \end{document}
