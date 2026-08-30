@@ -14,10 +14,23 @@
     \RequirePackage[type1]{gillius2}
     \RequirePackage[notext,nomath,nott]{kpfonts}
     \RequirePackage[T1]{fontenc}
-    \renewcommand{\sfdefault}{jkpss}
+    \renewcommand{\sfdefault}{jkpss} % Remove? Inherited from dnd.
     \setmainfont{Lato}
     \setsansfont{Lato}
     \renewcommand{\familydefault}{\rmdefault}
+
+    % ======== Font checks ========
+    % This template uses fallbacks for several key fonts in the
+    % folowing manner:
+    % 1. Load official font if installed on the system.
+    % 2. Load official font if found in the fonts/ directory.
+    %     TrueType is assumed, unless OTF is likely (depends on which font),
+    %     and assumptions are made about file names.
+    %     If file names differ, adjust either template or file names.
+    % 3. Load fallback font if installed on the system.
+    % 4. Load fallback font if found in the fonds/ directory.
+    %     Several "official" and unofficial fallback fonts are included.
+    % =========================
 
     \newfontfamily{\AIfontQTCloisteredMonk}{qtcloisteredmonk}
     \newcommand{\AIoldenglishFont}{\AIfontQTCloisteredMonk}
@@ -27,23 +40,55 @@
     \newcommand{\AIchapterfont}{\AIfontAvalenRekas}
     \newcommand{\AIsectionfont}{\AIfontAvalenRekas}
 
-    % Original file name is "MUARA DEMO .ttf", but trailing space
-    % causes problem, so file was renamed.
-    \newfontfamily\AIfontMuara{MUARA~DEMO.ttf}[
-    Path = fonts/,
-    Extension = .ttf,
-    UprightFont = *
-    ]
+    % Check if Muara exists. Otherwise load MUARA DEMO
+    \IfFontExistsTF{Muara} {
+      \newfontfamily\AIfontMuara{Muara}
+    } {
+      % Look for font in fonts/
+      \IfFontExistsTF{fonts/Muara.ttf}
+      {\newfontfamily\AIfontMuara{Muara.ttf}[Path = fonts/, Extension = .ttf,UprightFont = *]}
+      {
+        % Original file name is "MUARA DEMO .ttf", but trailing space
+        % causes problem, so file was renamed.
+        \newfontfamily\AIfontMuara{MUARA~DEMO.ttf}
+        [Path = fonts/, Extension = .ttf, UprightFont = *]
+      }
+    }
+
+    % Make (sub)subsection font alias
     \newcommand{\AIsubsectionfont}{\AIfontMuara}
     \newcommand{\AIsubsubsectionfont}{\AIfontMuara}
 
-    \newfontfamily\AIfontIMFellEnglish{IMFellEnglish-Regular.ttf}[
-    Path = fonts/IM_Fell_English/,
-    Extension = .ttf,
-    UprightFont = *,
-    ItalicFont = IMFellEnglish-Italic
-    ]
-    \newcommand{\AIquoteFont}{\AIfontIMFellEnglish}
+    % Use 1651 Alchemy if available. Otherwise IM FELL English
+    \IfFontExistsTF{1651~Alchemy}
+    {
+      % Is Contextuals = Alternate needed when loading like this?
+      \newfontfamily\AIfontAlchemy{1651~Alchemy}
+    }
+    { % Look for font file in fonts/
+      \IfFontExistsTF{fonts/GLC~-~1651AlchemyNormal.otf}
+      {
+        \newfontfamily\AIfontAlchemy{GLC~-~1651Alchemy.otf}
+        [Path = fonts/1651~Alchemy~Family/,
+        Extension = .otf,
+        UprightFont    = * Normal,
+        ItalicFont     = * Italic,
+        Contextuals    = Alternate]
+      } { % Load fallback IM FELL English instead
+        \IfFontExistsTF{IM~FELL~English} {
+          \newfontfamily\AIfontAlchemy{IM~FELL~English}
+        } { % :Load fallback from file instead
+          \newfontfamily\AIfontIMFellEnglish{IMFellEnglish-Regular.ttf}[
+          Path = fonts/IM_Fell_English/,
+          Extension = .ttf,
+          UprightFont = *,
+          ItalicFont = IMFellEnglish-Italic
+          ]
+        }
+      }
+    }
+
+    \newcommand{\AIquoteFont}{\AIfontAlchemy}
 
     \newfontfamily\AIfontEroded{ERODED~PERSONAL~USE.ttf}[
     Path = fonts/eroded-personal-use/,
