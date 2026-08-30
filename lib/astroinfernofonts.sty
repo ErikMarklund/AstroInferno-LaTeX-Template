@@ -59,7 +59,9 @@
     \newcommand{\AIsubsectionfont}{\AIfontMuara}
     \newcommand{\AIsubsubsectionfont}{\AIfontMuara}
 
-    % Use 1651 Alchemy if available. Otherwise IM FELL English
+    % The 1651 Alchemy font replacements are difficult. All have some drawbacks.
+    % One alternative could be Caslon Antique, but the digits look wrong.
+    % Use 1651 Alchemy if available. Otherwise Dominican, then IM FELL English
     \IfFontExistsTF{1651~Alchemy}
     {
       % Is Contextuals = Alternate needed when loading like this?
@@ -74,16 +76,29 @@
         UprightFont    = * Normal,
         ItalicFont     = * Italic,
         Contextuals    = Alternate]
-      } { % Load fallback IM FELL English instead
-        \IfFontExistsTF{IM~FELL~English} {
-          \newfontfamily\AIfontAlchemy{IM~FELL~English}
-        } { % :Load fallback from file instead
-          \newfontfamily\AIfontIMFellEnglish{IMFellEnglish-Regular.ttf}[
-          Path = fonts/IM_Fell_English/,
-          Extension = .ttf,
-          UprightFont = *,
-          ItalicFont = IMFellEnglish-Italic
+      } { % First fallback Dominican. Free, but cannot be bundled.
+        % Only read from file, because when installing my OS sees three
+        % different fonts.
+        \IfFontExistsTF{fonts/dominican/DOMINICA.TTF}
+        {
+          \newfontfamily\AIfontAlchemy{DOMINICA.TTF}[
+          Path = fonts/dominican/,
+          Extension = .TTF,
+          UprightFont  = DOMINICA,
+          ItalicFont = DOMII___,
+          SmallCapsFont = DOMISC__
           ]
+        } { % Load bundled fallback IM FELL English
+          \IfFontExistsTF{IM~FELL~English} {
+            \newfontfamily\AIfontAlchemy{IM~FELL~English}
+          } { % :Load fallback from file instead
+            \newfontfamily\AIfontAlchemy{IMFellEnglish-Regular.ttf}[
+            Path = fonts/IM_Fell_English/,
+            Extension = .ttf,
+            UprightFont = *,
+            ItalicFont = IMFellEnglish-Italic
+            ]
+          }
         }
       }
     }
