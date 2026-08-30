@@ -14,9 +14,11 @@ This changelog is now flushed to only incorporate changes for the Astro Inferno 
 ### Added
 
 - AIWeapon environment
-- Colour overhaul
+- Fallback system for fonts. Try official ones first.
 
 ### Changed
+
+- Colour overhaul
 
 ## [Before flushing changelog]
 

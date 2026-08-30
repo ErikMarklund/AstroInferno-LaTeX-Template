@@ -35,7 +35,7 @@
 % Custom loading Berylium font. Not needed for the template, but used
 % in example.tex.
 \newfontfamily\AIfontBeryllium{Berylium_Rg.otf}[
-    Path = berylium/,
+    Path = fonts/berylium/,
     Extension = .otf,
     UprightFont = *,
     BoldFont = Berylium_Bd,       % Change to your exact bold file name
@@ -43,7 +43,7 @@
     BoldItalicFont = Berylium_Bd_It  % Change to your exact bold-italic file name
 ]
 \newfontfamily\AIfontMinster{minster6.ttf}[
-Path = minster/,
+Path = fonts/minster/,
 Extension = .ttf
 ]
 
@@ -655,9 +655,9 @@ Some fonts are excluded due to licencing issues, whereas others are omitted beca
   |\normalfont|  & Lato \\
   |\AIfontAvalenRekas| & {\AIfontAvalenRekas Avalen Rekas} \\
   |\AIfontMuara| & {\AIfontMuara Muara} \\
-  |\AIfontIMFellEnglish| & {\AIfontIMFellEnglish IMFellEnglish} \\
+  |\AIquoteFont| & {\AIquoteFont 1651 Alchemy (or fallback)} \\
   |\AIfontEroded| & {\AIfontEroded Eroded}\\
-  |\AIfontQTCloisteredMonk| & {\AIfontQTCloisteredMonk QT Cloistered Monk}
+  |\AIoldenglishFont| & {\AIoldenglishFont QT Cloistered Monk}
 \end{AITable}
 See |lib/astroinfernofonts.sty| for aliases.
 
@@ -666,7 +666,7 @@ See |lib/astroinfernofonts.sty| for aliases.
 New fonts can be added using native \LaTeX functions.
 For example, this document loads the font Minster through
 |\newfontfamily\AIfontMinster{minster6.ttf}[|\\
-|Path = minster/,|\\
+|Path = fonts/minster/,|\\
 |Extension = .ttf|\\
 |]|\\
 and uses it for the Void Cult Demagogue title.
