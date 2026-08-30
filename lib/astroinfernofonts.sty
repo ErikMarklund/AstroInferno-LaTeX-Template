@@ -27,12 +27,18 @@
     \newcommand{\AIchapterfont}{\AIfontAvalenRekas}
     \newcommand{\AIsectionfont}{\AIfontAvalenRekas}
 
-    \newfontfamily\AIfontMuara{MUARA-DEMO.ttf}
+    % Original file name is "MUARA DEMO .ttf", but trailing space
+    % causes problem, so file was renamed.
+    \newfontfamily\AIfontMuara{MUARA~DEMO.ttf}[
+    Path = fonts/,
+    Extension = .ttf,
+    UprightFont = *
+    ]
     \newcommand{\AIsubsectionfont}{\AIfontMuara}
     \newcommand{\AIsubsubsectionfont}{\AIfontMuara}
 
     \newfontfamily\AIfontIMFellEnglish{IMFellEnglish-Regular.ttf}[
-    Path = IM_Fell_English/,
+    Path = fonts/IM_Fell_English/,
     Extension = .ttf,
     UprightFont = *,
     ItalicFont = IMFellEnglish-Italic
@@ -40,7 +46,7 @@
     \newcommand{\AIquoteFont}{\AIfontIMFellEnglish}
 
     \newfontfamily\AIfontEroded{ERODED~PERSONAL~USE.ttf}[
-    Path = eroded-personal-use/,
+    Path = fonts/eroded-personal-use/,
     Extension = .ttf,
     UprightFont = *]
   }
