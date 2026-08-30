@@ -6,12 +6,21 @@
 \RequirePackage{lettrine}
 \RequirePackage[auto]{contour}
 
+
+\bool_new:N \g_AlchemyCopyright_bool
+
+\NewDocumentCommand\AlchemyCopyright{}
+{
+  \bool_if:NTF \g_AlchemyCopyright_bool
+  { © }
+  { { \normalfont {©} } }
+}
+
 \bool_if:NT \l__AI_layout_bool
   {
     % \RequirePackage{bookman}
     \RequirePackage{fontspec}
     \RequirePackage{lato}
-    \RequirePackage[type1]{gillius2}
     \RequirePackage[notext,nomath,nott]{kpfonts}
     \RequirePackage[T1]{fontenc}
     \renewcommand{\sfdefault}{jkpss} % Remove? Inherited from dnd.
@@ -66,6 +75,7 @@
     {
       % Is Contextuals = Alternate needed when loading like this?
       \newfontfamily\AIfontAlchemy{1651~Alchemy}
+      \bool_gset_true:N \g_AlchemyCopyright_bool
     }
     { % Look for font file in fonts/
       \IfFontExistsTF{fonts/GLC~-~1651AlchemyNormal.otf}
@@ -76,9 +86,11 @@
         UprightFont    = * Normal,
         ItalicFont     = * Italic,
         Contextuals    = Alternate]
+        \bool_gset_true:N \g_AlchemyCopyright_bool
       } { % First fallback Dominican. Free, but cannot be bundled.
         % Only read from file, because when installing my OS sees three
         % different fonts.
+        \bool_gset_false:N \g_AlchemyCopyright_bool % We can't trust
         \IfFontExistsTF{fonts/dominican/DOMINICA.TTF}
         {
           \newfontfamily\AIfontAlchemy{DOMINICA.TTF}[
@@ -109,14 +121,6 @@
     Path = fonts/eroded-personal-use/,
     Extension = .ttf,
     UprightFont = *]
-  }
-
-
-\cs_new_protected:Npn \__AI_sf_initial_family:
-  {
-    \bool_if:NTF \l__AI_layout_bool
-      { \gilliustwo }
-      { \sffamily }
   }
 
 \keys_define:nn { astroinferno / fonts }
@@ -209,7 +213,7 @@
     comment-title-style .value_required:n = true,
     % Comment body
     comment-body-family .tl_set:N         = \l__AI_comment_body_family_tl,
-    comment-body-family .initial:n        = \color{AIcurrentcolour}\__AI_sf_initial_family:,
+    comment-body-family .initial:n        = \color{AIcurrentcolour}\normalfont,
     comment-body-family .value_required:n = true,
     comment-body-style .tl_set:N         = \l__AI_comment_body_style_tl,
     comment-body-style .initial:n        = \small,
@@ -226,19 +230,19 @@
     sidebar-title-style .value_required:n = true,
     % Sidebar body
     sidebar-body-family .tl_set:N         = \l__AI_sidebar_body_family_tl,
-    sidebar-body-family .initial:n        = \color{AIcurrentcolour}\__AI_sf_initial_family:,
+    sidebar-body-family .initial:n        = \color{AIcurrentcolour}\AIquoteFont,
     sidebar-body-family .value_required:n = true,
     sidebar-body-style .tl_set:N         = \l__AI_sidebar_body_style_tl,
-    sidebar-body-style .initial:n        = \small,
+    sidebar-body-style .initial:n        = \small\slshape,
     sidebar-body-style .value_required:n = true,
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     % Read-aloud boxes
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     readaloud-family .tl_set:N         = \l__AI_readaloud_family_tl,
-    readaloud-family .initial:n        = \color{AIcurrentcolour}\__AI_sf_initial_family:,
+    readaloud-family .initial:n        = \color{AIcurrentcolour}\AIquoteFont,
     readaloud-family .value_required:n = true,
     readaloud-style .tl_set:N         = \l__AI_readaloud_style_tl,
-    readaloud-style .initial:n        = \small,
+    readaloud-style .initial:n        = \small \slshape,
     readaloud-style .value_required:n = true,
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     % Table of Contents
