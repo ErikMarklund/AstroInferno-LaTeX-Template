@@ -24,6 +24,13 @@
 % If you add or update a caption here, add it to languages/_template.sty
 % as well.
 
+% Starred version to circumvent missing copyright sign in 1651 Alchemy replacements
+\NewDocumentCommand{\AIcopyright}{ s }
+{
+  This~work~is~published~under~the~Astro~Inferno~Third-Party~Licence.~Astro~Inferno~is~
+  \bool_if:nTF {#1} { \AlchemyCopyright{}~} { ©~}
+  Haxan~Studios.~This~work~is~not~official,~is~not~affiliated~with~or~endorsed~by~Haxan~Studios,~and~Haxan~Studios~is~not~responsible~for~its~contents.
+}
 %% Monster
 % Basics
 % Replace with appropriate symbols later.
