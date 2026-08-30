@@ -227,6 +227,16 @@
     \end{minipage}
   }
 
+  % Set colorbox colours
+  \AIIsDarkMode
+  {
+    \colorlet {l_weaponboxcolour} {AImidgraybrown}
+    \colorlet {l_weapontextcolour} {AIwhite}
+  } {
+    \colorlet {l_weaponboxcolour} {AIdarkteal}
+    \colorlet {l_weapontextcolour} {AIblack}
+  }
+
   % Get the max height
   \dim_set:Nn \l_max_height_dim {
     % Both box height and box depth need to be added together for the
@@ -248,18 +258,18 @@
   \end{minipage}
   \hspace{\l_datagap_dim}
 
-  \colorbox{AIdarkteal}{
+  \colorbox{l_weaponboxcolour}{
     \begin{minipage}[t][\l_max_height_dim][t]{\l_databox_dim}
       \vspace{0pt} % Force top-edge alignment
-      {\color{AIblack}\tl_use:N \l_data_values_tl}
+      {\color{l_weapontextcolour}\tl_use:N \l_data_values_tl}
     \end{minipage}
   }%
   \hspace{\l_datafeaturegap_dim}
-  \colorbox{AIdarkteal}{
+  \colorbox{l_weaponboxcolour}{
     \hspace{\l_featureboxpad_dim}
     \begin{minipage}[t][\l_max_height_dim][t]{\l_featurebox_dim}
       \vspace{0pt} % Force top-edge alignment
-      {\color{AIblack}\tl_use:N \l_features_tl}
+      {\color{l_weapontextcolour}\tl_use:N \l_features_tl}
     \end{minipage}
   }%
   \group_end:
