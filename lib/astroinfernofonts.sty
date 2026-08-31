@@ -318,13 +318,6 @@
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     % Miscellaneous
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    % Footer
-    footer-family .tl_set:N         = \l__AI_footer_family_tl,
-    footer-family .initial:n        = \normalfont,
-    footer-family .value_required:n = true,
-    footer-style .tl_set:N         = \l__AI_footer_style_tl,
-    footer-style .initial:n        = \scriptsize \textcolor{AImidteal},
-    footer-style .value_required:n = true,
     % Page number
     page-number-family .tl_set:N         = \l__AI_page_number_family_tl,
     page-number-family .initial:n        = \AIfontAvalenRekas,
@@ -430,9 +423,6 @@
 
   
 % Miscellaneous
-\NewDocumentCommand{\AIFontFooter}{}
-  { \l__AI_footer_family_tl \l__AI_footer_style_tl }
-
 \NewDocumentCommand{\AIFontPageNumber}{}
   { \l__AI_page_number_family_tl \l__AI_page_number_style_tl }
 

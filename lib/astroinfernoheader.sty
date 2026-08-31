@@ -25,7 +25,7 @@
 
 % Left-even page footer
 \fancyfoot[LE]{%
-    \AIFontFooter \leftmark
+  \normalfont % No idea why needed, but dark/light colour is ignored otherwise.
     \begin{tikzpicture}[remember~picture,overlay]
       \node[inner~sep=0pt,anchor=south~west,xshift=.13in,yshift=.13in] at (current~page.south~west) {\AIFontPageNumber \thepage};
     \end{tikzpicture}
@@ -33,7 +33,7 @@
 
 % Right-odd page footer
 \fancyfoot[RO]{%
-    \AIFontFooter \leftmark
+  \normalfont % No idea why needed, but dark/light colour is ignored otherwise.
     \begin{tikzpicture}[remember~picture,overlay]
       \node[inner~sep=0pt,anchor=south~east,xshift=-.13in,yshift=.13in] at (current~page.south~east) {\AIFontPageNumber \thepage};
     \end{tikzpicture}
