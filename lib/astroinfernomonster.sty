@@ -4,9 +4,10 @@
 % Monster environments
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Simple stat block to mimic Astro Inferno adversary blocks in the rulebook
-\DeclareTColorBox {AIMonster} { O{} m }
+\DeclareTColorBox {__AIMonster} { O{} }
   {
     enhanced,
+    width=\columnwidth,
     frame~hidden,
     boxrule     = 0pt,
     breakable,
@@ -17,71 +18,108 @@
     right       = 0pt,
     sharp~corners,
     opacityback = 0,
-    %colframe    = titlered,
-    fonttitle   = \AIFontStatBlockTitle,
+    %fonttitle   = \AIFontStatBlockTitle,
     fontupper   = \AIFontStatBlockBody,
     fontlower   = \AIFontStatBlockBody,
-    title            = {\hfill #2 \hfill\null},
+    %title            = {\hfill #2 \hfill\null},
     coltitle    = .,
     #1
   }
 
-% Italicized text appearing immediately after monster's name
-\NewDocumentCommand {\AIMonsterType} {m}
-  {
-    \hfill\MakeUppercase{\textbf {\scriptsize{#1}}}\hfill\null\\[1.5em]
-  }
-
-\NewDocumentCommand {\AIMonsterClass} {m}
-  {
-      \hfill\textls[300]{\MakeUppercase{\textbf{\large{#1}}}}\hfill\null\\[0.3em]
-  }
-
-\NewDocumentCommand{\AIMonsterBeing} {m}
-  {
-    \hfill\textls[60]{\MakeUppercase{\textbf {\large{#1}}}}\hfill\null\\
-  }
-
-% A description variant used to list creature attributes.
-\newlist {__AI_monster_attributes} {description} {1}
-\setlist [__AI_monster_attributes]
-  {
-    before   = \color {titlered},
-    font     = \AIFontStatBlockBody,
-    labelsep = \l__AI_space_dim,
-    nosep,
-  }
-
-% Only prints the item label if the value was supplied
-\cs_new_protected_nopar:Npn \__AI_if_monster_attribute:nn #1#2
-  {
-    \tl_if_empty:NF {#1}
-      { \item [#2] #1 }
-  }
-
-%% Monster basics
-\keys_define:nn { astroinferno / monster / basics }
-  {
-    % Not used in current code path and unlikely to be
-    % resurrected. Mark for deletion.
-    damage .tl_set:N   = \l__damage_tl,
-    damage .initial:n   = 1,
-    damage .value_required:n   = true,
-    mortality .tl_set:N   = \l__mortality_tl,
-    mortality .initial:n   = 20,
-    mortality .value_required:n   = true,
-    bones .tl_set:N   = \l__bones_tl,
-    bones .initial:n   = 1,
-    bones .value_required:n   = true,
-  }
-
-\NewDocumentCommand {\AIMonsterBasics} {m m m}
+\keys_define:nn { astroinferno / monster / monsterdata }
 {
-      \hfill
-      {#1}\hspace{0.5em}\AIdamagesymbol\hspace{2em}
-      {#2}\hspace{0.5em}\AImortalitysymbol\hspace{2em}
-      {#3}\hspace{0.5em}\AIbonessymbol\hfill\null\\
-  }
+  % We want this to set up the font for the title.
+  titlefont .tl_set:N =\l_monster_titlefont_tl,
+  titlefont .initial:n   = \l__AI_stat_block_title_family_tl,
+  titlestyle .tl_set:N = \l_monster_titlestyle_tl,
+  titlestyle .initial:n = \l__AI_stat_block_title_style_tl,
+  %
+  type .tl_set:N  = \l_monster_type_tl,
+  type .initial:n  = -~unknown~-,
+  type .value_required:n  = true,
+  class .tl_set:N  = \l_monster_class_tl,
+  class .initial:n  = -~unknown~-,
+  class .value_required:n  = true,
+  being .tl_set:N  = \l_monster_being_tl,
+  being .initial:n  = -~unknown~-,
+  being .value_required:n  = true,
+  damage .tl_set:N  = \l_monster_damage_tl,
+  damage .initial:n  = 0,
+  damage .value_required:n  = true,
+  mortality .tl_set:N  = \l_monster_mortality_tl,
+  mortality .initial:n  = 0,
+  mortality .value_required:n  = true,
+  bones .tl_set:N  = \l_monster_bones_tl,
+  bones .initial:n  = 0,
+  bones .value_required:n  = true,
+  % Troubles should be a comma-separated list.
+  troubles .clist_set:N  = \l_monster_troubles_clist,
+  troubles .initial:n  = {e},
+  troubles .value_required:n  = true,
+  % End troubles should be a semicolon-separated list,
+  % because it needs to accept commas in the items.
+  endtroubles .tl_set:N  = \l_monster_end_troubles_raw_tl,
+  endtroubles .initial:n  = {e},
+  endtroubles .value_required:n  = true,
+  traits .tl_set:N  = \l_monster_traits_tl,
+  traits .initial:n  = -~unknown~-,
+  traits .value_required:n  = true,
+  description .tl_set:N  = \l_monster_description_tl,
+  description .initial:n  = -~unknown~-,
+  description .value_required:n  = true,
+  % Harvest should be a comma-separated list of items.
+  % Each item is {symbol, item, qty}. For example,
+  % {symbol=\AIsecularsymbol, item=Erthian ingots, qty={\scriptsize 1D6}/\AIspsymbol}
+  harvest .tl_set:N = \l_monster_harvest_tl,
+  harvest .initial:n  = {},
+  harvest .value_required:n  = true,
+  harvestchoose .tl_set:N = \l_monster_harvestchoose_tl,
+  harvestchoose .initial:n  = one,
+  harvestchoose .value_required:n  = true,
+  lootqty .tl_set:N  = \l_monster_lootqty_tl,
+  lootqty .initial:n  = {0},
+  lootqty .value_required:n  = true,
+  lootblood .tl_set:N  = \l_monster_lootblood_tl,
+  lootblood .initial:n  = -~unknown~-,
+  lootblood .value_required:n  = true  
+}
+  
+\NewDocumentEnvironment{AIMonster} {O{} m}
+{
+  \str_set:Nn  \l_monster_name_str {#2}
+  \begin{__AIMonster}[#1]
+}
+{
+\end{__AIMonster}
+}
+
+\NewDocumentCommand{\AIMonsterData} {O{}}
+{
+  \keys_set:nn { astroinferno / monster / monsterdata } {#1}
+
+   % Split the raw token list by semicolons into a sequence
+  \seq_set_split:NnV \l_monster_end_troubles_seq { ; } \l_monster_end_troubles_raw_tl
+ 
+  % Print name
+  { \l_monster_titlefont_tl \l_monster_titlestyle_tl \selectfont
+    \hfill \l_monster_name_str \hfill\null}\\[2mm]
+  \hfill\MakeUppercase{\textbf {\scriptsize{\l_monster_type_tl}}}\hfill\null\\[1.5em]
+  \hfill\textls[300]{\MakeUppercase{\textbf{\large{\l_monster_class_tl}}}}\hfill\null\\[0.3em]
+  \hfill\textls[60]{\MakeUppercase{\textbf {\large{\l_monster_being_tl}}}}\hfill\null\\
+  % Damage, mortality, bones
+  \hfill
+  \AIdamage{\l_monster_damage_tl}\hspace{2em}
+  \AImortality{\l_monster_mortality_tl}\hspace{2em}
+  \AIbones{\l_monster_bones_tl}
+  \hfill\null\\[0.6em]
+  % Troubles
+  \AIMonsterTroubles{\l_monster_troubles_clist}{\l_monster_end_troubles_seq}
+  \hfill\MakeUppercase{\textbf {\scriptsize{\l_monster_traits_tl}}}\hfill\null\\[0.4em]
+  {\small{\l_monster_description_tl}\\[1em]}
+  % Harvest and loot
+   \AIMonsterHarvest[\l_monster_harvestchoose_tl]
+   {\l_monster_harvest_tl}{\l_monster_lootqty_tl}{\l_monster_lootblood_tl}
+}
 
 \NewDocumentCommand {\AIMonsterTroubles} {m m}
 {
@@ -90,68 +128,84 @@
   \begin{minipage}[t]{0.49\columnwidth}
     \textbf{\textls[200]{\footnotesize TROUBLES}}\\
     \it
-    % Map through the list and add a newline after each item
-    \clist_map_inline:nn { #1 } { ##1 \\ }
+    \clist_use:Nn {#1} { \\ } 
   \end{minipage}
   \hfill
   \begin{minipage}[t]{0.49\columnwidth}
     \raggedleft
     \textbf{\textls[200]{\footnotesize END~TROUBLE}}\\
     \it
-    % Map through the list and add a newline after each item
-    \clist_map_inline:nn { #2 } { ##1 \\ }
+    \seq_use:Nn #2 { \\ }
   \end{minipage}\\
 
   \vspace{\baselineskip} % Add vertical space after the lists
 }
 
-\NewDocumentCommand {\AIMonsterTraits} {m}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Helper stuff for AIMonsterHarvest
+\tl_new:N \l__harvest_tl
+\seq_new:N \l__harvest_seq
+
+% Storage for the active item attributes
+\tl_new:N \l__harvest_symbol_tl
+\tl_new:N \l__harvest_item_tl
+\tl_new:N \l__harvest_qty_tl
+
+\keys_define:nn { astroinferno / harvest / item }
 {
-  \hfill\MakeUppercase{\textbf {\scriptsize{#1}}}\hfill\null\\[0.4em]
+  symbol .tl_set:N = \l__harvest_symbol_tl,
+  item  .tl_set:N = \l__harvest_item_tl,
+  qty   .tl_set:N = \l__harvest_qty_tl,
 }
 
-\NewDocumentCommand {\AIMonsterDescription} {m}
+% Brace-stripping helper macro.
+\cs_new_protected:Nn \__monster_evaluate_harvest_keys:n
+{ \keys_set:nn { astroinferno / harvest / item } { #1 } }
+  
+\cs_new_protected:Nn \__monster_render_harvest_line:n
 {
-  \noindent
-  {\small{#1}\\[0.4em]}
+  % Clear variables from the previous loop iteration
+  \tl_clear:N \l__harvest_symbol_tl
+  \tl_clear:N \l__harvest_item_tl
+  \tl_clear:N \l__harvest_qty_tl
+  
+  % FIX: Pass the item through our brace-stripper first
+  \__monster_evaluate_harvest_keys:n #1
+  
+  % Print exactly: symbol item \hfill qty
+  \makebox[0.5cm][l]{\l__harvest_symbol_tl} \textbf{\l__harvest_item_tl} 
+  \hfill \l__harvest_qty_tl \\
 }
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+% Overall not so happy about this one. Too complicated with all the helper functions.
+%
 % Optional argument gives number of choices from harvest table.
 % m1 is pairs of harvest table entries {{h1, ammount1}, {h2, ammount2}, ... }
 % m2 is loot and blood.
-\NewDocumentCommand {\AIMonsterHarvest} {O{one} m m}
+\NewDocumentCommand {\AIMonsterHarvest} {O{one} m m m}
 {
   \noindent
   \small
-  % 1. Split the left side by commas into individual pairs
-  \seq_set_split:Nnn \l_left_pairs_seq { , } { #2 }
-  % 2. Split the right side by commas normally
-  \seq_set_split:Nnn \l_right_list_seq { , } { #3 }
-
+  
+  % Drop the outer items into a sequence array if you need it for other layout math
+  \seq_set_from_clist:Nn \l__harvest_seq {#2}
+  
   % Left Column
   \begin{minipage}[t]{0.60\textwidth}
     \raggedright
     \textbf{Harvesting}~{\scriptsize(Choose~{#1})}\\
-    % Loop through each pair element
-    \seq_map_inline:Nn \l_left_pairs_seq 
-     {
-      % Split the single pair string using "/" as the internal divider
-      \seq_set_split:Nnn \l_single_pair_seq { , } { ##1 }
-      
-      % Print item 1, push to the right edge, print item 2, start new line
-      \textbf{\seq_item:Nn \l_single_pair_seq { 1 }}
-      \hfill 
-      \seq_item:Nn \l_single_pair_seq { 2 } \\
-    }
+    \clist_map_function:NN #2 \__monster_render_harvest_line:n
   \end{minipage}
   \hfill
   
-  % Right Column
+  %Right Column
   \begin{minipage}[t]{0.38\columnwidth}
     \raggedleft
     \textbf{Looting}\\
-    % Map through the list and add a newline after each item
-    \seq_map_inline:Nn \l_right_list_seq { ##1 \\ }
+    \AIloot{#3}\\
+    #4
   \end{minipage}
   
   \vspace{\baselineskip} % Add vertical space after the lists

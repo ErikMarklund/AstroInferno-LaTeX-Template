@@ -397,8 +397,8 @@ Analogous commands are |\AIsanity|, |\AIaura|, |\AIdamage|, |\AImortality|, and 
 \begin{AITable}[header=Loot Helper Function]{XX}
   Command & Result \\
   |\AIloot{}| & \AIloot{}\\
-  |\AIloot[+]{1}| & \AIloot[+]{1}\\
-  |\AIloot[-]{2}| & \AIloot[-]{2}
+  |\AIloot{+1}| & \AIloot{+1}\\
+  |\AIloot{-2}| & \AIloot{-2}
 \end{AITable}
 
 \chapter{Adversaries and Items}
@@ -420,58 +420,64 @@ Analogous commands are |\AIsanity|, |\AIaura|, |\AIdamage|, |\AImortality|, and 
 \end{AIWeapon*}
 
 % Monster stat block
-\begin{AIMonster}[width=\columnwidth]{Void cult accolyte}
-    \AIMonsterType{Souls - imps}
-    \AIMonsterClass{Minions}
-    \AIMonsterBeing{Ashen souls}
-    \AIMonsterBasics{3}{12}{3} % damage, mortality, bones
-    \AIMonsterTroubles {
-      Shoot: \AIdamage{6},
-      Cower: \AIbones[+]{1}
-    } {
-      {Suicide bomb: \AIdamage{15}, area},
-      Frenzy: \AIdamage[+]{3}
-    }
-    \AIMonsterTraits{Trigger happy - volatile}
-    \AIMonsterDescription{Fanatic minions, both cowards and suicidal
-      at the same time.}
-    % For the harvesting and looting, provide the former as a
-    % nested comma-separated list as first argument, the latter as a
-    % comma-separated list as second argument. The third argument is
-    % how many items can be chosen from the harvesting table:
-    % \AIMonsterHarvest{ {h1, ammount1} , {h2, ammount2} , ... }
-    % {loot, blood}
-    % {one}
-    % As of now, the dice rolls must be manually formatted to look
-    % similar to the rule book by using {\scriptsize{die} /
-    % SP}. Automatic formatting might become overly complex.
-    \AIMonsterHarvest
-    {{\AIapotecharysymbol~Unlight tobacco, {\scriptsize 1D6}/\AIspsymbol},
-     {\AIsecularsymbol~Erthian ingots, {\scriptsize 1D6}/\AIspsymbol}}
-    {\AIloot[-]{4},\AIbloodsymbol~Soiled blood}
+\begin{AIMonster}{Void cult accolyte}
+  \AIMonsterData
+  [
+  type = Souls - imps,
+  class = Minions,
+  being = Ashen souls,
+  damage = 3, mortality = 12, bones = 3,
+  troubles = {
+    Shoot: \AIdamage{6},
+    Cower: \AIbones[+]{1}
+  },
+  endtroubles = { % Semicolon-separated list to allow for commas in the items!
+    Suicide bomb: \AIdamage{15}, area;
+    Frenzy: \AIdamage[+]{3}
+  },
+  traits = Trigger happy - volatile,
+  description = {Fanatic minions, both cowards and suicidal at the same time.},
+  harvest = {
+    {symbol = \AIapotecharysymbol, item = Unlight tobacco, qty = {\scriptsize 1D6}/\AIspsymbol},
+    {symbol = \AIsecularsymbol, item = Erthian ingots, qty = {\scriptsize 1D6}/\AIspsymbol}
+  },
+  lootqty = -4,
+  lootblood = Soiled blood
+ ]
 \end{AIMonster}
 \vfill
-\begin{AIMonster}[width=\columnwidth, fonttitle=\color{AIcurrentcolour}\fontsize{40}{46}\AIfontMinster]{Void cult demagogue}
-    \AIMonsterType{Void priests - Obliviation deacons}
-    \AIMonsterClass{Champions}
-    \AIMonsterBeing{Greater souls}
-    \AIMonsterBasics{6}{6}{3}
-    \AIMonsterTroubles{
-      Punishment: \AIdamage{10},
-      Glossolalia:\AIdamage[+]{2},
-      Support: +5~Accolytes
-    } {
-      Possess one character,
-      Curse: Party disadvantage
-    }
-    \AIMonsterTraits{Insane - zealous - devoted}
-    \AIMonsterDescription{Zealot mid-level leaders in the cult. Will
-      never retreat, ready to sacrifice themselves for the greater evil.}
-    \AIMonsterHarvest[two]
-    {{\AIapotecharysymbol~Excellent III Elixir, {\scriptsize 1}/\AIspsymbol},
-     {\AIalchemysymbol~Exotic ingredient, {\scriptsize 2}/\AIspsymbol},
-     {\AIancientsymbol~Excellent III Valuable, {\scriptsize 1D4}/\AIspsymbol}}
-    {\AIloot[-]{4},\AIbloodsymbol~Normal blood}
+\begin{AIMonster}
+ {Void cult demagogue}
+ \AIMonsterData
+ [
+  titlefont = \AIfontMinster,
+  titlestyle = \fontsize{40}{46},
+  type = Void priests - Obliviation deacons,
+  class = Champions,
+  being = Greater souls,
+  damage = 6, mortality = 6, bones = 3,
+  troubles = {
+    Punishment: \AIdamage{10},
+    Glossolalia: \AIdamage[+]{2},
+    Support: +5~Accolytes
+  },
+  endtroubles = { % Semicolon-separated list to allow for commas in the items!
+    Possess one character;
+    Curse: Party disadvantage
+  },
+  traits = Insane - zealous - devoted,
+  description = {Zealot mid-level leaders in the cult. Will never
+  retreat, ready to sacrifice themselves for the greater evil.},
+  harvest = {
+    {symbol = \AIapotecharysymbol, item = \AITier{3} Elixir, qty = {\scriptsize 1}/\AIspsymbol},
+    {symbol = \AIalchemysymbol, item = Exotic ingredient, qty = {\scriptsize 2}/\AIspsymbol},
+    {symbol = \AIancientsymbol, item = \AITier{3} Valuable, qty = {\scriptsize 1D4}/\AIspsymbol}
+  },
+  harvestchoose = two,
+  lootqty = -4,
+  lootblood = Normal blood
+ ]
+  
 \end{AIMonster}
 \newpage
 The |\AIMonster| environment is used to typeset monster and NPC stat blocks. The module supplies many functions to easily typeset the contents of the stat block.

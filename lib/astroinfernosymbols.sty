@@ -61,12 +61,19 @@
 \NewDocumentCommand{\AImortality}{o m} {\AIsymbolprinter[#1]{\AImortalitysymbol}{#2}}
 \NewDocumentCommand{\AIbones}{o m} {\AIsymbolprinter[#1]{\AIbonessymbol}{#2}}
 
-\NewDocumentCommand{\AIloot}{o m}
+% \NewDocumentCommand{\AIloot}{o m}
+% {
+%   \str_case:nnF {#1}
+%   {
+%     { + } {\AIchestsymbol \nobreakspace (+{#2})}
+%     { - } {\AIchestsymbol \nobreakspace (-{#2})}
+%   }
+%   {\AIchestsymbol}
+% }
+
+\NewDocumentCommand{\AIloot}{m}
 {
-  \str_case:nnF {#1}
-  {
-    { + } {\AIchestsymbol \nobreakspace (+{#2})}
-    { - } {\AIchestsymbol \nobreakspace (-{#2})}
-  }
-  {\AIchestsymbol}
+  \tl_if_empty:nTF {#1}
+  {\AIchestsymbol} % Just print symbol if no argument given
+  {\AIchestsymbol\nobreakspace(\AIBonus{#1})} % Print like in adversary loot table
 }

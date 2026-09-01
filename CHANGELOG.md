@@ -19,6 +19,7 @@ This changelog is now flushed to only incorporate changes for the Astro Inferno 
 ### Changed
 
 - Colour overhaul
+- Monster reimplementation
 
 ## [Before flushing changelog]
 
