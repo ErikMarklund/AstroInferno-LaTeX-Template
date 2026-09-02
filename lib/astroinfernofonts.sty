@@ -116,10 +116,12 @@
 
     \newcommand{\AIquoteFont}{\AIfontAlchemy}
 
-    \newfontfamily\AIfontEroded{ERODED~PERSONAL~USE.ttf}[
-    Path = fonts/eroded-personal-use/,
-    Extension = .ttf,
-    UprightFont = *]
+    \newfontfamily\AIfontCheddarGothic{CheddarGothicRough-Regular.otf}[
+    Path = fonts/cheddar_gothic_rough_fonts/,
+    Extension = .otf,
+    UprightFont = *,
+    ItalicFont = CheddarGothicRough-Italic.otf]
+    \newcommand{\AIerodedblockFont}{\AIfontCheddarGothic}
   }
 
 \keys_define:nn { astroinferno / fonts }
@@ -302,7 +304,7 @@
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     % Weapon title
     weapon-title-family .tl_set:N         = \l__AI_weapon_title_family_tl,
-    weapon-title-family .initial:n        = \AIfontEroded,
+    weapon-title-family .initial:n        = \AIerodedblockFont,
     weapon-title-family .value_required:n = true,
     weapon-title-style .tl_set:N         = \l__AI_weapon_title_style_tl,
     weapon-title-style .initial:n        = \bfseries \fontsize{60}{68} \scshape \color{AIcurrentcolour},
