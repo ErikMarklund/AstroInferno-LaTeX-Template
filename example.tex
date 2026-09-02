@@ -149,19 +149,18 @@ in |example.tex|, and it contains some useful hacks that can be used
 to go beyond the standard title page, table of contents, and more.
 
 \subsection{Technical Notes}
-\subsubsection{LATEX Engine}
+\paragraph{LATEX Engine}
 Unlike the DnD5e LaTeX Template, this template was developed for LuaLaTeX.
 As such, the template will probably not work with pdf2latex.
-\subsubsection{Packages}
+\paragraph{Packages}
 All required packages are included in the current TeX~Live.
 Additional components, like fonts, are included in the template.
-\subsubsection{Class vs. Package}
+\paragraph{Class vs. Package}
 The parent template defines a class, but also works as a package that can be used in another document.
 The development of this template has focused on the class aspect, and has not been tested as a package.
 As such, it is strongly recommended to use it as a class, like in this example document.
 
-\section{Licenses}
-\noindent
+\section{License}
 Some components of this template are subject to licensing. It is fine
 to use the template for personal use, and also to distribute it
 (subject to the template's licence). For other uses, make sure to not
@@ -179,7 +178,7 @@ License\footnote{\url{https://astroinferno.com/astro_coven/srd/license.html}},
 implement all that is required, and stay within the boundaries of what
 it allows.
 
-\subsection{Some words about fonts}
+\subsection{Fonts}
 Astro Inferno uses some fonts that are not included in this
 template. You can add those fonts yourself, just make sure you have
 obtained the required licenses.
@@ -189,7 +188,7 @@ you intend to distribute your document, make sure to replace those
 fonts with other ones for which you have a license, or obtain
 appropriate licenses for the included fonts where needed.
 
-\subsection{Misc}
+\section{Misc information}
 Some useful information about symbols, can be found in the Astro
 Inferno Rules Reference
 \footnote{\url{https://astroinferno.com/astro_coven/srd/srd.html\#symbols}}.
@@ -315,7 +314,7 @@ The module has three environments for setting text apart so that it is drawn to 
   As you approach this module you get a sense that the blood and tears of many generations went into its making. A cold feeling descends upon you as you type your first words.
 \end{AIReadAloud}
 
-\section{As an Aside}
+\subsection{As an Aside}
 The other two environments are the |AIComment| and the |AISidebar|. The |AIComment| is breakable and can safely be used inline in the text.
 
 \begin{AIComment}{This Is a Comment Box!}
@@ -328,6 +327,7 @@ The |AISidebar| is not breakable and is best used floated toward a page corner a
   The |AISidebar| is used as a sidebar. It does not break over columns and is best used with a figure environment to float it to one corner of the page where the surrounding text can then flow around it.
 \end{AISidebar}
 
+\newpage % Actually new column
 \section{Tables}
 The |AITable| colors the even rows and is set to the width of a line by default.
 
@@ -652,10 +652,10 @@ Use |\AISetThemeColor[<color>]| to set |commentcolor|, |readaloudcolor|, |sideba
 \endgroup
 
 \chapter{Fonts and Text Features}
-\noindent
+\section{Fonts}
 This template uses various fonts that are identical to, or similar to, the most common ones in Astro Inferno.
 Some fonts are excluded due to licencing issues, whereas others are omitted because they are only used sparingly.
-\section{Included Fonts}
+\subsection{Included Fonts}
 \begin{AITable}[header=Fonts in template, colorodd=AImidteal, coloreven]{lX}
   Macro Name    & Font name and look \\
   |\normalfont|  & Lato \\
@@ -674,7 +674,7 @@ names exepected. Unlike the other fonts, Dominican will not be
 attempted to be loaded from normally installed fonts, due to boring
 technical issues.
 
-\section{Adding Fonts}
+\subsection{Adding Fonts}
 %\newfontfamily\AIfontMinster{minster/minster6.ttf}
 New fonts can be added using native \LaTeX functions.
 For example, this document loads the font Minster through\\[\baselineskip]
