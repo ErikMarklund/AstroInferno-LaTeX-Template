@@ -21,6 +21,7 @@
 \RequirePackage {fontawesome7}
 \RequirePackage {eso-pic}
 \RequirePackage {luacolor}
+\RequirePackage [indent=0cm]{parskip}
 
 \sys_if_engine_luatex:T
   {
@@ -49,7 +50,6 @@
       }
 
     % Set paragraph and line spacing
-    \setlength {\parindent}            {1em}
     \setlength {\RaggedRightRightskip} {0pt plus 1em}
     \setlength {\RaggedRightParindent} {\parindent}
 
