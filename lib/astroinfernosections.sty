@@ -46,6 +46,12 @@
     {} % label
     { \wordsep } % sep
     {\__AI_FormatChapterTitle} % before-code
+    \titleformat {name=\chapter, numberless}
+    [ block ]
+    { \AIFontChapter \filcenter } % format
+    {} % label
+    { \wordsep } % sep
+    {} % before-code
 
   \titlespacing* {\chapter}
     { 0pt }  % left
