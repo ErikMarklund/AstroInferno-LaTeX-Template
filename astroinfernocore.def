@@ -12,7 +12,6 @@
 \RequirePackage {enumitem}
 \RequirePackage {etoolbox}
 \RequirePackage {textcomp,gensymb} % degree symbol for italian ordinals
-\RequirePackage {hang} % hanging paragraphs
 \RequirePackage [autolanguage] {numprint} % localization of thousands separator
 \RequirePackage {tabularx} % variable-width table columns
 \RequirePackage [breakable,skins,xparse]{tcolorbox} % styled text boxes
