@@ -307,7 +307,7 @@ This ditch has a board spanning it. Someone has rubbed it down with grease.
 \AISubArea{Gate}
 The gate is four meters wide and twice as tall. An ominous portcullis looking like a gilloutine blade hangs over any souls passing through.
 
-\chapter{Boxes and Symbols} \label{chap:text_boxes}
+\chapter{Boxes} \label{chap:text_boxes}
 \AIPlaceNewBackground*{img/paper-darkgreen.jpg}
 
 \section{Text Boxes}
@@ -348,9 +348,7 @@ Odd and/or even rows can have transparent background.
     Some value  & Some value
 \end{AITable}
 
-
-\newpage % Actually new column
-\section{Symbols}
+\chapter{Symbols}
 Astro Inferno uses various special symbols. The template has commands for those:
 
 \begin{AITable}[header=Core Stat Tokens]{XX}
@@ -401,24 +399,8 @@ Analogous commands are |\AIsanity|, |\AIaura|, |\AIdamage|, |\AImortality|, and 
   |\AIloot{-2}| & \AIloot{-2}
 \end{AITable}
 
-\chapter{Adversaries and Items}
 
-\section{Adversaries}
-%
-% We place this AIWeapon already here, or it will probably render on a separate page.
-\begin{AIWeapon*}{Cyclopean club}
-  \AIWeaponData*[
-  description={Titan great hammer of the Sea},
-  tier=4,
-  attack=0,
-  damage=6,
-  targets=1,
-  grade=1,
-  skill=Crushing,
-  features={{Heavy, Phew!},{Hard, Rock hard indeed}}
-  ]
-\end{AIWeapon*}
-
+\chapter{Adversaries}
 % Monster stat block
 \begin{AIMonster}{Void cult accolyte}
   \AIMonsterData
@@ -479,18 +461,59 @@ Analogous commands are |\AIsanity|, |\AIaura|, |\AIdamage|, |\AImortality|, and 
  ]
   
 \end{AIMonster}
-\newpage
+\newpage % Actually new column
+\noindent
 The |\AIMonster| environment is used to typeset monster and NPC stat blocks. The module supplies many functions to easily typeset the contents of the stat block.
 One can pass |\tcolorbox| options to |\AIMonster|. For example, we can
 change the title font for our Void cult demagogue to 'Minster'.
 %
 %It might be best to \emph{not} make |\AIMonster| a float. That is, do not pass |float=htb| as an option. Floats can be great in \LaTeX, but they make it difficult to position the adversary blocks correctly.
 
-\section{Weapons}
-There is an |AIWeapon| environment for typesetting weapons in twocolumn mode, similar to |AIMonster|.
-|AIIweapon*| creates a float that spans both columns, resembling weapons under the Gear section in the Rulebook.
-Background images are not (yet) implemented.
+\chapter{Weapons}
+% We place this AIWeapon already here, or it will probably render on a separate page.
+\begin{AIWeapon*}{Cyclopean club}
+  \AIWeaponData*[
+  description={Titan great hammer of the Sea},
+  tier=4,
+  attack=0,
+  damage=6,
+  targets=1,
+  grade=1,
+  skill=Crushing,
+  features={{Heavy, Phew!},{Hard, Rock hard indeed}}
+  ]
+\end{AIWeapon*}
+\begin{AIWeapon*}{Primo}
+  \AIWeaponData*[
+  description={Myrkheim cleaver of Samael},
+  tier=3,
+  attack=0,
+  damage=6,
+  targets=x2,
+  grade=1,
+  skill=Slashing,
+  features={{Chaotic, 3~targets hit},{Dirty, Blueargh!}}]
+\end{AIWeapon*}
+% \begin{AIWeapon*}{Secundo}
+%   \AIWeaponData*[
+%   tier=3,
+%   attack=3,
+%   damage=4,
+%   targets=2,
+%   grade=1,
+%   skill=Slashing,
+%   features={{Quick, 2~targets hit/~\AIspsymbol~spent},{Sharp, Yikes!}}]
+% \end{AIWeapon*}
 
+\noindent
+There is an |AIWeapon| environment for typesetting weapons in twocolumn mode,
+which is inspired by but not identical to how weapons are displayed in the Gear section of the Rulebook.
+To get the page-spanning variant, use|AIIweapon*|, which creates a float that spans both columns,
+resembling weapons under the Gear section in the Rulebook.
+As always, float placement can be tricky to control, especially in twocolumn mode,
+so be patient and wait with perfecting the positioning until the document is close to finalised.
+Background images are not (yet) implemented.
+\newpage % Actually new column
 \begin{AIWeapon}{Soul dicer}
   \AIWeaponData[
   description={Sinful dagger of Tiamat},
@@ -502,28 +525,7 @@ Background images are not (yet) implemented.
   skill=Slashing,
   features={{Quick, 2~targets hit/~\AIspsymbol~spent},{Sharp, Yikes!}}]
 \end{AIWeapon}
-
 % Let's do two full-width weapons on a separate float page.
-\begin{AIWeapon*}[floatplacement=p]{Primo}
-  \AIWeaponData*[
-  tier=3,
-  attack=3,
-  damage=4,
-  targets=2,
-  grade=1,
-  skill=Slashing,
-  features={{Quick, 2~targets hit/~\AIspsymbol~spent},{Sharp, Yikes!}}]
-\end{AIWeapon*}
-\begin{AIWeapon*}[floatplacement=p]{Secundo}
-  \AIWeaponData*[
-  tier=3,
-  attack=3,
-  damage=4,
-  targets=2,
-  grade=1,
-  skill=Slashing,
-  features={{Quick, 2~targets hit/~\AIspsymbol~spent},{Sharp, Yikes!}}]
-\end{AIWeapon*}
 
 \AIMakeLight
 \part{Customization} \label{part:customization}
@@ -677,11 +679,11 @@ technical issues.
 \section{Adding Fonts}
 %\newfontfamily\AIfontMinster{minster/minster6.ttf}
 New fonts can be added using native \LaTeX functions.
-For example, this document loads the font Minster through
+For example, this document loads the font Minster through\\[\baselineskip]
 |\newfontfamily\AIfontMinster{minster6.ttf}[|\\
 |Path = fonts/minster/,|\\
 |Extension = .ttf|\\
-|]|\\
+|]|\\[\baselineskip]
 and uses it for the Void Cult Demagogue title.
 Similarly, the Berylium font is used on the titlepage.
 Technically, Minster1-6 and Berylium are included with the Template,

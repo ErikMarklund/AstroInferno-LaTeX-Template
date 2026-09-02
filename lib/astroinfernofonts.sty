@@ -128,6 +128,7 @@
     % Sectioning commands
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     % Part
+    % Not well defined in the Core book. Should probably be bigger.
     part-family .tl_set:N         = \l__AI_part_family_tl,
     part-family .initial:n        = \AIpartfont,
     part-family .value_required:n = true,
@@ -135,13 +136,15 @@
     part-style .initial:n        = \fontsize{60}{70} \scshape,
     part-style .value_required:n = true,
     % Chapter
+    % Should be 78 pt by judging from the Core book.
     chapter-family .tl_set:N         = \l__AI_chapter_family_tl,
     chapter-family .initial:n        = \AIchapterfont,
     chapter-family .value_required:n = true,
     chapter-style .tl_set:N         = \l__AI_chapter_style_tl,
-    chapter-style .initial:n        = \linespread{.9} \Huge \scshape,
+    chapter-style .initial:n        = \linespread{.9} \fontsize{78}{90} \scshape,
     chapter-style .value_required:n = true,
     % Section
+    % 26 pt judging from the Core book. -7% letter spacing.
     section-family .tl_set:N         = \l__AI_section_family_tl,
     section-family .initial:n        = \AIsectionfont,
     section-family .value_required:n = true,

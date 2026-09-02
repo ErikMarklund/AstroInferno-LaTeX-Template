@@ -1,5 +1,14 @@
 \ExplSyntaxOn
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Needed for hack to disable chapter number appearing in TOC title
+\bool_new:N \g_AI_isToc_bool
+\bool_gset_false:N \g_AI_isToc_bool
+
+\AddToHook{cmd/tableofcontents/before}{ \bool_gset_true:N \g_AI_isToc_bool }
+\AddToHook{cmd/tableofcontents/after}{\bool_gset_false:N \g_AI_isToc_bool }
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \bool_if:NT \l__AI_layout_bool
 {
   % Change part numbering to Arabic numbers from Roman numerals
@@ -24,12 +33,19 @@
     { 2ex } % sep
     {} % before-code
 
+  \NewDocumentCommand{\__AI_FormatChapterTitle}{m}
+  {
+    \bool_if:NTF {\g_AI_isToc_bool}
+    { #1 }
+    { #1 \hspace{1mm}\raisebox{36pt}{\normalfont\bfseries\fontsize{24}{28}\selectfont\AIleadzero{\thechapter} } }
+  }
   % Chapter
   \titleformat {\chapter}
-    { \AIFontChapter } % format
-    { \chaptertitlename\ \thechapter : } % label
+    [ block ]
+    { \AIFontChapter \filcenter } % format
+    {} % label
     { \wordsep } % sep
-    {} % before-code
+    {\__AI_FormatChapterTitle} % before-code
 
   \titlespacing* {\chapter}
     { 0pt }  % left
