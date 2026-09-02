@@ -144,12 +144,13 @@
     chapter-style .initial:n        = \linespread{.9} \fontsize{78}{90} \scshape,
     chapter-style .value_required:n = true,
     % Section
-    % 26 pt judging from the Core book. -7% letter spacing.
+    % 26 pt judging from the Core book. -7% letter spacing. 30 pt,
+    % normal spacing in other places..
     section-family .tl_set:N         = \l__AI_section_family_tl,
     section-family .initial:n        = \AIsectionfont,
     section-family .value_required:n = true,
     section-style .tl_set:N         = \l__AI_section_style_tl,
-    section-style .initial:n        = \linespread{.9} \huge \scshape \RaggedRight,
+    section-style .initial:n        = \linespread{.9} \fontsize{30}{35} \scshape \RaggedRight,
     section-style .value_required:n = true,
     % Subsection
     subsection-family .tl_set:N         = \l__AI_subsection_family_tl,

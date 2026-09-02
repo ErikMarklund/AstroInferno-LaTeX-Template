@@ -33,13 +33,13 @@
     { 2ex } % sep
     {} % before-code
 
+  % Chapter
   \NewDocumentCommand{\__AI_FormatChapterTitle}{m}
   {
     \bool_if:NTF {\g_AI_isToc_bool}
     { #1 }
     { #1 \hspace{1mm}\raisebox{36pt}{\normalfont\bfseries\fontsize{24}{28}\selectfont\AIleadzero{\thechapter} } }
   }
-  % Chapter
   \titleformat {\chapter}
     [ block ]
     { \AIFontChapter \filcenter } % format
