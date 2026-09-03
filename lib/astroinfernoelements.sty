@@ -80,3 +80,40 @@
   % ones. Also needed as TOC's own \clearpage was disabled above.
   \twocolumn
 }
+
+% ======== Final page with heptagram from example.tex ========
+% Options:
+%    mode - dark or light
+%    image - image file
+%    imagewidth - width of image
+\keys_define:nn { astroinferno / elements / imagepage }
+{
+  image .tl_set:N = \l__AI_imagepage_image_tl,
+  image .initial:n = {img/astro-inferno-logo-kit/Astrogram},
+  imagewidth .tl_set:N = \l__AI_imagepage_imagewidth_tl,
+  imagewidth .initial:n = 0.6\textwidth,
+  imagewidth .value_required:n  = true,
+  mode .tl_set:N = \l__AI_imagepage_mode_tl,
+  mode .initial:n = dark,
+  mode .value_required:n  = true
+}
+\NewDocumentCommand\AIMakeElementImagepage{O{}}
+{
+  \keys_set:nn { astroinferno / elements / imagepage } {#1}
+
+  \str_case:VnF \l__AI_imagepage_mode_tl {
+    { dark } { \pagecolor{AIblack} \AIMakeDark }
+    { light } { \pagecolor{AIwhite} \AIMakeLight }
+  } {
+    \PackageError{astroinferno}{Unknown~mode~'\l__AI_imagepage_mode_tl'}{}
+  }
+ 
+  \ClearShipoutPictureBG
+  \onecolumn{
+    \vspace*{\fill}
+    \begin{center}
+      \includegraphics[width=\l__AI_imagepage_imagewidth_tl]{\l__AI_imagepage_image_tl}
+    \end{center}
+    \vspace*{\fill}
+  }
+}
