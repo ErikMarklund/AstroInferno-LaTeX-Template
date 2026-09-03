@@ -124,6 +124,36 @@
     \newcommand{\AIerodedblockFont}{\AIfontCheddarGothic}
   }
 
+  % Load Bahnschrift font if available.
+  \IfFontExistsTF{Bahnschrift}
+  {\newfontfamily\AIfontBahnschrift{Bahnschrift}[
+    BoldFont={Bahnschrift},
+    BoldFeatures={Weight=700},
+    ItalicFont={Bahnschrift},
+    ItalicFeatures={FakeSlant=0.2},
+    BoldItalicFont={Bahnschrift},
+    BoldItalicFeatures={Weight=700, FakeSlant=0.2}
+    ]
+  } {\IfFontExistsTF{fonts/Bahnschrift/Bahnschrift.ttf}
+    {
+      \newfontfamily\AIfontBahnschrift{Bahnschrift.ttf}
+      [Path = fonts/Bahnschrift/,
+      BoldFont={Bahnschrift},
+      BoldFeatures={Weight=700},
+      ItalicFont={Bahnschrift},
+      ItalicFeatures={FakeSlant=0.2},
+      BoldItalicFont={Bahnschrift},
+      BoldItalicFeatures={Weight=700, FakeSlant=0.2}]
+    } { % Load fallback D-DIN
+      \newfontfamily\AIfontBahnschrift{D-DIN.otf}[
+      Path = fonts/d-din/,
+      Extension = .otf,
+      UprightFont = *,
+      ItalicFont = *-Italic,
+      BoldFont = *-Bold]
+    }
+  }
+
 \keys_define:nn { astroinferno / fonts }
   {
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -266,14 +296,14 @@
     toc-chapter-family .initial:n        = \AIfontMuara,
     toc-chapter-family .value_required:n = true,
     toc-chapter-style .tl_set:N         = \l__AI_toc_chapter_style_tl,
-    toc-chapter-style .initial:n        = \fontsize{13}{16} \scshape,
+    toc-chapter-style .initial:n        = \fontsize{13}{16} \selectfont,
     toc-chapter-style .value_required:n = true,
     % Section
     toc-section-family .tl_set:N         = \l__AI_toc_section_family_tl,
     toc-section-family .initial:n        = \AIfontMuara,
     toc-section-family .value_required:n = true,
     toc-section-style .tl_set:N         = \l__AI_toc_section_style_tl,
-    toc-section-style .initial:n        = \fontsize{11}{14},
+    toc-section-style .initial:n        = \fontsize{11}{14} \selectfont,
     toc-section-style .value_required:n = true,
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     % Stat blocks
