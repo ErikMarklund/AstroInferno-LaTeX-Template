@@ -56,3 +56,27 @@
     \hfill\null
   \end{center}
 }
+
+% ======== TOC from example.tex ========
+% No arguments or options
+\NewDocumentCommand\AIMakeElementTOCpage{}
+{
+  \begingroup
+  \let\clearpage\null % Temporarily disable \clearpage to allow an image to be added below the TOC.
+  \tableofcontents
+  \onecolumn{
+    \begin{center}
+      \vfill
+      % Choose coven image based on dark/light mode
+      \includegraphics[width=0.3\columnwidth]{\AIIsDarkMode
+        {"img/astro-inferno-logo-kit/Astro~Inferno~-~Coven~White.png"}
+        {"img/astro-inferno-logo-kit/Astro~Inferno~-~Coven~Black.png"}
+      }
+    \end{center}
+    \vspace{2cm}
+  }
+  \endgroup
+  \clearpage % Needed for longer TOCs. Doesn't matter for shorter
+  % ones. Also needed as TOC's own \clearpage was disabled above.
+  \twocolumn
+}

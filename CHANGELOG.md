@@ -21,6 +21,8 @@ This changelog is now flushed to only incorporate changes for the Astro Inferno 
 - Colour overhaul
 - Monster reimplementation
 - "Correct" chapter and (sub)section headings
+- Improved TOC
+- Commands for ready-made layout for titlepage and TOC page.
 
 ## [Before flushing changelog]
 
