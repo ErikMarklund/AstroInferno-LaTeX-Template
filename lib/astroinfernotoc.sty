@@ -9,11 +9,16 @@
 
   \titlecontents{part}
     [0pt] % left
+    % Draw rule first, then space up
     { \addvspace{.06in} \AIFontTocPart } % above-code
-    {\partname\ \thecontentslabel :~ } % numbered-entry-format
+    {
+      % If the rule is in the below-code it will strike over swirly
+      % parts of the letters, so we do it here instead.
+      \smash{\raisebox{-0.1in}{\makebox[0pt][l]{\color{AIdeepred}\rule{\linewidth}{1pt}}}}
+      \partname\ \thecontentslabel :~ } % numbered-entry-format
     {} % numberless-entry-format
     {} % filler-page-format
-    [ \addvspace{-.03in} \titleline{ \color{AIdeepred} \titlerule[1pt] } \addvspace{.05in } ] % below-code
+    [ \addvspace{.1in } ] % below-code
 
   \titlecontents{chapter}
     [0pt] % left
