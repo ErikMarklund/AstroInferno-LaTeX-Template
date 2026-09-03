@@ -40,13 +40,27 @@
     %     Several "official" and unofficial fallback fonts are included.
     % =========================
 
+    % ======== Font names ========
+    % Fonts are named \AIfontX, where X is the font name.
+    % For example, \AIfontAvalenRekas.
+    %
+    % Fallback fonts are named as the primary font.
+    % For example, Dominican is loaded as \AIfontAlchemy.
+    %
+    % A number of font aliases are defined below, which are named
+    % \AIXFont, where X is a description/use. For example,
+    % \AIoldenglishFont is an alias for \AIfontQTCloisteredMonk.
+    %
+    % Some separate aliases are made for specific layout elements,
+    % such as \AIpartfont
+
     \newfontfamily{\AIfontQTCloisteredMonk}{qtcloisteredmonk}
     \newcommand{\AIoldenglishFont}{\AIfontQTCloisteredMonk}
 
     \newfontfamily\AIfontAvalenRekas{Avalen~Rekas.ttf}[Path = fonts/]
-    \newcommand{\AIpartfont}{\AIfontAvalenRekas}
-    \newcommand{\AIchapterfont}{\AIfontAvalenRekas}
-    \newcommand{\AIsectionfont}{\AIfontAvalenRekas}
+    \newcommand{\AIpartFont}{\AIfontAvalenRekas}
+    \newcommand{\AIchapterFont}{\AIfontAvalenRekas}
+    \newcommand{\AIsectionFont}{\AIfontAvalenRekas}
 
     % Check if Muara exists. Otherwise load MUARA DEMO
     \IfFontExistsTF{Muara} {
@@ -58,14 +72,13 @@
       {
         % Original file name is "MUARA DEMO .ttf", but trailing space
         % causes problem, so file was renamed.
-        \newfontfamily\AIfontMuara{MUARA~DEMO.ttf}
-        [Path = fonts/, Extension = .ttf, UprightFont = *]
+        \newfontfamily\AIfontMuara{MUARA~DEMO.ttf} [ Path = fonts/, Extension = .ttf, UprightFont = * ]
       }
     }
 
     % Make (sub)subsection font alias
-    \newcommand{\AIsubsectionfont}{\AIfontMuara}
-    \newcommand{\AIsubsubsectionfont}{\AIfontMuara}
+    \newcommand{\AIsubsectionFont}{\AIfontMuara}
+    \newcommand{\AIsubsubsectionFont}{\AIfontMuara}
 
     % The 1651 Alchemy font replacements are difficult. All have some drawbacks.
     % One alternative could be Caslon Antique, but the digits look wrong.
@@ -79,12 +92,12 @@
     { % Look for font file in fonts/
       \IfFontExistsTF{fonts/GLC~-~1651AlchemyNormal.otf}
       {
-        \newfontfamily\AIfontAlchemy{GLC~-~1651Alchemy.otf}
-        [Path = fonts/1651~Alchemy~Family/,
+        \newfontfamily\AIfontAlchemy{GLC~-~1651Alchemy.otf} [
+        Path = fonts/1651~Alchemy~Family/,
         Extension = .otf,
         UprightFont    = * Normal,
         ItalicFont     = * Italic,
-        Contextuals    = Alternate]
+        Contextuals    = Alternate ]
         \bool_gset_true:N \g_AlchemyCopyright_bool
       } { % First fallback Dominican. Free, but cannot be bundled.
         % Only read from file, because when installing my OS sees three
@@ -97,8 +110,7 @@
           Extension = .TTF,
           UprightFont  = DOMINICA,
           ItalicFont = DOMII___,
-          SmallCapsFont = DOMISC__
-          ]
+          SmallCapsFont = DOMISC__ ]
         } { % Load bundled fallback IM FELL English
           \IfFontExistsTF{IM~FELL~English} {
             \newfontfamily\AIfontAlchemy{IM~FELL~English}
@@ -107,8 +119,7 @@
             Path = fonts/IM_Fell_English/,
             Extension = .ttf,
             UprightFont = *,
-            ItalicFont = IMFellEnglish-Italic,
-            ]
+            ItalicFont = IMFellEnglish-Italic ]
           }
         }
       }
@@ -153,6 +164,7 @@
       BoldFont = *-Bold]
     }
   }
+  \newcommand{\AImechanicalFont}{\AIfontBahnschrift}
 
 \keys_define:nn { astroinferno / fonts }
   {
@@ -162,7 +174,7 @@
     % Part
     % Not well defined in the Core book. Should probably be bigger.
     part-family .tl_set:N         = \l__AI_part_family_tl,
-    part-family .initial:n        = \AIpartfont,
+    part-family .initial:n        = \AIpartFont,
     part-family .value_required:n = true,
     part-style .tl_set:N         = \l__AI_part_style_tl,
     part-style .initial:n        = \fontsize{60}{70} \scshape,
@@ -170,7 +182,7 @@
     % Chapter
     % Should be 78 pt by judging from the Core book.
     chapter-family .tl_set:N         = \l__AI_chapter_family_tl,
-    chapter-family .initial:n        = \AIchapterfont,
+    chapter-family .initial:n        = \AIchapterFont,
     chapter-family .value_required:n = true,
     chapter-style .tl_set:N         = \l__AI_chapter_style_tl,
     chapter-style .initial:n        = \linespread{.9} \fontsize{78}{90} \scshape,
@@ -179,7 +191,7 @@
     % 26 pt judging from the Core book. -7% letter spacing. 30 pt,
     % normal spacing in other places..
     section-family .tl_set:N         = \l__AI_section_family_tl,
-    section-family .initial:n        = \AIsectionfont,
+    section-family .initial:n        = \AIsectionFont,
     section-family .value_required:n = true,
     section-style .tl_set:N         = \l__AI_section_style_tl,
     section-style .initial:n        = \linespread{.9} \fontsize{30}{35} \scshape \RaggedRight,
@@ -187,7 +199,7 @@
     % Subsection
     % 20.5 pt judging from the Core book.
     subsection-family .tl_set:N         = \l__AI_subsection_family_tl,
-    subsection-family .initial:n        = \AIsubsectionfont,
+    subsection-family .initial:n        = \AIsubsectionFont,
     subsection-family .value_required:n = true,
     subsection-style .tl_set:N         = \l__AI_subsection_style_tl,
     subsection-style .initial:n        = \linespread{.9} \fontsize{20.5}{25} \scshape \RaggedRight,
@@ -195,7 +207,7 @@
     % subsubsection
     % 16.5 pt judging from the Core book.
     subsubsection-family .tl_set:N         = \l__AI_subsubsection_family_tl,
-    subsubsection-family .initial:n        = \AIsubsectionfont,
+    subsubsection-family .initial:n        = \AIsubsectionFont,
     subsubsection-family .value_required:n = true,
     subsubsection-style .tl_set:N         = \l__AI_subsubsection_style_tl,
     subsubsection-style .initial:n        = \linespread{.9} \fontsize{16.5}{20} \scshape \RaggedRight,
