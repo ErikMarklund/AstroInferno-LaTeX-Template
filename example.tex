@@ -53,45 +53,27 @@ Extension = .ttf
 \frontmatter
 
 \begin{titlepage}
-  
-  \begin{center}
-    \vspace*{\stretch{1}}
-    \AIfontBeryllium
+
+  % We can use a pre-made element that sets up a nice titlepage with
+  % the Astro Inferno logo and copyright text.
+  % Or you can make your own titlepage layout.
+  \AIMakeElementTitlepage
+  [
+  titlefont = \AIfontBeryllium,
+  quote = {
+    "I scream in the dark,\\
+    To find true salvation,\\
+    But the only thing I hear,\\
+    Is your final salutation."\\[\baselineskip]
+    \hfill -Totalt Jävla Mörker},
+  quotewidth = 0.25\textwidth
+  ]
+  {% Put title here
     {\Huge The Infernal \LaTeX{}\\[0.5em]}
     {\large An Example of the astroinfernobook Class\\[1.5em]}
     Erik Marklund\\
-    \today \\
-    \vspace{1.5cm}
-    \includegraphics[width=0.6\textwidth]{
-      \AIIsDarkMode
-      {"img/astro-inferno-logo-kit/Astro Inferno - White.png"}
-      {"img/astro-inferno-logo-kit/Astro Inferno - Black.png"}
-    }\par % Need this or maybe \newline, or else the logo will appear
-          % to the right of the text that follows.
-    \vspace{1.5cm}
-    \hfill
-    \begin{minipage}[t]{0.25\textwidth}{
-        \it
-        \AIquoteFont
-          "I scream in the dark,\\
-          To find true salvation,\\
-          But the only thing I hear,\\
-          Is your final salutation."\\[\baselineskip]
-        \hfill -Totalt Jävla Mörker
-      }
-    \end{minipage}
-    \hfill\null
-    \vspace*{\stretch{2}}\par
-    \hfill
-    \begin{minipage}[t]{0.7\textwidth}{
-        \begin{AISidebar}{}
-          \AIcopyright*
-        \end{AISidebar}
-      }
-    \end{minipage}
-    \hfill\null
-  \end{center}
-
+    \today
+  }
 \end{titlepage}
 
 % This construct is needed to eliminate a CONTENTS showing up in the

@@ -1,0 +1,58 @@
+\ExplSyntaxOn
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Macros for making ready-made elements
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% ======== Titlepage from example.tex ========
+% Mandatory argument: Title
+% Options:
+%   titlefont - font and text properties for the title
+%   quote - printed under the logo
+%   quotewidth - different quotes require different space
+\keys_define:nn { astroinferno / elements / titlepage }
+{
+  titlefont .tl_set:N = \l__AI_titlepage_titlefont_tl,
+  titlefont .initial:n = \AIfontAvalenRekas,
+  quote .tl_set:N = \l__AI_titlepage_quote_tl,
+  quote .initial:n = {},
+  quotewidth .tl_set:N = \l__AI_titlepage_quotewidth_tl,
+  quotewidth .initial:n = 0.25\textwidth
+}
+
+\NewDocumentCommand\AIMakeElementTitlepage{O{} m}
+{
+  \keys_set:nn { astroinferno / elements / titlepage } {#1}
+
+  \begin{center}
+    \vspace*{\stretch{1}}
+    { \l__AI_titlepage_titlefont_tl\selectfont #2\\}
+    \vspace{1.5cm}
+    \includegraphics[width=0.6\textwidth]{
+      \AIIsDarkMode
+      {"img/astro-inferno-logo-kit/Astro~Inferno~-~White.png"}
+      {"img/astro-inferno-logo-kit/Astro~Inferno~-~Black.png"}
+    }\par % Need this or maybe \newline, or else the logo will appear
+          % to the right of the text that follows.
+    \vspace{1.5cm}
+    \hfill
+    \begin{minipage}[t]{\l__AI_titlepage_quotewidth_tl}
+      {
+        \it \AIquoteFont
+        \l__AI_titlepage_quote_tl
+      }
+    \end{minipage}
+    \hfill\null
+    \vspace*{\stretch{2}}\par
+    \hfill
+    \begin{minipage}[t]{0.7\textwidth}
+      {
+        \begin{AISidebar}{}
+          \AIcopyright*
+        \end{AISidebar}
+      }
+    \end{minipage}
+    \hfill\null
+  \end{center}
+}

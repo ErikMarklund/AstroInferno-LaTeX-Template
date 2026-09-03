@@ -94,3 +94,4 @@
 \RequirePackage {lib/astroinfernotable}      % tables
 \RequirePackage {lib/astroinfernotoc}        % table of contents styling
 \RequirePackage {lib/astroinfernoweapon}     % weapons
+\RequirePackage {lib/astroinfernoelements}   % ready-made elements
