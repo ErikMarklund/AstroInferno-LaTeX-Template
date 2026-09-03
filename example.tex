@@ -83,8 +83,9 @@ Extension = .ttf
 \AIMakeElementTOCpage
 
 \mainmatter%
+\AIPlaceNewBackground*{img/paper.jpg}
 
-\chapter*{Preface}
+\chapter*{Preface} \label{ch:preface}
 % We manually add this unnumbered chapter to the TOC
 \addcontentsline{toc}{chapter}{Preface}
 \section{Origins}
@@ -178,7 +179,7 @@ they cause if used mid document.
 
 \subsection{New Background Without Switching}
 One can also insert a new background without switching mode using |\AIPlaceNewBackground|.
-The starred version |\AIPlaceNewBackground*| will do the same, but for one page only.
+The starred version |\AIPlaceNewBackground*| will do the same, but for one page only (e.g., Preface above).
 Both commands do \emph{not} cause a page break.
 
 \subsection{Detecting Dark Mode}
@@ -187,8 +188,8 @@ on. For example, |\AIIsDarkMode{yes}{no}|: \AIIsDarkMode{yes}{no}.
 This is used above to choose between loading black or white logos
 depending on whether dark mode is on or not.
 
-We will switch to dark mode here (after the Seal of Phenex) insert a new background for a single page at the start of section~\ref{chap:text_boxes}, then switch back to light mode at
-part~\ref{part:customization}.
+We will switch to dark mode here (after the Seal of Phenex) insert a new background for a single page at the start of section~\ref{ch:text_boxes}, then switch back to light mode at
+part~\ref{ch:weapons}.
 \newpage % Effectively starts a new column
 \noindent
 \begin{center}
@@ -263,7 +264,7 @@ This ditch has a board spanning it. Someone has rubbed it down with grease.
 \AISubArea{Gate}
 The gate is four meters wide and twice as tall. An ominous portcullis looking like a gilloutine blade hangs over any souls passing through.
 
-\chapter{Boxes} \label{chap:text_boxes}
+\chapter{Boxes} \label{ch:text_boxes}
 \AIPlaceNewBackground*{img/paper-darkgreen.jpg}
 
 \section{Text Boxes}
@@ -426,7 +427,8 @@ change the title font for our Void cult demagogue to 'Minster'.
 %
 %It might be best to \emph{not} make |\AIMonster| a float. That is, do not pass |float=htb| as an option. Floats can be great in \LaTeX, but they make it difficult to position the adversary blocks correctly.
 
-\chapter{Weapons}
+\AIMakeLight
+\chapter{Weapons} \label{ch:weapons}
 % We place this AIWeapon already here, or it will probably render on a separate page.
 \begin{AIWeapon*}{Cyclopean club}
   \AIWeaponData*[
@@ -485,7 +487,6 @@ Background images are not (yet) implemented.
 \end{AIWeapon}
 % Let's do two full-width weapons on a separate float page.
 
-\AIMakeLight
 \part{Customization} \label{part:customization}
 
 \chapter{Colors}
