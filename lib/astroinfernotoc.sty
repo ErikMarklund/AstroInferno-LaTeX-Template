@@ -18,16 +18,16 @@
   \titlecontents{chapter}
     [0pt] % left
     { \addvspace{.1in} \AIFontTocChapter } % above-code
-    { \tocchapapp\ \thecontentslabel :~ } % numbered-entry-format
-    {} % numberless-entry-format
-    {\titlerule*{.}\contentspage} % filler-page-format
+    { \makebox[1cm][l]{\AIleadzero{\thecontentslabel}} } % numbered-entry-format
+    { \hspace*{1cm}} % numberless-entry-format
+    {\titlerule*{}\contentspage[\itshape\AIquoteFont\thecontentspage]} % filler-page-format
 
   \titlecontents{section}
-    [0pt] % left
+    [1cm] % left
     {\AIFontTocSection} % above-code
-    {\thecontentslabel :~ } % numbered-entry-format
+    {} % numbered-entry-format
     {} % numberless-entry-format
-    {\titlerule*{.}\contentspage} % filler-page-format
+    {\titlerule*{}\contentspage[\itshape\AIquoteFont\thecontentspage]} % filler-page-format
 
   \newcommand\tocchapapp{\tocchapterabbreviationname}
   \g@addto@macro\appendix{%
