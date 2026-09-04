@@ -23,6 +23,7 @@ This changelog is now flushed to only incorporate changes for the Astro Inferno 
 - "Correct" chapter and (sub)section headings
 - Improved TOC
 - Commands for ready-made layout for titlepage and TOC page.
+- Command for ready-made page with single image.
 
 ## [Before flushing changelog]
 

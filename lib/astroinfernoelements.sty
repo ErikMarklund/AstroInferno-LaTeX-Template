@@ -81,11 +81,15 @@
   \twocolumn
 }
 
-% ======== Final page with heptagram from example.tex ========
+% ======== Page with centered image used as final page in example.tex ========
 % Options:
-%    mode - dark or light
+%    mode - dark or light. Other values do nothing.
 %    image - image file
 %    imagewidth - width of image
+%    clearcolour - make background this colour instead of image.
+%                         If not set, the background image will remain.
+% Currently, only default background images for light and dark modes are possible,
+% or setting the background to a single colour with clearcolour.
 \keys_define:nn { astroinferno / elements / imagepage }
 {
   image .tl_set:N = \l__AI_imagepage_image_tl,
@@ -94,26 +98,45 @@
   imagewidth .initial:n = 0.6\textwidth,
   imagewidth .value_required:n  = true,
   mode .tl_set:N = \l__AI_imagepage_mode_tl,
-  mode .initial:n = dark,
-  mode .value_required:n  = true
+  mode .initial:n = {},
+  mode .value_required:n  = true,
+  clearcolour .tl_set:N = \l__AI_imagepage_clearcolour_tl,
+  clearcolour .initial:n = {}
 }
+
+\bool_new:N \l__AI_imagepage_was_dark_bool
+
 \NewDocumentCommand\AIMakeElementImagepage{O{}}
 {
   \keys_set:nn { astroinferno / elements / imagepage } {#1}
 
+  % Check which mode it was. Restore after
+  \AIIsDarkMode
+  { \bool_gset_true:N \l__AI_imagepage_was_dark_bool }
+  { \bool_gset_false:N \l__AI_imagepage_was_dark_bool }
+
   \str_case:VnF \l__AI_imagepage_mode_tl {
-    { dark } { \pagecolor{AIblack} \AIMakeDark }
-    { light } { \pagecolor{AIwhite} \AIMakeLight }
+    { dark } { \AIMakeDark }
+    { light } { \AIMakeLight }
   } {
-    \PackageError{astroinferno}{Unknown~mode~'\l__AI_imagepage_mode_tl'}{}
+    \clearpage % Just start new page
   }
- 
-  \ClearShipoutPictureBG
-  \onecolumn{
+
+  \tl_if_empty:NTF \l__AI_imagepage_clearcolour_tl {
+  } {
+    \pagecolor{\l__AI_imagepage_clearcolour_tl}
+    \ClearShipoutPictureBG
+  }
+
+  \onecolumn
     \vspace*{\fill}
     \begin{center}
       \includegraphics[width=\l__AI_imagepage_imagewidth_tl]{\l__AI_imagepage_image_tl}
     \end{center}
     \vspace*{\fill}
-  }
+  \twocolumn
+  \clearpage
+  \bool_if:NTF \l__AI_imagepage_was_dark_bool
+  { \AIMakeDark }
+  { \AIMakeLight }
 }
