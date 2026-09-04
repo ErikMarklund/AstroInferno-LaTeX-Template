@@ -476,6 +476,27 @@ Background images are not (yet) implemented.
   features={{Quick, 2~targets hit/~\AIspsymbol~spent},{Sharp, Yikes!}}]
 \end{AIWeapon}
 
+\chapter{Image Pages}
+\begin{table*}[b]
+  \caption{\AIFontTableTitle{} Useful options for image page}
+  \begin{tabularx}{\linewidth}{lllX}
+    \textbf{Option} & \textbf{Values} & \textbf{Default} & \textbf{Description} \\
+    |image|              & Filename           & & Image to place \\
+    |imagewidth|     & Width                 & 0.6 {\textbackslash}textwidth  & Width of rendered image \\
+    |mode|              & |[dark, light]| & & Make image page in light/dark mode \\
+    |modeafter|       & |[dark, light]| & & Set mode after image page (just reset if not prvided) \\
+    |clearcolour|      & Colour           & & Use plain colour instead of background image \\
+    |bgimage|          & Filename        & |AIMakeDark/-Light| default & Image passed to |AIMakeDark/-Light| \\
+    |bgimageafter|   & Filename        & |AIMakeDark/-Light| default & Image passed to |AIMakeDark/-Light| after image page
+  \end{tabularx}
+\end{table*}
+There is a macro |\AIMakeElementImagepage| for making pages with just a single image.
+An image must be provided with the |image| option.
+|\AIMakeElementImagepage| was used to create the last page of this document.
+Now we will use it to display the seal of Phenex again.
+
+\AIMakeElementImagepage[image=img/37-Phenex_seal.png]
+
 \part{Customization} \label{part:customization}
 
 \chapter{Colors}
@@ -631,6 +652,7 @@ Astro Inferno fonts.
 \AIDropCapLine{D}{rop caps are not used in official Astro Inferno so far, but it is a neat feature from the DnD5e Template that was kept when deriving this template. The 'QT Cloistered Monk' font is used for drop caps.}
 
 \AIMakeElementImagepage[
+image=img/astro-inferno-logo-kit/Astrogram,
 imagewidth=\textwidth,
 mode=dark,
 clearcolour=AIblack
