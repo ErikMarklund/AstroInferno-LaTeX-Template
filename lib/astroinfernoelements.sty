@@ -86,22 +86,39 @@
 %    mode - dark or light. Other values do nothing.
 %    image - image file
 %    imagewidth - width of image
+%    mode - [dark, light] set dark or light mode
+%    modeafter - [dark, light] set dark or light mode after image page
 %    clearcolour - make background this colour instead of image.
 %                         If not set, the background image will remain.
-% Currently, only default background images for light and dark modes are possible,
-% or setting the background to a single colour with clearcolour.
+%    bgimage - background image to use with mode. Default if not set
+%    bgimageafter - like bgimage for subsequent pages.
 \keys_define:nn { astroinferno / elements / imagepage }
 {
   image .tl_set:N = \l__AI_imagepage_image_tl,
-  image .initial:n = {img/astro-inferno-logo-kit/Astrogram},
+  image .initial:n = {},
   imagewidth .tl_set:N = \l__AI_imagepage_imagewidth_tl,
   imagewidth .initial:n = 0.6\textwidth,
   imagewidth .value_required:n  = true,
   mode .tl_set:N = \l__AI_imagepage_mode_tl,
   mode .initial:n = {},
   mode .value_required:n  = true,
+  modeafter .tl_set:N = \l__AI_imagepage_modeafter_tl,
+  modeafter .initial:n = {},
   clearcolour .tl_set:N = \l__AI_imagepage_clearcolour_tl,
-  clearcolour .initial:n = {}
+  clearcolour .initial:n = {},
+  bgimage .tl_set:N = \l__AI_imagepage_bgimage_tl,
+  bgimage .initial:n = {},
+  bgimageafter .tl_set:N = \l__AI_imagepage_bgimageafter_tl,
+  bgimageafter .initial:n = {},
+}
+
+% Helper function to call AIMakeDark/Light with or without altenative image.
+% Useful to avoid multiple checks for the same logic in AIMakeElementImagepage
+\cs_new_protected:Nn \__AI_make_mode:Nn
+{
+  \tl_if_empty:NTF #2
+    { #1 }
+    { #1 [ #2 ] }
 }
 
 \bool_new:N \l__AI_imagepage_was_dark_bool
@@ -116,8 +133,8 @@
   { \bool_gset_false:N \l__AI_imagepage_was_dark_bool }
 
   \str_case:VnF \l__AI_imagepage_mode_tl {
-    { dark } { \AIMakeDark }
-    { light } { \AIMakeLight }
+    { dark } {\__AI_make_mode:Nn \AIMakeDark \l__AI_imagepage_bgimageafter_tl}
+    { light } {\__AI_make_mode:Nn \AIMakeLight \l__AI_imagepage_bgimageafter_tl}
   } {
     \clearpage % Just start new page
   }
@@ -136,7 +153,16 @@
     \vspace*{\fill}
   \twocolumn
   \clearpage
-  \bool_if:NTF \l__AI_imagepage_was_dark_bool
-  { \AIMakeDark }
-  { \AIMakeLight }
+
+  % If modeafter is light or dark, reset to that mode
+  % Otherwise just reset to whatever mode was before.
+  \str_case:VnF \l__AI_imagepage_modeafter_tl {
+    { dark } {\__AI_make_mode:Nn \AIMakeDark \l__AI_imagepage_bgimageafter_tl}
+    { light } {\__AI_make_mode:Nn \AIMakeLight \l__AI_imagepage_bgimageafter_tl}
+    {
+      \bool_if:NTF \l__AI_imagepage_was_dark_bool
+      { \__AI_make_mode:Nn \AIMakeDark \l__AI_imagepage_bgimageafter_tl }
+      { \__AI_make_mode:Nn \AIMakeLight \l__AI_imagepage_bgimageafter_tl }
+    }
+  }
 }
