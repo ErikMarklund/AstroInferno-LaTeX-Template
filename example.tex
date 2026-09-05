@@ -179,7 +179,9 @@ they cause if used mid document.
 
 \subsection{New Background Without Switching}
 One can also insert a new background without switching mode using |\AIPlaceNewBackground|.
-The starred version |\AIPlaceNewBackground*| will do the same, but for one page only (e.g., Preface above).
+The starred version |\AIPlaceNewBackground*| will do the same, but for
+one page only (e.g., Preface above, also
+p.~\pageref{ch:fonts}\footnote{Image taken at Skokloster castle}).
 Both commands do \emph{not} cause a page break.
 
 \subsection{Detecting Dark Mode}
@@ -389,10 +391,10 @@ seal on p.~\pageref{fig:phenix}).
 Floats that span two columns are possible, but
 getting them rigth can be like grappling with Jörmungandr, in part
 because of the many hidden |\clearpage|s lurking within various commands.
-In many cases the best way to achieve what you want is actually to
-prepare a page-size image and use it as a background image with
+Sometimes it is better to
+prepare a page-size image to use as a background image with
 |\AIPlaceNewBackground*|.  On this page we do a dirty trick to place an
-image independently of the text.
+image\footnote{https://pixnio.com/nature-landscapes/underwater/jellyfish-aquarium-highlighted-green} independently of the text.
 \newpage % Actually column break
 
 \rule{1cm}{0pt}\vspace{8.5cm}
@@ -477,6 +479,7 @@ change the title font for our Void cult demagogue to 'Minster'.
 %It might be best to \emph{not} make |\AIMonster| a float. That is, do not pass |float=htb| as an option. Floats can be great in \LaTeX, but they make it difficult to position the adversary blocks correctly.
 
 \AIMakeLight
+
 \chapter{Weapons} \label{ch:weapons}
 % We place this AIWeapon already here, or it will probably render on a separate page.
 \begin{AIWeapon*}{Cyclopean club}
@@ -638,12 +641,13 @@ colors to the current |themecolor|.
 \end{AISidebar}
 \endgroup
 
-\chapter{Fonts and Text Features}
+\chapter{Fonts and Text Features} \label{ch:fonts}
+\AIPlaceNewBackground*{img/alchemy.jpg}
 \section{Fonts}
 This template uses various fonts that are identical to, or similar to, the most common ones in Astro Inferno.
 Some fonts are excluded due to licencing issues, whereas others are omitted because they are only used sparingly.
 \subsection{Included Fonts}
-\begin{AITable}[header=Fonts in template, colorodd=AImidteal, coloreven]{lX}
+\begin{AITable}[header=Fonts in template, colorodd=AImidteal, coloreven=AIdarkteal]{lX}
   Macro Name    & Font name and look \\
   |\normalfont|  & Lato \\
   |\AIfontAvalenRekas| & {\AIfontAvalenRekas Avalen Rekas} \\
