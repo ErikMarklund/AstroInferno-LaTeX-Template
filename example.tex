@@ -194,7 +194,7 @@ part~\ref{ch:weapons}.
 \noindent
 \begin{center}
   \includegraphics[width=0.8\columnwidth]{img/37-Phenex_seal.png}\\[1em]
-\end{center}
+\end{center} \label{fig:phenix}
 \textit{\AIquoteFont
   "Phoenix is a great marquesse, appearing like the bird Phoenix, having a child's voice: but before he standeth still before the conjuror, he singeth many sweet notes. Then the exorcist with his companions must beware he give no ear to the melody, but must by and by bid him put on humane shape; then will he speak marvelously of all wonderful sciences. He is an excellent poet, and obedient, he hopeth to return to the seventh throne after a thousand two hundredth years, and governeth twenty legions."\\
   \hfill-The Lesser Key of Solomon
@@ -357,6 +357,46 @@ Analogous commands are |\AIsanity|, |\AIaura|, |\AIdamage|, |\AImortality|, and 
   |\AIloot{-2}| & \AIloot{-2}
 \end{AITable}
 
+\chapter{Images}
+\begin{table*}[b]
+  \caption{\AIFontTableTitle{} Useful options for image page}
+  \begin{tabularx}{\linewidth}{lllX}
+    \textbf{Option} & \textbf{Expects}  & \textbf{Default} & \textbf{Description} \\
+    |image|              & Filename           & & Image to place \\
+    |imagewidth|     & Width                 & 0.6 {\textbackslash}textwidth  & Width of rendered image \\
+    |mode|              & |[dark, light]| & & Mode for image page \\
+    |modeafter|       & |[dark, light]| & & Mode after image page \\
+    |clearcolour|      & Colour           & & Use plain colour instead of background image \\
+    |bgimage|          & Filename        & mode default & Background image \\
+    |bgimageafter|   & Filename        & mode default & Bachground image hereafter
+  \end{tabularx}
+\end{table*}
+
+\section{Inline and Float Images}
+Image placement in typesetting belongs in the $7^{th}$ level of hell.
+\LaTeX actually often makes image placement easier than WYSIWYG word
+processors like Microsoft Word do, but it can still definitely be a source of
+frustration.
+An Astro Inferno document uses twocolumn mode, which makes it even harder.
+Floats that occupy a single column width often struggle to find a good
+place, so images might be more easily placed as non-floats (like the
+seal on p.~\pageref{fig:phenix}).
+Floats that span two columns are possible, but
+getting them rigth can be like grappling with Jörmungandr.
+In many cases the best way to achieve what you want is actually to
+prepare a page-size image and use it as a background image with
+|\AIPlaceNewBackground*|.
+
+\section{Image Page}
+There is a macro |\AIMakeElementImagepage| for making pages displaying
+a single image.
+An image must be provided with the |image| option. See other options
+in table.
+|\AIMakeElementImagepage| was in fact used to create the last page of
+this document, and now we will use it to display the seal of Phenex again.
+
+\AIMakeElementImagepage[image=img/37-Phenex_seal.png, mode=light]
+
 
 \chapter{Adversaries}
 % Monster stat block
@@ -475,27 +515,6 @@ Background images are not (yet) implemented.
   skill=Slashing,
   features={{Quick, 2~targets hit/~\AIspsymbol~spent},{Sharp, Yikes!}}]
 \end{AIWeapon}
-
-\chapter{Image Pages}
-\begin{table*}[b]
-  \caption{\AIFontTableTitle{} Useful options for image page}
-  \begin{tabularx}{\linewidth}{lllX}
-    \textbf{Option} & \textbf{Values} & \textbf{Default} & \textbf{Description} \\
-    |image|              & Filename           & & Image to place \\
-    |imagewidth|     & Width                 & 0.6 {\textbackslash}textwidth  & Width of rendered image \\
-    |mode|              & |[dark, light]| & & Make image page in light/dark mode \\
-    |modeafter|       & |[dark, light]| & & Set mode after image page (just reset if not prvided) \\
-    |clearcolour|      & Colour           & & Use plain colour instead of background image \\
-    |bgimage|          & Filename        & |AIMakeDark/-Light| default & Image passed to |AIMakeDark/-Light| \\
-    |bgimageafter|   & Filename        & |AIMakeDark/-Light| default & Image passed to |AIMakeDark/-Light| after image page
-  \end{tabularx}
-\end{table*}
-There is a macro |\AIMakeElementImagepage| for making pages with just a single image.
-An image must be provided with the |image| option.
-|\AIMakeElementImagepage| was used to create the last page of this document.
-Now we will use it to display the seal of Phenex again.
-
-\AIMakeElementImagepage[image=img/37-Phenex_seal.png]
 
 \part{Customization} \label{part:customization}
 
