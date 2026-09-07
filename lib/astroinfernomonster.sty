@@ -85,7 +85,7 @@
   
 \NewDocumentEnvironment{AIMonster} {O{} m}
 {
-  \str_set:Nn  \l_monster_name_str {#2}
+  \tl_set:Nn  \l_monster_name_tl {#2}
   \begin{__AIMonster}[#1]
 }
 {
@@ -101,7 +101,7 @@
  
   % Print name
   { \l_monster_titlefont_tl \l_monster_titlestyle_tl \selectfont
-    \hfill \l_monster_name_str \hfill\null}\\[2mm]
+    \hfill \l_monster_name_tl \hfill\null}\\[2mm]
   \hfill\MakeUppercase{\textbf {\scriptsize{\l_monster_type_tl}}}\hfill\null\\[1.5em]
   \hfill\textls[300]{\MakeUppercase{\textbf{\large{\l_monster_class_tl}}}}\hfill\null\\[0.3em]
   \hfill\textls[60]{\MakeUppercase{\textbf {\large{\l_monster_being_tl}}}}\hfill\null\\
