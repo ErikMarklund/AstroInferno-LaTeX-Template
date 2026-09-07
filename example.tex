@@ -421,7 +421,7 @@ this document, and now we will use it to display the seal of Phenex again.
   being = Ashen souls,
   damage = 3, mortality = 12, bones = 3,
   troubles = {
-    Shoot: \AIdamage{6},
+    Shoot: \AIdamage{6};
     Cower: \AIbones[+]{1}
   },
   endtroubles = { % Semicolon-separated list to allow for commas in the items!
@@ -449,12 +449,13 @@ this document, and now we will use it to display the seal of Phenex again.
   class = Champions,
   being = Greater souls,
   damage = 6, mortality = 6, bones = 3,
+  % Semicolon-separated lists for troubles and endteoubles to allow for commas in the items!
   troubles = {
-    Punishment: \AIdamage{10},
-    Glossolalia: \AIdamage[+]{2},
+    Punishment: \AIdamage{10};
+    Glossolalia: \AIdamage[+]{2};
     Support: +5~Accolytes
   },
-  endtroubles = { % Semicolon-separated list to allow for commas in the items!
+  endtroubles = {
     Possess one character;
     Curse: Party disadvantage
   },
