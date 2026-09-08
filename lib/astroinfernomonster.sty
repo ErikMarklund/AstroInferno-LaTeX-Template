@@ -32,6 +32,12 @@
   titlefont .initial:n   = \l__AI_stat_block_title_family_tl,
   titlestyle .tl_set:N = \l_monster_titlestyle_tl,
   titlestyle .initial:n = \l__AI_stat_block_title_style_tl,
+  titleheight .tl_set:N  = \l_monster_titleheight_tl,
+  titleheight .initial:n  = -1pt, % if -1, use 1.2ex
+  titleheight .value_required:n = true,
+  titlealign .tl_set:N  = \l_monster_titlealign_tl,
+  titlealign .initial:n  = t,
+  titlealign .value_required:n = true,
   %
   type .tl_set:N  = \l_monster_type_tl,
   type .initial:n  = -~unknown~-,
@@ -91,6 +97,7 @@
 \end{__AIMonster}
 }
 
+\dim_new:N \l_theheight_dim
 \NewDocumentCommand{\AIMonsterData} {O{}}
 {
   \keys_set:nn { astroinferno / monster / monsterdata } {#1}
@@ -100,8 +107,16 @@
   \seq_set_split:NnV \l_monster_end_troubles_seq { ; } \l_monster_end_troubles_raw_tl
  
   % Print name
+  % Is titleheight set? If >=0 then yes.
+  \dim_compare:nTF {\l_monster_titleheight_tl < 0pt}
+  { \dim_set:Nn \l_theheight_dim {1.2ex} } % Set to 1.2ex
+  { \dim_set:Nn \l_theheight_dim {\l_monster_titleheight_tl} } % Set to titleheight
+
   { \l_monster_titlefont_tl \l_monster_titlestyle_tl \selectfont
-    \hfill \l_monster_name_tl \hfill\null}\\[2mm]
+    \parbox[t][\l_theheight_dim][\l_monster_titlealign_tl]{\columnwidth} {
+      \hfill \l_monster_name_tl \hfill\null
+    }\\[2mm]
+  }
   \hfill\MakeUppercase{\textbf {\scriptsize{\l_monster_type_tl}}}\hfill\null\\[1.5em]
   \hfill\textls[300]{\MakeUppercase{\textbf{\large{\l_monster_class_tl}}}}\hfill\null\\[0.3em]
   \hfill\textls[60]{\MakeUppercase{\textbf {\large{\l_monster_being_tl}}}}\hfill\null\\
