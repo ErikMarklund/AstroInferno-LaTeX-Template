@@ -99,46 +99,30 @@
   imagewidth .tl_set:N = \l__AI_imagepage_imagewidth_tl,
   imagewidth .initial:n = 0.6\textwidth,
   imagewidth .value_required:n  = true,
-  mode .tl_set:N = \l__AI_imagepage_mode_tl,
-  mode .initial:n = {},
-  mode .value_required:n  = true,
-  modeafter .tl_set:N = \l__AI_imagepage_modeafter_tl,
-  modeafter .initial:n = {},
   clearcolour .tl_set:N = \l__AI_imagepage_clearcolour_tl,
-  clearcolour .initial:n = {},
-  bgimage .tl_set:N = \l__AI_imagepage_bgimage_tl,
-  bgimage .initial:n = {},
-  bgimageafter .tl_set:N = \l__AI_imagepage_bgimageafter_tl,
-  bgimageafter .initial:n = {},
-}
-
-% Helper function to call AIMakeDark/Light with or without altenative image.
-% Useful to avoid multiple checks for the same logic in AIMakeElementImagepage
-\cs_new_protected:Nn \__AI_make_mode:Nn
-{
-  \tl_if_empty:NTF #2
-    { #1 }
-    { #1 [ #2 ] }
+  clearcolour .initial:n = {}
 }
 
 \bool_new:N \l__AI_imagepage_was_dark_bool
 
-\NewDocumentCommand\AIMakeElementImagepage{O{}}
+% New implementation with before-code and after-code.
+% Use before- and after-codes to set dark/light mode.
+% Clearly more robust than earlier implementation.
+% Assumes twocolumn, but probably works in onecolumn if
+% \onecolumn is put in after-code (not tested).
+\NewDocumentCommand\AIMakeElementImagepage{O{} m m}
 {
   \keys_set:nn { astroinferno / elements / imagepage } {#1}
 
-  % Check which mode it was. Restore after
+  % Check which mode it was. Restore after1
   \AIIsDarkMode
   { \bool_gset_true:N \l__AI_imagepage_was_dark_bool }
   { \bool_gset_false:N \l__AI_imagepage_was_dark_bool }
 
-  \str_case:VnF \l__AI_imagepage_mode_tl {
-    { dark } {\__AI_make_mode:Nn \AIMakeDark \l__AI_imagepage_bgimageafter_tl}
-    { light } {\__AI_make_mode:Nn \AIMakeLight \l__AI_imagepage_bgimageafter_tl}
-  } {
-    \clearpage % Just start new page
-  }
+  % Run before-code
+  { #2 }
 
+  % Set bg colour instead of bg image if clearcolour is provided
   \tl_if_empty:NTF \l__AI_imagepage_clearcolour_tl {
   } {
     \pagecolor{\l__AI_imagepage_clearcolour_tl}
@@ -146,23 +130,18 @@
   }
 
   \onecolumn
-    \vspace*{\fill}
-    \begin{center}
-      \includegraphics[width=\l__AI_imagepage_imagewidth_tl]{\l__AI_imagepage_image_tl}
-    \end{center}
-    \vspace*{\fill}
+  \vspace*{\fill}
+  \begin{center}
+    \includegraphics[width=\l__AI_imagepage_imagewidth_tl]{\l__AI_imagepage_image_tl}
+  \end{center}
+  \vspace*{\fill}
   \twocolumn
-  \clearpage
 
-  % If modeafter is light or dark, reset to that mode
-  % Otherwise just reset to whatever mode was before.
-  \str_case:VnF \l__AI_imagepage_modeafter_tl {
-    { dark } {\__AI_make_mode:Nn \AIMakeDark \l__AI_imagepage_bgimageafter_tl}
-    { light } {\__AI_make_mode:Nn \AIMakeLight \l__AI_imagepage_bgimageafter_tl}
-    {
-      \bool_if:NTF \l__AI_imagepage_was_dark_bool
-      { \__AI_make_mode:Nn \AIMakeDark \l__AI_imagepage_bgimageafter_tl }
-      { \__AI_make_mode:Nn \AIMakeLight \l__AI_imagepage_bgimageafter_tl }
-    }
-  }
+  % Restore mode. Does not remember bg image though
+  \bool_if:NTF \l__AI_imagepage_was_dark_bool
+  { \AIMakeDark }
+  { \AIMakeLight }
+
+  % Run after-code
+  { #3 }
 }
