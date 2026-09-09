@@ -1,5 +1,6 @@
 \ExplSyntaxOn
 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Custom headers and footers
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -10,38 +11,71 @@
 % Setup for custom footer
 \pagestyle {fancy}
 
-\cs_if_free:NF \chaptermark
-  {
-    \renewcommand*{\chaptermark}[1]
-      {
-        \markboth{}{}
-      }
-  }
+\cs_set:Npn \chaptermark #1 {
+  \markboth{#1}{}
+}
 
 \renewcommand*{\headrulewidth}{0pt} % no rule for header
 \renewcommand*{\footrulewidth}{0pt} % no rule for footer
 
 \fancyhf {} % clear all headers and footers
 
+
+\NewDocumentCommand\AImarginchapter{}
+{
+  %\normalfont
+  % Chapter numbers 13.5pt. Chapter name 15 pt.
+  {\raisebox{-0.3mm}{\AImechanicalFont \fontsize{13.5}{15} \bfseries \AIleadzero{\thechapter}}}
+  \enskip\tikz[baseline=0.62ex]{
+    \draw[line~width=1.8pt] (0,0pt) -- (0, 13pt);
+    \draw[line~width=1.3pt] (-3.6pt, 9.5pt) -- (3.6pt, 9.5pt);
+  }\enskip
+  { \AIfontAvalenRekas \fontsize{15}{17} \selectfont \leftmark}
+}
+
 % Left-even page footer
 \fancyfoot[LE]{%
   \normalfont % No idea why needed, but dark/light colour is ignored otherwise.
-    \begin{tikzpicture}[remember~picture,overlay]
-      \node[inner~sep=0pt,anchor=south~west,xshift=.13in,yshift=.13in] at (current~page.south~west) {\AIFontPageNumber \thepage};
-    \end{tikzpicture}
-  }
+  \begin{tikzpicture}[remember~picture,overlay]
+    \node[inner~sep=0pt,anchor=south~west,xshift=.13in,yshift=.13in] at (current~page.south~west) {\AIFontPageNumber \thepage};
+    % Vertical bit in the outer margin. Made to mimic Core Rulebook
+    \int_compare:nT { \value{chapter} > 0 }
+    {
+      \tl_if_blank:eF { \leftmark }
+      {
+        \node[rotate=-90, anchor=mid] at ([xshift=0.45cm, yshift=0cm] current~page.west)
+        {
+          \AImarginchapter
+        };
+        % Part number not printed, because I don't know how to do it robustly
+      }
+    }
+  \end{tikzpicture}
+}
 
 % Right-odd page footer
 \fancyfoot[RO]{%
   \normalfont % No idea why needed, but dark/light colour is ignored otherwise.
-    \begin{tikzpicture}[remember~picture,overlay]
-      \node[inner~sep=0pt,anchor=south~east,xshift=-.13in,yshift=.13in] at (current~page.south~east) {\AIFontPageNumber \thepage};
-    \end{tikzpicture}
-  }
+  \begin{tikzpicture}[remember~picture,overlay]
+    \node[inner~sep=0pt,anchor=south~east,xshift=-.13in,yshift=.13in] at (current~page.south~east) {\AIFontPageNumber \thepage};
+    % Vertical bit in the outer margin.  Made to mimic Core Rulebook
+    \int_compare:nT { \value{chapter} > 0 }
+    {
+      \tl_if_blank:eF { \leftmark }
+      {
+        \node[rotate=90, anchor=center] at ([xshift=-0.45cm, yshift=0cm] current~page.east)
+        {
+          \AImarginchapter
+        };
+        % Part number not printed, because I don't know how to do it robustly
+      }
+    }
+  \end{tikzpicture}
+}
 
-\fancypagestyle {plain} {}
+\fancypagestyle{plain}[fancy]{}
 
-\fancypagestyle{empty}{%
+\fancypagestyle{empty}{
   \fancyfoot{}
 }
 
