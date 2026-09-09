@@ -361,25 +361,15 @@ Analogous commands are |\AIsanity|, |\AIaura|, |\AIdamage|, |\AImortality|, and 
 
 \chapter{Images}
 
-\begin{table*}[b]
-  \centering
-  \caption{\hfill\AIFontTableTitle{} Useful options for image page\hfill\null}
-  \small
-  \begin{tabularx}{0.75\textwidth}{lllX}
-    \rowcolor{AIdeepred}\textbf{Option} & \textbf{Expects}  & \textbf{Default} & \textbf{Description} \\
-    |image|              & Filename           & & Image to place \\
-    |imagewidth|     & Width                 & 0.6 {\textbackslash}textwidth  & Width of rendered image \\
-    |clearcolour|      & Colour           & & Use plain colour instead of background image \\
-  \end{tabularx}
-\end{table*}
 
 % This actually places the image behind the text, so will not compete
 % over space with anything else. Hence the vspace etc.
 % Please don't tell anyone, because this goes against every principle LaTeX
 % stands for.
-\smash{\raisebox{-9cm}{\includegraphics[width=\textwidth]{img/jellyfish_faint.png}}}
+\smash{\raisebox{-10.5cm}{\includegraphics[width=\textwidth]{img/jellyfish_faint.png}}}
 
-\vspace{8.5cm}
+\newcommand{\imgtextlevel}{11cm}
+\vspace{\imgtextlevel}
 \section{Inline and Float Images}
 Image placement in typesetting belongs in the $7^{th}$ level of hell.
 The template uses twocolumn mode, which makes it even harder.
@@ -395,7 +385,7 @@ prepare a page-size image to use as a background image with
 image\footnote{https://pixnio.com/nature-landscapes/underwater/jellyfish-aquarium-highlighted-green} independently of the text.
 \newpage % Actually column break
 
-\rule{1cm}{0pt}\vspace{8.5cm}
+\rule{1cm}{0pt}\vspace{\imgtextlevel}
 \section{Image Page}
 There is a macro |\AIMakeElementImagepage{}{}| for making pages displaying
 a single image.
@@ -404,7 +394,14 @@ in table. The two arguments are for 'before-code' and 'after-code',
 which are useful for setting the mode and background for the image
 page and for subsequent page(s).
 |\AIMakeElementImagepage| was used to create the last page of
-this document, and now we will use it to display the seal of Phenex again.
+this document, and now we will use it to display the seal of Phenex
+again.
+\begin{AITable}[header=Useful options for image page]{lX}
+  Option & Description \\
+  |image|              & Image to place \\
+  |imagewidth|     & Width of rendered image \\
+  |clearcolour|      & Background colour, no image
+\end{AITable}
 
 \AIMakeElementImagepage[image=img/37-Phenex_seal.png]{\AIMakeLight}{\AIMakeDark}
 
