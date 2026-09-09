@@ -137,15 +137,25 @@
 
 \NewDocumentCommand {\AIMonsterTroubles} {m m}
 {
+  % Here, we make two minipages that side by side,
+  % but each wider than half a column, separated by
+  % a negative space. Why? Because this can allow some
+  % (end)troubles to be longer than half a line without
+  % linebreaks. The downside is that the texts might overlap.
+  % If that happens, fix manually by reordering the (end)troubles
+  % or inserting manual linebreaks where needed.
+  % Other solutions are possible, but this should work most
+  % of the time and is simple.
   \noindent
   \small
-  \begin{minipage}[t]{0.49\columnwidth}
+  \begin{minipage}[t]{0.7\columnwidth}
     \textbf{\textls[200]{\footnotesize TROUBLES}}\\
     \it
     \seq_use:Nn #1 { \\ } 
   \end{minipage}
+  \hspace{-0.61\columnwidth}
   \hfill
-  \begin{minipage}[t]{0.49\columnwidth}
+  \begin{minipage}[t]{0.7\columnwidth}
     \raggedleft
     \textbf{\textls[200]{\footnotesize END~TROUBLE}}\\
     \it
