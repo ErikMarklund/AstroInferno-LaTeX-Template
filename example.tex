@@ -647,7 +647,42 @@ colors to the current |themecolor|.
 \end{AISidebar}
 \endgroup
 
+\chapter{Borders}
+\AIFancyMarginsColour{AIorange}
+\begin{table*}[b]
+  \caption{\AIFontTableTitle{}Commands for Border Control}\label{tab:border}
+  \begin{tabularx}{\linewidth}{lX}
+    \rowcolor{AImidsteelgray}\textbf{\color{AIwhite}Command} & \textbf{\color{AIwhite}Effect} \\
+    |\AIFancyMargins|     & Turns on borders \\
+    |\AINoFancyMargins| & Turns off borders \\
+    |\AIFancyMarginsColour{colour}| & Renders a border in |colour| \\
+    |\AINoFancyMarginsColour| & Turns of coloured border \\
+    |\AIFancyMarginsImage{img}| & Use image |img| for
+    border\footnote{Not implemented yet. Coloured borders have precedence over image borders.} \\
+    |\AINoFancyMarginsImage| & Turns off image border \\
+    |\AIFancyMarginsTopTransparency{t}| & Sets top tansparency of
+    coloured border to |t| (0-100)
+  \end{tabularx}
+\end{table*}
+\section{Pages with Borders}
+Page borders are rendered on most pages where a current chapter is
+defined. Part splash pages is an example where they are not printed,
+and everything up to and including the TOC will be borderless.
+
+The borders will print the chapter number, a cross, followed by the
+chapter title. Page numbers will always be printed, irrespective of
+whether a border is rendered or not.
+
+\section{Customisation}
+See table below for commands to control border features.
+By default, an |AIdeepred| border with top transparency 70 is used in
+the template. Changing settings mid document can work, but might have
+unexpected results depending on context. Here, we try out an
+|AIorange| border, but prefer the |AIdeepred| one and switch back at
+the start of next chapter.
+
 \chapter{Fonts and Text Features} \label{ch:fonts}
+\AIFancyMarginsColour{AIdeepred}
 \AIPlaceNewBackground*{img/alchemy.jpg}
 \section{Fonts}
 This template uses various fonts that are identical to, or similar to, the most common ones in Astro Inferno.
