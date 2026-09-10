@@ -366,9 +366,9 @@ Analogous commands are |\AIsanity|, |\AIaura|, |\AIdamage|, |\AImortality|, and 
 % over space with anything else. Hence the vspace etc.
 % Please don't tell anyone, because this goes against every principle LaTeX
 % stands for.
-\smash{\raisebox{-10.5cm}{\includegraphics[width=\textwidth]{img/jellyfish_faint.png}}}
+\smash{\raisebox{-10.2cm}{\includegraphics[width=\textwidth]{img/jellyfish_faint.png}}}
 
-\newcommand{\imgtextlevel}{11cm}
+\newcommand{\imgtextlevel}{10.5cm}
 \vspace{\imgtextlevel}
 \section{Inline and Float Images}
 Image placement in typesetting belongs in the $7^{th}$ level of hell.
@@ -386,21 +386,25 @@ image\footnote{https://pixnio.com/nature-landscapes/underwater/jellyfish-aquariu
 \newpage % Actually column break
 
 \rule{1cm}{0pt}\vspace{\imgtextlevel}
-\section{Image Page}
+\section{Image Page} \label{sec:imagepage}
 There is a macro |\AIMakeElementImagepage{}{}| for making pages displaying
 a single image.
 An image must be provided with the |image| option. See other options
 in table. The two arguments are for 'before-code' and 'after-code',
 which are useful for setting the mode and background for the image
 page and for subsequent page(s).
+Page borders (see p.~\pageref{ch:borders}) are suppressed by default
+on image pages, but this can be changed by providing the option |suppressborder=false|.
 |\AIMakeElementImagepage| was used to create the last page of
 this document, and now we will use it to display the seal of Phenex
 again.
+\vfill
 \begin{AITable}[header=Useful options for image page]{lX}
   Option & Description \\
   |image|              & Image to place \\
   |imagewidth|     & Width of rendered image \\
-  |clearcolour|      & Background colour, no image
+  |clearcolour|      & Background colour, no image \\
+  |suppressborder| & Suppresses border on image page
 \end{AITable}
 
 \AIMakeElementImagepage[image=img/37-Phenex_seal.png]{\AIMakeLight}{\AIMakeDark}
@@ -647,7 +651,7 @@ colors to the current |themecolor|.
 \end{AISidebar}
 \endgroup
 
-\chapter{Borders}
+\chapter{Borders} \label{ch:borders}
 \AIFancyMarginsColour{AIorange}
 \begin{table*}[b]
   \caption{\AIFontTableTitle{}Commands for Border Control}\label{tab:border}
@@ -672,6 +676,9 @@ colors to the current |themecolor|.
 Page borders are rendered on most pages where a current chapter is
 defined. Part splash pages is an example where they are not printed,
 and everything up to and including the TOC will be borderless.
+Image pages are borderless by
+default, but this can be controlled with options (see
+p.~\pageref{sec:imagepage}).
 
 The borders will print the chapter number, a cross, followed by the
 chapter title. Page numbers will always be printed, irrespective of

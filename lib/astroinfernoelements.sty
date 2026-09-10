@@ -100,11 +100,22 @@
   imagewidth .initial:n = 0.6\textwidth,
   imagewidth .value_required:n  = true,
   clearcolour .tl_set:N = \l__AI_imagepage_clearcolour_tl,
-  clearcolour .initial:n = {}
+  clearcolour .initial:n = {},
+  suppressborder .choices:nn = { true, false } {},
+  suppressborder / true .code:n  = \bool_set_true:N  \l__AI_imagepage_suppressborder_bool,
+  suppressborder / false .code:n = \bool_set_false:N \l__AI_imagepage_suppressborder_bool,
+  suppressborder / unknown .code:n =
+  \msg_error:nnnnnn { astroinferno / elements / imagepage } { unknown-choice }
+  { suppressborder }
+  { true , false }
+  { #1 }
+  { },
+  suppressborder .default:n = true,
+  suppressborder .initial:n = true,
 }
 
 \bool_new:N \l__AI_imagepage_was_dark_bool
-
+\bool_new:N \l__AI_imagepage_was_border_bool
 % New implementation with before-code and after-code.
 % Use before- and after-codes to set dark/light mode.
 % Clearly more robust than earlier implementation.
@@ -121,6 +132,14 @@
 
   % Run before-code
   { #2 }
+
+  % Should border be suppressed?
+  \bool_if:NT \l__AI_imagepage_suppressborder_bool {
+    % store old value of \g_AI_fancy_margins_bool
+    \bool_set_eq:NN \l__AI_imagepage_was_border_bool \g_AI_fancy_margins_bool
+    % Turn off borders
+    \bool_set_false:N \g_AI_fancy_margins_bool
+  }
 
   % Set bg colour instead of bg image if clearcolour is provided
   \tl_if_empty:NTF \l__AI_imagepage_clearcolour_tl {
@@ -144,4 +163,9 @@
 
   % Run after-code
   { #3 }
+
+  % Restore border suppression?
+  \bool_if:NT \l__AI_imagepage_suppressborder_bool {
+    \bool_set_eq:NN \g_AI_fancy_margins_bool \l__AI_imagepage_was_border_bool
+  }
 }
