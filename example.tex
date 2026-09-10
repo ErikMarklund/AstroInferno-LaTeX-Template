@@ -267,7 +267,6 @@ This ditch has a board spanning it. Someone has rubbed it down with grease.
 The gate is four meters wide and twice as tall. An ominous portcullis looking like a gilloutine blade hangs over any souls passing through.
 
 \chapter{Boxes} \label{ch:text_boxes}
-\AIPlaceNewBackground*{img/paper-darkgreen.jpg}
 
 \section{Text Boxes}
 The module has three environments for setting text apart so that it is drawn to the reader's attention. |AIReadAloud| is used for text that a game master would read aloud.
@@ -360,7 +359,7 @@ Analogous commands are |\AIsanity|, |\AIaura|, |\AIdamage|, |\AImortality|, and 
 \end{AITable}
 
 \chapter{Images}
-
+\AIPlaceNewBackground*{img/paper-darkgreen.jpg}
 
 % This actually places the image behind the text, so will not compete
 % over space with anything else. Hence the vspace etc.
@@ -383,6 +382,9 @@ Sometimes it is better to
 prepare a page-size image to use as a background image with
 |\AIPlaceNewBackground*|.  On this page we do a dirty trick to place an
 image\footnote{https://pixnio.com/nature-landscapes/underwater/jellyfish-aquarium-highlighted-green} independently of the text.
+In addition to the jellyfish image, we have changed to a green version
+of the standard dark-mode background image with
+|\AIPlaceNewBackground*|.
 \newpage % Actually column break
 
 \rule{1cm}{0pt}\vspace{\imgtextlevel}
