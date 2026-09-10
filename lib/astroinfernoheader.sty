@@ -8,7 +8,7 @@
 \bool_new:N \g_AI_fancy_margins_bool
 % Use this colour for border. Trumps image.
 \tl_new:N \g_AI_fancy_margins_border_colour_tl
-% Use image for border (NOT IMPLEMENTED)
+% Use image for border
 \str_new:N \g_AI_fancy_margins_border_image_str
 % Top transparency (0-100) for colour border
 \int_new:N \g_AI_fancy_margins_top_transparency_int
@@ -116,10 +116,13 @@
   \begin{tikzpicture}[remember~picture,overlay]
     % Vertical bit in the outer margin. Made to mimic Core Rulebook
     \bool_if:nT {\l_AI_render_border_bool} {
-      \tl_if_empty:NTF { \g_AI_fancy_margins_colour_tl }
-      { } % Implement image here
-      {
-        % Make rectangle
+      \tl_if_empty:NTF \g_AI_fancy_margins_colour_tl {
+        \str_if_empty:NF \g_AI_fancy_margins_border_image_str {
+          \node[anchor=south~west, inner~sep=0pt] at (current~page.south~west) {
+            \scalebox{-1}[1]{ \includegraphics[height=\paperheight]{\g_AI_fancy_margins_border_image_str} }
+          };
+        }
+      } { % Make rectangle
         \fp_compare:nNnTF {\g_AI_fancy_margins_top_transparency_int} > {0}
         { % Do with fading
           \fill[color=\g_AI_fancy_margins_colour_tl, path~fading=borderfade]
@@ -148,10 +151,13 @@
   \begin{tikzpicture}[remember~picture,overlay]
     % Vertical bit in the outer margin.  Made to mimic Core Rulebook
     \bool_if:nT {\l_AI_render_border_bool} {
-      \tl_if_empty:NTF { \g_AI_fancy_margins_colour_tl }
-      { } % Implement image here
-      {
-        % Make rectangle
+      \tl_if_empty:NTF { \g_AI_fancy_margins_colour_tl } {
+        \str_if_empty:NF \g_AI_fancy_margins_border_image_str {
+          \node[anchor=south~east, inner~sep=0pt] at (current~page.south~east) {
+            \includegraphics[height=\paperheight]{\g_AI_fancy_margins_border_image_str}
+          };
+        }
+      } { % Make rectangle
         \fp_compare:nNnTF {\g_AI_fancy_margins_top_transparency_int} > {0}
         { % Do with fading
           \fill[color=\g_AI_fancy_margins_colour_tl, path~fading=borderfade]

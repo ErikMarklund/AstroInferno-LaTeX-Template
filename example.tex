@@ -652,17 +652,20 @@ colors to the current |themecolor|.
 \endgroup
 
 \chapter{Borders} \label{ch:borders}
-\AIFancyMarginsColour{AIorange}
+% Turn of coloured border, use image instead.
+\AINoFancyMarginsColour
+\AIFancyMarginsImage{img/brown_border.png}
+
 \begin{table*}[b]
   \caption{\AIFontTableTitle{}Commands for Border Control}\label{tab:border}
   \begin{tabularx}{\linewidth}{lX}
-    \rowcolor{AImidsteelgray}\textbf{\color{AIwhite}Command} & \textbf{\color{AIwhite}Effect} \\
+    \rowcolor{AIdeepred}\textbf{Command} & \textbf{Effect} \\
     |\AIFancyMargins|     & Turns on borders \\
     |\AINoFancyMargins| & Turns off borders \\
     |\AIFancyMarginsColour{colour}| & Renders a border in |colour| \\
     |\AINoFancyMarginsColour| & Turns of coloured border \\
     |\AIFancyMarginsImage{img}| & Use image |img| for
-    border\footnote{Not implemented yet. Coloured borders have precedence over image borders.} \\
+    border\footnote{Coloured borders have precedence over image borders.} \\
     |\AINoFancyMarginsImage| & Turns off image border \\
     |\AIFancyMarginsTopTransparency{t}| & Sets top tansparency of
     coloured border to |t| (0-100) \\
@@ -676,18 +679,21 @@ colors to the current |themecolor|.
 Page borders are rendered on most pages where a current chapter is
 defined. Part splash pages is an example where they are not printed,
 and everything up to and including the TOC will be borderless.
+Another example is when starting a new part, but not a new chapter,
+which will signal that no border should be rendered.
 Image pages are borderless by
 default, but this can be controlled with options (see
 p.~\pageref{sec:imagepage}).
 
-The borders will print the chapter number, a cross, followed by the
+The borders will have the chapter number, a cross, followed by the
 chapter title. Page numbers will always be printed, irrespective of
 whether a border is rendered or not.
 
 The mode colour might have poor contrast with the borders, so a specific
 colour can be used for both page numbers and border text for all pages
 with rendered border. If unset, the mode colour will be used. See
-table below.
+table below. The Astro Inferno Core Rulebook always uses white border
+text and page numbers for all pages with borders.
 
 \section{Customisation}
 See table below for commands to control border features.
@@ -695,13 +701,13 @@ By default, an |AIdeepred| border with top transparency 100, and white
 text, is used in the template. This resembles the style in the first
 2/3rd of the Astro Inferno Core Rulebook.
 Changing settings mid document can work, but might have
-unexpected results depending on context. Here, we try out an
-|AIorange| border, but prefer the |AIdeepred| one and switch back at
+unexpected results depending on context. Here, we swap out the
+|AIdeepred| border for an image, then switch back at
 the start of next chapter.
 
 \chapter{Fonts and Text Features} \label{ch:fonts}
 \AIFancyMarginsColour{AIdeepred}
-\AIPlaceNewBackground*{img/alchemy.jpg}
+%\AIPlaceNewBackground*{img/alchemy.jpg}
 \section{Fonts}
 This template uses various fonts that are identical to, or similar to, the most common ones in Astro Inferno.
 Some fonts are excluded due to licencing issues, whereas others are omitted because they are only used sparingly.
