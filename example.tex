@@ -661,7 +661,11 @@ colors to the current |themecolor|.
     border\footnote{Not implemented yet. Coloured borders have precedence over image borders.} \\
     |\AINoFancyMarginsImage| & Turns off image border \\
     |\AIFancyMarginsTopTransparency{t}| & Sets top tansparency of
-    coloured border to |t| (0-100)
+    coloured border to |t| (0-100) \\
+    |\AIFancyMarginsTextColour{colour}| & Colour for text and page
+    numbers on border \\
+    |\AINoFancyMarginsTextColour| & Use mode colour for border text
+    and page numbers
   \end{tabularx}
 \end{table*}
 \section{Pages with Borders}
@@ -673,10 +677,17 @@ The borders will print the chapter number, a cross, followed by the
 chapter title. Page numbers will always be printed, irrespective of
 whether a border is rendered or not.
 
+The mode colour might have poor contrast with the borders, so a specific
+colour can be used for both page numbers and border text for all pages
+with rendered border. If unset, the mode colour will be used. See
+table below.
+
 \section{Customisation}
 See table below for commands to control border features.
-By default, an |AIdeepred| border with top transparency 70 is used in
-the template. Changing settings mid document can work, but might have
+By default, an |AIdeepred| border with top transparency 100, and white
+text, is used in the template. This resembles the style in the first
+2/3rd of the Astro Inferno Core Rulebook.
+Changing settings mid document can work, but might have
 unexpected results depending on context. Here, we try out an
 |AIorange| border, but prefer the |AIdeepred| one and switch back at
 the start of next chapter.
