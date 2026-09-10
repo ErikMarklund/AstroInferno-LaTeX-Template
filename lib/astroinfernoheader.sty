@@ -126,10 +126,10 @@
         \fp_compare:nNnTF {\g_AI_fancy_margins_top_transparency_int} > {0}
         { % Do with fading
           \fill[color=\g_AI_fancy_margins_colour_tl, path~fading=borderfade]
-          (current~page.south~west) rectangle ([xshift=1cm] current~page.north~west);
+          (current~page.south~west) rectangle ([xshift=1cm, yshift=0.2mm] current~page.north~west);
         } { % Do without fading
           \fill[color=\g_AI_fancy_margins_colour_tl]
-          (current~page.south~west) rectangle ([xshift=1cm] current~page.north~west);
+          (current~page.south~west) rectangle ([xshift=1cm, yshift=0.2mm] current~page.north~west);
         }
       }
       \node[rotate=-90, anchor=mid] at ([xshift=0.45cm, yshift=0cm] current~page.west)
@@ -161,10 +161,10 @@
         \fp_compare:nNnTF {\g_AI_fancy_margins_top_transparency_int} > {0}
         { % Do with fading
           \fill[color=\g_AI_fancy_margins_colour_tl, path~fading=borderfade]
-          (current~page.south~east) rectangle ([xshift=-1cm] current~page.north~east);
+          (current~page.south~east) rectangle ([xshift=-1cm, yshift=0.2mm] current~page.north~east);
         } { % Do without fading
           \fill[color=\g_AI_fancy_margins_colour_tl]
-          (current~page.south~east) rectangle ([xshift=1cm] current~page.north~east);
+          (current~page.south~east) rectangle ([xshift=1cm, yshift=0.2mm] current~page.north~east);
         }
       }
       \node[rotate=90, anchor=center] at ([xshift=-0.45cm, yshift=0cm] current~page.east)
