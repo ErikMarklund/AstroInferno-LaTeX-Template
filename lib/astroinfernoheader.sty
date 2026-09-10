@@ -1,5 +1,35 @@
 \ExplSyntaxOn
 
+\usetikzlibrary{fadings}
+
+% Control variables and functions to control fancy margin
+%
+% Do fancy margins
+\bool_new:N \g_AI_fancy_margins_bool
+% Use this colour for border. Trumps image.
+\tl_new:N \g_AI_fancy_margins_border_colour_tl
+% Use image for border (NOT IMPLEMENTED)
+\str_new:N \g_AI_fancy_margins_border_image_str
+% Top transparency (0-100) for colour border
+\int_new:N \g_AI_fancy_margins_top_transparency_int
+
+% Macros for setting control variables.
+\NewDocumentCommand\AIFancyMargins{} { \bool_gset_true:N \g_AI_fancy_margins_bool }
+\NewDocumentCommand\AINoFancyMargins{} { \bool_gset_false:N \g_AI_fancy_margins_bool }
+
+\NewDocumentCommand\AIFancyMarginsColour{m} {\tl_gset:Nn \g_AI_fancy_margins_colour_tl {#1}}
+\NewDocumentCommand\AINoFancyMarginsColour{} {\tl_gclear:N \g_AI_fancy_margins_colour_tl }
+
+\NewDocumentCommand\AIFancyMarginsImage{m} {\str_gset:Nn \g_AI_fancy_margins_border_image_str {#1}}
+\NewDocumentCommand\AINoFancyMarginsImage{} { \str_gclear:N \g_AI_fancy_margins_border_image_str }
+
+\NewDocumentCommand\AIFancyMarginsTopTransparency{m} {\int_gset:Nn \g_AI_fancy_margins_top_transparency_int {#1}}
+
+% Default is print margin on AIdeepred border fading to 0.3
+\AIFancyMargins
+\AIFancyMarginsColour{AIdeepred}
+\AINoFancyMarginsImage
+\AIFancyMarginsTopTransparency{70}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Custom headers and footers
@@ -21,9 +51,8 @@
 \fancyhf {} % clear all headers and footers
 
 
-\NewDocumentCommand\AImarginchapter{}
+\NewDocumentCommand\__AImarginchapter{}
 {
-  %\normalfont
   % Chapter numbers 13.5pt. Chapter name 15 pt.
   {\raisebox{-0.3mm}{\AImechanicalFont \fontsize{13.5}{15} \bfseries \AIleadzero{\thechapter}}}
   \enskip\tikz[baseline=0.62ex]{
@@ -33,43 +62,73 @@
   { \AIfontAvalenRekas \fontsize{15}{17} \selectfont \leftmark}
 }
 
+\NewDocumentCommand\__AImakefading{}
+{
+  % Define a gradient using current parameters. Must happen outside the tikzpicture
+  \tikzfading[
+  name=borderfade,
+  bottom~color=transparent!0,
+  top~color=transparent!70
+  ]
+}
+
 % Left-even page footer
 \fancyfoot[LE]{%
   \normalfont % No idea why needed, but dark/light colour is ignored otherwise.
+  \__AImakefading
   \begin{tikzpicture}[remember~picture,overlay]
-    \node[inner~sep=0pt,anchor=south~west,xshift=.13in,yshift=.13in] at (current~page.south~west) {\AIFontPageNumber \thepage};
     % Vertical bit in the outer margin. Made to mimic Core Rulebook
-    \int_compare:nT { \value{chapter} > 0 }
-    {
-      \tl_if_blank:eF { \leftmark }
-      {
-        \node[rotate=-90, anchor=mid] at ([xshift=0.45cm, yshift=0cm] current~page.west)
-        {
-          \AImarginchapter
-        };
-        % Part number not printed, because I don't know how to do it robustly
+    \bool_if:nT {\g_AI_fancy_margins_bool} { % Do fancy margins at all?
+      \int_compare:nT { \value{chapter} > 0 } {
+        \tl_if_blank:eF { \leftmark } { % \leftmark will be blank on e.g. part splash pages.
+          \tl_if_empty:NTF { \g_AI_fancy_margins_colour_tl } {
+          } {
+            % Make rectangle
+            \fp_compare:nNnTF {\g_AI_fancy_margins_top_transparency_int} > {0}
+            { % Do with fading
+              \fill[color=\g_AI_fancy_margins_colour_tl, path~fading=borderfade] (current~page.south~west) rectangle ([xshift=1cm] current~page.north~west);
+            } { % Do without fading
+              \fill[color=\g_AI_fancy_margins_colour_tl] (current~page.south~west) rectangle ([xshift=1cm] current~page.north~west);
+            }
+          }
+          \node[rotate=-90, anchor=mid] at ([xshift=0.45cm, yshift=0cm] current~page.west)
+          { \__AImarginchapter };
+          % Part number not printed, because I don't know how to do it robustly
+        }
       }
     }
+    % Page number last so it appears over border
+    \node[inner~sep=0pt,anchor=south~west,xshift=.13in,yshift=.13in] at (current~page.south~west) {\AIFontPageNumber \thepage};
   \end{tikzpicture}
 }
 
 % Right-odd page footer
 \fancyfoot[RO]{%
   \normalfont % No idea why needed, but dark/light colour is ignored otherwise.
+  \__AImakefading
   \begin{tikzpicture}[remember~picture,overlay]
-    \node[inner~sep=0pt,anchor=south~east,xshift=-.13in,yshift=.13in] at (current~page.south~east) {\AIFontPageNumber \thepage};
     % Vertical bit in the outer margin.  Made to mimic Core Rulebook
-    \int_compare:nT { \value{chapter} > 0 }
-    {
-      \tl_if_blank:eF { \leftmark }
-      {
-        \node[rotate=90, anchor=center] at ([xshift=-0.45cm, yshift=0cm] current~page.east)
-        {
-          \AImarginchapter
-        };
-        % Part number not printed, because I don't know how to do it robustly
+    \bool_if:nT {\g_AI_fancy_margins_bool} { % Do fancy margins at all?
+      \int_compare:nT { \value{chapter} > 0 } {
+        \tl_if_blank:eF { \leftmark } { % \leftmark will be blank on e.g. part splash pages.
+          \tl_if_empty:NTF { \g_AI_fancy_margins_colour_tl } {
+          } {
+            % Make rectangle
+            \fp_compare:nNnTF {\g_AI_fancy_margins_top_transparency_int} > {0}
+            { % Do with fading
+              \fill[color=\g_AI_fancy_margins_colour_tl, path~fading=borderfade] (current~page.south~east) rectangle ([xshift=-1cm] current~page.north~east);
+            } { % Do without fading
+              \fill[color=\g_AI_fancy_margins_colour_tl] (current~page.south~east) rectangle ([xshift=1cm] current~page.north~east);
+            }
+          }
+          \node[rotate=90, anchor=center] at ([xshift=-0.45cm, yshift=0cm] current~page.east)
+          { \__AImarginchapter };
+          % Part number not printed, because I don't know how to do it robustly
+        }
       }
     }
+    % Page number last so it appears over border
+    \node[inner~sep=0pt,anchor=south~east,xshift=-.13in,yshift=.13in] at (current~page.south~east) {\AIFontPageNumber \thepage};
   \end{tikzpicture}
 }
 

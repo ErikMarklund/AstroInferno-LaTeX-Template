@@ -24,6 +24,7 @@ This changelog is now flushed to only incorporate changes for the Astro Inferno 
 - Improved TOC
 - Commands for ready-made layout for titlepage and TOC page.
 - Command for ready-made page with single image.
+- Page borders
 
 ## [Before flushing changelog]
 
