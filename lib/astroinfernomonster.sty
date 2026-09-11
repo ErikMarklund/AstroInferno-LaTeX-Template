@@ -117,9 +117,9 @@
       \hfill \l_monster_name_tl \hfill\null
     }\\[2mm]
   }
-  \hfill\MakeUppercase{\textbf {\scriptsize{\l_monster_type_tl}}}\hfill\null\\[1.5em]
-  \hfill\textls[300]{\MakeUppercase{\textbf{\large{\l_monster_class_tl}}}}\hfill\null\\[0.3em]
-  \hfill\textls[60]{\MakeUppercase{\textbf {\large{\l_monster_being_tl}}}}\hfill\null\\
+  \hfill\MakeUppercase{\textbf {\scriptsize{\l_monster_type_tl}}}\hfill\null\\[1.4em]
+  \hfill\textls[350]{\MakeUppercase{{\fontsize{10}{12}\latoblack{\l_monster_class_tl}}}}\hfill\null\\[0.3em]
+  \hfill\textls[180]{\MakeUppercase{{\fontsize{10}{12}\latoblack{\l_monster_being_tl}}}}\hfill\null\\[0.2mm]
   % Damage, mortality, bones
   \hfill
   \AIdamage{\l_monster_damage_tl}\hspace{2em}
@@ -149,7 +149,7 @@
   \noindent
   \small
   \begin{minipage}[t]{0.7\columnwidth}
-    \textbf{\textls[200]{\footnotesize TROUBLES}}\\
+    {\latoblack \textls[200]{\scriptsize TROUBLES}}\\
     \it
     \seq_use:Nn #1 { \\ } 
   \end{minipage}
@@ -157,7 +157,7 @@
   \hfill
   \begin{minipage}[t]{0.7\columnwidth}
     \raggedleft
-    \textbf{\textls[200]{\footnotesize END~TROUBLE}}\\
+    {\latoblack \textls[200]{\scriptsize END~TROUBLE}}\\
     \it
     \seq_use:Nn #2 { \\ }
   \end{minipage}\\
