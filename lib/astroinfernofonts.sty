@@ -370,6 +370,16 @@
     weapon-section-style .initial:n        = \scshape \large,
     weapon-section-style .value_required:n = true,
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    % Masters
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    % Master title
+    master-title-family .tl_set:N         = \l__AI_master_title_family_tl,
+    master-title-family .initial:n        = \AIfontAvalenRekas,
+    master-title-family .value_required:n = true,
+    master-title-style .tl_set:N         = \l__AI_master_title_style_tl,
+    master-title-style .initial:n        = \fontsize{20}{23} \color{AIcurrentcolour} \selectfont,
+    master-title-style .value_required:n = true,
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     % Miscellaneous
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     % Page number
@@ -475,7 +485,10 @@
 \NewDocumentCommand{\AIFontWeaponSection}{}
   { \l__AI_weapon_section_family_tl \l__AI_weapon_section_style_tl }
 
-  
+% Weapons
+\NewDocumentCommand{\AIFontMasterTitle}{}
+  { \l__AI_master_title_family_tl \l__AI_master_title_style_tl }
+
 % Miscellaneous
 \NewDocumentCommand{\AIFontPageNumber}{}
   { \l__AI_page_number_family_tl \l__AI_page_number_style_tl }

@@ -26,6 +26,7 @@ This changelog is now flushed to only incorporate changes for the Astro Inferno 
 - Command for ready-made page with single image.
 - Page borders
 - Support for transparent boxes
+- Master environment
 
 ## [Before flushing changelog]
 

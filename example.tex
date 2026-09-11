@@ -424,10 +424,11 @@ again.
 
 \AIMakeElementImagepage[image=img/37-Phenex_seal.png]{\AIMakeLight}{\AIMakeDark}
 
-\chapter{Adversaries}
+\chapter{Foes and Masters}
 % Restore margin
 \AIFancyMarginsColour{AIdeepred}
 \AIFancyMarginsTextColour{AIwhite}
+\section{Adversaries}
 % Monster stat block
 %
 % If several AIMonster occupies a page, it could be nice to make them
@@ -496,7 +497,7 @@ again.
   lootqty = -4,
   lootblood = Normal blood
  ]
-  
+
 \end{AIMonster}
 \newpage % Actually new column
 \noindent
@@ -505,6 +506,37 @@ One can pass |\tcolorbox| options to |\AIMonster|. For example, we can
 change the title font for our Void cult demagogue to 'Minster'.
 %
 %It might be best to \emph{not} make |\AIMonster| a float. That is, do not pass |float=htb| as an option. Floats can be great in \LaTeX, but they make it difficult to position the adversary blocks correctly.
+
+\vfill
+\hfill
+\includegraphics[width=\columnwidth]{img/hel.jpg}
+\hfill\null
+\vfill
+\section{Masters}
+There is a command for typesetting masters, |\AIMaster|, which takes
+all needed information as options and packages it like this:\\[0.8cm]
+
+\AIMaster[
+type = Jötunn,
+description = {Bringer of sorrows},
+subtype = True Unlight,
+lair = Ironwood,
+lairtype = Dwelling,
+poetic = {
+  With her Loki had three children - One was Fenrir,  the
+  second Jormungand , the third is Hel
+},
+domains = {Sorrow, bereavement, loss},
+symbols = {Wolf, serpent, ice, black, earth},
+blessings = {
+  Arcane Arts +1,
+  Movement +2,
+  Infernal Survival +3,
+  \AITier{5} Artifact,
+  [Dark] + [Anatomy]
+}
+]{Angerboda}
+
 
 \AIMakeLight
 

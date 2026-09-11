@@ -1,0 +1,61 @@
+\ExplSyntaxOn
+
+\keys_define:nn { astroinferno / master / masterdata }
+{
+  type .tl_set:N = \l_master_type_tl,
+  type .initial:n = -~unknown~-,
+  type .value_required:n = true,
+  description .tl_set:N = \l_master_description_tl,
+  description .initial:n = -~unknown~-,
+  description .value_required:n = true,
+  subtype .tl_set:N = \l_master_subtype_tl,
+  subtype .initial:n = -~unknown~-,
+  subtype .value_required:n = true,
+  lair .tl_set:N = \l_master_lair_tl,
+  lair .initial:n = -~unknown~-,
+  lair .value_required:n = true,
+  lairtype .tl_set:N = \l_master_lairtype_tl,
+  lairtype .initial:n = Lair,
+  lairtype .value_required:n = true,
+  poetic .tl_set:N = \l_master_poetic_tl,
+  poetic .initial:n = -~unknown~-,
+  poetic .value_required:n = true,
+  domains .tl_set:N = \l_master_domains_tl,
+  domains .initial:n = -~unknown~-,
+  domains .value_required:n = true,
+  symbols .tl_set:N = \l_master_symbols_tl,
+  symbols .initial:n = -~unknown~-,
+  symbols .value_required:n = true,
+  blessings .clist_set:N = \l_master_blessings_clist,
+  blessings .initial:n = {-,-,-,-,-},
+  blessings .value_required:n = true,
+}
+
+\NewDocumentCommand\AIMaster { O{} m }
+{
+  \keys_set:nn { astroinferno / master / masterdata } {#1}
+  
+  % Print title
+  \begin{minipage}[t]{\columnwidth}
+    {\AIFontMasterTitle #2~\raisebox{1.2mm}{\sffamily \fontsize{6}{7} \bfseries \MakeUppercase \l_master_description_tl}\\[2mm]}
+    {\bfseries Type}~\l_master_type_tl \\
+    {\bfseries Subtype}~\l_master_subtype_tl \\
+    {\bfseries \l_master_lairtype_tl}~\l_master_lair_tl \\[\baselineskip]
+    {\AIquoteFont \selectfont \textit{\l_master_poetic_tl}} \\[\baselineskip]
+    {\bfseries Domains}~\l_master_domains_tl \\[\baselineskip]
+    {\bfseries Symbols}~\l_master_symbols_tl \\[\baselineskip]
+    {\bfseries Blessings}\\
+    \begin{minipage}[t]{0.25\columnwidth} {
+        \bfseries
+        \AITier{1}\\
+        \AITier{2}\\
+        \AITier{3}\\
+        \AITier{4}\\
+        \AITier{5}
+      }
+    \end{minipage} \hfill
+    \begin{minipage}[t] {0.74\columnwidth}
+      \clist_map_inline:Nn \l_master_blessings_clist {##1\\}
+    \end{minipage}\\
+  \end{minipage}
+}
