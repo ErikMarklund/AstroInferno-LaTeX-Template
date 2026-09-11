@@ -282,6 +282,16 @@ The other two environments are the |AIComment| and the |AISidebar|. The |AIComme
   A |AIComment| is a box for minimal highlighting of text. It lacks the ornamentation of |AISidebar|, but it can handle being broken over a column.
 \end{AIComment}
 
+All three environments can be made semitransparent by passing the
+option |opacityfill=O|, where |O| $\in$ [0, 1].\footnote{As the three
+  environments are |tcolorbox|es under the hood, they will accept any |tcolorbox|
+  options, such as shadows, borders, etc.}
+
+\begin{AIComment}[opacityfill=0.5]{You can see right through me!}
+  This box was made with |opacityfill=0.5|. The text remains opaque as
+  you can see.
+\end{AIComment}
+
 The |AISidebar| is not breakable and is best used floated toward a page corner as it is below.
 
 \begin{AISidebar}[float=!b]{Behold the AISidebar!}
