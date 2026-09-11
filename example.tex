@@ -359,8 +359,11 @@ Analogous commands are |\AIsanity|, |\AIaura|, |\AIdamage|, |\AImortality|, and 
 \end{AITable}
 
 \chapter{Images}
+% Inject new background
 \AIPlaceNewBackground*{img/paper-darkgreen.jpg}
-
+% Play with margin colours
+\AIFancyMarginsColour{AImidgraybrown}
+\AIFancyMarginsTextColour{AIyellow}
 % This actually places the image behind the text, so will not compete
 % over space with anything else. Hence the vspace etc.
 % Please don't tell anyone, because this goes against every principle LaTeX
@@ -412,6 +415,9 @@ again.
 \AIMakeElementImagepage[image=img/37-Phenex_seal.png]{\AIMakeLight}{\AIMakeDark}
 
 \chapter{Adversaries}
+% Restore margin
+\AIFancyMarginsColour{AIdeepred}
+\AIFancyMarginsTextColour{AIwhite}
 % Monster stat block
 %
 % If several AIMonster occupies a page, it could be nice to make them
