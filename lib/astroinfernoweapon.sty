@@ -113,6 +113,8 @@
   \textbf{#1}:~#2 \\
 }
 
+\dim_new:N \l_lmargin_dim % page-spanning variant should have a space before title
+\dim_new:N \l_rmargin_dim % page-spanning variant should have a space at hte end
 \dim_new:N \l_titlebox_dim
 \dim_new:N \l_backstep_dim
 \dim_new:N \l_statbox_dim
@@ -140,23 +142,29 @@
   \keys_set:nn { astroinferno / weapon / weapondata } {#2}
   
   % Some things are constant.
-  \settowidth{\l_statbox_dim}{\sffamily \textbf{STATS}}
-  \settowidth{\l_datatextbox_dim}{Augment}
-  \dim_set:Nn \l_databox_dim {1.7cm}
+  \settowidth{\l_statbox_dim}{\latoblack STATS}
+  % \settowidth{\l_datatextbox_dim}{Augment}
+  \dim_set:Nn \l_datatextbox_dim {1.55cm}
+  \dim_set:Nn \l_databox_dim {1.8cm}
   \dim_set:Nn \l_datagap_dim {0.2cm}
   \dim_set:Nn \l_datafeaturegap_dim {0.4cm}
   \dim_set:Nn \l_minitextgap_dim {0.05cm}
   \dim_set:Nn \l_featureboxpad_dim {0.1cm}
   
   \bool_if:NTF {#1} {
-    \dim_set:Nn \l_titlebox_dim {0.55\linewidth}
+    \dim_set:Nn \l_lmargin_dim {0.65cm}
+    \dim_set:Nn \l_rmargin_dim {0.67cm}
+    \dim_set:Nn \l_titlebox_dim {0.508\linewidth}
     \dim_set:Nn \l_backstep_dim {-0.1\linewidth}
   } {
+    \dim_set:Nn \l_lmargin_dim {0pt}
+    \dim_set:Nn \l_rmargin_dim {0pt}
     \dim_set:Nn \l_titlebox_dim {0pt}
     \dim_set:Nn \l_backstep_dim {0pt}
   }
 
   \dim_set:Nn \l_featurebox_dim {\linewidth
+    - \l_lmargin_dim
     - \l_titlebox_dim
     - \l_backstep_dim
     - \l_statbox_dim
@@ -165,6 +173,7 @@
     - \l_databox_dim
     - \l_datafeaturegap_dim
     - \l_featureboxpad_dim
+    - \l_rmargin_dim
     - 4\l_minitextgap_dim
     - 4\fboxsep
     - 6pt}  % Not sure why I need to subtract 6pt for them to fit.
@@ -173,25 +182,25 @@
   \dim_set:Nn \l_featureboxframe_dim {\l_featurebox_dim + 2\l_minitextgap_dim}
 
   \bool_if:NTF {#1} {
+    \hspace{\l_lmargin_dim}
     \begin{minipage}[t]{\l_titlebox_dim}
       {\l_weapon_titlestyle_tl \l_weapon_fonttitle_tl \vspace{-0.25ex}}
       % \vspace to force top-edge alignment, and to raise the title
       % text slightly, because there is some emptiness above the letters.
       {\l_weapon_titlestyle_tl \l_weapon_fonttitle_tl \l_weapon_title_str\\[0.3cm]}
-      {\bfseries \sffamily \footnotesize \MakeUppercase
-        {
-          \textls[300]{\AITier{\l_weapon_tier_int}}\\
-          \textls[300]{\l_weapon_description_tl}
+      {\fontsize{10}{12} \latoblack \MakeUppercase {
+          {\textls[180]{\AITier{\l_weapon_tier_int}}}\\[0.5mm]
+          {\textls[180]{\l_weapon_description_tl}}
         }
       }
+
     \end{minipage} \hspace{\l_backstep_dim}
   } {
     \begin{center}
       {\l_weapon_titlestyle_tl \l_weapon_fonttitle_tl \l_weapon_title_str}\\[0.2cm]
-      {\bfseries \sffamily \footnotesize \MakeUppercase
-        {
-          \textls[300]{\AITier{\l_weapon_tier_int}}\\
-          \textls[300]{{\l_weapon_description_tl}}\\
+      {\fontsize{10}{12} \latoblack \MakeUppercase {
+          \textls[180]{\AITier{\l_weapon_tier_int}}\\[0.5mm]
+          \textls[180]{{\l_weapon_description_tl}}\\
         }
       }
     \end{center}
@@ -231,7 +240,7 @@
       
       % Print item 1 and item 2 cleanly
       \seq_item:Nn \l__ai_tmp_pair_seq { 1 } \\
-      \textit{\seq_item:Nn \l__ai_tmp_pair_seq { 2 }}
+      \textit{\small \seq_item:Nn \l__ai_tmp_pair_seq { 2 }}
     }
   }
 
@@ -275,7 +284,7 @@
   \begin{minipage}[t]{\l_statbox_dim}
     \vspace{0pt} % Force top-edge alignment
     {\vspace{-0.22cm}\par
-      \sffamily \textbf{STATS}}
+      \latoblack STATS}
   \end{minipage}
   \begin{minipage}[t]{\l_datatextbox_dim}
     \vspace{0pt} % Force top-edge alignment
@@ -283,14 +292,14 @@
   \end{minipage}
   \hspace{\l_datagap_dim}
 
-  \__AIWeaponbox[colback=l_weaponboxcolour]{
+  \__AIWeaponbox[colback=l_weaponboxcolour, left=\fboxsep, right=\fboxsep]{
     \begin{minipage}[t][\l_max_height_dim][t]{\l_databox_dim}
       \vspace{0pt} % Force top-edge alignment
       {\color{l_weapontextcolour}\tl_use:N \l_data_values_tl}
     \end{minipage}
   }
   \hspace{\l_datafeaturegap_dim}
-  \__AIWeaponbox[colback=l_weaponboxcolour]{
+  \__AIWeaponbox[colback=l_weaponboxcolour, left=\fboxsep, right=\fboxsep]{
     \hspace{\l_featureboxpad_dim}
     \begin{minipage}[t][\l_max_height_dim][t]{\l_featurebox_dim}
       \vspace{0pt} % Force top-edge alignment

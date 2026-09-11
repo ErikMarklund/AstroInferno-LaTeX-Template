@@ -27,6 +27,10 @@
     \setsansfont{Lato}
     \renewcommand{\familydefault}{\rmdefault}
 
+    % For LuaLaTeX, \fontseries{eb} etc. falls back to \bfseries.
+    % Need to define separately
+    \newfontfamily\latoblack{Lato Black}
+
     % ======== Font checks ========
     % This template uses fallbacks for several key fonts in the
     % folowing manner:
