@@ -24,6 +24,26 @@
   #1
 }
 
+\DeclareTotalTCBox {\__AIWeaponbox} { O{} m }
+{
+  hbox,
+  nobeforeafter,
+  box~align=base,
+  enhanced,
+  opacityfill  = 0.25,
+  frame~hidden,
+  boxrule  = 0pt,
+  unbreakable,
+  parbox  = false,
+  boxsep  = 0pt,
+  toptitle  = 3mm,
+  left  = 2mm,
+  right  = 2pt,
+  sharp~corners,
+  coltitle = .,
+  #1
+}{#2}
+
 % We need a variable to store the title passed to the wrapper environment AIWeapon,
 % Then read the variable in AIWeaponData.
 \str_new:N  \l_weapon_title_str
@@ -100,9 +120,11 @@
 \dim_new:N \l_datagap_dim
 \dim_new:N \l_databox_dim
 \dim_new:N \l_datafeaturegap_dim
+\dim_new:N \l_databoxframe_dim
 \dim_new:N \l_featurebox_dim
 \dim_new:N \l_minitextgap_dim % Tiny spacing between colorbox edge and text
 \dim_new:N \l_featureboxpad_dim
+\dim_new:N \l_featureboxframe_dim
 \tl_new:N  \l_data_text_tl
 \tl_new:N  \l_data_values_tl
 \tl_new:N  \l_features_tl
@@ -146,6 +168,9 @@
     - 4\l_minitextgap_dim
     - 4\fboxsep
     - 6pt}  % Not sure why I need to subtract 6pt for them to fit.
+
+  \dim_set:Nn \l_databoxframe_dim {\l_databox_dim + 2\l_minitextgap_dim}
+  \dim_set:Nn \l_featureboxframe_dim {\l_featurebox_dim + 2\l_minitextgap_dim}
 
   \bool_if:NTF {#1} {
     \begin{minipage}[t]{\l_titlebox_dim}
@@ -258,19 +283,20 @@
   \end{minipage}
   \hspace{\l_datagap_dim}
 
-  \colorbox{l_weaponboxcolour}{
+  \__AIWeaponbox[colback=l_weaponboxcolour]{
     \begin{minipage}[t][\l_max_height_dim][t]{\l_databox_dim}
       \vspace{0pt} % Force top-edge alignment
       {\color{l_weapontextcolour}\tl_use:N \l_data_values_tl}
     \end{minipage}
-  }%
+  }
   \hspace{\l_datafeaturegap_dim}
-  \colorbox{l_weaponboxcolour}{
+  \__AIWeaponbox[colback=l_weaponboxcolour]{
     \hspace{\l_featureboxpad_dim}
     \begin{minipage}[t][\l_max_height_dim][t]{\l_featurebox_dim}
       \vspace{0pt} % Force top-edge alignment
       {\color{l_weapontextcolour}\tl_use:N \l_features_tl}
     \end{minipage}
-  }%
+  }
+
   \group_end:
 }
