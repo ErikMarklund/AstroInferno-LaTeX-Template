@@ -324,7 +324,10 @@ Odd and/or even rows can have transparent background.
 % Note that whatever is put after will print with the chapter titlefont, so make sure
 % add things like \normalsize in your argument.
 % See lib/astroinfernosections.sty for implementation.
-\AINextChapterBefore{\vspace{3cm}\\}
+\AINextChapterBefore{
+  \smash{\raisebox{-3.5cm}{\includegraphics[width=0.6\paperwidth]{img/astro-inferno-cuneiform.png}}}
+  \vspace{3cm}\\
+}
 \AINextChapterAfter{\normalsize\AIquoteFont\textit{And thou shalt take this rod in thine hand, wherewith thou shalt do signs.\\- Exodus 4:7}\\[1cm]}
 
 \chapter{Symbols}
