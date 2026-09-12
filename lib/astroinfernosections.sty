@@ -1,5 +1,18 @@
 \ExplSyntaxOn
 
+
+\tl_new:N \g_AI_chapter_before_tl
+\tl_new:N \g_AI_chapter_after_tl
+\tl_gclear:N \g_AI_chapter_before_tl
+\tl_gclear:N \g_AI_chapter_after_tl
+
+\NewDocumentCommand\AINextChapterBefore{ m }
+{ \tl_gset:Nn \g_AI_chapter_before_tl {#1} }
+
+\NewDocumentCommand\AINextChapterAfter{ m }
+{ \tl_gset:Nn \g_AI_chapter_after_tl {#1} }
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Needed for hack to disable chapter number appearing in TOC title
 \bool_new:N \g_AI_isToc_bool
@@ -39,14 +52,23 @@
     \bool_if:NTF {\g_AI_isToc_bool}
     { #1 }
     { #1 \hspace{1mm}\raisebox{35pt}{\AIfontBahnschrift\fontsize{28}{28}\bfseries\AIleadzero{\thechapter} } }
+    % 
+    \tl_if_empty:NF \g_AI_chapter_after_tl {
+      \newline
+      \tl_use:N \g_AI_chapter_after_tl
+      \tl_gclear:N \g_AI_chapter_after_tl
+    }
   }
   \titleformat {\chapter}
     [ block ]
     { \AIFontChapter \filcenter } % format
     {} % label
     {0pt} % sep
-    {\__AI_FormatChapterTitle} % before-code
-    \titleformat {name=\chapter, numberless}
+    { {\g_AI_chapter_before_tl} \tl_gclear:N \g_AI_chapter_before_tl % Execute, then clear
+      \__AI_FormatChapterTitle
+    } % before-code
+    
+  \titleformat {name=\chapter, numberless}
     [ block ]
     { \AIFontChapter \filcenter } % format
     {} % label

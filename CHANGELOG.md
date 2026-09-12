@@ -27,6 +27,7 @@ This changelog is now flushed to only incorporate changes for the Astro Inferno 
 - Page borders
 - Support for transparent boxes
 - Master environment
+- Before-code and after-code for chapters to enable more advanced headings
 
 ## [Before flushing changelog]
 

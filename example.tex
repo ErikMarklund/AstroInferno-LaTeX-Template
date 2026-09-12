@@ -317,6 +317,16 @@ Odd and/or even rows can have transparent background.
     Some value  & Some value
 \end{AITable}
 
+% Check this out!
+% There are functions for adding stuff before and after the next chapter title.
+% We can use it to mimic some chapter titles in the Astro Inferno Core Rulebook,
+% like Ch 1 Mechanics, which has a space above and some text below.
+% Note that whatever is put after will print with the chapter titlefont, so make sure
+% add things like \normalsize in your argument.
+% See lib/astroinfernosections.sty for implementation.
+\AINextChapterBefore{\vspace{3cm}\\}
+\AINextChapterAfter{\normalsize\AIquoteFont\textit{And thou shalt take this rod in thine hand, wherewith thou shalt do signs.\\- Exodus 4:7}\\[1cm]}
+
 \chapter{Symbols}
 Astro Inferno uses various special symbols. The template has commands for those:
 
