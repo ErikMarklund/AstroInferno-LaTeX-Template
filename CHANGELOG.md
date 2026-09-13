@@ -15,6 +15,12 @@ This changelog is now flushed to only incorporate changes for the Astro Inferno 
 
 - AIWeapon environment
 - Fallback system for fonts. Try official ones first.
+- Commands for ready-made layout for titlepage and TOC page.
+- Command for ready-made page with single image.
+- Page borders
+- Master environment
+- Support for transparent boxes
+- Before-code and after-code for chapters to enable more advanced headings
 
 ### Changed
 
@@ -22,12 +28,7 @@ This changelog is now flushed to only incorporate changes for the Astro Inferno 
 - Monster reimplementation
 - "Correct" chapter and (sub)section headings
 - Improved TOC
-- Commands for ready-made layout for titlepage and TOC page.
-- Command for ready-made page with single image.
-- Page borders
-- Support for transparent boxes
-- Master environment
-- Before-code and after-code for chapters to enable more advanced headings
+- Consistent British English
 
 ## [Before flushing changelog]
 
