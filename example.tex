@@ -554,7 +554,23 @@ blessings = {
 
 
 \AIMakeLight
-
+%\AINextChapterBefore{\vspace{2cm}\\}
+\AINextChapterAfter{
+  \normalsize\AIquoteFont
+  \begin{minipage}[t]{0.9\textwidth}
+    \begin{center}
+      \textit{
+        Naked splendour, pain divine, each breath is a cry to be sifted, sifted as wheat! Sifted as wheat!\\
+        Wood to the pyre, sifted as wheat! \\
+        Scorched lungs, solemn benediction \\
+        I shall make mountains bleed for thy holy mission \\[\baselineskip]
+        Sword of faith - Breastplate of righteousness\\
+        Garments of vengeance - Locust and the helmet of Salvation\\[\baselineskip]
+        - Funeral Mist
+      }
+    \end{center}
+  \end{minipage}\\[1cm]
+}
 \chapter{Weapons} \label{ch:weapons}
 % We place this AIWeapon already here, or it will probably render on a separate page.
 \begin{AIWeapon*}{Cyclopean club}
@@ -703,6 +719,9 @@ colours to the current |themecolour|.
 \end{AISidebar}
 \endgroup
 
+\AINextChapterBefore{\vspace{1cm}\\}
+\AINextChapterAfter{\vspace{-1cm}}
+
 \chapter{Borders} \label{ch:borders}
 % Turn of coloured border, use image instead.
 \AINoFancyMarginsColour
@@ -747,6 +766,7 @@ with rendered border. If unset, the mode colour will be used. See
 table below. The Astro Inferno Core Rulebook always uses white border
 text and page numbers for all pages with borders.
 
+\newpage
 \section{Customisation}
 See table below for commands to control border features.
 By default, an |AIdeepred| border with top transparency 100, and white
