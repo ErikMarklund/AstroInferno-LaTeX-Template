@@ -82,9 +82,8 @@ Extension = .ttf
 % Just \tableofcontents goes a long way.
 \AIMakeElementTOCpage
 
-\mainmatter%
+\mainmatter
 \AIPlaceNewBackground*{img/paper.jpg}
-
 \chapter*{Preface} \label{ch:preface}
 % We manually add this unnumbered chapter to the TOC
 \addcontentsline{toc}{chapter}{Preface}
@@ -99,42 +98,40 @@ would not have existed. Some DnD-specifc features have been removed,
 other remain funcitonal but without documentation awaiting
 resurrection, removal, or are just hidden but available for the more
 adventurous TeXers. But most of all, the remaining features have been adapted
-for Astro Inferno and new features have been added to enable
-good-looking documents that mimics the styles seen in the Astro Inferno
+for Astro Inferno, and new features added, to enable
+good-looking documents that mimic the styles seen in the Astro Inferno
 Core Rulebook and various associated material such as Crown of Ruin.
 
 The official Astro Inferno material employs a lot of advanced layout
 features that require both expertise, specialised software, and manual
-work (see for example the tilted column margins in the Core Rulebook).
+work (see for example the slanted column margins in the Core Rulebook).
 This template will unfortunately never be able to reproduce or mimic
 all such features, but we hope it will be a useful tool for producing
-stunning campaign modules etc. Its key features are demonstrated here
-in |example.tex|, and it contains some useful hacks that can be used
-to go beyond the standard title page, table of contents, and more.
+stunning campaign modules etc. Its key features plus some usefeul hacks are demonstrated here.
+Making good looking running test with chapters, sections, etc. is quite straightforward.
+To see how more complex things were accomplished, see the source code in |example.tex|.
 
 \subsection{Technical Notes}
 \paragraph{LATEX Engine}
 Unlike the DnD5e LaTeX Template, this template was developed for LuaLaTeX.
 As such, the template will probably not work with pdf2latex.
-\paragraph{Packages}
-All required packages are included in the current TeX~Live.
-Additional components, like fonts, are included in the template.
+\paragraph{Prerequisites}
+All required \LaTeX{} packages are included in the current TeX~Live.
+Additional components, like fonts, are deistributed with the template.
 \paragraph{Class vs. Package}
 The parent template defines a class, but also works as a package that can be used in another document.
-The development of this template has focused on the class aspect, and has not been tested as a package.
+The development of this template however has focused on the class aspect, and has not been tested as a package.
 As such, it is strongly recommended to use it as a class, like in this example document.
 
+\newpage
 \section{License}
-Some components of this template are subject to licensing. It is fine
-to use the template for personal use, and also to distribute it
-(subject to the template's licence). For other uses, make sure to not
-violate the licenses of any components included in the template, for example,
-specific fonts.
+Some components distributed tohether with this template are subject to licensing. It is fine
+to use the template with those components for personal use. For other uses, make sure to not
+violate the licenses of those components, Astro Inferno, or the template.
 
 \subsection{This Template}
 This template itself is released under an MIT license (see
-|LICENSE|). It contains some fonts that are released under
-compatible licenses. Get the latest release on GitHub\footnote{\url{https://github.com/ErikMarklund/AstroInferno-LaTeX-Template}}
+|LICENSE|). Get the latest release on GitHub\footnote{\url{https://github.com/ErikMarklund/AstroInferno-LaTeX-Template}}
 
 \subsection{Astro Inferno}
 Make sure to read the Astro Inferno Third Party
@@ -145,24 +142,24 @@ it allows.
 \subsection{Fonts}
 Astro Inferno uses some fonts that are not included in this
 template. You can add those fonts yourself, just make sure you have
-obtained the required licenses.
+obtained the required licenses where relevant, or violate their terms.
 
-Some fonts included with the template are only free for personal use. If
-you intend to distribute your document, make sure to replace those
-fonts with other ones for which you have a license, or obtain
-appropriate licenses for the included fonts where needed.
+Some fonts are distributed alongside the template, but have licences of their own.
+Some of them are only free for personal use. If
+you intend to go beyond personal use, make sure to obtain
+appropriate licenses for the existing fonts where needed, or replace those
+fonts with other ones for which you have a license.
 
-\section{Misc information}
-Some useful information about symbols, can be found in the Astro
-Inferno Rules Reference
-\footnote{\url{https://astroinferno.com/astro_coven/srd/srd.html\#symbols}}.
+\subsection{Images}
+Apart from the Astro Inferno logo and the Astro Inferno Coven Emblem, only images in the public domain, images derived from the parent template, and own work, have been used for the template and this example document. Attribution is given where appropriate.
+
 
 \part{Layout}
 \chapter{Fiat Tenebrae}
 \section{Dark and Light}
 The Astro Inferno rule book switches between light and dark pages, and
 this template can do this too!
-\subsection{Switching Between Dark and Light Mode}
+\subsection{Switching Mode}
 Use |\AIMakeDark| and |\AIMakeLight| to
 switch between the two styles. An optional argument providing an
 alternative background image can be provided:\\[1em]
@@ -177,11 +174,10 @@ as it will have notable implications for downstream typesetting.
 used for initialisation in the preamble because of the layout problems
 they cause if used mid document.
 
-\subsection{New Background Without Switching}
+\subsection{New Background}
 One can also insert a new background without switching mode using |\AIPlaceNewBackground|.
 The starred version |\AIPlaceNewBackground*| will do the same, but for
-one page only (e.g., Preface above, also
-p.~\pageref{ch:fonts}\footnote{Image taken at Skokloster castle}).
+one page only (e.g., p.~\pageref{ch:fonts}\footnote{Image taken at Skokloster castle}).
 Both commands do \emph{not} cause a page break.
 
 \subsection{Detecting Dark Mode}
@@ -331,7 +327,11 @@ Odd and/or even rows can have transparent background.
 \AINextChapterAfter{\normalsize\AIquoteFont\textit{And thou shalt take this rod in thine hand, wherewith thou shalt do signs.\\- Exodus 4:7}\\[1cm]}
 
 \chapter{Symbols}
-Astro Inferno uses various special symbols. The template has commands for those:
+Astro Inferno uses various special symbols.
+Uuseful information about them can be found in the Astro
+Inferno Rules Reference
+\footnote{\url{https://astroinferno.com/astro_coven/srd/srd.html\#symbols}},
+and this template has commands for rendering them:
 
 \begin{AITable}[header=Core Stat Tokens]{XX}
   Command & Result \\
@@ -442,6 +442,8 @@ again.
 \AIFancyMarginsColour{AIdeepred}
 \AIFancyMarginsTextColour{AIwhite}
 \section{Adversaries}
+\vspace{1cm}
+%{\color{AIdeepred}\rule{\columnwidth}{1pt}}
 % Monster stat block
 %
 % If several AIMonster occupies a page, it could be nice to make them
