@@ -6,16 +6,16 @@
 
 \bool_new:N \g_AI_dark_mode_bool
 
-% Provide a default initial color name so fontspec doesn't crash during preamble compilation
-\gdef\AICurrentThemeColorName{AIblack}
+% Provide a default initial colour name so fontspec doesn't crash during preamble compilation
+\gdef\AICurrentThemeColourName{AIblack}
 
 % Updated to NewDocumentCommand with a mandatory argument 'm'
-\NewDocumentCommand{\AISSetGlobalColor}{ m }
+\NewDocumentCommand{\AISSetGlobalColour}{ m }
 {
   \color{#1}% Set local color
   \global\let\default@color\current@color % Force it into floats and tables
-  % Save the color name to a flat, underscore-free standard macro name globally
-  \gdef\AICurrentThemeColorName{#1}% 
+  % Save the colour name to a flat, underscore-free standard macro name globally
+  \gdef\AICurrentThemeColourName{#1}% 
 }
 
 \NewDocumentCommand{\AIMakeDark} {s O{img/paper-darkred}}
@@ -24,9 +24,9 @@
   \bool_if:NF{#1}
   {\clearpage}
   \colorlet{AIcurrentcolour}{AIwhite}
-  \AISSetGlobalColor{AIwhite}
-  % \AISetThemeColor[AIdarkbox]
-  \AIDarkColors
+  \AISSetGlobalColour{AIwhite}
+  % \AISetThemeColour[AIdarkbox]
+  \AIDarkColours
   \RemoveFromHook{shipout/background} % Must clear earlier background, or the page number position will be broken.
   \AddToShipoutPictureBG{%
     \AtPageLowerLeft{%
@@ -41,9 +41,9 @@
   \bool_if:NF{#1}
   {\clearpage}
   \colorlet{AIcurrentcolour}{AIblack}
-  \AISSetGlobalColor{AIblack}
-  % \AISetThemeColor[AIlightbox]
-  \AILightColors
+  \AISSetGlobalColour{AIblack}
+  % \AISetThemeColour[AIlightbox]
+  \AILightColours
   \RemoveFromHook{shipout/background} % Must clear earlier background, or the page number position will be broken.
   \AddToShipoutPictureBG{%
     \AtPageLowerLeft{%
@@ -75,7 +75,7 @@
 
 % Classic LaTeX2e hook to intercept \normalfont using the underscore-free macro
 \makeatletter
-\g@addto@macro\normalfont{\color{\AICurrentThemeColorName}}
+\g@addto@macro\normalfont{\color{\AICurrentThemeColourName}}
 \makeatother
 
 \ExplSyntaxOn

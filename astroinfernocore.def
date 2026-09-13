@@ -73,7 +73,7 @@
 % Low-level modules first.
 \RequirePackage {lib/compat}        % compatibility definitions
 \RequirePackage {lib/astroinfernoutility}    % utility functions
-\RequirePackage {lib/astroinfernocolors}     % color definitions
+\RequirePackage {lib/astroinfernocolours}    % colour definitions
 \RequirePackage {lib/astroinfernofonts}      % font definitions
 \RequirePackage {lib/astroinfernostrings}    % Load document strings
 \RequirePackage {lib/astroinfernosymbols}    % Load document symbols

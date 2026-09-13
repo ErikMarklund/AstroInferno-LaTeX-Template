@@ -46,12 +46,12 @@
     #1,
   }
 
-% Extra key for controlling the color of the title and the background
+% Extra key for controlling the colour of the title and the background
 \keys_define:nn { astroinferno / sidebar }
   {
-    color .tl_set:N         = \l__AI_sidebar_color_tl,
-    color .initial:n        = sidebarcolor,
-    color .value_required:n = true,
+    colour .tl_set:N         = \l__AI_sidebar_colour_tl,
+    colour .initial:n        = sidebarcolour,
+    colour .value_required:n = true,
   }
 
 % This function, through its variant, forces the expansion of the tcb keys
@@ -64,7 +64,7 @@
 \cs_generate_variant:Nn \__AI_start_sidebar:nn { nV }
 
 % The AISidebar environment
-% #1 - keys. We handle the custom color key before passing other keys on
+% #1 - keys. We handle the custom colour key before passing other keys on
 % #2 - title.
 \NewDocumentEnvironment {AISidebar} { o m }
   {
@@ -75,8 +75,8 @@
 
       \__AI_start_sidebar:nV
         {
-          colback      = \l__AI_sidebar_color_tl,
-          colbacktitle = \l__AI_sidebar_color_tl,
+          colback      = \l__AI_sidebar_colour_tl,
+          colbacktitle = \l__AI_sidebar_colour_tl,
           title        = {#2},
         }
         \l_tmpa_tl

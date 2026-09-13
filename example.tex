@@ -296,7 +296,7 @@ The |AISidebar| is not breakable and is best used floated toward a page corner a
 
 \newpage % Actually new column
 \section{Tables}
-The |AITable| colors the even rows and is set to the width of a line by default.
+The |AITable| colours the even rows and is set to the width of a line by default.
 
 \begin{AITable}[header=Nice Table]{XX}
     Table head  & Table head \\
@@ -306,7 +306,7 @@ The |AITable| colors the even rows and is set to the width of a line by default.
 \end{AITable}
 
 Odd and/or even rows can have transparent background.
-\begin{AITable}[header=Nice Table, colorodd]{XX}
+\begin{AITable}[header=Nice Table, colourodd]{XX}
     Table head  & Table head \\
     Some value  & Some value \\
     Some value  & Some value \\
@@ -603,15 +603,15 @@ Background images are not (yet) implemented.
   features={{Quick, 2~targets hit/~\AIspsymbol~spent},{Sharp, Yikes!}}]
 \end{AIWeapon}
 
-\part{Customization} \label{part:customization}
+\part{Customisation} \label{part:customization}
 
-\chapter{Colors}
+\chapter{Colours}
 
 \begin{table*}[b]
-  \caption{\AIFontTableTitle{}Colors Defined by this Package}\label{tab:colors}
+  \caption{\AIFontTableTitle{}Colours Defined by this Package}\label{tab:colours}
 
   \begin{tabularx}{\linewidth}{lX}
-    \textbf{Color}                  & \textbf{Description} \\
+    \textbf{Colour}                  & \textbf{Description} \\
     \rowcolor{AIlogored}
     |AIlogored|                 & Astro Inferno logo red \\
     \rowcolor{AIdeepred}
@@ -652,23 +652,23 @@ Background images are not (yet) implemented.
   \end{tabularx}
 \end{table*}
 
-\section{Color control}
-Global color variables to style |AIComment|, |AIReadAloud|, |AISidebar|, and |AITable| environments are provided.
+\section{Colour control}
+Global colour variables to style |AIComment|, |AIReadAloud|, |AISidebar|, and |AITable| environments are provided.
 
-\begin{AITable}[header=Box Colors]{lX}
-  Color            &  Description \\
-  |commentcolor|   & |AIComment| background \\
-  |readaloudcolor| & |AIReadAloud| background \\
-  |sidebarcolor|   & |AISidebar| background \\
+\begin{AITable}[header=Box Colours]{lX}
+  Colour            &  Description \\
+  |commentcolour|   & |AIComment| background \\
+  |readaloudcolour| & |AIReadAloud| background \\
+  |sidebarcolour|   & |AISidebar| background \\
   |AItableodd| & |AITable| odd rows \\
   |AItableeven| & |AITable| even rows
 \end{AITable}
 
-Those environemnts also accept an optional color argument to set the color for a single instance.
-|AITable| instead takes |colorodd| and |coloreven|. See table of predefined colors.
+Those environemnts also accept an optional colour argument to set the colour for a single instance.
+|AITable| instead takes |colourodd| and |coloureven|. See table of predefined colours.
 
 \begin{AITable}[
-  colorodd=AIpaleblue,coloreven]{cX}
+  colourodd=AIpaleblue,coloureven]{cX}
   d6 & Item \\
   1  & 1 Ct \\
   2  & Unlight tobacco \\
@@ -678,28 +678,28 @@ Those environemnts also accept an optional color argument to set the color for a
   6  & Nine inch nails
 \end{AITable}
 
-\section{Themed Colors}
-Use |\AISetThemeColor[<color>]| to set |commentcolor|,
-|readaloudcolor|, |sidebarcolor|, and |tablecolor| to a specific
-color. Calling |\AISetThemeColor| without an argument sets those
-colors to the current |themecolor|.
+\section{Themed Colours}
+Use |\AISetThemeColour[<colour>]| to set |commentcolour|,
+|readaloudcolour|, |sidebarcolour|, and |tablecolour| to a specific
+colour. Calling |\AISetThemeColour| without an argument sets those
+colours to the current |themecolour|.
 \begin{AIComment}{Tip!}
   Set the theme colour between |\begingroup| \ldots |\endgroup| to
   restrict the change of colour to elements within the group.
 \end{AIComment}
 
 \begingroup
-\AISetThemeColor[AIorange]
+\AISetThemeColour[AIorange]
 
 \begin{AIComment}
   {This Comment Is in Orange}
-  This comment is in the the new color, because |\AISetThemeColor[AIorange]| was called.
+  This comment is in the the new colour, because |\AISetThemeColour[AIorange]| was called.
 \end{AIComment}
 
 \begin{AISidebar}
   {This Sidebar Is Also Orange}
   The sidebar is also using the new
-  theme color.
+  theme colour.
 \end{AISidebar}
 \endgroup
 

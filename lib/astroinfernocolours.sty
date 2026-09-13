@@ -1,7 +1,7 @@
 \ExplSyntaxOn
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Define colors, sampled from the books.
+% Define colours, sampled from the books.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \definecolor {AIblack} {HTML} {000000}
@@ -25,34 +25,34 @@
 \definecolor {AImidsteelgray} {HTML} {394044} % Used in some boxes
 \definecolor {AIdarksteelgray} {HTML} {171B27} % Used in some boxes
 
-% The color used in \AISetThemeColor when a new color is not set
-\colorlet {themecolor} {AIlightteal}
+% The colour used in \AISetThemeColour when a new colour is not set
+\colorlet {themecolour} {AIlightteal}
 
-\NewDocumentCommand{\AIDarkColors} {} {
+\NewDocumentCommand{\AIDarkColours} {} {
   \colorlet {AItableodd} {AIdarksteelgray}
   \colorlet {AItableeven} {AImidsteelgray}
-  \colorlet {commentcolor} {AImidgraybrown}
-  \colorlet {readaloudcolor} {AImidsteelgray}
-  \colorlet {sidebarcolor} {AIdeepred}
+  \colorlet {commentcolour} {AImidgraybrown}
+  \colorlet {readaloudcolour} {AImidsteelgray}
+  \colorlet {sidebarcolour} {AIdeepred}
 }
-\NewDocumentCommand{\AILightColors} {} {
+\NewDocumentCommand{\AILightColours} {} {
   \colorlet {AItableodd} {AIlightgray}
   \colorlet {AItableeven} {AImidgray}
-  \colorlet {commentcolor} {AImidteal}
-  \colorlet {readaloudcolor} {AIlightteal}
-  \colorlet {sidebarcolor} {AImidgray}
+  \colorlet {commentcolour} {AImidteal}
+  \colorlet {readaloudcolour} {AIlightteal}
+  \colorlet {sidebarcolour} {AImidgray}
 }
-% Element colors that change when \AISetThemeColor is used
-\colorlet {commentcolor} {themecolor} % AIComment background
-\colorlet {sidebarcolor} {themecolor} % AISidebar background
-\colorlet {tablecolor}   {themecolor} % AITable even row background
+% Element colours that change when \AISetThemeColour is used
+\colorlet {commentcolour} {themecolour} % AIComment background
+\colorlet {sidebarcolour} {themecolour} % AISidebar background
+\colorlet {tablecolour}   {themecolour} % AITable even row background
 
-% Sets the themecolor and colors for all themed elements
-% If called without the optional color, resets the color of all themed elements to the current themecolor
-\NewDocumentCommand {\AISetThemeColor} { O {themecolor} }
+% Sets the themecolour and colours for all themed elements
+% If called without the optional colour, resets the colour of all themed elements to the current themecolour
+\NewDocumentCommand {\AISetThemeColour} { O {themecolour} }
   {
-    \colorlet {themecolor}   {#1}
-    \colorlet {commentcolor} {#1}
-    \colorlet {sidebarcolor} {#1}
-    \colorlet {tablecolor}   {#1}
+    \colorlet {themecolour}   {#1}
+    \colorlet {commentcolour} {#1}
+    \colorlet {sidebarcolour} {#1}
+    \colorlet {tablecolour}   {#1}
   }

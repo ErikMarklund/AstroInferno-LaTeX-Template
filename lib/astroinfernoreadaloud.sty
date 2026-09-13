@@ -34,12 +34,12 @@
     #1,
   }
 
-% Extra key for controlling the color of the title and the background
+% Extra key for controlling the colour of the title and the background
 \keys_define:nn { astroinferno / read_aloud }
   {
-    color .tl_set:N         = \l__AI_read_aloud_color_tl,
-    color .initial:n        = readaloudcolor,
-    color .value_required:n = true,
+    colour .tl_set:N         = \l__AI_read_aloud_colour_tl,
+    colour .initial:n        = readaloudcolour,
+    colour .value_required:n = true,
   }
 
 % This function, through its variant, forces the expansion of the tcb keys
@@ -52,7 +52,7 @@
 \cs_generate_variant:Nn \__AI_start_read_aloud:nn { nV }
 
 % The AIReadAloud environment
-% #1 - keys. We handle the custom color key before passing other keys on
+% #1 - keys. We handle the custom colour key before passing other keys on
 \NewDocumentEnvironment {AIReadAloud} {o}
 	{
       		\group_begin:
@@ -61,7 +61,7 @@
         		{ \keys_set_known:nnN { astroinferno / read_aloud } {#1} \l_tmpa_tl }
 
       		\__AI_start_read_aloud:nV
-        		{ colback = \l__AI_read_aloud_color_tl, }
+        		{ colback = \l__AI_read_aloud_colour_tl, }
         	\l_tmpa_tl
     	}
 {
