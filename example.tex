@@ -811,8 +811,12 @@ Astro Inferno fonts.
 \section{Drop Caps}
 \AIDropCapLine{D}{rop caps are not used in official Astro Inferno so far, but it is a neat feature from the DnD5e Template that was kept when deriving this template. The 'QT Cloistered Monk' font is used for drop caps.}
 
-\chapter{Box Customisation} \label{ch:box_customisation}
+\AINextChapterBefore{\null\\} % Just a newline as space above, but the fontsize is enormous
+\AINextChapterAfter{\normalsize
+  \vspace{1cm}
+}
 \AIPlaceNewBackground*{img/alchemy.jpg}
+\chapter{Box Customisation} \label{ch:box_customisation}
 \section{Transparency}
 All three box environments can be made semitransparent by passing the
 option |opacityfill=O|, where |O| $\in$ [0, 1]. See |tcolorbox| package documentation
@@ -833,7 +837,7 @@ which will affect all subsequent boxes of that type.
 |\AICommentClearBoxstyle| clears the box style completely, and |\AICommentDefaultBoxstyle| reverts to default.
 It is however often more convenient to just pass a box style among the optional arguments to a box, e.g.,
 |\begin{AIComment}[AIboxstyleFrame]| to apply it to a single box instance.\footnote{With the current implementation,
-    setting a box style with the |...AddBoxstyle| cannot set the background colour and a few other properties.
+    setting a box style with the |...AddBoxstyle| command cannot set the background colour and a few other properties.
     Those can however be set manually via the optional arguments to the box.}
 
 \newpage % Actually new column
