@@ -13,4 +13,4 @@ lint:
 backlog:	backlog.pdf
 
 %.pdf: %.tex
-	latexmk --interaction=nonstopmode --pdf --pdflatex=$(LATEX) $<
+	latexmk --interaction=nonstopmode --pdf --lualatex --lualatex=$(LATEX) $<
