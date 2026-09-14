@@ -1,19 +1,36 @@
 \ExplSyntaxOn
 
+
+% Adds a boxstyle to readalouds
+\NewDocumentCommand\AIReadAloudAddBoxstyle{m}
+{ \tcbset{ AI_readaloud_extra/.append~style={#1} } }
+
+% Clears all boxstyles from readalouds
+\NewDocumentCommand\AIReadAloudClearBoxstyle{}
+{ \tcbset{ AI_readaloud_extra/.style={} } }
+
+% Revert to dafault. Readalouds use a plain style.
+\NewDocumentCommand\AIReadAloudDefaultBoxstyle{}
+{ \AIReadAloudClearBoxstyle }
+
+% Initialise
+\AIReadAloudDefaultBoxstyle
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Environment for read-aloud text.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Standard for every read-aloud text
-\DeclareTColorBox {__AI_read_aloud} {o}
-  {
+
+% Make a comment base style
+\tcbset{
+  AI_readaloud_base/.style = {
     before~upper    =
+    {
+      \bool_if:NT \l__AI_layout_bool
       {
-        \bool_if:NT \l__AI_layout_bool
-          {
-            \bool_if:NF \l__AI_justified_bool
-              {\RaggedRight}
-          }
-      },
+        \bool_if:NF \l__AI_justified_bool
+        {\RaggedRight}
+      }
+    },
     code            = {\linespread {1.1} },
     enhanced~jigsaw,
     frame~hidden,
@@ -31,6 +48,14 @@
     fontupper       = \AIFontReadAloud,
     fontlower       = \AIFontReadAloud,
     after~skip      = 13pt plus 4pt minus 4pt,
+  }
+}
+
+% Standard for every read-aloud text
+\DeclareTColorBox {__AI_read_aloud} {o}
+  {
+    AI_readaloud_base,
+    AI_readaloud_extra,
     #1,
   }
 

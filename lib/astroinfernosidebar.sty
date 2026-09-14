@@ -1,19 +1,39 @@
 \ExplSyntaxOn
 
+
+% Adds a boxstyle to sidebars
+\NewDocumentCommand\AISidebarAddBoxstyle{m}
+{ \tcbset{ AI_sidebar_extra/.append~style={#1} } }
+
+% Clears all boxstyles from sidebars
+\NewDocumentCommand\AISidebarClearBoxstyle{}
+{ \tcbset{ AI_sidebar_extra/.style={} } }
+
+% Revert to default. Sidebars use pointy banner.
+\NewDocumentCommand\AISidebarDefaultBoxstyle{}
+{
+  \AISidebarClearBoxstyle
+  \AISidebarAddBoxstyle{AIboxstylePointyBanner}
+}
+
+% Initialise
+\AISidebarDefaultBoxstyle
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Environment for sidebars.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Standard for every sidebar
-\DeclareTColorBox {__AI_sidebar} {o}
-  {
+
+% Make a sidebar base style
+\tcbset{
+  AI_sidebar_base/.style = {
     before~upper     =
+    {
+      \bool_if:NT \l__AI_layout_bool
       {
-        \bool_if:NT \l__AI_layout_bool
-          {
-            \bool_if:NF \l__AI_justified_bool
-              {\RaggedRight}
-          }
-      },
+        \bool_if:NF \l__AI_justified_bool
+        {\RaggedRight}
+      }
+    },
     code={\linespread{.9}},
     frame~hidden,
     boxrule          = 0pt,
@@ -25,24 +45,21 @@
     right            = 6pt,
     top              = 0pt,
     bottom           = 0pt,
-    valign = center,
+    valign           = center,
     fonttitle        = \AIFontSidebarTitle,
     fontupper        = \AIFontSidebarBody,
     fontlower        = \AIFontSidebarBody,
     sharp~corners,
     parbox           = false,
-    borderline~north = {1pt} {-0.5pt} {black},
-    borderline~south = {1pt} {-0.5pt} {black},
     coltitle         = black,
-    fuzzy~shadow     = {0mm} {-3.5pt} {-0.5pt} {0.4mm} {black!60!white},
-    overlay          =
-      {
-        \fill [black] ( frame.south~west ) -- ++ (  7pt, 0 ) -- ++ ( 0, -5pt ) -- cycle;
-        \fill [black] ( frame.north~west ) -- ++ (  7pt, 0 ) -- ++ ( 0,  5pt ) -- cycle;
-        \fill [black] ( frame.north~east ) -- ++ ( -7pt, 0 ) -- ++ ( 0,  5pt ) -- cycle;
-        \fill [black] ( frame.south~east ) -- ++ ( -7pt, 0 ) -- ++ ( 0, -5pt ) -- cycle;
-      },
     after~skip       = 14pt plus 4pt minus 4pt,
+  }
+}
+
+\DeclareTColorBox {__AI_sidebar} {o}
+  {
+    AI_sidebar_base,
+    AI_sidebar_extra,
     #1,
   }
 

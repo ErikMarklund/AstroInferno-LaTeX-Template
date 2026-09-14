@@ -21,6 +21,7 @@ This changelog is now flushed to only incorporate changes for the Astro Inferno 
 - Master environment
 - Support for transparent boxes
 - Before-code and after-code for chapters to enable more advanced headings
+- Modular boxstyles
 
 ### Changed
 

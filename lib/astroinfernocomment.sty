@@ -1,19 +1,36 @@
 \ExplSyntaxOn
 
+
+% Adds a boxstyle to comments
+\NewDocumentCommand\AICommentAddBoxstyle{m}
+{ \tcbset{ AI_comment_extra/.append~style={#1} } }
+
+% Clears all boxstyles from comments
+\NewDocumentCommand\AICommentClearBoxstyle{}
+{ \tcbset{ AI_comment_extra/.style={} } }
+
+% Revert to dafault. Comments use a plain style.
+\NewDocumentCommand\AICommentDefaultBoxstyle{}
+{ \AICommentClearBoxstyle }
+
+% Initialise
+\AICommentDefaultBoxstyle
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Environment for comments.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Standard for every comment
-\DeclareTColorBox {__AI_comment} {o}
-  {
+
+% Make a comment base style
+\tcbset{
+  AI_comment_base/.style = {
     before~upper =
+    {
+      \bool_if:NT \l__AI_layout_bool
       {
-        \bool_if:NT \l__AI_layout_bool
-          {
-            \bool_if:NF \l__AI_justified_bool
-              { \RaggedRight }
-          }
-      },
+        \bool_if:NF \l__AI_justified_bool
+        { \RaggedRight }
+      }
+    },
     code         = {\linespread{.9}},
     frame~hidden,
     boxrule      = 0pt,
@@ -33,6 +50,14 @@
     parbox       = false,
     coltitle     = black,
     after~skip   = 13pt plus 4pt minus 4pt,
+  }
+}
+
+% Standard for every comment
+\DeclareTColorBox {__AI_comment} {o}
+  {
+    AI_comment_base,
+    AI_comment_extra,
     #1,
   }
 

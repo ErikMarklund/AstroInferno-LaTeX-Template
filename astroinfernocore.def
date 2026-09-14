@@ -88,6 +88,7 @@
 \RequirePackage {lib/astroinfernocomment}    % inline comment boxes
 \RequirePackage {lib/astroinfernoheader}     % fancy headers and footers
 \RequirePackage {lib/astroinfernomonster}    % stat blocks
+\RequirePackage {lib/astroinfernoboxstyles}  % boxstyles
 \RequirePackage {lib/astroinfernoreadaloud}  % read-aloud text
 \RequirePackage {lib/astroinfernosections}   % section styling and special section headers
 \RequirePackage {lib/astroinfernosidebar}    % sidebars

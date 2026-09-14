@@ -1,0 +1,71 @@
+\ExplSyntaxOn
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Boxstyle modules for sidebars, comments, readaloouds.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% The point of this is to have style modules that can be put on sidebars,
+% comments, and readalouds.
+
+% The boxstyles below can be modified via various keys, which are
+% defined above each boxstyle (e.g., AI/style/pointybanner/decoration~colour
+% for AIboxstylePointyBanner.) Keys can be modified globally with 
+% \AIboxstyleModifyKey{key}{value}
+
+
+
+% Make a wrapper for setting key values.
+% Note that the AI/style/ will be added to the beginning
+% of the key to be set, so if you want to set the key
+% AI/style/frame/decoration~colour to AIdeepred, you would issue
+% \AIboxstyleModifyKey{frame/decoration~colour}{AIdeepred}.
+%
+\NewDocumentCommand\AIboxstyleModifyKey{m m} {
+  \tcbset{ AI/style/#1 = #2 }
+}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% The default pointy banner for sidebars
+%
+
+\tcbset{
+  AI/style/pointybanner/decoration~colour/.initial = AIblack
+}
+
+\tcbset{
+  AIboxstylePointyBanner/.style = {
+    % Grab the decorationcolour and store in AI@bancol
+    code     = { \colorlet{AI@bancol}{\pgfkeysvalueof{/tcb/AI/style/pointybanner/decoration~colour}} },
+    fuzzy~shadow     = {0mm} {-3.5pt} {-0.5pt} {0.4mm} {black!60!white},
+    borderline~north = {1pt} {-0.5pt} {AI@bancol},
+    borderline~south = {1pt} {-0.5pt} {AI@bancol},
+    overlay                 =
+    {
+      \fill [AI@bancol] ( frame.south~west ) -- ++ (  7pt, 0 ) -- ++ ( 0, -5pt ) -- cycle;
+      \fill [AI@bancol] ( frame.north~west ) -- ++ (  7pt, 0 ) -- ++ ( 0,  5pt ) -- cycle;
+      \fill [AI@bancol] ( frame.north~east ) -- ++ ( -7pt, 0 ) -- ++ ( 0,  5pt ) -- cycle;
+      \fill [AI@bancol] ( frame.south~east ) -- ++ ( -7pt, 0 ) -- ++ ( 0, -5pt ) -- cycle;
+    }
+  }
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% A simple frame
+%
+
+\tcbset{
+  AI/style/frame/decoration~colour/.initial = AIblack
+}
+
+\tcbset{
+  AIboxstyleFrame/.style = {
+    code     = { \colorlet{AI@framecol}{\pgfkeysvalueof{/tcb/AI/style/frame/decoration~colour}} },
+    borderline~north = {1pt} {-0.5pt} {AI@framecol},
+    borderline~south = {1pt} {-0.5pt} {AI@framecol},
+    borderline~east = {1pt} {-0.5pt} {AI@framecol},
+    borderline~west = {1pt} {-0.5pt} {AI@framecol},
+  }
+}

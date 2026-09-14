@@ -177,7 +177,7 @@ they cause if used mid document.
 \subsection{New Background}
 One can also insert a new background without switching mode using |\AIPlaceNewBackground|.
 The starred version |\AIPlaceNewBackground*| will do the same, but for
-one page only (e.g., p.~\pageref{ch:fonts}\footnote{Image taken at Skokloster castle}).
+one page only (e.g., p.~\pageref{ch:box_customisation}\footnote{Image taken at Skokloster castle}).
 Both commands do \emph{not} cause a page break.
 
 \subsection{Detecting Dark Mode}
@@ -276,16 +276,6 @@ The other two environments are the |AIComment| and the |AISidebar|. The |AIComme
 
 \begin{AIComment}{This Is a Comment Box!}
   A |AIComment| is a box for minimal highlighting of text. It lacks the ornamentation of |AISidebar|, but it can handle being broken over a column.
-\end{AIComment}
-
-All three environments can be made semitransparent by passing the
-option |opacityfill=O|, where |O| $\in$ [0, 1].\footnote{As the three
-  environments are |tcolorbox|es under the hood, they will accept any |tcolorbox|
-  options, such as shadows, borders, etc.}
-
-\begin{AIComment}[opacityfill=0.5]{You can see right through me!}
-  This box was made with |opacityfill=0.5|. The text remains opaque as
-  you can see.
 \end{AIComment}
 
 The |AISidebar| is not breakable and is best used floated toward a page corner as it is below.
@@ -819,6 +809,52 @@ Astro Inferno fonts.
 
 \section{Drop Caps}
 \AIDropCapLine{D}{rop caps are not used in official Astro Inferno so far, but it is a neat feature from the DnD5e Template that was kept when deriving this template. The 'QT Cloistered Monk' font is used for drop caps.}
+
+\chapter{Box Customisation} \label{ch:box_customisation}
+\AIPlaceNewBackground*{img/alchemy.jpg}
+\section{Box Styles}
+Boxes (p~\pageref{ch:text_boxes}) can be modified by passing |tcolorbox| options
+(see the |tcolorbox| package documentation). To facilitate customisation of boxes
+there are a number of pre-defined box style modules that can be assigned to specific box types.
+For example, to give a comment box the pointy banner style used by the default sidebar:
+|\AICommentAddBoxstyle{AIboxstylePointyBanner}|.
+
+\AICommentAddBoxstyle{AIboxstylePointyBanner}
+\begin{AIComment} {I am a Comment Box}
+  \ldots but I have a pointy-banner style.  
+\end{AIComment}
+\AICommentDefaultBoxstyle
+
+|\AICommentDefaultBoxstyle| then reverts to the default style.
+Corresponding commands exist for the other box types.
+
+\subsection{Predefined Box Styles}
+\AICommentAddBoxstyle{AIboxstyleFrame}
+\begin{AIComment} {|AIboxstyleFrame|}
+  Not actually used in Astro Inferno, but could be useful.
+\end{AIComment}
+
+All styles have certain keys that control specific features. For example,
+one can set the frame colour for |AIboxstyleFrame|
+\begingroup
+\AIboxstyleModifyKey{frame/decoration colour}{AIpetroleum}
+\begin{AIComment} {|AIboxstyleFrame| {\color{AIpetroleum} |AIpetroleum|}}
+  I am blue.
+\end{AIComment}
+\endgroup
+\AICommentDefaultBoxstyle
+
+\section{Transparency}
+All three box environments can be made semitransparent by passing the
+option |opacityfill=O|, where |O| $\in$ [0, 1]. See |tcolorbox| package documentation
+for more precise control over transparency of different elements.
+
+\AIReadAloudAddBoxstyle{AIboxstyleFrame}
+\begin{AIReadAloud}[opacityfill=0.5]{You can see right through me!}
+  This readaloud box was made with |opacityfill=0.5| and |AIboxstyleFrame|.
+  The text remains opaque as you can see.
+\end{AIReadAloud}
+\AIReadAloudDefaultBoxstyle
 
 \AIMakeElementImagepage[
 image=img/astro-inferno-logo-kit/Astrogram,
