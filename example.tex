@@ -768,15 +768,16 @@ unexpected results depending on context. Here, we swap out the
 |AIdeepred| border for an image, then switch back at
 the start of next chapter.
 
+\AINextChapterBefore{\null\\[-1cm]}
+\AINextChapterAfter{\normalsize\vspace{0.5cm}\null}
 \chapter{Fonts and Text Features} \label{ch:fonts}
 \AIFancyMarginsColour{AIdeepred}
-%\AIPlaceNewBackground*{img/alchemy.jpg}
 \section{Fonts}
 This template uses various fonts that are identical to, or similar to, the most common ones in Astro Inferno.
 Some fonts are excluded due to licencing issues, whereas others are omitted because they are only used sparingly.
 \subsection{Included Fonts}
 \begin{AITable}[header=Fonts in template]{lX}
-  Macro Name    & Font name and look \\
+  Macro Name    & Font Name and Look \\
   |\normalfont|  & Lato \\
   |\AIfontAvalenRekas| & {\AIfontAvalenRekas Avalen Rekas} \\
   |\AIfontMuara| & {\AIfontMuara Muara} \\
@@ -789,11 +790,13 @@ See |lib/astroinfernofonts.sty| for aliases and fallbackfonts.
 
 The main fallback for 1651 Alchemy is Dominican. It is free to use,
 but not to redistribute. If you want to use it, put the font files in
-|fonts/dominican/|. See |lib/astroinfernofonts.sty| for the exact file
-names exepected. Unlike the other fonts, Dominican will not be
+|fonts/dominican/|.\footnote{Unlike the other fonts, Dominican will not be
 attempted to be loaded from normally installed fonts, due to boring
-technical issues.
+technical issues.}
+See |lib/astroinfernofonts.sty| for the exact file
+names exepected.
 
+\newpage % Actually new column
 \subsection{Adding Fonts}
 %\newfontfamily\AIfontMinster{minster/minster6.ttf}
 New fonts can be added using native \LaTeX functions.
@@ -803,20 +806,22 @@ For example, this document loads the font Minster through\\[\baselineskip]
 |Extension = .ttf|\\
 |]|\\[\baselineskip]
 and uses it for the Void Cult Demagogue title.
-Similarly, the Berylium font is used on the titlepage.
-Technically, Minster1-6 and Berylium are included with the Template,
-but not automatically loaded, as they do not correspond to particular
+The Berylium font is loaded in a similar manner and used on the titlepage.
+Minster1-6 and Berylium are supplied alongside the Template,
+but are not automatically loaded, as they do not correspond to particular
 Astro Inferno fonts.
 
+Note that different fonts can have different features, be split over multiple files, etc.
+Hopefully, by looking in |example.tex| and |lib/astroinfernofonts.sty| you will
+figure out how to load your new fonts.
+
 \section{Drop Caps}
-\AIDropCapLine{D}{rop caps are not used in official Astro Inferno so far, but it is a neat feature from the DnD5e Template that was kept when deriving this template. The 'QT Cloistered Monk' font is used for drop caps.}
+\AIDropCapLine{D}{rop caps are not used in official Astro Inferno so far, but it is a neat feature from the DnD5e Template that was kept when deriving this template. |\AIoldenglishFont| is used for drop caps.}
 
 \AINextChapterBefore{\null\\} % Just a newline as space above, but the fontsize is enormous
-\AINextChapterAfter{\normalsize
-  \vspace{1cm}
-}
-\AIPlaceNewBackground*{img/alchemy.jpg}
+\AINextChapterAfter{\normalsize \vspace{1cm}}
 \chapter{Box Customisation} \label{ch:box_customisation}
+\AIPlaceNewBackground*{img/alchemy.jpg}
 \section{Transparency}
 All three box environments can be made semitransparent by passing the
 option |opacityfill=O|, where |O| $\in$ [0, 1]. See |tcolorbox| package documentation
