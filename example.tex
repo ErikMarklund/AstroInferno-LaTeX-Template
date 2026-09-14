@@ -812,25 +812,40 @@ Astro Inferno fonts.
 
 \chapter{Box Customisation} \label{ch:box_customisation}
 \AIPlaceNewBackground*{img/alchemy.jpg}
+\section{Transparency}
+All three box environments can be made semitransparent by passing the
+option |opacityfill=O|, where |O| $\in$ [0, 1]. See |tcolorbox| package documentation
+for more precise control over transparency of different elements.
+
+\begin{AIComment}[opacityfill=0.5]{You can see right through me!}
+  This comment box was made with |opacityfill=0.5|.
+  The text remains opaque.
+\end{AIComment}
+
 \section{Box Styles}
-Boxes (p~\pageref{ch:text_boxes}) can be modified by passing |tcolorbox| options
+Boxes (p.~\pageref{ch:text_boxes}) can be modified by passing |tcolorbox| options
 (see the |tcolorbox| package documentation). To facilitate customisation of boxes
 there are a number of pre-defined box style modules that can be assigned to specific box types.
-For example, to give a comment box the pointy banner style used by the default sidebar:
-|\AICommentAddBoxstyle{AIboxstylePointyBanner}|.
 
-\AICommentAddBoxstyle{AIboxstylePointyBanner}
-\begin{AIComment} {I am a Comment Box}
+The box styles can be set with |\AICommentAddBoxstyle{}| (or corresponding commands for the other box types),
+which will affect all subsequent boxes of that type.
+|\AICommentClearBoxstyle| clears the box style completely, and |\AICommentDefaultBoxstyle| reverts to default.
+It is however often more convenient to just pass a box style among the optional arguments to a box, e.g.,
+|\begin{AIComment}[AIboxstyleFrame]| to apply it to a single box instance.\footnote{With the current implementation,
+    setting a box style with the |...AddBoxstyle| cannot set the background colour and a few other properties.
+    Those can however be set manually via the optional arguments to the box.}
+
+\newpage % Actually new column
+\subsection{Pointy Banner}
+For example, to give a comment box the pointy banner style used by the default sidebar, we pass
+|AIboxstylePointyBanner| as an option to |AIComment|.
+
+\begin{AIComment}[AIboxstylePointyBanner] {I am a Comment Box}
   \ldots but I have a pointy-banner style.  
 \end{AIComment}
-\AICommentDefaultBoxstyle
 
-|\AICommentDefaultBoxstyle| then reverts to the default style.
-Corresponding commands exist for the other box types.
-
-\subsection{Predefined Box Styles}
-\AICommentAddBoxstyle{AIboxstyleFrame}
-\begin{AIComment} {|AIboxstyleFrame|}
+\subsection{Frame}
+\begin{AIComment}[AIboxstyleFrame] {|AIboxstyleFrame|}
   Not actually used in Astro Inferno, but could be useful.
 \end{AIComment}
 
@@ -838,23 +853,19 @@ All styles have certain keys that control specific features. For example,
 one can set the frame colour for |AIboxstyleFrame|
 \begingroup
 \AIboxstyleModifyKey{frame/decoration colour}{AIpetroleum}
-\begin{AIComment} {|AIboxstyleFrame| {\color{AIpetroleum} |AIpetroleum|}}
+\begin{AIComment}[AIboxstyleFrame]
+  {|AIboxstyleFrame| {\color{AIpetroleum} |AIpetroleum|}}
   I am blue.
 \end{AIComment}
 \endgroup
-\AICommentDefaultBoxstyle
+See |lib/astroinfernoboxstyles.sty| for available keys.
 
-\section{Transparency}
-All three box environments can be made semitransparent by passing the
-option |opacityfill=O|, where |O| $\in$ [0, 1]. See |tcolorbox| package documentation
-for more precise control over transparency of different elements.
+\subsection{\ttfamily \bfseries LED}
+The Red Gods demanded it.
+\begin{AIComment}[AIboxstyleLED] {LED or Dead}
+  >\$ sudo kill all humans
+\end{AIComment}
 
-\AIReadAloudAddBoxstyle{AIboxstyleFrame}
-\begin{AIReadAloud}[opacityfill=0.5]{You can see right through me!}
-  This readaloud box was made with |opacityfill=0.5| and |AIboxstyleFrame|.
-  The text remains opaque as you can see.
-\end{AIReadAloud}
-\AIReadAloudDefaultBoxstyle
 
 \AIMakeElementImagepage[
 image=img/astro-inferno-logo-kit/Astrogram,

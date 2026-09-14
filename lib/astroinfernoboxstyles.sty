@@ -69,3 +69,33 @@
     borderline~west = {1pt} {-0.5pt} {AI@framecol},
   }
 }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% A transparent LED display
+%
+
+\tcbset{
+  AI/style/LED/text~colour/.initial = AIledgreen,
+  AI/style/LED/frame~colour/.initial = AIledgreen
+}
+
+\tcbset{
+  AIboxstyleLED/.style = {
+    code     = {
+      \colorlet{AI@LEDtextcol}{\pgfkeysvalueof{/tcb/AI/style/LED/text~colour}}
+      \colorlet{AI@LEDframecol}{\pgfkeysvalueof{/tcb/AI/style/LED/frame~colour}}
+    },
+    borderline~north = {1pt} {-0.5pt} {AI@LEDframecol},
+    borderline~south = {1pt} {-0.5pt} {AI@LEDframecol},
+    borderline~east = {1pt} {-0.5pt} {AI@LEDframecol},
+    borderline~west = {1pt} {-0.5pt} {AI@LEDframecol},
+    fuzzy~halo = 1pt~with~AI@LEDframecol,
+    fonttitle = \color{AI@LEDtextcol}\ttfamily\bfseries,
+    fontupper = \color{AI@LEDtextcol}\ttfamily,
+    opacityfill = 0.7,
+    colback = AIblack,
+    colbacktitle = AIblack,
+    sharpish~corners
+  }
+}
+
