@@ -7,7 +7,7 @@ This is a LaTeX template for typesetting documents in the style of the Astro Inf
 ## Features
 
 * Color schemes, fonts, and layout are close to the core books (but not exactly the same).
-* Needed fonts are included, or provided with TeX Live.
+* Needed fonts are supplied, or provided with TeX Live.
 * Developed for LuaTeX. Not tested with other engines.
 
 [comment]: <>![Preview](scrot.jpg)
@@ -67,7 +67,7 @@ You can also clone a copy of the repository to each LaTeX project. For example, 
 
 ```sh
 mkdir lib/
-git clone https://github.com/ErikMarklund/AstroInferno-LaTeX-Template .git lib/atroinferno
+git clone https://github.com/ErikMarklund/AstroInferno-LaTeX-Template.git lib/atroinferno
 ```
 
 LaTeX will not find the template automatically. Set `TEXINPUTS` when compiling your project to locate the package:
@@ -95,7 +95,7 @@ Load the `astroinfernobook` class in your preamble:
 ### Package
 
 You can also load the `astroinferno` package directly to use it with another class.
-Note that the upstream dnd package has only been tested with the `book` class, and astroinferno has not been tested like this at all.
+**Note that the upstream dnd package has only been tested with the `book` class, and astroinferno has not been tested like this at all.**
 
 ```tex
 \documentclass[10pt,twoside,twocolumn,openany]{book}
@@ -217,28 +217,6 @@ You can use LuaTeX to compile the document.
 lualatex main.tex
 ```
 
-### Wrapping `monsterbox` in float disrupts spacing inside stat block
-
-Wrapping a `monsterbox` (or `monsterboxnobg`) in a floating figure adds extra space between stat block elements:
-
-```latex
-\begin{figure}[b]
-  \begin{monsterbox}{Orc Warden}
-    % ...
-  \end{monsterbox}
-\end{figure}
-```
-
-Instead, use the `tcolorbox` `float` parameter:
-
-```latex
-\begin{monsterbox}[float=b]{Orc Warden}
-  % ...
-\end{monsterbox}
-```
-
-Refer to the `tcolorbox` documentation (section 4.13) for more float parameters.
-
 ## Contributing
 
 ### Style
@@ -267,7 +245,9 @@ Install the appropriate plugin for your editor.
 
 ## Credits
 
-* Background image from [Lost and Taken](https://lostandtaken.com/)
+* Background image from [Lost and Taken](https://lostandtaken.com/),
+  adapted to fit Astro Inferno style.
+* Other material used in example.tex is acknowledged in footnotes.
 
 ## License
 
