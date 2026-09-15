@@ -3,27 +3,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Monster environments
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Simple stat block to mimic Astro Inferno adversary blocks in the rulebook
-\DeclareTColorBox {__AIMonster} { O{} }
-  {
-    enhanced,
-    width=\columnwidth,
-    frame~hidden,
-    unbreakable,
-    boxrule     = 0pt,
-    breakable,
-    parbox      = false,
-    boxsep      = 0pt,
-    toptitle    = 3mm,
-    left        = 0pt,
-    right       = 0pt,
-    sharp~corners,
-    opacityback = 0,
-    fontupper   = \AIFontStatBlockBody,
-    fontlower   = \AIFontStatBlockBody,
-    coltitle    = .,
-    #1
-  }
 
 \keys_define:nn { astroinferno / monster / monsterdata }
 {
@@ -91,10 +70,11 @@
 \NewDocumentEnvironment{AIMonster} {O{} m}
 {
   \tl_set:Nn  \l_monster_name_tl {#2}
-  \begin{__AIMonster}[#1]
+  \begin{minipage}[t]{\columnwidth}
+    \AIFontStatBlockBody
 }
 {
-\end{__AIMonster}
+  \end{minipage}
 }
 
 \dim_new:N \l_theheight_dim
