@@ -139,12 +139,32 @@
 
     \newcommand{\AIquoteFont}{\AIfontAlchemy}
 
-    \newfontfamily\AIfontCheddarGothic{CheddarGothicRough-Regular.otf}[
-    Path = fonts/cheddar_gothic_rough_fonts/,
-    Extension = .otf,
-    UprightFont = *,
-    ItalicFont = CheddarGothicRough-Italic.otf]
-    \newcommand{\AIerodedblockFont}{\AIfontCheddarGothic}
+    \IfFontExistsTF{Cheddar~Gothic~Rough}
+    {
+      \newfontfamily\AIfontCheddarGothic{Cheddar~Gothic~Rough}
+      \newcommand{\AIerodedblockFont}{\AIfontCheddarGothic}
+    } { % Then try from file
+      \IfFontExistsTF{fonts/CheddarGothicRough-Regular.otf}
+      {
+        \newfontfamily\AIfontCheddarGothic{CheddarGothicRough-Regular.otf}[
+        Path = fonts/cheddar_gothic_rough_fonts/,
+        Extension = .otf,
+        UprightFont = *,
+        ItalicFont = CheddarGothicRough-Italic.otf]
+        \newcommand{\AIerodedblockFont}{\AIfontCheddarGothic}
+      } { % Then use Eroded as fallback
+        \IfFontExistsTF{ERODED~PERSONAL~USE}{
+          \newfontfamily\AIfontEroded{ERODED~PERSONAL~USE}
+          \newcommand{\AIerodedblockFont}{\AIfontEroded}
+        } { % Try load from file
+          \newfontfamily\AIfontEroded{eroded-personal-use.regular.ttf}[
+          Path = fonts/Eroded/,
+          Extension = .ttf,
+          UprightFont = *]
+          \newcommand{\AIerodedblockFont}{\AIfontEroded}
+        }
+      }
+    }
   }
 
   % Load Bahnschrift font if available.

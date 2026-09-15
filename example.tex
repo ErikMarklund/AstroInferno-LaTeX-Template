@@ -807,11 +807,11 @@ Some fonts are excluded due to licencing issues, whereas others are omitted beca
   |\AIfontAvalenRekas| & {\AIfontAvalenRekas Avalen Rekas} \\
   |\AIfontMuara| & {\AIfontMuara Muara} \\
   |\AIquoteFont| & {\AIquoteFont 1651 Alchemy (or fallback)} \\
-  |\AIerodedblockFont| & {\AIerodedblockFont Cheddar Gothic}\\
+  |\AIerodedblockFont| & {\AIerodedblockFont Cheddar Gothic (or fallback)}\\
   |\AIoldenglishFont| & {\AIoldenglishFont QT Cloistered Monk} \\
   |\AImechanicalFont| & {\AImechanicalFont Bahnschrift (or fallback)}
 \end{AITable}
-See |lib/astroinfernofonts.sty| for aliases and fallbackfonts.
+See |lib/astroinfernofonts.sty| for aliases and fallback fonts.
 
 The main fallback for 1651 Alchemy is Dominican. It is free to use,
 but not to redistribute. If you want to use it, put the font files in
@@ -841,7 +841,11 @@ Hopefully, by looking in |example.tex| and |lib/astroinfernofonts.sty| you will
 figure out how to load your new fonts.
 
 \section{Drop Caps}
-\AIDropCapLine{D}{rop caps are not used in official Astro Inferno so far, but it is a neat feature from the DnD5e Template that was kept when deriving this template. |\AIoldenglishFont| is used for drop caps.}
+\AIDropCapLine{D}{rop caps are not used in official Astro Inferno so
+  far, but it is a neat feature from the DnD5e Template that was kept
+  when deriving this template. 'QT Cloistered Monk' is used for drop
+  caps. Note that some text features might not work within the
+  text surrounding the dropcap.}
 
 \AINextChapterBefore{\null\\} % Just a newline as space above, but the fontsize is enormous
 \AINextChapterAfter{\normalsize \vspace{1cm}}
