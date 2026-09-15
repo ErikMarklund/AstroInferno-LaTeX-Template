@@ -104,6 +104,9 @@
   %
   features .clist_set:N  = \l_weapon_features_clist,
   features .initial:n  = {},
+  %
+  imagecode .tl_set:N  = \l_weapon_imagecode_tl,
+  imagecode .initial:n  = {},
 }
 
 
@@ -140,6 +143,9 @@
 {
   \group_begin:
   \keys_set:nn { astroinferno / weapon / weapondata } {#2}
+
+  % Inject image code here
+  \tl_if_empty:NF \l_weapon_imagecode_tl { \tl_use:N \l_weapon_imagecode_tl \par}
   
   % Some things are constant.
   \settowidth{\l_statbox_dim}{\latoblack STATS}

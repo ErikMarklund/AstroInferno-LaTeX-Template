@@ -152,6 +152,9 @@ fonts with other ones for which you have a license.
 
 \subsection{Images}
 Apart from the Astro Inferno logo and the Astro Inferno Coven Emblem, only images in the public domain, images derived from the parent template, and own work, have been used for the template and this example document. Attribution is given where appropriate.
+Cyclopean club image was adapted from: York Castle Museum,
+CC~BY-SA~4.0 \url{https://creativecommons.org/licenses/by-sa/4.0},
+via Wikimedia Commons.
 
 
 \part{Layout}
@@ -559,7 +562,7 @@ blessings = {
         - Funeral Mist
       }
     \end{center}
-  \end{minipage}\\[0.5cm]
+  \end{minipage}\\[0cm]
 }
 \chapter{Weapons} \label{ch:weapons}
 % We place this AIWeapon already here, or it will probably render on a separate page.
@@ -573,7 +576,23 @@ blessings = {
   targets=1,
   grade=1,
   skill=Crushing,
-  features={{Heavy, Phew!},{Hard, Rock hard indeed}}
+  features={{Heavy, Phew!},{Hard, Rock hard indeed}},
+  % Here we use the imagecode option, which executes a block of code
+  % early in the rendering of the weapon. Very dirty and un-LaTeX-y hack.
+  % Will take some fiddling to get right, and will hopefully be reimplemented
+  % in a better way.
+  % One disadvantage is that the extent of the image is not automatically detected
+  % by other elements on the page, so might cause overlap. Perhaps padding with extra
+  % \vspace{} outside \smash{...} could help.
+  imagecode={
+    \smash{ % Makes this "invisible" to the rest of the typesetting
+      \hspace{0.3cm} % Move down slightly. Will depend on image.
+      \raisebox{-0.4cm} { % Shift right to align with weapon name
+         % 0.93 Seems to be the right width to exactly span the visible part of the float.
+        \includegraphics[width=0.93\textwidth]{img/club.png}
+      }
+    }
+  }
   ]
 \end{AIWeapon*}
 \begin{AIWeapon*}{Sultr}
@@ -598,7 +617,10 @@ To get the page-spanning variant, use |AIweapon*|, which creates a float that sp
 resembling weapons under the Gear section in the Rulebook (see below).
 As always, float placement can be tricky to control, especially in twocolumn mode,
 so be patient and wait with perfecting the positioning until the document is close to finalised.
-Background images are not (yet) implemented.
+
+A crude and blasphemous way to display an image is implemented.
+See |example.tex| source code.
+
 \newpage % Actually new column
 \begin{AIWeapon}{Soul dicer}
   \AIWeaponData[
