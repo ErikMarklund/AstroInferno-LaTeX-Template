@@ -19,8 +19,9 @@
   breaklines=true,
 }
 
+\definecolor {fixnotecolour} {rgb} {0.3, 0.6, 0.5}
 \newcommand{\so}[1]{\sout{\color{gray}{#1}}}
-
+\newcommand{\fixnote}[1]{\textit{\color{fixnotecolour} {#1}}}
 \begin{document}
 
 \onecolumn{
@@ -71,15 +72,15 @@
 \begin{itemize}
 \item Parts are a bit \ldots dull.
 \item[x] \so{Consistent British or American English}\\
-  \textit{British English now.}
+  \fixnote{British English now.}
 \item[x] \so{Bring in left margin of full-page |AIWeapon|}
 \item[x] \so{Semitransparent weapon boxes}
 \item[x] \so{Semitransparent boxes?}\\
-  \textit{Still opaque by default.}
+  \fixnote{Still opaque by default.}
 \item[x] \so{Readaloud boxes do not look very Astro Inferno}\\
-  \textit{More plain now, which is better.}
+  \fixnote{More plain now, which is better.}
 \item[x] \so{Subparagraphs look just like paragraphs now, so remove them}\\
-  \textit{Removed from example.tex, but they can in principle
+  \fixnote{Removed from example.tex, but they can in principle
     be used by AISubArea under some circumstances, so they are still
     defined. subiparagraph is gone however.}
 \item[x] \so{Allow image border}
@@ -119,10 +120,10 @@
 \item AIMonster does not need a tcolorbox
 \item Better control over mode-specific colours
 \item[x] \so{Weapon images}\\
-  \textit{Pretty dirty. Could do with cleaner implementation.}
+  \fixnote{Pretty dirty. Could do with cleaner implementation.}
 \item[x] \so{Modular frames/looks for comment, readaloud, sidebar}
 \item[x] \so{Options for more spatious chapter headings}\\
-  \textit{Effectively added before-code and after-code.}
+  \fixnote{Effectively added before-code and after-code.}
 \item[x] \so{Automate turning off border for AIMakeElementImagepage}
 \item[x] \so{Make border printing optional}
 \item[x] \so{Simplify nested logic in |fancyfoot|}
@@ -147,7 +148,7 @@
 \item multicol instead of twocolumn
 \item[x] \so{Trouble and endtrouble boxes should actually overlap to
     accommodate longer lines.}\\
-  \textit{Works!}
+  \fixnote{Works!}
 \end{itemize}
 
 \subsection{Examples}
@@ -163,17 +164,17 @@
 \begin{itemize}
 \item Spacing after chapter title erratic with |\AINextChapterAfter|.
 \item[x] \so{Border top about a millimeter too low}\\
-  \textit{Made them 0.2~mm taller. Unclear why they were too short.}
+  \fixnote{Made them 0.2~mm taller. Unclear why they were too short.}
 \item[x] \so{Border text and page numbers follow mode, which can look bad on}
   border. Rulebook uses white whenever there is a border.
 \item[x] \so{Allow commas in troubles in |AIMonster|}
 \item[x] \so{modeafter option for |AIMakeElementImagepage| breaks
     compilation. Why?}\\
-  \textit{Reimplemented with before-code and after-code, removed mode,
+  \fixnote{Reimplemented with before-code and after-code, removed mode,
     modeafter etc. More robust.}
 \item Investigate why readaloud-style doesn't automatically change to
   current mode colour with AIquoteFont. Same for sidebar.
 \item[x] \so{AIloot needs fixing. AIloot\{+1\} makes double +}\\
-  \textit{(didn't really need fixing. Was called wrong in example.tex)}
+  \fixnote{(didn't really need fixing. Was called wrong in example.tex)}
 \end{itemize}
 \end{document}
