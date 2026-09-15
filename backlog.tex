@@ -89,9 +89,14 @@
 \item[x] \so{Make macro for titlepage}
 \item[x] \so{Make macro for TOCpage}
 \item[x] \so{Make macro for imagepage (last page in example.tex)}
-\item[x] \so{Find block font for chapter ``exponents''}
+\item[x] \so{Find block font for chapter ``exponents''}\\
+  \fixnote{Bahnschrift, fallback to D-DIN.}
 \item[x] \so{Change TOC font(s)}
 \item[x] \so{Swap out Eroded for Cheddar Gothic}
+  \begin{itemize}
+  \item Delete Cheddar Gothic from fonts due to licensing. Still load if available,
+    but use Eroded as backup.
+  \end{itemize}
 \item[x] \so{Center text vertically in sidebars}
 \item[x] \so{Use gap between paragraphs instead of indents}
 \item[x] \so{Enlarge (sub)section/chapter headings}
