@@ -166,38 +166,38 @@
         }
       }
     }
-  }
-
-  % Load Bahnschrift font if available.
-  \IfFontExistsTF{Bahnschrift}
-  {\newfontfamily\AIfontBahnschrift{Bahnschrift}[
-    BoldFont={Bahnschrift},
-    BoldFeatures={Weight=700},
-    ItalicFont={Bahnschrift},
-    ItalicFeatures={FakeSlant=0.2},
-    BoldItalicFont={Bahnschrift},
-    BoldItalicFeatures={Weight=700, FakeSlant=0.2}
-    ]
-  } {\IfFontExistsTF{fonts/Bahnschrift/Bahnschrift.ttf}
-    {
-      \newfontfamily\AIfontBahnschrift{Bahnschrift.ttf}
-      [Path = fonts/Bahnschrift/,
+  
+    % Load Bahnschrift font if available.
+    \IfFontExistsTF{Bahnschrift}
+    {\newfontfamily\AIfontBahnschrift{Bahnschrift}[
       BoldFont={Bahnschrift},
       BoldFeatures={Weight=700},
       ItalicFont={Bahnschrift},
       ItalicFeatures={FakeSlant=0.2},
       BoldItalicFont={Bahnschrift},
-      BoldItalicFeatures={Weight=700, FakeSlant=0.2}]
-    } { % Load fallback D-DIN
-      \newfontfamily\AIfontBahnschrift{D-DIN.otf}[
-      Path = fonts/d-din/,
-      Extension = .otf,
-      UprightFont = *,
-      ItalicFont = *-Italic,
-      BoldFont = *-Bold]
+      BoldItalicFeatures={Weight=700, FakeSlant=0.2}
+      ]
+    } {\IfFontExistsTF{fonts/Bahnschrift/Bahnschrift.ttf}
+      {
+        \newfontfamily\AIfontBahnschrift{Bahnschrift.ttf}
+        [Path = fonts/Bahnschrift/,
+        BoldFont={Bahnschrift},
+        BoldFeatures={Weight=700},
+        ItalicFont={Bahnschrift},
+        ItalicFeatures={FakeSlant=0.2},
+        BoldItalicFont={Bahnschrift},
+        BoldItalicFeatures={Weight=700, FakeSlant=0.2}]
+      } { % Load fallback D-DIN
+        \newfontfamily\AIfontBahnschrift{D-DIN.otf}[
+        Path = fonts/d-din/,
+        Extension = .otf,
+        UprightFont = *,
+        ItalicFont = *-Italic,
+        BoldFont = *-Bold]
+      }
     }
+    \newcommand{\AImechanicalFont}{\AIfontBahnschrift}
   }
-  \newcommand{\AImechanicalFont}{\AIfontBahnschrift}
 
 \keys_define:nn { astroinferno / fonts }
   {
