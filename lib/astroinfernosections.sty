@@ -39,12 +39,56 @@
   % Section formatting
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   % Part
+
+  \dim_new:N \l_AI_partwidth_dim
+  \dim_new:N \l_AI_partlabel_start_dim
+  \box_new:N \l_AI_part_box
+  \box_new:N \l_AI_partlabel_box
+
+  \NewDocumentCommand{\__AI_FormatPartTitle}{m}
+  {
+    % First render the title in a virtual box and measure its width
+    \hbox_set:Nn \l_AI_part_box {#1}
+    % Measure its width
+    \dim_set:Nn \l_AI_partwidth_dim { \box_wd:N \l_AI_part_box }
+    % Let \partname start at center - 0.5\l_AI_partwidth_dim + 1.5em
+    \dim_set:Nn \l_AI_partlabel_start_dim
+    { 0.5\textwidth - 0.5\l_AI_partwidth_dim }
+
+    % This code should result in a vertically centered part title,
+    % with the label above.
+
+    % Put part label in a box for later
+    \vbox_set:Nn \l_AI_partlabel_box {
+      \fontsize{30}{35}\selectfont
+      \hspace{\l_AI_partlabel_start_dim}\partname\ \thepart \hfill \null
+    }
+    % Negative space between label and name
+    \dim_set:Nn \l_tmpa_dim { -20pt }
+
+    % Render label. Add negative space.
+    \box_use:N \l_AI_partlabel_box \par
+    \vspace{\l_tmpa_dim}
+
+    % Print the part name.
+    {#1}\par
+
+    % Add space below to balance space occupied above part name.
+    \vspace*{\dim_eval:n {
+        \box_ht:N \l_AI_partlabel_box
+        + \box_dp:N \l_AI_partlabel_box
+        + \baselineskip
+        + \l_tmpa_dim
+      }
+    }
+  }
+
   \titleformat {\part}
     [display]
     { \centering \AIFontPart } % format
-    { \partname\ \thepart } % label
+    {} % label
     { 2ex } % sep
-    {} % before-code
+    {\__AI_FormatPartTitle} % before-code
 
   % Chapter
   \NewDocumentCommand{\__AI_FormatChapterTitle}{m}
