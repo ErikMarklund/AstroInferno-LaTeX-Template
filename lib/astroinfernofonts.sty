@@ -70,7 +70,7 @@
     \newfontfamily{\AIfontQTCloisteredMonk}{qtcloisteredmonk}
     \newcommand{\AIoldenglishFont}{\AIfontQTCloisteredMonk}
 
-    \newfontfamily\AIfontAvalenRekas{Avalen~Rekas.ttf}[Path = fonts/]
+    \newfontfamily\AIfontAvalenRekas{Avalen~Rekas.ttf}[Path = fonts/AvalenRekas/]
     \newcommand{\AIpartFont}{\AIfontAvalenRekas}
     \newcommand{\AIchapterFont}{\AIfontAvalenRekas}
     \newcommand{\AIsectionFont}{\AIfontAvalenRekas}
@@ -80,12 +80,12 @@
       \newfontfamily\AIfontMuara{Muara}
     } {
       % Look for font in fonts/
-      \IfFontExistsTF{fonts/Muara.ttf}
-      {\newfontfamily\AIfontMuara{Muara.ttf}[Path = fonts/, Extension = .ttf,UprightFont = *]}
+      \IfFontExistsTF{fonts/Muara/Muara.ttf}
+      {\newfontfamily\AIfontMuara{Muara.ttf}[Path = fonts/Muara/, Extension = .ttf,UprightFont = *]}
       {
         % Original file name is "MUARA DEMO .ttf", but trailing space
         % causes problem, so file was renamed.
-        \newfontfamily\AIfontMuara{MUARA~DEMO.ttf} [ Path = fonts/, Extension = .ttf, UprightFont = * ]
+        \newfontfamily\AIfontMuara{MUARA~DEMO.ttf} [ Path = fonts/Muara/, Extension = .ttf, UprightFont = * ]
       }
     }
 
