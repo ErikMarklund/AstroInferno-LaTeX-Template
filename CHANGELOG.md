@@ -13,33 +13,39 @@ This changelog is now flushed to only incorporate changes for the Astro Inferno 
 
 ### Added
 
-- AIWeapon environment
-- Fallback system for fonts. Try official ones first.
-- Commands for ready-made layout for titlepage and TOC page.
-- Command for ready-made page with single image.
-- Page borders
-- Master environment
-- Support for transparent boxes
-- Before-code and after-code for chapters to enable more advanced headings
-- Modular boxstyles
-
 ### Changed
 
-- Colour overhaul
-- Monster reimplementation
-- "Correct" chapter and (sub)section headings
-- Improved TOC
-- Consistent British English
+## [1.0.0] - 2026-09-18
+
+### Added in 1.0.0
+
+* AIWeapon environment
+* Fallback system for fonts. Try official ones first.
+* Commands for ready-made layout for titlepage and TOC page.
+* Command for ready-made page with single image.
+* Page borders
+* Master environment
+* Support for transparent boxes
+* Before-code and after-code for chapters to enable more advanced headings
+* Modular boxstyles
+
+### Changed in 1.0.0
+
+* Colour overhaul
+* Monster reimplementation
+* "Correct" chapter and (sub)section headings
+* Improved TOC
+* Consistent British English
 
 ## [Before flushing changelog]
 
-- Changed from pdfLaTeX to LuaLaTeX
-- Filenames changed to reflect Astro Inferno
-- Macro/command names changed to reflect Astro Inferno
-- Dark and Light modes implemented
-- Monster environment redesigned and streamlined
-- Spells removed
-- Reformatting: fonts, sizes, page numbering, footer, ...
-- New Astro Inferno symbols (damage, bones, ...)
-- Reworked example.log to reflect changes and showcase new features.
-- Adding backlog.tex
+* Changed from pdfLaTeX to LuaLaTeX
+* Filenames changed to reflect Astro Inferno
+* Macro/command names changed to reflect Astro Inferno
+* Dark and Light modes implemented
+* Monster environment redesigned and streamlined
+* Spells removed
+* Reformatting: fonts, sizes, page numbering, footer, ...
+* New Astro Inferno symbols (damage, bones, ...)
+* Reworked example.log to reflect changes and showcase new features.
+* Adding backlog.tex
