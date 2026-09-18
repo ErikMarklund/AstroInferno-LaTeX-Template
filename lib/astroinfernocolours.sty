@@ -18,30 +18,30 @@
 \definecolor {AIlightteal} {HTML} {E7E7E7} % Used in some tables, boxes
 \definecolor {AImidteal} {HTML} {D6D0BF}  % Used in some tables, boxes
 \definecolor {AIdarkteal} {HTML} {957736} % Used in weapon boxes WITH 25 % OPACITY
-\definecolor {AImidgraybrown} {HTML} {625C4F} % Used in some boxes
-\definecolor {AIdarkgraybrown} {HTML} {2A2822} % Used in some boxes
-\definecolor {AIlightgray} {HTML} {E9E8E7} % Used in some tables
-\definecolor {AImidgray} {HTML} {B5B6B6} % Used in some tables
-\definecolor {AImidsteelgray} {HTML} {394044} % Used in some boxes
-\definecolor {AIdarksteelgray} {HTML} {171B27} % Used in some boxes
+\definecolor {AImidgreybrown} {HTML} {625C4F} % Used in some boxes
+\definecolor {AIdarkgreybrown} {HTML} {2A2822} % Used in some boxes
+\definecolor {AIlightgrey} {HTML} {E9E8E7} % Used in some tables
+\definecolor {AImidgrey} {HTML} {B5B6B6} % Used in some tables
+\definecolor {AImidsteelgrey} {HTML} {394044} % Used in some boxes
+\definecolor {AIdarksteelgrey} {HTML} {171B27} % Used in some boxes
 \definecolor {AIledgreen} {HTML} {2bff63} % We use this for the LED boxstyle
 
 % The colour used in \AISetThemeColour when a new colour is not set
 \colorlet {themecolour} {AIlightteal}
 
 \NewDocumentCommand{\AIDarkColours} {} {
-  \colorlet {AItableodd} {AIdarksteelgray}
-  \colorlet {AItableeven} {AImidsteelgray}
-  \colorlet {commentcolour} {AImidgraybrown}
-  \colorlet {readaloudcolour} {AImidsteelgray}
+  \colorlet {AItableodd} {AIdarksteelgrey}
+  \colorlet {AItableeven} {AImidsteelgrey}
+  \colorlet {commentcolour} {AImidgreybrown}
+  \colorlet {readaloudcolour} {AImidsteelgrey}
   \colorlet {sidebarcolour} {AIdeepred}
 }
 \NewDocumentCommand{\AILightColours} {} {
-  \colorlet {AItableodd} {AIlightgray}
-  \colorlet {AItableeven} {AImidgray}
+  \colorlet {AItableodd} {AIlightgrey}
+  \colorlet {AItableeven} {AImidgrey}
   \colorlet {commentcolour} {AImidteal}
   \colorlet {readaloudcolour} {AIlightteal}
-  \colorlet {sidebarcolour} {AImidgray}
+  \colorlet {sidebarcolour} {AImidgrey}
 }
 % Element colours that change when \AISetThemeColour is used
 \colorlet {commentcolour} {themecolour} % AIComment background

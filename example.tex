@@ -108,7 +108,7 @@ work (see for example the slanted column margins in the Core Rulebook).
 This template will unfortunately never be able to reproduce or mimic
 all such features, but we hope it will be a useful tool for producing
 stunning campaign modules etc. Its key features plus some usefeul hacks are demonstrated here.
-Making good looking running test with chapters, sections, etc. is quite straightforward.
+Making good looking running text with chapters, sections, etc. is quite straightforward.
 To see how more complex things were accomplished, see the source code in |example.tex|.
 
 \subsection{Technical Notes}
@@ -117,10 +117,10 @@ Unlike the DnD5e LaTeX Template, this template was developed for LuaLaTeX.
 As such, the template will probably not work with pdf2latex.
 \paragraph{Prerequisites}
 All required \LaTeX{} packages are included in the current TeX~Live.
-Additional components, like fonts, are deistributed with the template.
+Additional components, like fonts, are distributed alongside the template.
 \paragraph{Class vs. Package}
-The parent template defines a class, but also works as a package that can be used in another document.
-The development of this template however has focused on the class aspect, and has not been tested as a package.
+The parent DnD5e template defines a class, but also works as a package that can be used in another documentclass.
+The development of this template has focused on the class, and it has not been tested as a package.
 As such, it is strongly recommended to use it as a class, like in this example document.
 
 \newpage
@@ -152,7 +152,7 @@ fonts with other ones for which you have a license.
 
 \subsection{Images}
 Apart from the Astro Inferno logo and the Astro Inferno Coven Emblem, only images in the public domain, images derived from the parent template, and own work, have been used for the template and this example document. Attribution is given where appropriate.
-Cyclopean club image was adapted from: York Castle Museum,
+Cyclopean club image was adapted from an image by York Castle Museum,
 \href{https://creativecommons.org/licenses/by-sa/4.0}{CC~BY-SA~4.0},
 via Wikimedia Commons.
 
@@ -169,11 +169,11 @@ alternative background image can be provided:\\[1em]
 |\AIMakeDark{img/your_cool_image.jpg}|\\[1em]
 Note that these commands will cause a page break. Thus, switching between the dark and
 light modes should probably be introduced at a relatively late stage
-in the qwriting process, when most of the content is finished,
+in the writing process, when most of the content is finished,
 as it will have notable implications for downstream typesetting.
 
 |\AIMakeDark*| and
-|\AIMakeLight*| suppress the page breaks, but should only be
+|\AIMakeLight*| suppress the page breaks, but should mainly be
 used for initialisation in the preamble because of the layout problems
 they cause if used mid document.
 
@@ -181,7 +181,7 @@ they cause if used mid document.
 One can also insert a new background without switching mode using |\AIPlaceNewBackground|.
 The starred version |\AIPlaceNewBackground*| will do the same, but for
 one page only (e.g., p.~\pageref{ch:box_customisation}\footnote{Image taken at Skokloster castle}).
-Both commands do \emph{not} cause a page break.
+Neither command will cause a page break.
 
 \subsection{Detecting Dark Mode}
 The function |\AIIsDarkMode{}{}| can be used to detect if dark mode is
@@ -263,7 +263,7 @@ This is where the Baroness spends most of her time. Walls of glassy black stone.
 This ditch has a board spanning it. Someone has rubbed it down with grease.
 
 \AISubArea{Gate}
-The gate is four meters wide and twice as tall. An ominous portcullis looking like a gilloutine blade hangs over any souls passing through.
+The gate is four meters wide and twice as tall. An ominous portcullis looking like a guillotine blade hangs over any souls passing through.
 
 \chapter{Boxes} \label{ch:text_boxes}
 
@@ -321,10 +321,10 @@ Odd and/or even rows can have transparent background.
 
 \chapter{Symbols}
 Astro Inferno uses various special symbols.
-Uuseful information about them can be found in the Astro
+Useful information about them can be found in the Astro
 Inferno Rules Reference
-\footnote{\url{https://astroinferno.com/astro_coven/srd/srd.html\#symbols}},
-and this template has commands for rendering them:
+\footnote{\url{https://astroinferno.com/astro_coven/srd/srd.html\#symbols}}.
+This template has commands for rendering the symbols:
 
 \begin{AITable}[header=Core Stat Tokens]{XX}
   Command & Result \\
@@ -378,7 +378,7 @@ Analogous commands are |\AIsanity|, |\AIaura|, |\AIdamage|, |\AImortality|, and 
 % Inject new background
 \AIPlaceNewBackground*{img/paper-darkgreen.jpg}
 % Play with margin colours
-\AIFancyMarginsColour{AImidgraybrown}
+\AIFancyMarginsColour{AImidgreybrown}
 \AIFancyMarginsTextColour{AIyellow}
 % This actually places the image behind the text, so will not compete
 % over space with anything else. Hence the vspace etc.
@@ -389,7 +389,7 @@ Analogous commands are |\AIsanity|, |\AIaura|, |\AIdamage|, |\AImortality|, and 
 \newcommand{\imgtextlevel}{10.5cm}
 \vspace{\imgtextlevel}
 \section{Inline and Float Images}
-Image placement in typesetting belongs in the $7^{th}$ level of hell.
+Image placement in typesetting belongs in the $\mathsf{7^{th}}$ level of hell.
 The template uses twocolumn mode, which makes it even harder.
 Floats that occupy a single column width often struggle to find a good
 place, so images might be more easily placed as non-floats (like the
@@ -406,9 +406,9 @@ of the standard dark-mode background image with
 |\AIPlaceNewBackground*|.
 \newpage % Actually column break
 
-\rule{1cm}{0pt}\vspace{\imgtextlevel}
+\vspace*{\imgtextlevel}
 \section{Image Page} \label{sec:imagepage}
-There is a macro |\AIMakeElementImagepage{}{}| for making pages displaying
+There is a command |\AIMakeElementImagepage{}{}| for making pages displaying
 a single image.
 An image must be provided with the |image| option. See other options
 in table. The two arguments are for 'before-code' and 'after-code',
@@ -509,8 +509,9 @@ again.
 \end{AIMonster}
 \newpage % Actually new column
 \noindent
-The |\AIMonster| environment is used to typeset monster and NPC stat blocks. The module supplies many functions to easily typeset the contents of the stat block.
-One can pass |\tcolorbox| options to |\AIMonster|. For example, we can
+The |\AIMonster| environment is used to typeset monster and NPC stat blocks.
+Inside, |\AIMonsterData| is used to render the monster data, and allows control over
+title style. Here, we
 change the title font for our Void cult demagogue to 'Minster'.
 %
 %It might be best to \emph{not} make |\AIMonster| a float. That is, do not pass |float=htb| as an option. Floats can be great in \LaTeX, but they make it difficult to position the adversary blocks correctly.
@@ -656,7 +657,7 @@ See |example.tex| source code.
     \rowcolor{AIyellow}
     |AIyellow|                 & Yellow seen in Rulebook, Gear section\\
     \rowcolor{AIundyingblue}
-    |AIundyingblue|                 & Blue used with Unying in Rulebook on p.~59\\
+    |AIundyingblue|                 & Blue used with Undying in Rulebook on p.~59\\
     \rowcolor{AIpaleblue}
     |AIpaleblue| & Pale blue seen in Rulebook, Destiny section \\
     \rowcolor{AIpetroleum}
@@ -667,18 +668,18 @@ See |example.tex| source code.
     |AImidteal| & Mid teal seen in tables, boxes \\
     \rowcolor{AIdarkteal}
     |AIdarkteal| & Dark teal seen in weapon boxes (with 25~\% opacity) \\
-    \rowcolor{AImidgraybrown}
-    \textcolor{AIwhite}{|AImidgraybrown|} & \textcolor{AIwhite}{ Grayish brown seen in boxes} \\
-    \rowcolor{AIdarkgraybrown}
-    \textcolor{AIwhite}{|AIdarkgraybrown|} & \textcolor{AIwhite}{ Dark grayish brown seen in boxes} \\
-    \rowcolor{AIlightgray}
-    |AIlightgray| & Light gray seen in tables \\
-    \rowcolor{AImidgray}
-    |AImidgray| & Gray seen in tables \\
-    \rowcolor{AImidsteelgray}
-    \textcolor{AIwhite}{|AImidsteelgray|} & \textcolor{AIwhite}{ Steel gray seen in boxes on dark pages} \\
-    \rowcolor{AIdarksteelgray}
-    \textcolor{AIwhite}{|AIdarksteelgray|} & \textcolor{AIwhite}{Dark steel gray seen in boxes on dark pages}\\
+    \rowcolor{AImidgreybrown}
+    \textcolor{AIwhite}{|AImidgreybrown|} & \textcolor{AIwhite}{ Greyish brown seen in boxes} \\
+    \rowcolor{AIdarkgreybrown}
+    \textcolor{AIwhite}{|AIdarkgreybrown|} & \textcolor{AIwhite}{ Dark greyish brown seen in boxes} \\
+    \rowcolor{AIlightgrey}
+    |AIlightgrey| & Light grey seen in tables \\
+    \rowcolor{AImidgrey}
+    |AImidgrey| & Grey seen in tables \\
+    \rowcolor{AImidsteelgrey}
+    \textcolor{AIwhite}{|AImidsteelgrey|} & \textcolor{AIwhite}{ Steel grey seen in boxes on dark pages} \\
+    \rowcolor{AIdarksteelgrey}
+    \textcolor{AIwhite}{|AIdarksteelgrey|} & \textcolor{AIwhite}{Dark steel grey seen in boxes on dark pages}\\
     \rowcolor{AIledgreen}
     {|AIledgreen|} & {LED green. See p.~\pageref{ch:box_customisation}}\\
   \end{tabularx}
@@ -696,7 +697,7 @@ Global colour variables to style |AIComment|, |AIReadAloud|, |AISidebar|, and |A
   |AItableeven| & |AITable| even rows
 \end{AITable}
 
-Those environemnts also accept an optional colour argument to set the colour for a single instance.
+Those environments also accept an optional colour argument to set the colour for a single instance.
 |AITable| instead takes |colourodd| and |coloureven|. See table of predefined colours.
 
 \begin{AITable}[
@@ -725,7 +726,7 @@ colours to the current |themecolour|.
 
 \begin{AIComment}
   {This Comment Is in Orange}
-  This comment is in the the new colour, because |\AISetThemeColour[AIorange]| was called.
+  This comment is in the new colour, because |\AISetThemeColour[AIorange]| was called.
 \end{AIComment}
 
 \begin{AISidebar}
@@ -755,7 +756,7 @@ colours to the current |themecolour|.
     border\footnote{Coloured borders have precedence over image borders.} \\
     |\AINoFancyMarginsImage| & Turns off image border \\
     |\AIFancyMarginsTopTransparency{t}| & Sets top tansparency of
-    coloured border to |t| (0-100) \\
+    coloured border to |t| $\in$ [0,100] \\
     |\AIFancyMarginsTextColour{colour}| & Colour for text and page
     numbers on border \\
     |\AINoFancyMarginsTextColour| & Use mode colour for border text
@@ -763,11 +764,9 @@ colours to the current |themecolour|.
   \end{tabularx}
 \end{table*}
 \section{Pages with Borders}
-Page borders are rendered on most pages where a current chapter is
-defined. Part splash pages is an example where they are not printed,
+Page borders are rendered on most pages with a defined current chapter.
+Part splash pages is thus an example where they are not printed,
 and everything up to and including the TOC will be borderless.
-Another example is when starting a new part, but not a new chapter,
-which will signal that no border should be rendered.
 Image pages are borderless by
 default, but this can be controlled with options (see
 p.~\pageref{sec:imagepage}).
@@ -777,10 +776,9 @@ chapter title. Page numbers will always be printed, irrespective of
 whether a border is rendered or not.
 
 The mode colour might have poor contrast with the borders, so a specific
-colour can be used for both page numbers and border text for all pages
-with rendered border. If unset, the mode colour will be used. See
-table below. The Astro Inferno Core Rulebook always uses white border
-text and page numbers for all pages with borders.
+colour -- |AIwhite| by default -- can be used for both page numbers and border text for all pages
+with border. See
+table below.
 
 \newpage
 \section{Customisation}
@@ -819,7 +817,7 @@ but not to redistribute. If you want to use it, put the font files in
 attempted to be loaded from normally installed fonts, due to boring
 technical issues.}
 See |lib/astroinfernofonts.sty| for the exact file
-names exepected.
+names expected.
 
 \newpage % Actually new column
 \subsection{Adding Fonts}
@@ -854,7 +852,7 @@ figure out how to load your new fonts.
 \section{Transparency}
 All three box environments can be made semitransparent by passing the
 option |opacityfill=O|, where |O| $\in$ [0, 1]. See |tcolorbox| package documentation
-for more precise control over transparency of different elements.
+for more precise control over the transparency of different elements.
 
 \begin{AIComment}[opacityfill=0.5]{You can see right through me!}
   This comment box was made with |opacityfill=0.5|.
@@ -867,12 +865,13 @@ Boxes (p.~\pageref{ch:text_boxes}) can be modified by passing |tcolorbox| option
 there are a number of predefined box style modules that can be assigned to specific box types.
 
 The box styles can be set with |\AICommentAddBoxstyle{}| (or corresponding commands for the other box types),
-which will affect all subsequent boxes of that type.
+which will affect all subsequent comment boxes.
 |\AICommentClearBoxstyle| clears the box style completely, and |\AICommentDefaultBoxstyle| reverts to default.
 It is however often more convenient to just pass a box style among the optional arguments to a box, e.g.,
-|\begin{AIComment}[AIboxstyleFrame]| to apply it to a single box instance.\footnote{With the current implementation,
+|\begin{AIComment}[AIboxstyleFrame]|, to apply it to a single box instance.\footnote{With the current implementation,
     setting a box style with the |...AddBoxstyle| command cannot set the background colour and a few other properties.
-    Those can however be set manually via the optional arguments to the box.}
+    Those can however be set manually via the optional arguments to the box.
+    In contrast, passing the boxstyle as an optional argument \emph{can} change those properties.}
 
 \newpage % Actually new column
 \subsection{Pointy Banner}
