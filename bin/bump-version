@@ -87,13 +87,32 @@ main() {
   info "new date: ${new_date}"
   info "new version: ${new_version}"
 
+  if [ "$(uname)" = "Darwin" ]; then
+    # macOS: empty string argument
+      I_FLAG=(-i '')
+  else
+      # Linux: just -i
+      I_FLAG=(-i)
+  fi
+  
   if [[ -z $dry_run ]]; then
-    sed -e '/ProvidesPackage/ s#'"${current_date}"'#'"${new_date}"'#' \
-        -e '/ProvidesPackage/ s#'"v${current_version}"'#'"v${new_version}"'#' \
-        -i astroinferno.sty astroinfernobook.cls
-    sed -e '/DATE_TAG/ s#'"${current_date}"'#'"${new_date}"'#' \
-	-e '/Version/ s#'"${current_version}"'#'"${new_version}"'#' \
-	-i astroinfernocore.def
+    echo "Updating astroinferno.sty"
+    sed "${I_FLAG[@]}" \
+	-e '/ProvidesExplPackage/ s#'"${current_date}"'#'"${new_date}"'#' \
+        -e '/ProvidesExplPackage/ s#'"${current_version}"'#'"${new_version}"'#' \
+        astroinferno.sty
+
+    echo "Updating astroinfernobook.cls"
+    sed "${I_FLAG[@]}" \
+	-e '/ProvidesExplClass/ s#'"${current_date}"'#'"${new_date}"'#' \
+        -e '/ProvidesExplClass/ s#'"${current_version}"'#'"${new_version}"'#' \
+        astroinfernobook.cls
+
+    echo "Updating astroinfernocore.def"
+    sed "${I_FLAG[@]}" \
+	-e '/DATE_TAG/ s#'"${current_date}"'#'"${new_date}"'#' \
+	-e '/VERSION_TAG/ s#'"${current_version}"'#'"${new_version}"'#' \
+	astroinfernocore.def
 
     git add astroinferno.sty astroinfernobook.cls astroinfernocore.def
     git commit -m "Release version ${new_version}"
