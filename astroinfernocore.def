@@ -1,6 +1,18 @@
 \ExplSyntaxOn
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% AIversion and AIreleasedate are automatically updated by bump-version. Do not touch!
+\NewDocumentCommand\AIversion{}
+{
+  0.8.0% VERSION TAG
+}
+
+\NewDocumentCommand\AIreleasedate{}
+{
+  26/09/18% DATE_TAG
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Package Dependencies
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

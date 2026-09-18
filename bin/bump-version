@@ -93,9 +93,9 @@ main() {
         -i astroinferno.sty astroinfernobook.cls
     sed -e '/DATE_TAG/ s#'"${current_date}"'#'"${new_date}"'#' \
 	-e '/Version/ s#'"${current_version}"'#'"${new_version}"'#' \
-	-i example.tex
+	-i astroinfernocore.def
 
-    git add astroinferno.sty astroinfernobook.cls example.tex
+    git add astroinferno.sty astroinfernobook.cls astroinfernocore.def
     git commit -m "Release version ${new_version}"
     git tag -a -m "Version ${new_version}" "v${new_version}" HEAD
   fi
