@@ -91,9 +91,8 @@ main() {
     sed -e '/ProvidesPackage/ s#'"${current_date}"'#'"${new_date}"'#' \
         -e '/ProvidesPackage/ s#'"v${current_version}"'#'"v${new_version}"'#' \
         -i astroinferno.sty astroinfernobook.cls
-    sed 's/'"${current_version}"'/'"${new_version}"'/g' -i README.md
 
-    git add README.md astroinferno.sty astroinfernobook.cls
+    git add astroinferno.sty astroinfernobook.cls
     git commit -m "Release version ${new_version}"
     git tag -a -m "Version ${new_version}" "v${new_version}" HEAD
   fi
