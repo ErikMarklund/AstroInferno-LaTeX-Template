@@ -1,5 +1,7 @@
 \ExplSyntaxOn
 
+\bool_new:N \l_skipit_bool
+\bool_set_false:N \l_skipit_bool
 
 \tl_clear_new:N \g_AI_chapter_before_tl
 \tl_clear_new:N \g_AI_chapter_before_skip_tl
@@ -105,14 +107,9 @@
     {\__AI_FormatPartTitle} % before-code
 
   % Chapter
-  \NewDocumentCommand{\__AI_FormatChapterTitle}{m}
+  \NewDocumentCommand{\__AI_FormatChapterExtras}{}
   {
-    % Switch to the huge font right here, ensuring it only affects the title
     \AIFontChapter
-
-    \bool_if:NTF {\g_AI_isToc_bool}
-    { #1 }
-    { #1 \hspace{1mm}\raisebox{35pt}{\AIfontBahnschrift\fontsize{28}{28}\bfseries\AIleadzero{\thechapter} } }
 
     \tl_if_empty:NTF \g_AI_chapter_after_tl {
       % Only add a bit of space if specified
@@ -137,6 +134,26 @@
     \tl_gclear:N \g_AI_chapter_after_belowskip_tl
   }
 
+  \NewDocumentCommand{\__AI_FormatChapterTitle}{m}
+  {
+    % Switch to the huge font right here, ensuring it only affects the title
+    \AIFontChapter
+
+    \bool_if:NTF {\g_AI_isToc_bool}
+    { #1 }
+    { #1 \hspace{1mm}\raisebox{35pt}{\AIfontBahnschrift\fontsize{28}{28}\bfseries\AIleadzero{\thechapter} } }
+
+    \__AI_FormatChapterExtras
+  }
+
+  \NewDocumentCommand{\__AI_FormatChapterTitleNonum}{m}
+  {
+    \AIFontChapter
+
+    { #1 }
+    \__AI_FormatChapterExtras
+  }
+
   \titleformat {\chapter}
     [ block ]
     { \filcenter } % format. Chapter font moved to \__AI_FormatChapterTitle
@@ -157,10 +174,21 @@
 
   \titleformat {name=\chapter, numberless}
     [ block ]
-    { \AIFontChapter \filcenter } % format
+    { \filcenter } % format
     {} % label
-    { \wordsep } % sep
-    {} % before-code
+    {0pt} % sep
+    { \tl_if_empty:NF \g_AI_chapter_before_tl {
+        % \leavemode temporarily leaves vertical mode,
+        % \endgraf is basically \par but is allowed here.
+        \leavevmode \normalfont \normalsize \g_AI_chapter_before_tl \endgraf
+        \tl_gclear:N \g_AI_chapter_before_tl
+      }
+      \tl_if_empty:NF \g_AI_chapter_before_skip_tl {
+        \vskip \g_AI_chapter_before_skip_tl
+        \tl_gclear:N \g_AI_chapter_before_skip_tl
+      }
+      \__AI_FormatChapterTitleNonum
+    } % before-code
 
   \titlespacing* {\chapter}
     { 0pt }  % left
