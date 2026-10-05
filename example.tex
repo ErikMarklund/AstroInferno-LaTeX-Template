@@ -314,9 +314,11 @@ Odd and/or even rows can have transparent background.
 % Note that whatever is put after will print with the chapter titlefont, so make sure
 % add things like \normalsize in your argument.
 % See lib/astroinfernosections.sty for implementation.
-\AINextChapterBefore{
-  \smash{\raisebox{-3.5cm}{\includegraphics[width=0.6\paperwidth]{img/astro-inferno-cuneiform.png}}}
-  \vspace{3cm}\\
+\AINextChapterBefore[0.3cm]{
+  % \smash{\raisebox{-3.5cm}{\includegraphics[width=0.6\paperwidth]{img/astro-inferno-cuneiform.png}}}
+  \raisebox{-5.2cm}{
+  \includegraphics[width=0.6\paperwidth]{img/astro-inferno-cuneiform.png}}
+  %\vspace{3cm}\\
 }
 \AINextChapterAfter{\normalsize\AIquoteFont\textit{And thou shalt take this rod in thine hand, wherewith thou shalt do signs.\\- Exodus 4:7}\\[1cm]}
 
@@ -375,20 +377,15 @@ Analogous commands are |\AIsanity|, |\AIaura|, |\AIdamage|, |\AImortality|, and 
   |\AIloot{-2}| & \AIloot{-2}
 \end{AITable}
 
+
+\AINextChapterAfter{\includegraphics[width=\textwidth]{img/jellyfish_faint.png}}
 \chapter{Images} \label{ch:images}
 % Inject new background
 \AIPlaceNewBackground*{img/paper-darkgreen.jpg}
 % Play with margin colours
 \AIFancyMarginsColour{AImidgreybrown}
 \AIFancyMarginsTextColour{AIyellow}
-% This actually places the image behind the text, so will not compete
-% over space with anything else. Hence the vspace etc.
-% Please don't tell anyone, because this goes against every principle LaTeX
-% stands for.
-\smash{\raisebox{-10.2cm}{\includegraphics[width=\textwidth]{img/jellyfish_faint.png}}}
 
-\newcommand{\imgtextlevel}{10.5cm}
-\vspace{\imgtextlevel}
 \section{Inline and Float Images}
 Image placement in typesetting belongs in the $\mathsf{7^{th}}$ level of hell.
 The template uses twocolumn mode, which makes it even harder.
@@ -407,7 +404,6 @@ of the standard dark-mode background image with
 |\AIPlaceNewBackground*|.
 \newpage % Actually column break
 
-\vspace*{\imgtextlevel}
 \section{Image Page} \label{sec:imagepage}
 There is a command |\AIMakeElementImagepage{}{}| for making pages displaying
 a single image.
@@ -431,12 +427,26 @@ again.
 
 \AIMakeElementImagepage[image=img/37-Phenex_seal.png]{\AIMakeLight}{\AIMakeDark}
 
-\chapter{Foes and Masters}
+\AINextChapterBefore[3cm]{}
+\AINextChapterAfter[2.5cm]{
+  \normalfont
+  \flushleft
+  The |AIMonster| environment is used to typeset monster and NPC stat blocks.
+  Inside, |{\textbackslash}AIMonsterData| is used to render the monster data, and allows control over
+  title style. Here, we change the title font for our Void cult demagogue to 'Minster'.\\[\baselineskip]
+  % This isn't entirely normal text, so can't make a new paragraph in the proper sense.
+  Because different fonts occupy different vertical space,
+  |AIMonster| blocks with different title fonts might align poorly when
+  put side by side. Here, we solve that by inserting an invisible strut
+  (a zero-width (or -height) |{\textbackslash}rule| that occupy a desired height (or width) )
+  into each title, which makes \LaTeX{} render the title lines to equal height.
+  The effective height can also be manipulated by passing the option |titleheight| with a suitable
+  value to |AIMonster|, which effectively changes the padding between the title and the next line.
+}
+\chapter{Adversaries}
 % Restore margin
 \AIFancyMarginsColour{AIdeepred}
 \AIFancyMarginsTextColour{AIwhite}
-\section{Adversaries}
-\vspace{1cm}
 %{\color{AIdeepred}\rule{\columnwidth}{1pt}}
 % Monster stat block
 %
@@ -448,9 +458,11 @@ again.
 % AIMonsterData to a constant value (if unset it will use 1.2ex, which
 % can vary with font etc.)
 %
-\begin{AIMonster}{Void cult accolyte}
+% Add some padding to align
+\begin{AIMonster}{\rule{0pt}{1.5cm}Void cult accolyte}
   \AIMonsterData
   [
+  titleheight=1.0cm,
   type = Souls - imps,
   class = Minions,
   being = Ashen souls,
@@ -473,11 +485,12 @@ again.
   lootblood = Soiled blood
  ]
 \end{AIMonster}
-\vfill
+\newpage % Actually new column
 \begin{AIMonster}
- {Void cult demagogue}
+ {\rule{0pt}{1.5cm}Void cult demagogue}
  \AIMonsterData
  [
+  titleheight=1.5cm,
   titlefont = \AIfontMinster,
   titlestyle = \fontsize{40}{46},
   type = Void priests - Obliviation deacons,
@@ -508,23 +521,20 @@ again.
  ]
 
 \end{AIMonster}
-\newpage % Actually new column
-\noindent
-The |\AIMonster| environment is used to typeset monster and NPC stat blocks.
-Inside, |\AIMonsterData| is used to render the monster data, and allows control over
-title style. Here, we
-change the title font for our Void cult demagogue to 'Minster'.
-%
 %It might be best to \emph{not} make |\AIMonster| a float. That is, do not pass |float=htb| as an option. Floats can be great in \LaTeX, but they make it difficult to position the adversary blocks correctly.
 
-\vfill
+\AINextChapterBefore[3cm]{}
+\AINextChapterAfter[1.5cm][1cm]{{\AIquoteFont \textit{I\"{a}! Shub-Niggurath! The Black Goat of the Woods with a Thousand Young!}}}
+\chapter{Masters}
 \hfill
 \includegraphics[width=\columnwidth]{img/hel.jpg}
-\hfill\null
-\vfill
-\section{Masters}
+\hfill\par
+\vspace{0.5cm}
+
 There is a command for typesetting masters, |\AIMaster|, which takes
-all needed information as options and packages it like this:\\[0.8cm]
+all needed information as options (|type|, |description|, |subtype|, |lair|, |lairtype|, |poetic|,
+|domains|, |symbols|, and |blessings|) and packages it like in the next column.
+\newpage % Actually new column
 
 \AIMaster[
 type = Jötunn,
@@ -550,7 +560,7 @@ blessings = {
 
 \AIMakeLight
 %\AINextChapterBefore{\vspace{2cm}\\}
-\AINextChapterAfter{
+\AINextChapterAfter[0.5cm]{
   \normalsize\AIquoteFont
   \begin{minipage}[t]{0.9\textwidth}
     \begin{center}
@@ -564,7 +574,7 @@ blessings = {
         - Funeral Mist
       }
     \end{center}
-  \end{minipage}\\[0cm]
+  \end{minipage}
 }
 \chapter{Weapons} \label{ch:weapons}
 % We place this AIWeapon already here, or it will probably render on a separate page.
@@ -737,8 +747,8 @@ colours to the current |themecolour|.
 \end{AISidebar}
 \endgroup
 
-\AINextChapterBefore{\vspace{1cm}\\}
-\AINextChapterAfter{\vspace{-1cm}}
+\AINextChapterBefore[3.5cm]{}
+\AINextChapterAfter{\vspace{1.5cm}}
 
 \chapter{Borders} \label{ch:borders}
 % Turn of coloured border, use image instead.
@@ -792,7 +802,7 @@ unexpected results depending on context. Here, we swap out the
 |AIdeepred| border for an image, then switch back at
 the start of next chapter.
 
-\AINextChapterBefore{\null\\[-1cm]}
+\AINextChapterBefore[1.5cm]{}
 \AINextChapterAfter{\normalsize\vspace{0.5cm}\null}
 \chapter{Fonts and Text Features} \label{ch:fonts}
 \AIFancyMarginsColour{AIdeepred}
@@ -846,7 +856,7 @@ figure out how to load your new fonts.
   caps. Note that some text features might not work within the
   text surrounding the dropcap.}
 
-\AINextChapterBefore{\null\\} % Just a newline as space above, but the fontsize is enormous
+\AINextChapterBefore[2.5cm]{} % Just a newline as space above, but the fontsize is enormous
 \AINextChapterAfter{\normalsize \vspace{1cm}}
 \chapter{Box Customisation} \label{ch:box_customisation}
 \AIPlaceNewBackground*{img/alchemy.jpg}

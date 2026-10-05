@@ -1,17 +1,31 @@
 \ExplSyntaxOn
 
 
-\tl_new:N \g_AI_chapter_before_tl
-\tl_new:N \g_AI_chapter_after_tl
-\tl_gclear:N \g_AI_chapter_before_tl
-\tl_gclear:N \g_AI_chapter_after_tl
+\tl_clear_new:N \g_AI_chapter_before_tl
+\tl_clear_new:N \g_AI_chapter_before_skip_tl
+\tl_clear_new:N \g_AI_chapter_after_tl
+\tl_clear_new:N \g_AI_chapter_after_aboveskip_tl
+\tl_clear_new:N \g_AI_chapter_after_belowskip_tl
 
-\NewDocumentCommand\AINextChapterBefore{ m }
-{ \tl_gset:Nn \g_AI_chapter_before_tl {#1} }
+% First argument is an optional vertical skip between before code and chapter title.
+% To just insert space above, call with first argument and empty second argument:
+%   \AINextChapterBefore[2cm]{}
+\NewDocumentCommand\AINextChapterBefore{ O{0pt} m }
+{
+  \tl_gset:Nn \g_AI_chapter_before_skip_tl {#1}
+  \tl_gset:Nn \g_AI_chapter_before_tl {#2}
+}
 
-\NewDocumentCommand\AINextChapterAfter{ m }
-{ \tl_gset:Nn \g_AI_chapter_after_tl {#1} }
-
+% First argument is an optional vertical skip between chapter title and after code.
+% Second argument is extra space below the after code.
+% To just insert space below, call with first argument and empty third argument:
+%   \AINextChapterAfter[1cm]{}
+\NewDocumentCommand\AINextChapterAfter{ O{0pt} O{0pt} m }
+{
+  \tl_gset:Nn \g_AI_chapter_after_aboveskip_tl {#1}
+  \tl_gset:Nn \g_AI_chapter_after_belowskip_tl {#2}
+  \tl_gset:Nn \g_AI_chapter_after_tl {#3}
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Needed for hack to disable chapter number appearing in TOC title
@@ -93,25 +107,54 @@
   % Chapter
   \NewDocumentCommand{\__AI_FormatChapterTitle}{m}
   {
+    % Switch to the huge font right here, ensuring it only affects the title
+    \AIFontChapter
+
     \bool_if:NTF {\g_AI_isToc_bool}
     { #1 }
     { #1 \hspace{1mm}\raisebox{35pt}{\AIfontBahnschrift\fontsize{28}{28}\bfseries\AIleadzero{\thechapter} } }
-    % 
-    \tl_if_empty:NF \g_AI_chapter_after_tl {
-      \newline
+
+    \tl_if_empty:NTF \g_AI_chapter_after_tl {
+      % Only add a bit of space if specified
+      \tl_if_empty:NF \g_AI_chapter_after_aboveskip_tl {
+        \vspace*{\g_AI_chapter_after_aboveskip_tl}
+      }
+    } {
+      % The \normalsize below also makes any text below normalsized by default
+      \tl_if_empty:NTF \g_AI_chapter_after_aboveskip_tl {
+        \normalsize \newline
+      } { % Add extra space as specified
+        \normalsize \\[\g_AI_chapter_after_aboveskip_tl]
+      }
       \tl_use:N \g_AI_chapter_after_tl
-      \tl_gclear:N \g_AI_chapter_after_tl
+      \tl_if_empty:NF \g_AI_chapter_after_belowskip_tl {
+        % add some extra space defined is second optional argument to AINextChapterAfter
+        \vskip \g_AI_chapter_after_belowskip_tl
+      }
     }
+    \tl_gclear:N \g_AI_chapter_after_tl
+    \tl_gclear:N \g_AI_chapter_after_aboveskip_tl
+    \tl_gclear:N \g_AI_chapter_after_belowskip_tl
   }
+
   \titleformat {\chapter}
     [ block ]
-    { \AIFontChapter \filcenter } % format
+    { \filcenter } % format. Chapter font moved to \__AI_FormatChapterTitle
     {} % label
     {0pt} % sep
-    { {\g_AI_chapter_before_tl} \tl_gclear:N \g_AI_chapter_before_tl % Execute, then clear
+    { \tl_if_empty:NF \g_AI_chapter_before_tl {
+        % \leavemode temporarily leaves vertical mode,
+        % \endgraf is basically \par but is allowed here.
+        \leavevmode \normalfont \normalsize \g_AI_chapter_before_tl \endgraf
+        \tl_gclear:N \g_AI_chapter_before_tl
+      }
+      \tl_if_empty:NF \g_AI_chapter_before_skip_tl {
+        \vskip \g_AI_chapter_before_skip_tl
+        \tl_gclear:N \g_AI_chapter_before_skip_tl
+      }
       \__AI_FormatChapterTitle
     } % before-code
-    
+
   \titleformat {name=\chapter, numberless}
     [ block ]
     { \AIFontChapter \filcenter } % format

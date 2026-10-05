@@ -15,6 +15,8 @@ This changelog is now flushed to only incorporate changes for the Astro Inferno 
 
 ### Changed
 
+* Control of spacing aroung chapter headings much improved.
+
 ## [1.0.0] - 2026-09-18
 
 ### Added in 1.0.0
