@@ -204,9 +204,43 @@ part~\ref{ch:weapons}.
 
 \AIMakeDark
 
-\chapter{Sections}
-\noindent
+\AINextChapterBefore[3cm]{}
+\AINextChapterAfter[1.5cm][1cm]{\AIquoteFont \textit{If you are going through hell, keep going.\\-Winston Churchill}}
+\chapter{Chapters}
 This package is designed to aid you in writing beautifully typeset documents for Astro Inferno. It starts by adjusting the section formatting from the defaults in \LaTeX{} to something a bit more familiar to the reader. The chapter formatting is displayed above.
+Chapters cause a page break, and the chapter title is put on top of a new page by defauls.
+Chapter titles are also written on the page border (see p.~\pageref{ch:borders}).
+To make unnumbered chapters, use |\chapter*|, but be aware that such chapters are not included in the table of contents by default.
+
+\section{Decoration, spaces}
+Chapter titles can get extra space added above and/or below.
+They can also have text (or images and other things) above or below.
+To add text etc. above a chapter title, use |\AINextChapterBefore[]{}|.
+Similarly, |\AINextChapterAfter[][]{}| places text or images below the chapter title.
+Both commands affect the \emph{next} chapter only.
+Both commands are used for the chapter title on this page, and many others in this document.
+
+\newpage % Actually new column
+\begin{AIComment}[unbreakable]{|{\textbackslash}AINextChapterBefore[space]\{text\}|}
+  Inserts space, text, images, etc. above the next chapter title. Parameters:
+  \begin{itemize}[leftmargin=1.3cm]
+  \item[|space|] space added above |text|.
+  \item[|text|] text (or images etc) to be inserted above chapter title.
+  \end{itemize}
+  To just add space, provide a value for |space| but leave |text| empty.
+\end{AIComment}
+\vspace{0.45cm} % Ad hoc to balance columns
+\begin{AIComment}[unbreakable]{|{\textbackslash}AINextChapterAfter[space1][space2]\{text\}|}
+  Inserts space, text, images, etc. below the next chapter title. Parameters:
+  \begin{itemize}[leftmargin=1.3cm]
+  \item[|space1|] space added above |text|.
+  \item[|space2|] space added below |text|. Ignored if |text| is empty.
+  \item[|text|] text (or images etc) to be inserted below chapter title.
+  \end{itemize}
+  To just add space, provide a value for |space1| but leave |text| empty.
+\end{AIComment}
+
+\chapter{Sections}
 
 \section{Section}
 Sections break up chapters into large groups of associated text.
@@ -239,6 +273,8 @@ You have acquired a package which aids in typesetting source material for one of
   \item You have advantage on COG checks to typeset new content.
   \item When you fail an COG check to typeset new content, you can ask questions online at the package's website.
 \end{itemize}
+
+\newpage % Actually new column
 
 \AIItemHeader{Foo's Quill}{Wondrous item, rare}
 This quill has 3 charges. While holding it, you can use an action to expend 1 of its charges. The quill leaps from your hand and writes a contract applicable to your situation.
