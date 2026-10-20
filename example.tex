@@ -302,7 +302,7 @@ This ditch has a board spanning it. Someone has rubbed it down with grease.
 \AISubArea{Gate}
 The gate is four meters wide and twice as tall. An ominous portcullis looking like a guillotine blade hangs over any souls passing through.
 
-\chapter{Boxes} \label{ch:text_boxes}
+\chapter{Boxes and Tables} \label{ch:text_boxes}
 
 \section{Text Boxes}
 The module has three environments for setting text apart so that it is drawn to the reader's attention. |AIReadAloud| is used for text that a game master would read aloud.
@@ -323,6 +323,10 @@ The |AISidebar| is not breakable and is best used floated toward a page corner a
 \begin{AISidebar}[float=!b]{Behold the AISidebar!}
   The |AISidebar| is used as a sidebar. It does not break over columns and is best used with a figure environment to float it to one corner of the page where the surrounding text can then flow around it.
 \end{AISidebar}
+
+Each box environment is defined as a |tcolorbox|, and can thus be customised
+via |tcolorbox| options. A number of ready-made box styles are
+described in section~\ref{sec:boxstyles}, \textbf{\nameref{sec:boxstyles}}.
 
 \newpage % Actually new column
 \section{Tables}
@@ -906,7 +910,7 @@ for more precise control over the transparency of different elements.
   The text remains opaque.
 \end{AIComment}
 
-\section{Box Styles}
+\section{Box Styles} \label{sec:boxstyles}
 Boxes (p.~\pageref{ch:text_boxes}) can be modified by passing |tcolorbox| options
 (see the |tcolorbox| package documentation). To facilitate customisation of boxes
 there are a number of predefined box style modules that can be assigned to specific box types.
