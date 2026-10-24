@@ -97,15 +97,15 @@
   { \RequirePackage {lib/astroinfernodeprecated} }
 
 % Main modules in alphabetical order
-\RequirePackage {lib/astroinfernocomment}    % inline comment boxes
-\RequirePackage {lib/astroinfernoheader}     % fancy headers and footers
-\RequirePackage {lib/astroinfernomonster}    % stat blocks
 \RequirePackage {lib/astroinfernoboxstyles}  % boxstyles
+\RequirePackage {lib/astroinfernocomment}    % inline comment boxes
+\RequirePackage {lib/astroinfernoelements}   % ready-made elements
+\RequirePackage {lib/astroinfernoheader}     % fancy headers and footers
+\RequirePackage {lib/astroinfernomaster}     % masters
+\RequirePackage {lib/astroinfernomonster}    % stat blocks
 \RequirePackage {lib/astroinfernoreadaloud}  % read-aloud text
 \RequirePackage {lib/astroinfernosections}   % section styling and special section headers
 \RequirePackage {lib/astroinfernosidebar}    % sidebars
 \RequirePackage {lib/astroinfernotable}      % tables
 \RequirePackage {lib/astroinfernotoc}        % table of contents styling
 \RequirePackage {lib/astroinfernoweapon}     % weapons
-\RequirePackage {lib/astroinfernomaster}     % masters
-\RequirePackage {lib/astroinfernoelements}   % ready-made elements
