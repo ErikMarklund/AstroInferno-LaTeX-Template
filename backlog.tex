@@ -128,6 +128,7 @@
 
 \subsection{Functionality}
 \begin{itemize}
+\item Simple column-balancing feature.
 \item Make option to automatically exclude personal-use fonts
 \item Implement AIMonster variant with Key in the Machine style
 \item[x] \so{Master environment}
@@ -173,8 +174,10 @@
 
 \subsection{Issues}
 \begin{itemize}
-\item In TOC, there is more space below a part than above. Probably
-  looks better the other way round.
+\item[x] \so{In TOC, there is more space below a part than above. Probably
+    looks better the other way round.}\\
+  \fixnote{Removed aftercode in |{\tbs}titlecontents{part}|, where
+    there was an added space.}
 \item[x] \so{Spacing after chapter title erratic with |{\tbs}AINextChapterAfter|}.\\
   \fixnote{|{\tbs}AINextChapterBefore| now sits snuggly atop the chapter title.
     |{\tbs}AINextChapterBefore| ends with a |{\tbs}normalsize {\tbs}newline|.}
