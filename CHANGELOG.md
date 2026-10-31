@@ -13,9 +13,16 @@ This changelog is now flushed to only incorporate changes for the Astro Inferno 
 
 ### Added
 
+* Key and the Machine (katm) style adversaries.
+* New internal nested list standard.
+* AIMonsterData takes option that allows code injection ahead of
+  monster name, e.g. to help alignment.
+* New colours for katm adversary boxes.
+
 ### Changed
 
 * Control of spacing aroung chapter headings much improved.
+* Troubles, end troubles, harvest use new ;- and >-separated nested lists.
 
 ## [1.0.0] - 2026-09-18
 

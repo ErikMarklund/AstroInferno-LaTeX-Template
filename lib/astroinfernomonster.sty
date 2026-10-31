@@ -14,9 +14,14 @@
   titleheight .tl_set:N  = \l_monster_titleheight_tl,
   titleheight .initial:n  = -1pt, % if -1, use 1ex
   titleheight .value_required:n = true,
+  % titlealign is used for the third optional argument (internal alignment) in a parbox around the monster name
   titlealign .tl_set:N  = \l_monster_titlealign_tl,
   titlealign .initial:n  = t,
   titlealign .value_required:n = true,
+  % Choose between katm, core. Will determine how troubles are rendered.
+  monsterstyle .tl_set:N = \l_monster_style_tl,
+  monsterstyle .initial:n  = core,
+  monsterstyle .value_required:n  = true,
   %
   type .tl_set:N  = \l_monster_type_tl,
   type .initial:n  = -~unknown~-,
@@ -36,29 +41,47 @@
   bones .tl_set:N  = \l_monster_bones_tl,
   bones .initial:n  = 0,
   bones .value_required:n  = true,
+  quantity .tl_set:N  = \l_monster_quantity_tl,
+  quantity .initial:n  = {},
+  quantity .value_required:n  = true,
   % Troubles and endtroubles should be semicolon-separated lists,
   % because they need to accept commas in the items.
-  troubles .tl_set:N  = \l_monster_troubles_raw_tl,
-  troubles .initial:n  = {e},
+  % Each item should be a >-separated list:
+  %   katm: action > description > mechanics
+  %   core: action > combined description/mechanics
+  troubles .tl_set:N  = \l_monster_troubles_tl,
+  troubles .initial:n  = {},
   troubles .value_required:n  = true,
-  endtroubles .tl_set:N  = \l_monster_end_troubles_raw_tl,
-  endtroubles .initial:n  = {e},
+  % See troubles above. Here:
+  %   katm: Action > narrative > description > mechanics
+  %   cofre: Action > combined
+  endtroubles .tl_set:N  = \l_monster_end_troubles_tl,
+  endtroubles .initial:n  = {},
   endtroubles .value_required:n  = true,
+  % See troubles above. Here:
+  % katm: weakness > mechanics
+  % core: weakness > mechanics (not present in core rulebook)
+  weakness .tl_set:N  = \l_monster_weakness_tl,
+  weakness .initial:n  = {},
+  weakness .value_required:n  = true,
   traits .tl_set:N  = \l_monster_traits_tl,
   traits .initial:n  = -~unknown~-,
   traits .value_required:n  = true,
   description .tl_set:N  = \l_monster_description_tl,
   description .initial:n  = -~unknown~-,
   description .value_required:n  = true,
-  % Harvest should be a comma-separated list of items.
-  % Each item is {symbol, item, qty}. For example,
-  % {symbol=\AIsecularsymbol, item=Erthian ingots, qty={\scriptsize 1D6}/\AIspsymbol}
+  % See troubles above. Here:
+  %   Symbol > item > quantity
   harvest .tl_set:N = \l_monster_harvest_tl,
   harvest .initial:n  = {},
   harvest .value_required:n  = true,
   harvestchoose .tl_set:N = \l_monster_harvestchoose_tl,
   harvestchoose .initial:n  = one,
   harvestchoose .value_required:n  = true,
+  % Extra space under endtroubles/weakness box. katm only.
+  harvestgap .tl_set:N = \l_monster_harvestgap_tl,
+  harvestgap .initial:n  = {0.2cm},
+  harvestgap .value_required:n  = true,
   lootqty .tl_set:N  = \l_monster_lootqty_tl,
   lootqty .initial:n  = {0},
   lootqty .value_required:n  = true,
@@ -66,9 +89,14 @@
   lootblood .initial:n  = -~unknown~-,
   lootblood .value_required:n  = true  
 }
-  
+
+% Second optional argument allows a preamble for the title.
+% For example, \rule{0pt}{1cm} to insert a strut to regulate effective height,
+% which is useful for alignment of side-by-side adversaries with different
+% title fonts.
 \NewDocumentEnvironment{AIMonster} {O{} m}
 {
+  \tl_set:Nn  \l_monster_title_preamble_tl {#1}
   \tl_set:Nn  \l_monster_name_tl {#2}
   \begin{minipage}[t]{\columnwidth}
     \AIFontStatBlockBody
@@ -77,15 +105,19 @@
   \end{minipage}
 }
 
+
 \dim_new:N \l_theheight_dim
+
 \NewDocumentCommand{\AIMonsterData} {O{}}
 {
   \keys_set:nn { astroinferno / monster / monsterdata } {#1}
 
    % Split the raw token lists by semicolons into a sequence
-  \seq_set_split:NnV \l_monster_troubles_seq { ; } \l_monster_troubles_raw_tl
-  \seq_set_split:NnV \l_monster_end_troubles_seq { ; } \l_monster_end_troubles_raw_tl
- 
+  \seq_set_split:NnV \l_monster_troubles_seq { ; } \l_monster_troubles_tl
+  \seq_set_split:NnV \l_monster_end_troubles_seq { ; } \l_monster_end_troubles_tl
+  \seq_set_split:NnV \l_monster_weakness_seq { ; } \l_monster_weakness_tl
+  \seq_set_split:NnV \l_monster_harvest_seq { ; } \l_monster_harvest_tl
+
   % Print name
   % Is titleheight set? If >=0 then yes.
   \dim_compare:nTF {\l_monster_titleheight_tl < 0pt}
@@ -94,7 +126,7 @@
 
   { \l_monster_titlefont_tl \l_monster_titlestyle_tl \selectfont
     \parbox[t][\l_theheight_dim][\l_monster_titlealign_tl]{\columnwidth} {
-      \hfill \l_monster_name_tl \hfill\null
+      \hfill \l_monster_title_preamble_tl \l_monster_name_tl \hfill\null
     }\\[2mm]
   }
   \hfill\MakeUppercase{\textbf {\scriptsize{\l_monster_type_tl}}}\hfill\null\\[1.4em]
@@ -106,32 +138,98 @@
   \AImortality{\l_monster_mortality_tl}\hspace{2em}
   \AIbones{\l_monster_bones_tl}
   \hfill\null\\[0.6em]
+  \tl_if_eq:VnF {\l_monster_quantity_tl} {}
+  {\hfill\MakeUppercase{\textbf {\scriptsize{\l_monster_quantity_tl}}}\hfill\null\\[0.3em]}
+  % katm does traits before troubles
+  \tl_if_eq:VnT {\l_monster_style_tl} {katm}
+  {\hfill\MakeUppercase{\textbf {\scriptsize{\l_monster_traits_tl}}}\hfill\null\\[0.8em]}
   % Troubles
-  \AIMonsterTroubles{\l_monster_troubles_seq}{\l_monster_end_troubles_seq}
-  \hfill\MakeUppercase{\textbf {\scriptsize{\l_monster_traits_tl}}}\hfill\null\\[0.4em]
+  \AIMonsterTroubles{\l_monster_troubles_seq}{\l_monster_end_troubles_seq}{\l_monster_weakness_seq}
+  % core does traits here instead
+  \tl_if_eq:VnF {\l_monster_style_tl} {katm}
+  {\hfill\MakeUppercase{\textbf {\scriptsize{\l_monster_traits_tl}}}\hfill\null\\[0.4em]}
   {\small{\l_monster_description_tl}\\[1em]}
   % Harvest and loot
    \AIMonsterHarvest[\l_monster_harvestchoose_tl]
-   {\l_monster_harvest_tl}{\l_monster_lootqty_tl}{\l_monster_lootblood_tl}
+   {\l_monster_harvest_seq}{\l_monster_lootqty_tl}{\l_monster_lootblood_tl}
 }
 
-\NewDocumentCommand {\AIMonsterTroubles} {m m}
+
+% Used for setting how much the box extends outside column margins
+\dim_new:N \l__katm_extend_dim
+
+\NewDocumentCommand{\__put_in_katm_box} { O{} +m }
 {
-  % Here, we make two minipages that side by side,
-  % but each wider than half a column, separated by
-  % a negative space. Why? Because this can allow some
-  % (end)troubles to be longer than half a line without
-  % linebreaks. The downside is that the texts might overlap.
-  % If that happens, fix manually by reordering the (end)troubles
-  % or inserting manual linebreaks where needed.
-  % Other solutions are possible, but this should work most
-  % of the time and is simple.
-  \noindent
+  \dim_set:Nn \l__katm_extend_dim {0.35cm}
+  \begin{tcolorbox}[
+    enhanced~jigsaw, 
+    unbreakable,
+    parbox       = false, 
+    arc = 0.2cm,
+    arc~is~angular,
+    left~skip = -\l__katm_extend_dim,   % extend a bit to the sides of the column
+    right~skip = -\l__katm_extend_dim,
+    boxrule      = 0.5pt,
+    titlerule      = 0pt,
+    beforeafter~skip  = 0.135cm,
+    toptitle     = 2pt,
+    bottomtitle = 2pt,
+    boxsep       = 3pt,
+    left         = 6pt,
+    right        = 6pt,
+    top          = 0pt,
+    bottom       = 6pt,
+    fonttitle    = \AIfontMuara,
+    fontupper    = \normalsize \normalfont,
+    fontlower    = \normalsize \normalfont,
+    center~title,
+    colframe  = AIkatmboxtext,
+    coltitle     = AIkatmboxtext,
+    colback    = AIkatmboxtransp,
+    colbacktitle    = AIkatmboxtransp,
+    opacityfill = 0.8, % deduced from katm pdf
+    opacitytext = 1,
+    opacityframe = 1,
+    #1
+    ]
+    {#2}
+  \end{tcolorbox}
+}
+
+% Used by the internal (end)trouble rendering functions.
+\seq_new:N \l__tr_seq
+\tl_new:N \l__trouble_action_tl
+\tl_new:N \l__trouble_narrative_tl
+\tl_new:N \l__trouble_description_tl
+\tl_new:N \l__trouble_mechanics_tl
+
+% Render (end)troubles core rulebook style
+\NewDocumentCommand{\__core_troubles}{ m m m }
+{
+    % Here, we make two minipages that side by side,
+    % but each wider than half a column, separated by
+    % a negative space. Why? Because this can allow some
+    % (end)troubles to be longer than half a line without
+    % linebreaks. The downside is that the texts might overlap.
+    % If that happens, fix manually by reordering the (end)troubles
+    % or inserting manual linebreaks where needed.
+    % Other solutions are\ possible, but this should work most
+    % of the time and is simple.
   \small
   \begin{minipage}[t]{0.7\columnwidth}
     {\latoblack \textls[200]{\scriptsize TROUBLES}}\\
     \it
-    \seq_use:Nn #1 { \\ } 
+    \seq_map_inline:Nn #1 {
+      \seq_set_split:Nnn \l__tr_seq { > } {##1}
+
+      \tl_set:Ne \l__trouble_action_tl {\seq_item:Nn \l__tr_seq {1} }
+      \tl_set:Ne \l__trouble_mechanics_tl  {\seq_item:Nn \l__tr_seq {2} }
+
+      \l__trouble_action_tl
+      \tl_if_empty:NF \l__trouble_mechanics_tl
+      {:~\l__trouble_mechanics_tl}\\
+    }
+
   \end{minipage}
   \hspace{-0.61\columnwidth}
   \hfill
@@ -139,78 +237,238 @@
     \raggedleft
     {\latoblack \textls[200]{\scriptsize END~TROUBLE}}\\
     \it
-    \seq_use:Nn #2 { \\ }
-  \end{minipage}\\
+    \seq_map_inline:Nn #2 {
+      \seq_set_split:Nnn \l__tr_seq { > } {##1}
 
-  \vspace{\baselineskip} % Add vertical space after the lists
+      \tl_set:Ne \l__trouble_action_tl {\seq_item:Nn \l__tr_seq {1} }
+      \tl_set:Ne \l__trouble_mechanics_tl  {\seq_item:Nn \l__tr_seq {2} }
+
+      \l__trouble_action_tl
+      \tl_if_empty:NF \l__trouble_mechanics_tl
+      {:~\l__trouble_mechanics_tl}\\
+    }
+ \end{minipage}\\
+
+ % No weakness yet
+ \vspace{\baselineskip} % Add vertical space after the lists
+}
+
+% Render (end)troubles Key and the Machine style
+\NewDocumentCommand{\__katm_troubles}{ m m m }
+{
+  % Troubles
+  \__put_in_katm_box[
+  fonttitle = \fontsize{16}{14} \AIfontMuara \selectfont,
+  title = Trouble,
+  ]
+  {
+    \small
+    \seq_map_inline:Nn #1 {
+      \seq_set_split:Nnn \l__tr_seq { > } {##1}
+
+      \tl_set:Ne \l__trouble_action_tl {\seq_item:Nn \l__tr_seq {1} }
+      \tl_set:Ne \l__trouble_description_tl {\seq_item:Nn \l__tr_seq {2} }
+      \tl_set:Ne \l__trouble_mechanics_tl  {\seq_item:Nn \l__tr_seq {3} }
+
+      \begin{itemize}
+        % Action
+      \item {\bfseries \l__trouble_action_tl :}
+        % Description
+        \tl_if_empty:NF \l__trouble_description_tl
+        {~\l__trouble_description_tl}
+        % Mechanics
+        \tl_if_empty:NF \l__trouble_mechanics_tl
+        {~\mbox{(\l__trouble_mechanics_tl)}}
+      \end{itemize}
+    }
+  }
+
+  % End troubles
+  \__put_in_katm_box[
+  fonttitle = \fontsize{16}{14} \AIfontMuara \selectfont,
+  title = End Trouble,
+  ]
+  {
+    \small
+    \seq_map_inline:Nn #2 {
+      \seq_set_split:Nnn \l__tr_seq { > } {##1}
+
+      \tl_set:Ne \l__trouble_action_tl {\seq_item:Nn \l__tr_seq {1} }
+      \tl_set:Ne \l__trouble_narrative_tl {\seq_item:Nn \l__tr_seq {2} }
+      \tl_set:Ne \l__trouble_description_tl {\seq_item:Nn \l__tr_seq {3} }
+      \tl_set:Ne \l__trouble_mechanics_tl  {\seq_item:Nn \l__tr_seq {4} }
+
+      \begin{itemize}
+        % Action
+      \item {\bfseries \l__trouble_action_tl :}
+        % Narrative
+        \tl_if_empty:NF \l__trouble_narrative_tl
+        {{~\it \AIquoteFont \selectfont \l__trouble_narrative_tl}}
+        % Description
+        \tl_if_empty:NF \l__trouble_description_tl
+        {{\color{AIkatmboxtext} {} ~ {\textbar} \nobreakspace \l__trouble_description_tl }}
+        % Mechanics
+        \tl_if_empty:NF \l__trouble_mechanics_tl
+        {{} ~ \mbox{(\l__trouble_mechanics_tl)}}
+      \end{itemize}
+    }
+  }
+
+  % Make weakness box if non-empty weakness option
+  \tl_if_eq:VnF {\l_monster_weakness_tl} {}
+  {
+    \__put_in_katm_box[
+    fonttitle = \fontsize{16}{14} \AIfontMuara \selectfont,
+    title = Weakness,
+    ]
+    {
+      {
+        \color{AIkatmboxtext}
+        \small
+        \seq_map_inline:Nn #3 {
+          \seq_set_split:Nnn \l__tr_seq { > } {##1}
+
+          \tl_set:Ne \l__trouble_action_tl {\seq_item:Nn \l__tr_seq {1} }
+          \tl_set:Ne \l__trouble_mechanics_tl  {\seq_item:Nn \l__tr_seq {2} }
+
+          \begin{itemize}
+            % Action
+          \item {\bfseries \l__trouble_action_tl :}
+            % Narrative
+            \tl_if_empty:NF \l__trouble_mechanics_tl
+            {~{\color{AIwhite} \l__trouble_mechanics_tl}}
+          \end{itemize}
+        }
+      }
+    }
+  }
+  \vspace{0.15cm}
+}
+
+
+\NewDocumentCommand {\AIMonsterTroubles} {m m m}
+{
+  \noindent 
+  \tl_if_eq:VnTF \l_monster_style_tl {katm}
+  % Do Key and the Machine style
+  { \__katm_troubles{#1}{#2}{#3} }
+  % Fallback on core rulebook style
+  { \__core_troubles{#1}{#2}{#3} }
 }
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Helper stuff for AIMonsterHarvest
-\tl_new:N \l__harvest_tl
-\seq_new:N \l__harvest_seq
 
 % Storage for the active item attributes
 \tl_new:N \l__harvest_symbol_tl
 \tl_new:N \l__harvest_item_tl
 \tl_new:N \l__harvest_qty_tl
 
-\keys_define:nn { astroinferno / harvest / item }
+\seq_new:N \l__har_seq                  % Used to expand >-separated harvest lists.
+\dim_new:N \l__letterheight_dim    % Used to calculate space above katm harvest box
+
+% Helper to render the looting. Looks the same for both katm and core.
+\NewDocumentCommand{\__render_looting}{ m m }
 {
-  symbol .tl_set:N = \l__harvest_symbol_tl,
-  item  .tl_set:N = \l__harvest_item_tl,
-  qty   .tl_set:N = \l__harvest_qty_tl,
+  \textbf{Looting}\\
+  \AIloot{#1}\\
+  \AIbloodsymbol {} ~ #2
 }
 
-% Brace-stripping helper macro.
-\cs_new_protected:Nn \__monster_evaluate_harvest_keys:n
-{ \keys_set:nn { astroinferno / harvest / item } { #1 } }
-  
-\cs_new_protected:Nn \__monster_render_harvest_line:n
-{
-  % Clear variables from the previous loop iteration
-  \tl_clear:N \l__harvest_symbol_tl
-  \tl_clear:N \l__harvest_item_tl
-  \tl_clear:N \l__harvest_qty_tl
-  
-  % FIX: Pass the item through our brace-stripper first
-  \__monster_evaluate_harvest_keys:n #1
-  
-  % Print exactly: symbol item \hfill qty
-  \makebox[0.5cm][l]{\l__harvest_symbol_tl} \textbf{\l__harvest_item_tl} 
-  \hfill \l__harvest_qty_tl \\
-}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% Overall not so happy about this one. Too complicated with all the helper functions.
-%
+%       AIMonsterHarvest
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Optional argument gives number of choices from harvest table.
-% m1 is pairs of harvest table entries {{h1, ammount1}, {h2, ammount2}, ... }
-% m2 is loot and blood.
+% m1 is seq of >-separated harvest entries: symbol > item > quantity (see harvest key above).
+% m2 is loot quantity (e.g. +1).
+% m3 is blood (e.g. Normal blood).
+
 \NewDocumentCommand {\AIMonsterHarvest} {O{one} m m m}
 {
   \noindent
   \small
   
-  % Drop the outer items into a sequence array if you need it for other layout math
-  \seq_set_from_clist:Nn \l__harvest_seq {#2}
-  
-  % Left Column
-  \begin{minipage}[t]{0.60\textwidth}
-    \raggedright
-    \textbf{Harvesting}~{\scriptsize(Choose~{#1})}\\
-    \clist_map_function:NN #2 \__monster_render_harvest_line:n
-  \end{minipage}
-  \hfill
-  
-  %Right Column
-  \begin{minipage}[t]{0.38\columnwidth}
-    \raggedleft
-    \textbf{Looting}\\
-    \AIloot{#3}\\
-    #4
-  \end{minipage}
-  
+  \tl_if_eq:VnTF {\l_monster_style_tl} {katm}
+  {
+    % ===- Key and the Machine style -===
+    %
+    % First add some vertical space. Default is a bit big for my taste, but it can be changed with the harvestgap option.
+    % Put letter X in a box, measure to create appropriate rule to push down baseline for minipage.
+    \hbox_set:Nn \l_tmpa_box { X } 
+    \dim_set:Nn \l__letterheight_dim { \box_ht:N \l_tmpa_box + \l_monster_harvestgap_tl }
+    \rule{0pt}{\l__letterheight_dim}
+    % Put harvest and loot in one minipage below the gap
+    \begin{minipage}[t]{\columnwidth} % ------------------\
+      %
+      % Left Column
+      \begin{minipage}[t]{0.67\columnwidth}
+        \textbf{\MakeUppercase{\scriptsize \l_monster_name_tl {}~-~Choose~{#1}}}\\
+        \begin{tcolorbox}[
+          unbreakable,
+          enhanced~jigsaw,
+          parbox       = false,
+          sharp~corners,
+          toptitle     = 0pt,
+          bottomtitle = 0pt,
+          titlerule      = 0pt,
+          boxrule      = 0.5pt, 
+          beforeafter~skip  = 0.15cm,
+          left          = 3.5pt,
+          right        = 3.5pt,
+          top          = 2.5pt,
+          bottom       = 2.5pt,
+          opacityfill = 0.0,
+          opacitytext = 1.0,
+          opacityframe = 1.0,
+          colupper = AIcurrentcolour,
+          colframe = AIcurrentcolour
+          ]
+          {
+            \scriptsize
+            \seq_map_inline:Nn #2 {
+              \seq_set_split:Nnn \l__har_seq { > } {##1}
+              \tl_set:NV \l__harvest_symbol_tl { \seq_item:Nn \l__har_seq {1} }
+              \tl_set:NV \l__harvest_item_tl { \seq_item:Nn \l__har_seq {2} }
+              \tl_set:NV \l__harvest_qty_tl { \seq_item:Nn \l__har_seq {3} }
+              \makebox[0.5cm][l]{\l__harvest_symbol_tl} \textbf{\l__harvest_item_tl}
+              \hfill {\tiny \l__harvest_qty_tl}\\
+            }
+          }
+        \end{tcolorbox}
+      \end{minipage}
+      %
+      \hfill
+      %
+      % Right Column
+      \begin{minipage}[t]{0.29\columnwidth}
+        \__render_looting{#3}{#4}
+      \end{minipage}
+    \end{minipage} % --------------------------------/
+  }
+  { % ===- Core Rulebook style -===
+    %
+    % Left Column
+    \begin{minipage}[t]{0.60\textwidth}
+      \raggedright
+      \textbf{Harvesting}~{\scriptsize(Choose~{#1})}\\
+      \seq_map_inline:Nn #2 {
+          \seq_set_split:Nnn \l__har_seq { > } {##1}
+          \tl_set:NV \l__harvest_symbol_tl { \seq_item:Nn \l__har_seq {1} }
+          \tl_set:NV \l__harvest_item_tl { \seq_item:Nn \l__har_seq {2} }
+          \tl_set:NV \l__harvest_qty_tl { \seq_item:Nn \l__har_seq {3} }
+          \makebox[0.5cm][l]{\l__harvest_symbol_tl} \textbf{\l__harvest_item_tl}
+          \hfill {\l__harvest_qty_tl}\\
+        }
+    \end{minipage}
+    %
+    \hfill
+    %
+    % Right Column
+    \begin{minipage}[t]{0.38\columnwidth}
+      \raggedleft
+      \__render_looting{#3}{#4}
+    \end{minipage}
+  }
   \vspace{\baselineskip} % Add vertical space after the lists
 }

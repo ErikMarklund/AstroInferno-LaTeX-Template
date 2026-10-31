@@ -498,8 +498,8 @@ again.
 % AIMonsterData to a constant value (if unset it will use 1.2ex, which
 % can vary with font etc.)
 %
-% Add some padding to align
-\begin{AIMonster}{\rule{0pt}{1.5cm}Void cult accolyte}
+% Add some padding in the option to help align the adversary boxes.
+\begin{AIMonster}[\rule{0pt}{1.5cm}]{Void cult accolyte}
   \AIMonsterData
   [
   titleheight=1.0cm,
@@ -507,27 +507,30 @@ again.
   class = Minions,
   being = Ashen souls,
   damage = 3, mortality = 12, bones = 3,
+  % troubles = {
+  %   Shoot: \AIdamage{6};
+  %   Cower: \AIbones[+]{1}
+  % },
   troubles = {
-    Shoot: \AIdamage{6};
-    Cower: \AIbones[+]{1}
+    Shoot > \AIdamage{6};
+    Cower > \AIbones[+]{1}
   },
   endtroubles = { % Semicolon-separated list to allow for commas in the items!
-    Suicide bomb: \AIdamage{15}, area;
-    Frenzy: \AIdamage[+]{3}
+    Suicide bomb > \AIdamage{15}, area;
+    Frenzy > \AIdamage[+]{3}
   },
   traits = Trigger happy - volatile,
   description = {Fanatic minions, both cowards and suicidal at the same time.},
   harvest = {
-    {symbol = \AIapotecharysymbol, item = Unlight tobacco, qty = {\scriptsize 1D6}/\AIspsymbol},
-    {symbol = \AIsecularsymbol, item = Erthian ingots, qty = {\scriptsize 1D6}/\AIspsymbol}
+    \AIapotecharysymbol > Unlight tobacco > {\scriptsize 1D6}/\AIspsymbol;
+    \AIsecularsymbol > Erthian ingots > {\scriptsize 1D6}/\AIspsymbol
   },
   lootqty = -4,
   lootblood = Soiled blood
  ]
 \end{AIMonster}
 \newpage % Actually new column
-\begin{AIMonster}
- {\rule{0pt}{1.5cm}Void cult demagogue}
+\begin{AIMonster}[\rule{0pt}{1.5cm}]{Void cult demagogue}
  \AIMonsterData
  [
   titleheight=1.5cm,
@@ -538,30 +541,127 @@ again.
   being = Greater souls,
   damage = 6, mortality = 6, bones = 3,
   % Semicolon-separated lists for troubles and endteoubles to allow for commas in the items!
+  % troubles = {
+  %   Punishment: \AIdamage{10};
+  %   Glossolalia: \AIdamage[+]{2};
+  %   Support: +5~Accolytes
+  % },
   troubles = {
-    Punishment: \AIdamage{10};
-    Glossolalia: \AIdamage[+]{2};
-    Support: +5~Accolytes
+    Punishment > \AIdamage{10};
+    Glossolalia > \AIdamage[+]{2};
+    Support > +5~Accolytes
   },
   endtroubles = {
-    Possess one character;
-    Curse: Party disadvantage
+    Possess one character > ;
+    Curse > Party disadvantage
   },
   traits = Insane - zealous - devoted,
-  description = {Zealot mid-level leaders in the cult. Will never
+  description = {Fanatic mid-level leaders in the cult. Will never
   retreat, ready to sacrifice themselves for the greater evil.},
   harvest = {
-    {symbol = \AIapotecharysymbol, item = \AITier{3} Elixir, qty = {\scriptsize 1}/\AIspsymbol},
-    {symbol = \AIalchemysymbol, item = Exotic ingredient, qty = {\scriptsize 2}/\AIspsymbol},
-    {symbol = \AIancientsymbol, item = \AITier{3} Valuable, qty = {\scriptsize 1D4}/\AIspsymbol}
+    \AIapotecharysymbol > \AITier{3} Elixir > {\scriptsize 1}/\AIspsymbol;
+    \AIalchemysymbol > Exotic ingredient > {\scriptsize 2}/\AIspsymbol;
+    \AIancientsymbol > \AITier{3} Valuable > {\scriptsize 1D4}/\AIspsymbol
   },
   harvestchoose = two,
   lootqty = -4,
   lootblood = Normal blood
  ]
-
 \end{AIMonster}
 %It might be best to \emph{not} make |\AIMonster| a float. That is, do not pass |float=htb| as an option. Floats can be great in \LaTeX, but they make it difficult to position the adversary blocks correctly.
+
+\newcommand{\premonster}{4cm}
+\begin{minipage}[t][\premonster][t]{\columnwidth}
+  By passing the option |monsterstyle = katm| you get Key and the Machine style
+  adversaries instead.
+  Default monster style is |core|, for core rulebook look. Other styles may come
+  in the future.
+  See |example.tex| for code examples.
+\end{minipage}
+
+\begin{AIMonster}[\rule{0pt}{1.5cm}]{Void cult accolyte}
+  \AIMonsterData
+  [
+  titleheight=1.0cm,
+  monsterstyle = katm,
+  type = Souls - imps,
+  class = Minions,
+  being = Ashen souls,
+  damage = 3, mortality = 12, bones = 3,
+  quantity = 10 units,
+  troubles = {
+    Shoot > \AIdamage{6};
+    Cower > \AIbones[+]{1}
+  },
+  endtroubles = { % Semicolon-separated list to allow for commas in the items!
+    Suicide bomb > Opens the cloak, revealing explosives > \AIDist{2}
+    explosion > \AIdamage{15}, area;
+    Frenzy > The accolyte stares wildly, hyperventilates, then leaps
+    forward > Gains unnatural strength >\AIdamage[+]{3}
+  },
+  traits = Trigger happy - volatile,
+  description = {Fanatic minions, both cowards and suicidal at the same time.},
+  harvest = {
+    \AIapotecharysymbol > Unlight tobacco > 1D6/\AIspsymbol;
+    \AIsecularsymbol > Erthian ingots > 1D6/\AIspsymbol
+  },
+  harvestchoose = 1,
+  lootqty = -4,
+  lootblood = Soiled blood
+  ]
+\end{AIMonster}
+\newpage
+
+\begin{minipage}[t][\premonster][t]{\columnwidth}
+  % A bit awkward, but to make the top alignment correct I put in a
+  % strut with the height of a capital X. An empty minipage or a
+  % vspace won't do.
+  \newlength{\letterheight}
+  \settoheight{\letterheight}{X}
+  \rule{0cm}{\the\letterheight}\\
+\end{minipage}
+
+\begin{AIMonster}[\rule{0pt}{1.5cm}]{Void cult demagogue}
+  \AIMonsterData
+  [
+  titleheight=1.5cm,
+  titlefont = \AIfontMinster,
+  titlestyle = \fontsize{40}{46},
+  monsterstyle = katm,
+  type = Void priests - Obliviation deacons,
+  class = Champions,
+  being = Greater souls,
+  damage = 6, mortality = 6, bones = 3,
+  quantity = 1 demagogue,
+  % Semicolon-separated lists for troubles and endteoubles to allow for commas in the items!
+  troubles = {
+    Punishment > Channels the fury of the Void > \AIdamage{10};
+    Glossolalia > Speaking crazy gibberish > \AIdamage[+]{2};
+    Support > Commanding cry for backup > +5~Accolytes
+  },
+  endtroubles = {
+    Possession > The demagogue's eyes roll back temporarily > You feel
+    someone else take control > "Possessed";
+    Curse > The demagogue growls profanities in an ancient language >
+    Words filled with pain bombard the ears, causing nausia > Area, "disadvantage"
+  },
+  weakness = {
+    Killing 3 cultists > \AImortality[+]{1};
+    Damage from aether > \AIdamage[+]{3}
+  },
+  traits = Insane - zealous - devoted,
+  description = {Fanatic mid-level leaders in the cult. Will never
+    retreat, ready to sacrifice themselves for the greater evil.},
+  harvest = {
+    \AIapotecharysymbol >\AITier{3} Elixir > 1/\AIspsymbol;
+    \AIalchemysymbol > Exotic ingredient > 2/\AIspsymbol;
+    \AIancientsymbol > \AITier{3} Valuable > 1D4/\AIspsymbol
+  },
+  harvestchoose = 2,
+  lootqty = -4,
+  lootblood = Normal blood
+  ]
+\end{AIMonster}
 
 \AINextChapterBefore[3cm]{}
 \AINextChapterAfter[1.5cm][1cm]{{\AIquoteFont \textit{I\"{a}! Shub-Niggurath! The Black Goat of the Woods with a Thousand Young!}}}
