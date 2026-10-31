@@ -728,7 +728,7 @@ blessings = {
   targets=1,
   grade=1,
   skill=Crushing,
-  features={{Heavy, Phew!},{Hard, Rock hard indeed}},
+  features={Heavy > Phew! ; Hard > Rock hard indeed},
   % Here we use the imagecode option, which executes a block of code
   % early in the rendering of the weapon. Very dirty and un-LaTeX-y hack.
   % Will take some fiddling to get right, and will hopefully be reimplemented
@@ -756,7 +756,7 @@ blessings = {
   targets=x2,
   grade=1,
   skill=Slashing,
-  features={{Chaotic, 3~targets hit},{Dirty, Blueargh!}}]
+  features={Chaotic > 3~targets hit ; Dirty > Blueargh!}]
 \end{AIWeapon*}
 
 \noindent
@@ -783,7 +783,7 @@ See |example.tex| source code.
   targets=2,
   grade=1,
   skill=Slashing,
-  features={{Quick, 2~targets hit/~\AIspsymbol~spent},{Sharp, Yikes!}}]
+  features={Quick > 2~targets hit/~\AIspsymbol~spent ; Sharp > Yikes!}]
 \end{AIWeapon}
 
 \part{Customisation} \label{part:customization}

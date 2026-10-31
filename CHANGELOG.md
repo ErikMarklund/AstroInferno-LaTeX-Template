@@ -13,7 +13,11 @@ This changelog is now flushed to only incorporate changes for the Astro Inferno 
 
 ### Added
 
+* Command for unrolling new nested list AINested.
+
 ### Changed
+
+* Weapons use new AINested lists for features.
 
 ## [1.1.0] - 2026-10-31
 
@@ -28,7 +32,7 @@ This changelog is now flushed to only incorporate changes for the Astro Inferno 
 ### Changed
 
 * Control of spacing aroung chapter headings much improved.
-* Troubles, end troubles, harvest use new ;- and >-separated nested lists.
+* Troubles, end troubles, harvest use new ;- and >-separated nested lists (AINested).
 
 ## [1.0.0] - 2026-09-18
 
