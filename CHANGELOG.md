@@ -13,6 +13,12 @@ This changelog is now flushed to only incorporate changes for the Astro Inferno 
 
 ### Added
 
+### Changed
+
+## [1.1.0] - 2026-10-31
+
+### Added
+
 * Key and the Machine (katm) style adversaries.
 * New internal nested list standard.
 * AIMonsterData takes option that allows code injection ahead of
