@@ -590,8 +590,8 @@ again.
   damage = 3, mortality = 12, bones = 3,
   quantity = 10 units,
   troubles = {
-    Shoot > \AIdamage{6};
-    Cower > \AIbones[+]{1}
+    Shoot > Fires rudimentary firearm >\AIdamage{6};
+    Cower > Cowardly hunkers down >\AIbones[+]{1}
   },
   endtroubles = { % Semicolon-separated list to allow for commas in the items!
     Suicide bomb > Opens the cloak, revealing explosives > \AIDist{2}
