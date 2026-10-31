@@ -124,3 +124,52 @@
   { 0{#1} }
   { #1 }
 }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% We use a standard format for nested lists (2 levels), which we call AINested.
+% Outer level is ;-separated, inner is >-separated. For example:
+% { item1 > prop1 > qty1 ; item2 > prop2 > qty2 ; ...}
+%
+% We have a function for unrolling these lists, \AINestedUnroll.
+%
+% \AINestedUnroll takes two arguments:
+% 1) token-list variable holding the nested list.
+% 2) code, which is  executed for every item on the outer level on the list.
+% The code has access to the elements at the inner level via the variable \l_unroll_seq.
+%
+% EXAMPLE:
+% \tl_new:N \l_nested_tl
+% \tl_set:Nn \l_nested_tl {key > lock ; hand > glove}
+%  \AINestedUnroll { l_nested_tl } {
+%    {\seq_item:Nn \l_unroll_seq {1}}~fits~in~{\seq_item:Nn \l_unroll_seq {2}}\\
+%  }
+% Outputs
+% key fits in lock
+% hand fits in glove
+
+\seq_new:N \l__unroll_outer_seq
+\seq_new:N \l_unroll_seq
+
+% Internal function
+% #1 = token list variable containing the nested list
+% #2 = inline code to execute per inner pair
+\cs_new_protected:Nn \__unroll_nested_list:Nn
+{
+  % Split the outer list by ';'
+  \seq_set_split:NnV \l__unroll_outer_seq { ; } #1
+  
+  % Loop through each outer item
+  \seq_map_inline:Nn \l__unroll_outer_seq
+  {
+    % Split the current item (##1) by '>'
+    \seq_set_split:Nnn \l_unroll_seq { > } { ##1 }
+    
+    % Execute code (#2)
+    #2
+  }
+}
+
+\NewDocumentCommand{\AINestedUnroll}{ +m +m }
+{
+  \__unroll_nested_list:Nn #1 {#2}
+}
