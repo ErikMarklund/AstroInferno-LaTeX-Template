@@ -7,6 +7,16 @@
 \keys_define:nn { astroinferno / monster / monsterdata }
 {
   % We want this to set up the font for the title.
+  name .tl_set:N  = \l_monster_name_tl,
+  name .initial:n  = -~unknown~-,
+  name .value_required:n = true,
+  % titlepreamble is code inserted at the start of the title.
+  % For example, \rule{0pt}{1cm} to insert a strut to regulate effective height,
+  % which is useful for alignment of side-by-side adversaries with different
+  % title fonts.
+  titlepreamble .tl_set:N  = \l_monster_title_preamble_tl,
+  titlepreamble .initial:n  = {},
+  titlepreamble .value_required:n = true,
   titlefont .tl_set:N =\l_monster_titlefont_tl,
   titlefont .initial:n   = \l__AI_stat_block_title_family_tl,
   titlestyle .tl_set:N = \l_monster_titlestyle_tl,
@@ -90,14 +100,8 @@
   lootblood .value_required:n  = true  
 }
 
-% Second optional argument allows a preamble for the title.
-% For example, \rule{0pt}{1cm} to insert a strut to regulate effective height,
-% which is useful for alignment of side-by-side adversaries with different
-% title fonts.
-\NewDocumentEnvironment{AIMonster} {O{} m}
+\NewDocumentEnvironment{AIMonster} {}
 {
-  \tl_set:Nn  \l_monster_title_preamble_tl {#1}
-  \tl_set:Nn  \l_monster_name_tl {#2}
   \begin{minipage}[t]{\columnwidth}
     \AIFontStatBlockBody
 }
@@ -143,9 +147,15 @@
   \tl_if_eq:VnF {\l_monster_style_tl} {katm}
   {\hfill\MakeUppercase{\textbf {\scriptsize{\l_monster_traits_tl}}}\hfill\null\\[0.4em]}
   {\small{\l_monster_description_tl}\\[1em]}
-  % Harvest and loot
-   \AIMonsterHarvest[\l_monster_harvestchoose_tl]
-   {\l_monster_harvest_tl}{\l_monster_lootqty_tl}{\l_monster_lootblood_tl}
+  % Harvest and loot.
+  % Only write if not empty harvest list.
+  % Leave empty if making separate harvest/loot box later.
+  \tl_if_empty:NF \l_monster_harvest_tl
+  {
+    \AIMonsterHarvest[#1] {}
+    %{\l_monster_harvest_tl}{\l_monster_lootqty_tl}{\l_monster_lootblood_tl}
+  }
+  \vspace{\baselineskip} % Add vertical space after the harvest/loot
 }
 
 
@@ -355,11 +365,17 @@
 % m2 is loot quantity (e.g. +1).
 % m3 is blood (e.g. Normal blood).
 
-\NewDocumentCommand {\AIMonsterHarvest} {O{one} m m m}
+\NewDocumentCommand {\AIMonsterHarvest} {O{}}
 {
   \noindent
   \small
   
+  % Use begingroup, in case we interfere with some variable that is
+  % used elsewhere in AIMonsterData.
+  % Especially calling \keys_set again could warrant this.
+  \begingroup
+  \keys_set:nn { astroinferno / monster / monsterdata } {#1}
+
   \tl_if_eq:VnTF {\l_monster_style_tl} {katm}
   {
     % ===- Key and the Machine style -===
@@ -374,7 +390,7 @@
       %
       % Left Column
       \begin{minipage}[t]{0.67\columnwidth}
-        \textbf{\MakeUppercase{\scriptsize \l_monster_name_tl {}~-~Choose~{#1}}}\\
+        \textbf{\MakeUppercase{\scriptsize \l_monster_name_tl {}~-~Choose~{\l_monster_harvestchoose_tl}}}\\
         \begin{tcolorbox}[
           unbreakable,
           enhanced~jigsaw,
@@ -397,7 +413,7 @@
           ]
           {
             \scriptsize
-            \AINestedUnroll{#2} {
+            \AINestedUnroll{\l_monster_harvest_tl} {
               \tl_set:NV \l__harvest_symbol_tl { \seq_item:Nn \l_unroll_seq {1} }
               \tl_set:NV \l__harvest_item_tl { \seq_item:Nn \l_unroll_seq {2} }
               \tl_set:NV \l__harvest_qty_tl { \seq_item:Nn \l_unroll_seq {3} }
@@ -412,32 +428,35 @@
       %
       % Right Column
       \begin{minipage}[t]{0.29\columnwidth}
-        \__render_looting{#3}{#4}
+        \__render_looting{\l_monster_lootqty_tl}{\l_monster_lootblood_tl}
       \end{minipage}
     \end{minipage} % --------------------------------/
   }
   { % ===- Core Rulebook style -===
     %
-    % Left Column
-    \begin{minipage}[t]{0.60\textwidth}
-      \raggedright
-      \textbf{Harvesting}~{\scriptsize(Choose~{#1})}\\
-      \AINestedUnroll{#2} {
-        \tl_set:NV \l__harvest_symbol_tl { \seq_item:Nn \l_unroll_seq {1} }
-        \tl_set:NV \l__harvest_item_tl { \seq_item:Nn \l_unroll_seq {2} }
-        \tl_set:NV \l__harvest_qty_tl { \seq_item:Nn \l_unroll_seq {3} }
-        \makebox[0.5cm][l]{\l__harvest_symbol_tl} \textbf{\l__harvest_item_tl}
-        \hfill {\l__harvest_qty_tl}\\
+    \begin{minipage}[t]{\columnwidth} % ------------------\
+      % Left Column
+      \begin{minipage}[t]{0.60\textwidth}
+        \raggedright
+        \textbf{Harvesting}~{\scriptsize(Choose~{\l_monster_harvestchoose_tl})}\\
+        \AINestedUnroll{\l_monster_harvest_tl} {
+          \tl_set:NV \l__harvest_symbol_tl { \seq_item:Nn \l_unroll_seq {1} }
+          \tl_set:NV \l__harvest_item_tl { \seq_item:Nn \l_unroll_seq {2} }
+          \tl_set:NV \l__harvest_qty_tl { \seq_item:Nn \l_unroll_seq {3} }
+          \makebox[0.5cm][l]{\l__harvest_symbol_tl} \textbf{\l__harvest_item_tl}
+          \hfill {\l__harvest_qty_tl}\\
         }
-    \end{minipage}
-    %
-    \hfill
-    %
-    % Right Column
-    \begin{minipage}[t]{0.38\columnwidth}
-      \raggedleft
-      \__render_looting{#3}{#4}
-    \end{minipage}
+      \end{minipage}
+      %
+      \hfill
+      %
+      % Right Column
+      \begin{minipage}[t]{0.38\columnwidth}
+        \raggedleft
+        \__render_looting{\l_monster_lootqty_tl}{\l_monster_lootblood_tl}
+      \end{minipage}
+    \end{minipage} % --------------------------------/
   }
-  \vspace{\baselineskip} % Add vertical space after the lists
+
+  \endgroup
 }

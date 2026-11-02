@@ -14,6 +14,9 @@ This changelog is now flushed to only incorporate changes for the Astro Inferno 
 ### Added
 
 * Command for unrolling new nested list AINested.
+* AIMonsterHarvest can be called separately from AIMonsterData (and
+  AIMonster), and suppressed from AIMonsterData (omit harvest option).
+  This is inspired by Key and the Machine.
 
 ### Changed
 
