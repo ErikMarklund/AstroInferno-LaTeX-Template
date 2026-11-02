@@ -7,7 +7,7 @@
 \usepackage{listings}
 \usepackage{shortvrb}
 \usepackage{stfloats}
-\usepackage[normalem]{ulem} % For strikethrough
+\usepackage{lua-ul}
 
 \captionsetup[table]{labelformat=empty,font={sf,sc,bf,},skip=0pt}
 
@@ -20,7 +20,7 @@
 }
 
 \definecolor {fixnotecolour} {rgb} {0.3, 0.6, 0.5}
-\newcommand{\so}[1]{\sout{\color{gray}{#1}}}
+\newcommand{\so}[1]{\strikeThrough{\color{gray}{#1}}}
 \newcommand{\fixnote}[1]{\textit{\color{fixnotecolour} {#1}}}
 
 \newcommand{\tbs}{\textbackslash}
@@ -140,13 +140,14 @@
   \fixnote{See |lib/astroinfernoutility.sty|}
 \item[x] \so{Implement AIMonster variant with Key in the Machine style}\\
   \fixnote{Done! Uses new listed nest format.}
+\item Global monster style switch.
 \item[x] \so{Make the harvest box in AIMonster a separate command, to allow a
     group of them for a band of adversaries like in KATM.}\\
   \fixnote{Omit |harvest| option from |{\textbackslash}AIMonsterData|
     to prevent rendering of harvest/loot. Call |AIMonsterHarvest|
     separately with all harvest/loot relevant option to render separately.}
-\item Make Weakness box for core rulebook style adversaries, even
-  though the core rulebook doesn't use them.
+\item[x] \so{Make Weakness box for core rulebook style adversaries, even
+  though the core rulebook doesn't use them.}
 \item[x] \so{Master environment}
 \item[x] \so{AIMonster does not need a tcolorbox}\\
   \fixnote{Now a simple minipage.}
