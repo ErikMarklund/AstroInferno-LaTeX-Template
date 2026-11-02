@@ -613,6 +613,10 @@ We now also allow a weakness section for core rulebook style
 adversaries, even though those are not seen in the core rulebook. See
 Void cult accolyte on the previous page. If |weakness| is omitted or
 empty, no weakness section is rendered for any style.
+
+To set the monster style globally, use |\AIMonsterStyle{}|, which will
+set the style for all subsequent calls to |\AIMonsterData|. Setting
+|monsterstyle| explicitly overrides the global value.
 \newpage
 
 %\begin{minipage}[t][\premonster][t]{\columnwidth}
@@ -688,8 +692,8 @@ empty, no weakness section is rendered for any style.
 In The Key and the Machine, harvest/loot boxes are sometimes rendered
 separately and grouped when players face several types of adversaries.
 We demonstrate that here on this page.
-To do that, suinpy omit the |harvest| option for the adversary, then
-call |{\textbackslash}AIMonsterHarvest| and pass |name| and all the
+To do that, simply omit the |harvest| option for |\AIMonsterData|, then
+call |\AIMonsterHarvest| and pass |name| and all the
 harvest and loot related options there. This actually also works for
 core rulebook style, although that is not seen in the acutal core
 rulebook. Note however that the core rulebook style does not print out the

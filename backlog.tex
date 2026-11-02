@@ -140,7 +140,8 @@
   \fixnote{See |lib/astroinfernoutility.sty|}
 \item[x] \so{Implement AIMonster variant with Key in the Machine style}\\
   \fixnote{Done! Uses new listed nest format.}
-\item Global monster style switch.
+\item[x] \so{Global monster style switch.}\\
+  \fixnote{|AIMonsterStyle| sets the style for all subsequent adversaries}
 \item[x] \so{Make the harvest box in AIMonster a separate command, to allow a
     group of them for a band of adversaries like in KATM.}\\
   \fixnote{Omit |harvest| option from |{\textbackslash}AIMonsterData|
@@ -191,6 +192,7 @@
 
 \subsection{Issues}
 \begin{itemize}
+\item KATM troubles shouls always have white text. Has black in light mode.
 \item[x] \so{In TOC, there is more space below a part than above. Probably
     looks better the other way round.}\\
   \fixnote{Removed aftercode in |{\tbs}titlecontents{part}|, where

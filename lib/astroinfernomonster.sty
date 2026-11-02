@@ -1,5 +1,12 @@
 \ExplSyntaxOn
 
+\tl_new:N \l_monster_global_style_tl
+
+\NewDocumentCommand{\AIMonsterStyle} {m}
+{
+  \tl_set:Nn \l_monster_global_style_tl {#1}
+}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Monster environments
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -30,7 +37,7 @@
   titlealign .value_required:n = true,
   % Choose between katm, core. Will determine how troubles are rendered.
   monsterstyle .tl_set:N = \l_monster_style_tl,
-  monsterstyle .initial:n  = core,
+  monsterstyle .initial:n  = {},
   monsterstyle .value_required:n  = true,
   %
   type .tl_set:N  = \l_monster_type_tl,
@@ -116,6 +123,10 @@
 {
   \keys_set:nn { astroinferno / monster / monsterdata } {#1}
 
+  % Use global value if monsterstyle option not set
+  \tl_if_empty:NT \l_monster_style_tl
+  { \tl_set:NV \l_monster_style_tl \l_monster_global_style_tl }
+  
   % Print name
   % Is titleheight set? If >=0 then yes.
   \dim_compare:nTF {\l_monster_titleheight_tl < 0pt}
@@ -392,7 +403,11 @@
   % Especially calling \keys_set again could warrant this.
   \begingroup
   \keys_set:nn { astroinferno / monster / monsterdata } {#1}
-
+  
+  % Use global value if monsterstyle option not set
+  \tl_if_empty:NT \l_monster_style_tl
+  { \tl_set:NV \l_monster_style_tl \l_monster_global_style_tl }
+  
   \tl_if_eq:VnTF {\l_monster_style_tl} {katm}
   {
     % ===- Key and the Machine style -===
