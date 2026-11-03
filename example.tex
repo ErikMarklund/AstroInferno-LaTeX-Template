@@ -180,6 +180,12 @@ as it will have notable implications for downstream typesetting.
 used for initialisation in the preamble because of the layout problems
 they cause if used mid document.
 
+Mode colour defaults can be overridden with a second optional argument.
+The actual text colour however goes into the first optional argument.
+We do this to change the text colour for chapter~\ref{ch:images}.
+\begin{lstlisting}
+\AIMakeDark[text=AIpaleblue][tableeven=AIpetroleum]
+\end{lstlisting}
 \subsection{New Background}
 One can also insert a new background without switching mode using |\AIPlaceNewBackground|.
 The starred version |\AIPlaceNewBackground*| will do the same, but for
@@ -192,7 +198,7 @@ on. For example, |\AIIsDarkMode{yes}{no}|: \AIIsDarkMode{yes}{no}.
 This is used above to choose between loading black or white logos
 depending on whether dark mode is on or not.
 
-We will switch to dark mode at the end of this page, insert a new background for a single page at the start of section~\ref{ch:images}, then switch back to light mode at
+We will switch to dark mode at the end of this page, insert a new background for a single page at the start of chapter~\ref{ch:images}, then switch back to light mode at
 part~\ref{ch:weapons}.
 \newpage % Effectively starts a new column
 \noindent
@@ -419,7 +425,7 @@ Analogous commands are |\AIsanity|, |\AIaura|, |\AIdamage|, |\AImortality|, and 
   |\AIloot{-2}| & \AIloot{-2}
 \end{AITable}
 
-
+\AIMakeDark[text=AIpaleblue][tableeven=AIpetroleum]
 \AINextChapterAfter{\includegraphics[width=\textwidth]{img/jellyfish_faint.png}}
 \chapter{Images} \label{ch:images}
 % Inject new background
@@ -485,6 +491,8 @@ again.
   The effective height can also be manipulated by passing the option |titleheight| with a suitable
   value to |AIMonster|, which effectively changes the padding between the title and the next line.
 }
+
+\AIMakeDark % Just to reset colours.
 \chapter{Adversaries}
 % Restore margin
 \AIFancyMarginsColour{AIdeepred}

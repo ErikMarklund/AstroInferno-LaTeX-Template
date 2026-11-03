@@ -34,25 +34,6 @@
 % The colour used in \AISetThemeColour when a new colour is not set
 \colorlet {themecolour} {AIlightteal}
 
-\NewDocumentCommand{\AIDarkColours} {} {
-  \colorlet {AItableodd} {AIdarksteelgrey}
-  \colorlet {AItableeven} {AImidsteelgrey}
-  \colorlet {commentcolour} {AImidgreybrown}
-  \colorlet {readaloudcolour} {AImidsteelgrey}
-  \colorlet {sidebarcolour} {AIdeepred}
-}
-\NewDocumentCommand{\AILightColours} {} {
-  \colorlet {AItableodd} {AIlightgrey}
-  \colorlet {AItableeven} {AImidgrey}
-  \colorlet {commentcolour} {AImidteal}
-  \colorlet {readaloudcolour} {AIlightteal}
-  \colorlet {sidebarcolour} {AImidgrey}
-}
-% Element colours that change when \AISetThemeColour is used
-\colorlet {commentcolour} {themecolour} % AIComment background
-\colorlet {sidebarcolour} {themecolour} % AISidebar background
-\colorlet {tablecolour}   {themecolour} % AITable even row background
-
 % Sets the themecolour and colours for all themed elements
 % If called without the optional colour, resets the colour of all themed elements to the current themecolour
 \NewDocumentCommand {\AISetThemeColour} { O {themecolour} }

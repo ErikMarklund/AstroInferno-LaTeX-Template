@@ -15,55 +15,60 @@
   \color{#1}% Set local color
   \global\let\default@color\current@color % Force it into floats and tables
   % Save the colour name to a flat, underscore-free standard macro name globally
-  \gdef\AICurrentThemeColourName{#1}% 
+  \gdef\AICurrentThemeColourName{#1}%
+  \colorlet {AIcurrentcolour}{#1}
 }
 
 %%%%%%%%%%%% Dark mode %%%%%%%%%%%%
 %
 \keys_define:nn { astroinferno / darkpages / dark }
 {
+  text .tl_set:N  = \l_dark_text_tl,
+  text .default:n  = AIwhite,
   background .tl_set:N  = \l_dark_background_tl,
-  background .initial:n  = img/paper-darkred,
-  background .value_required:n = true
+  background .default:n  = img/paper-darkred,
 }
 
-\NewDocumentCommand{\AIMakeDark} {s O{}}
+% Starred version does not clear page.
+% First optional argument allows keys to be changed.
+% Second optional argument is passed straight to \AIDarkColours.
+\NewDocumentCommand{\AIMakeDark} {s O{} O{}}
 {
 
-  \keys_set:nn { astroinferno / darkpages / dark } {#2}
+  \keys_set:nn { astroinferno / darkpages / dark } {text, background, #2}
 
   \bool_set_true:N \g_AI_dark_mode_bool
   \bool_if:NF{#1}
   {\clearpage}
-  \colorlet{AIcurrentcolour}{AIwhite}
-  \AISSetGlobalColour{AIwhite}
-  \AIDarkColours
+  \AISSetGlobalColour{\l_dark_text_tl}
+  \AIDarkColours[#3]
   \bool_if:NTF #1
   { \AIPlaceNewBackground*{\l_dark_background_tl} }
   { \AIPlaceNewBackground{\l_dark_background_tl} }
 }
 
 
-%%%%%%%%%%%% Dark mode %%%%%%%%%%%%
+%%%%%%%%%%%% Light mode %%%%%%%%%%%%
 %
 \keys_define:nn { astroinferno / darkpages / light }
 {
+  text .tl_set:N  = \l_light_text_tl,
+  text .default:n = AIblack,
   background .tl_set:N  = \l_light_background_tl,
-  background .initial:n  = img/paper-pale,
-  background .value_required:n = true
+  background .default:n  = img/paper-pale,
 }
 
-\NewDocumentCommand{\AIMakeLight} {s O{}}
+\NewDocumentCommand{\AIMakeLight} {s O{} O{}}
 {
 
-  \keys_set:nn { astroinferno / darkpages / light } {#2}
+  % First reset the keys to defaults
+  \keys_set:nn { astroinferno / darkpages / light } {text, background,#2}
 
   \bool_set_false:N \g_AI_dark_mode_bool
   \bool_if:NF #1
   {\clearpage}
-  \colorlet{AIcurrentcolour}{AIblack}
-  \AISSetGlobalColour{AIblack}
-  \AILightColours
+  \AISSetGlobalColour{\l_light_text_tl}
+  \AILightColours[#3]
   \bool_if:NTF #1
   { \AIPlaceNewBackground*{\l_light_background_tl} }
   { \AIPlaceNewBackground{\l_light_background_tl} }
@@ -89,6 +94,64 @@
   }
 }
 
+%%%%%%%%%%%%% Commands for setting mode colours %%%%%%%%%%%%%
+% Pass keys in the optional argument.
+% Note that the colour of regular text is not set here.
+\keys_define:nn { astroinferno / modecolours / dark }
+{
+  tableodd .tl_set:N  = \l_dark_tableodd_tl,
+  tableodd .default:n  = AIdarksteelgrey,
+  tableeven .tl_set:N  = \l_dark_tableeven_tl,
+  tableeven .default:n  = AImidsteelgrey,
+  comment .tl_set:N  = \l_dark_comment_tl,
+  comment .default:n  = AImidgreybrown,
+  readaloud .tl_set:N  = \l_dark_readaloud_tl,
+  readaloud .default:n  = AImidsteelgrey,
+  sidebar .tl_set:N  = \l_dark_sidebar_tl,
+  sidebar .default:n  = AIdeepred,
+}
+
+\NewDocumentCommand{\AIDarkColours} {O{}} {
+
+  % Passing all keys without values for defaults, then #1 to override
+  \keys_set:nn { astroinferno / modecolours / dark }
+  {tableodd, tableeven, comment, readaloud, sidebar, #1}
+
+  \colorlet {AItableodd} {\l_dark_tableodd_tl}
+  \colorlet {AItableeven} {\l_dark_tableeven_tl}
+  \colorlet {commentcolour} {\l_dark_comment_tl}
+  \colorlet {readaloudcolour} {\l_dark_readaloud_tl}
+  \colorlet {sidebarcolour} {\l_dark_sidebar_tl}
+}
+
+\keys_define:nn { astroinferno / modecolours / light }
+{
+  tableodd .tl_set:N  = \l_light_tableodd_tl,
+  tableodd .default:n  = AIlightgrey,
+  tableeven .tl_set:N  = \l_light_tableeven_tl,
+  tableeven .default:n  = AImidgrey,
+  comment .tl_set:N  = \l_light_comment_tl,
+  comment .default:n  = AImidteal,
+  readaloud .tl_set:N  = \l_light_readaloud_tl,
+  readaloud .default:n  = AIlightteal,
+  sidebar .tl_set:N  = \l_light_sidebar_tl,
+  sidebar .default:n  = AImidgrey,
+}
+
+\NewDocumentCommand{\AILightColours} {O{}} {
+
+  % Passing all keys without values for defaults, then #1 to override
+  \keys_set:nn { astroinferno / modecolours / light }
+  {tableodd, tableeven, comment, readaloud, sidebar, #1}
+
+  \colorlet {AItableodd} {\l_light_tableodd_tl}
+  \colorlet {AItableeven} {\l_light_tableeven_tl}
+  \colorlet {commentcolour} {\l_light_comment_tl}
+  \colorlet {readaloudcolour} {\l_light_readaloud_tl}
+  \colorlet {sidebarcolour} {\l_light_sidebar_tl}
+}
+
+
 \ExplSyntaxOff % Step out of LaTeX3 mode safely
 
 % Classic LaTeX2e hook to intercept \normalfont using the underscore-free macro
@@ -100,9 +163,9 @@
 
 % Call this to execute #1 if dark mode is on, #2 otherwise
 \NewDocumentCommand{\AIIsDarkMode}{mm}
-  {
-    \bool_if:NTF \g_AI_dark_mode_bool {#1} {#2}
-  }
+{
+  \bool_if:NTF \g_AI_dark_mode_bool {#1} {#2}
+}
 
 % Initialise light mode to begin with.
-\AIMakeLight*
+  \AIMakeLight*

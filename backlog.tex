@@ -136,14 +136,19 @@
 
 \subsection{Functionality}
 \begin{itemize}
-\item Allow custom colours for dark and light mode.
-\item Better control over mode-specific colours.
-
+\item Allow single-colour background instead of image.
+  
 \item \onice{ Make option to automatically exclude personal-use fonts.\\
   {\color{red} A bit tricky with all different font licences.}}
 \item \onice{ Simple column-balancing feature.\\
   {\color{red} Not simple. Forget it (for now at least)}}
 
+\item[x] \so{Allow custom colours for dark and light mode.}\\
+  \fixnote{Commands |AIMakeDark| and |AIMakeLight| take keys, and
+    pass them on to |AIDarkColours| and |AILightColours|, which can
+    also be called directly.}
+\item[x] \so{Better control over mode-specific colours.}\\
+  \fixnote{See above.}
 \item[x] \so{Simplify AINested unrolling further with helper function to
     assign inner-level elements.}\\
   \fixnote{|AIUnrolled| and |AIUnrolledE| accesses the inner
