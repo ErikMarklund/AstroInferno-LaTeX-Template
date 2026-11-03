@@ -282,9 +282,13 @@
       \AINestedUnroll{#1} {
         \AIUnrolled{\l__trouble_description_tl}{2}
         \AIUnrolled{\l__trouble_mechanics_tl}{3}
-      \item {\bfseries \AIUnrolledE{1} :}  % Action
-        \tl_if_empty:NF \l__trouble_description_tl {~\l__trouble_description_tl}
-        \tl_if_empty:NF \l__trouble_mechanics_tl {~\mbox{(\l__trouble_mechanics_tl)}}
+      \item {\bfseries \AIUnrolledE{1}}  % Action
+        \bool_if:nF  % Only do if description or mechanics was provided.
+        { \tl_if_empty_p:N \l__trouble_description_tl && \tl_if_empty_p:N \l__trouble_mechanics_tl } {
+          \textbf{:}
+          \tl_if_empty:NF \l__trouble_description_tl {~\l__trouble_description_tl}
+          \tl_if_empty:NF \l__trouble_mechanics_tl {~\mbox{(\l__trouble_mechanics_tl)}}
+        }
       }
     \end{itemize}
   }
@@ -298,12 +302,18 @@
         \AIUnrolled{\l__trouble_narrative_tl}{2}
         \AIUnrolled{\l__trouble_description_tl}{3}
         \AIUnrolled{\l__trouble_mechanics_tl}{4}
-      \item {\bfseries \AIUnrolledE{1} :}  % Action
-        \tl_if_empty:NF \l__trouble_narrative_tl
-        {{~\it \AIquoteFont \selectfont \color{AIwhite} \l__trouble_narrative_tl}}
-        \tl_if_empty:NF \l__trouble_description_tl
-        {{\color{AIkatmboxteal} {} ~ {\textbar} \nobreakspace \l__trouble_description_tl }}
-        \tl_if_empty:NF \l__trouble_mechanics_tl {{} ~ \mbox{(\l__trouble_mechanics_tl)}}
+      \item {\bfseries \AIUnrolledE{1}}  % Action
+        \bool_if:nF  % Only do if narrative, description or mechanics was provided.
+        { \tl_if_empty_p:N \l__trouble_narrative_tl &&
+          \tl_if_empty_p:N \l__trouble_description_tl &&
+          \tl_if_empty_p:N \l__trouble_mechanics_tl } {
+          \textbf{:}
+          \tl_if_empty:NF \l__trouble_narrative_tl
+          {{~\it \AIquoteFont \selectfont \color{AIwhite} \l__trouble_narrative_tl}}
+          \tl_if_empty:NF \l__trouble_description_tl
+          {{\color{AIkatmboxteal} {} ~ {\textbar} \nobreakspace \l__trouble_description_tl }}
+          \tl_if_empty:NF \l__trouble_mechanics_tl {{} ~ \mbox{(\l__trouble_mechanics_tl)}}
+        }
       }
     \end{itemize}
   }
@@ -319,8 +329,8 @@
         \begin{itemize}
           \AINestedUnroll{#3} {
             \AIUnrolled{\l__trouble_mechanics_tl}{2}
-          \item {\bfseries \AIUnrolledE{1} :}  % Action
-            \tl_if_empty:NF \l__trouble_mechanics_tl {~{\color{AIwhite} \l__trouble_mechanics_tl}}
+          \item {\bfseries \AIUnrolledE{1}}  % Action
+            \tl_if_empty:NF \l__trouble_mechanics_tl {\textbf{:}~{\color{AIwhite} \l__trouble_mechanics_tl}}
           }
         \end{itemize}
       }
