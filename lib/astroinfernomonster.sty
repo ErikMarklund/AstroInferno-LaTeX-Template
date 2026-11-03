@@ -195,13 +195,14 @@
     top          = 0pt,
     bottom       = 6pt,
     fonttitle    = \AIfontMuara,
-    fontupper    = \normalsize \normalfont,
-    fontlower    = \normalsize \normalfont,
+    %fontupper    = \normalsize \normalfont,
+    %fontlower    = \normalsize \normalfont,
     center~title,
     colframe  = AIkatmboxtext,
     coltitle     = AIkatmboxtext,
     colback    = AIkatmboxtransp,
     colbacktitle    = AIkatmboxtransp,
+    coltext = AIwhite,
     opacityfill = 0.8, % deduced from katm pdf
     opacitytext = 1,
     opacityframe = 1,
@@ -317,7 +318,7 @@
       \begin{itemize}
       \item {\bfseries \l__trouble_action_tl :}
         \tl_if_empty:NF \l__trouble_narrative_tl
-        {{~\it \AIquoteFont \selectfont \l__trouble_narrative_tl}}
+        {{~\it \AIquoteFont \selectfont \color{AIwhite} \l__trouble_narrative_tl}}
         \tl_if_empty:NF \l__trouble_description_tl
         {{\color{AIkatmboxtext} {} ~ {\textbar} \nobreakspace \l__trouble_description_tl }}
         \tl_if_empty:NF \l__trouble_mechanics_tl

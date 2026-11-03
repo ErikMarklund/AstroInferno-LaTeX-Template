@@ -20,8 +20,10 @@
 }
 
 \definecolor {fixnotecolour} {rgb} {0.3, 0.6, 0.5}
+\definecolor {icecolour} {rgb} {0.4, 0.5, 0.9}
 \newcommand{\so}[1]{\strikeThrough{\color{gray}{#1}}}
 \newcommand{\fixnote}[1]{\textit{\color{fixnotecolour} {#1}}}
+\newcommand{\onice}[1]{{\color{icecolour}{#1}}}
 
 \newcommand{\tbs}{\textbackslash}
 \begin{document}
@@ -75,6 +77,8 @@
 \section{Astro Inferno features}
 \subsection{Cosmetic}
 \begin{itemize}
+\item KATM weakness text (and other teal text) could be brighter (KATM
+  is a bit inconsistent, but brighter is more readable on the dark box background).
 \item[x] \so{Parts are a bit \ldots dull.}\\
   \fixnote{Made 'Part X' small and floating above the first letter. Part name larger.}
 \item[x] \so{Consistent British or American English}\\
@@ -128,13 +132,20 @@
 
 \subsection{Functionality}
 \begin{itemize}
+\item Simplify AINested unrolling further with helper function to
+  assign inner-level elements.
+\item Allow custom colours for dark and light mode.
+\item Better control over mode-specific colours.
+
+\item \onice{ Make option to automatically exclude personal-use fonts.\\
+  {\color{red} A bit tricky with all different font licences.}}
+\item \onice{ Simple column-balancing feature.\\
+  {\color{red} Not simple. Forget it (for now at least)}}
+
 \item[x] \so{Remove localisation with babel/polyglossia because I don't
     prioritise its maintenance.}
   \fixnote{Functionality remains, but language files greatly reduced,
     because they were mainly old DnD5e terms.}
-\item Simple column-balancing feature.\\
-  {\color{red} Not simple. Forget it (for now at least)}
-\item Make option to automatically exclude personal-use fonts
 \item[x] \so{Clean up lib/astroinfernodeprecated.sty. Only contains old dnd5e stuff.}
 \item[x] \so{Command |AINestedUnroll| for unrolling new nested list format (AINested).}
   \fixnote{See |lib/astroinfernoutility.sty|}
@@ -152,7 +163,6 @@
 \item[x] \so{Master environment}
 \item[x] \so{AIMonster does not need a tcolorbox}\\
   \fixnote{Now a simple minipage.}
-\item Better control over mode-specific colours
 \item[x] \so{Weapon images}\\
   \fixnote{Pretty dirty. Could do with cleaner implementation.}
 \item[x] \so{Modular frames/looks for comment, readaloud, sidebar}
@@ -192,7 +202,7 @@
 
 \subsection{Issues}
 \begin{itemize}
-\item KATM troubles shouls always have white text. Has black in light mode.
+\item[x] \so{KATM troubles shouls always have white text. Has black in light mode.}
 \item[x] \so{In TOC, there is more space below a part than above. Probably
     looks better the other way round.}\\
   \fixnote{Removed aftercode in |{\tbs}titlecontents{part}|, where
