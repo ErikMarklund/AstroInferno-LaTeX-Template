@@ -4,7 +4,7 @@
 % AIversion and AIreleasedate are automatically updated by bump-version. Do not touch!
 \NewDocumentCommand\AIversion{}
 {
-  1.1.0 % VERSION_TAG
+  v1.1.1 % VERSION_TAG
 }
 
 \NewDocumentCommand\AIreleasedate{}

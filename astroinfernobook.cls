@@ -1,5 +1,5 @@
 \RequirePackage {expl3}
-\ProvidesExplClass {astroinfernobook} {2026/10/31} {1.1.0} { Template For Astro Inferno material }
+\ProvidesExplClass {astroinfernobook} {2026/11/03} {v1.1.1} { Template For Astro Inferno material }
 
 \bool_new:N \c__AI_isclass_bool
 \bool_set_true:N \c__AI_isclass_bool
