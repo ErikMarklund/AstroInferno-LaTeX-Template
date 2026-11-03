@@ -281,15 +281,15 @@
   ]
   {
     \small
-    \AINestedUnroll{#1} {
-      \AIUnrolled{\l__trouble_description_tl}{2}
-      \AIUnrolled{\l__trouble_mechanics_tl}{3}
-      \begin{itemize}
+    \begin{itemize}
+      \AINestedUnroll{#1} {
+        \AIUnrolled{\l__trouble_description_tl}{2}
+        \AIUnrolled{\l__trouble_mechanics_tl}{3}
       \item {\bfseries \AIUnrolledE{1} :}  % Action
         \tl_if_empty:NF \l__trouble_description_tl {~\l__trouble_description_tl}
         \tl_if_empty:NF \l__trouble_mechanics_tl {~\mbox{(\l__trouble_mechanics_tl)}}
-      \end{itemize}
-    }
+      }
+    \end{itemize}
   }
 
   % End troubles
@@ -299,19 +299,19 @@
   ]
   {
     \small
-    \AINestedUnroll{#2} {
-      \AIUnrolled{\l__trouble_narrative_tl}{2}
-      \AIUnrolled{\l__trouble_description_tl}{3}
-      \AIUnrolled{\l__trouble_mechanics_tl}{4}
-      \begin{itemize}
+    \begin{itemize}
+      \AINestedUnroll{#2} {
+        \AIUnrolled{\l__trouble_narrative_tl}{2}
+        \AIUnrolled{\l__trouble_description_tl}{3}
+        \AIUnrolled{\l__trouble_mechanics_tl}{4}
       \item {\bfseries \AIUnrolledE{1} :}  % Action
         \tl_if_empty:NF \l__trouble_narrative_tl
         {{~\it \AIquoteFont \selectfont \color{AIwhite} \l__trouble_narrative_tl}}
         \tl_if_empty:NF \l__trouble_description_tl
         {{\color{AIkatmboxteal} {} ~ {\textbar} \nobreakspace \l__trouble_description_tl }}
         \tl_if_empty:NF \l__trouble_mechanics_tl {{} ~ \mbox{(\l__trouble_mechanics_tl)}}
-      \end{itemize}
-    }
+      }
+    \end{itemize}
   }
 
   % Make weakness box if non-empty weakness option
@@ -325,13 +325,13 @@
       {
         \color{AIkatmboxteal}
         \small
-        \AINestedUnroll{#3} {
-          \AIUnrolled{\l__trouble_mechanics_tl}{2}
-         \begin{itemize}
-         \item {\bfseries \AIUnrolledE{1} :}  % Action
-           \tl_if_empty:NF \l__trouble_mechanics_tl {~{\color{AIwhite} \l__trouble_mechanics_tl}}
-         \end{itemize}
-        }
+        \begin{itemize}
+          \AINestedUnroll{#3} {
+            \AIUnrolled{\l__trouble_mechanics_tl}{2}
+          \item {\bfseries \AIUnrolledE{1} :}  % Action
+            \tl_if_empty:NF \l__trouble_mechanics_tl {~{\color{AIwhite} \l__trouble_mechanics_tl}}
+          }
+        \end{itemize}
       }
     }
   }
