@@ -48,7 +48,7 @@ main() {
   while getopts 'd:hnv' opt; do
     case $opt in
       d)
-        new_date="$(date -u -d "${OPTARG}" +'%Y/%m/%d')"
+        new_date="$(date -j -u -f %y%m%d "${OPTARG}" +'%y/%m/%d')"
         ;;
       h)
         usage
