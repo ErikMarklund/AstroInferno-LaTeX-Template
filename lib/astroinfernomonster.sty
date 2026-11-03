@@ -320,7 +320,7 @@
         \tl_if_empty:NF \l__trouble_narrative_tl
         {{~\it \AIquoteFont \selectfont \color{AIwhite} \l__trouble_narrative_tl}}
         \tl_if_empty:NF \l__trouble_description_tl
-        {{\color{AIkatmboxtext} {} ~ {\textbar} \nobreakspace \l__trouble_description_tl }}
+        {{\color{AIkatmboxteal} {} ~ {\textbar} \nobreakspace \l__trouble_description_tl }}
         \tl_if_empty:NF \l__trouble_mechanics_tl
         {{} ~ \mbox{(\l__trouble_mechanics_tl)}}
       \end{itemize}
@@ -336,7 +336,7 @@
     ]
     {
       {
-        \color{AIkatmboxtext}
+        \color{AIkatmboxteal}
         \small
         \AINestedUnroll{#3} {
           \tl_set:Ne \l__trouble_action_tl {\seq_item:Nn \l_unroll_seq {1} }
