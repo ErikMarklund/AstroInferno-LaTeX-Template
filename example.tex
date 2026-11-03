@@ -166,8 +166,10 @@ this template can do this too!
 \subsection{Switching Mode}
 Use |\AIMakeDark| and |\AIMakeLight| to
 switch between the two styles. An optional argument providing an
-alternative background image can be provided:\\[1em]
-|\AIMakeDark{img/your_cool_image.jpg}|\\[1em]
+alternative background image can be provided:
+\begin{lstlisting}
+\AIMakeDark[background=your_cool_image.jpg]
+\end{lstlisting}
 Note that these commands will cause a page break. Thus, switching between the dark and
 light modes should probably be introduced at a relatively late stage
 in the writing process, when most of the content is finished,
