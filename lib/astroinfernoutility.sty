@@ -146,6 +146,21 @@
 % Outputs
 % key fits in lock
 % hand fits in glove
+%
+% \AIUnrolled and \AIUnrolledE makes this even easier,
+% hiding the \l_unrolled_tl variable and making more compact code.
+%
+% EXAMPLE:
+% \tl_new:N \l_nested_tl
+% \tl_set:Nn \l_nested_tl {key > lock ; hand > glove}
+%  \AINestedUnroll { l_nested_tl } {
+%    {\AIUnrolledE{1}~fits~in~{\AIUnrolledE {2}}\\
+%  }
+%
+% These two helper functions differ in that \AIUnrolled stores the
+% item in a variable, whereas \AIUnrolledE returns it directly, kind
+% of like an inline variant.
+
 
 \seq_new:N \l__unroll_outer_seq
 \seq_new:N \l_unroll_seq
@@ -169,7 +184,19 @@
   }
 }
 
+% The first and maybe only fucntion you need to call to unroll.
 \NewDocumentCommand{\AINestedUnroll}{ +m +m }
-{
-  \__unroll_nested_list:Nn #1 {#2}
-}
+{ \__unroll_nested_list:Nn #1 {#2} }
+
+% Facilitates accessing the inner-level elements.
+% First command is token list variable in which to store the value.
+% Second argument is index of element to get.
+\NewDocumentCommand{\AIUnrolled}{m m}
+{ \tl_set:Ne #1 { \seq_item:Nn \l_unroll_seq {#2} } }
+
+% Just returns the element indicated by #1.
+% Sort of an inline variant of \AIUnrolled.
+% ('E' is for 'element', which is maybe not super logical, but 'I' for
+% 'Inline' looks too much like a small 'L'. 'E' for 'express'?)
+\NewDocumentCommand{\AIUnrolledE} {m}
+{ \seq_item:Nn \l_unroll_seq { #1 } }

@@ -136,8 +136,6 @@
 
 \subsection{Functionality}
 \begin{itemize}
-\item Simplify AINested unrolling further with helper function to
-  assign inner-level elements.
 \item Allow custom colours for dark and light mode.
 \item Better control over mode-specific colours.
 
@@ -146,6 +144,11 @@
 \item \onice{ Simple column-balancing feature.\\
   {\color{red} Not simple. Forget it (for now at least)}}
 
+\item[x] \so{Simplify AINested unrolling further with helper function to
+    assign inner-level elements.}\\
+  \fixnote{|AIUnrolled| and |AIUnrolledE| accesses the inner
+    elements. The former assigns the value to a variable, the latter
+    is an inline variant.}
 \item[x] \so{Remove localisation with babel/polyglossia because I don't
     prioritise its maintenance.}
   \fixnote{Functionality remains, but language files greatly reduced,
