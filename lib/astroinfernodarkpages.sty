@@ -18,55 +18,80 @@
   \gdef\AICurrentThemeColourName{#1}% 
 }
 
-\NewDocumentCommand{\AIMakeDark} {s O{img/paper-darkred}}
+%%%%%%%%%%%% Dark mode %%%%%%%%%%%%
+%
+\keys_define:nn { astroinferno / darkpages / dark }
 {
+  background .tl_set:N  = \l_dark_background_tl,
+  background .initial:n  = img/paper-darkred,
+  background .value_required:n = true
+}
+
+\NewDocumentCommand{\AIMakeDark} {s O{}}
+{
+
+  \keys_set:nn { astroinferno / darkpages / dark } {#2}
+
   \bool_set_true:N \g_AI_dark_mode_bool
   \bool_if:NF{#1}
   {\clearpage}
   \colorlet{AIcurrentcolour}{AIwhite}
   \AISSetGlobalColour{AIwhite}
-  % \AISetThemeColour[AIdarkbox]
   \AIDarkColours
   \RemoveFromHook{shipout/background} % Must clear earlier background, or the page number position will be broken.
-  \AddToShipoutPictureBG{%
-    \AtPageLowerLeft{%
-      \includegraphics[width=\paperwidth,height=\paperheight]{#2}%
-    }%
+  \AddToShipoutPictureBG{
+    \AtPageLowerLeft{
+      \includegraphics[width=\paperwidth,height=\paperheight]{\l_dark_background_tl}
+    }
   }
 }
 
-\NewDocumentCommand{\AIMakeLight} {s O{img/paper-pale}}
+
+%%%%%%%%%%%% Dark mode %%%%%%%%%%%%
+%
+\keys_define:nn { astroinferno / darkpages / light }
 {
+  background .tl_set:N  = \l_light_background_tl,
+  background .initial:n  = img/paper-pale,
+  background .value_required:n = true
+}
+
+\NewDocumentCommand{\AIMakeLight} {s O{}}
+{
+
+  \keys_set:nn { astroinferno / darkpages / light } {#2}
+
   \bool_set_false:N \g_AI_dark_mode_bool
   \bool_if:NF{#1}
   {\clearpage}
   \colorlet{AIcurrentcolour}{AIblack}
   \AISSetGlobalColour{AIblack}
-  % \AISetThemeColour[AIlightbox]
   \AILightColours
   \RemoveFromHook{shipout/background} % Must clear earlier background, or the page number position will be broken.
-  \AddToShipoutPictureBG{%
-    \AtPageLowerLeft{%
-      \includegraphics[width=\paperwidth,height=\paperheight]{#2}%
-    }%
+  \AddToShipoutPictureBG{
+    \AtPageLowerLeft{
+      \includegraphics[width=\paperwidth,height=\paperheight]{\l_light_background_tl}
+    }
   }
 }
 
+%%%%%%%%%%%% Image injection %%%%%%%%%%%%
+%
 \NewDocumentCommand{\AIPlaceNewBackground} {s m}
 {
   \RemoveFromHook{shipout/background} % Must clear earlier background, or the page number position will be broken.
   \bool_if:NTF{#1}
   {
-    \AddToShipoutPictureBG*{%
-      \AtPageLowerLeft{%
-        \includegraphics[width=\paperwidth,height=\paperheight]{#2}%
-      }%
+    \AddToShipoutPictureBG*{
+      \AtPageLowerLeft{
+        \includegraphics[width=\paperwidth,height=\paperheight]{#2}
+      }
     }
   } {
-    \AddToShipoutPictureBG{%
-      \AtPageLowerLeft{%
-        \includegraphics[width=\paperwidth,height=\paperheight]{#2}%
-      }%
+    \AddToShipoutPictureBG{
+      \AtPageLowerLeft{
+        \includegraphics[width=\paperwidth,height=\paperheight]{#2}
+      }
     }
   }
 }
