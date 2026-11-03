@@ -213,7 +213,6 @@
 }
 
 % Used by the internal (end)trouble rendering functions.
-\tl_new:N \l__trouble_action_tl
 \tl_new:N \l__trouble_narrative_tl
 \tl_new:N \l__trouble_description_tl
 \tl_new:N \l__trouble_mechanics_tl
@@ -235,11 +234,9 @@
     {\latoblack \textls[200]{\scriptsize TROUBLES}}\\
     \it
     \AINestedUnroll{#1} {
-      \AIUnrolled{\l__trouble_action_tl}{1}
       \AIUnrolled{\l__trouble_mechanics_tl}{2}
-      \l__trouble_action_tl
-      \tl_if_empty:NF \l__trouble_mechanics_tl
-      {:~\l__trouble_mechanics_tl}\\
+      \AIUnrolledE{1}  % Action
+      \tl_if_empty:NF \l__trouble_mechanics_tl {:~\l__trouble_mechanics_tl}\\
     }
 
   \end{minipage}
@@ -250,11 +247,9 @@
     {\latoblack \textls[200]{\scriptsize END~TROUBLE}}\\
     \it
     \AINestedUnroll{#2} {
-      \AIUnrolled{\l__trouble_action_tl}{1}
       \AIUnrolled{\l__trouble_mechanics_tl}{2}
-      \l__trouble_action_tl
-      \tl_if_empty:NF \l__trouble_mechanics_tl
-      {:~\l__trouble_mechanics_tl}\\
+      \AIUnrolledE{1}  % Action
+      \tl_if_empty:NF \l__trouble_mechanics_tl {:~\l__trouble_mechanics_tl}\\
     }
   \end{minipage}\\
 
@@ -266,11 +261,9 @@
       {\latoblack \textls[200]{\scriptsize WEAKNESS}}\\
       \it
       \AINestedUnroll{#3} {
-        \AIUnrolled{\l__trouble_action_tl}{1}
         \AIUnrolled{\l__trouble_mechanics_tl}{2}
-        \textbf{\l__trouble_action_tl}
-        \tl_if_empty:NF \l__trouble_mechanics_tl
-        {\textbf{:}~\l__trouble_mechanics_tl}\\
+        \textbf{\AIUnrolledE{1}}  % Action
+        \tl_if_empty:NF \l__trouble_mechanics_tl {\textbf{:}~\l__trouble_mechanics_tl}\\
       }
     \end{minipage}\\
   }
@@ -288,16 +281,13 @@
   ]
   {
     \small
-    \AINestedUnroll{#1} { 
-      \AIUnrolled{\l__trouble_action_tl}{1}
+    \AINestedUnroll{#1} {
       \AIUnrolled{\l__trouble_description_tl}{2}
       \AIUnrolled{\l__trouble_mechanics_tl}{3}
       \begin{itemize}
-      \item {\bfseries \l__trouble_action_tl :}
-        \tl_if_empty:NF \l__trouble_description_tl
-        {~\l__trouble_description_tl}
-        \tl_if_empty:NF \l__trouble_mechanics_tl
-        {~\mbox{(\l__trouble_mechanics_tl)}}
+      \item {\bfseries \AIUnrolledE{1} :}  % Action
+        \tl_if_empty:NF \l__trouble_description_tl {~\l__trouble_description_tl}
+        \tl_if_empty:NF \l__trouble_mechanics_tl {~\mbox{(\l__trouble_mechanics_tl)}}
       \end{itemize}
     }
   }
@@ -310,18 +300,16 @@
   {
     \small
     \AINestedUnroll{#2} {
-      \AIUnrolled{\l__trouble_action_tl}{1}
       \AIUnrolled{\l__trouble_narrative_tl}{2}
       \AIUnrolled{\l__trouble_description_tl}{3}
       \AIUnrolled{\l__trouble_mechanics_tl}{4}
       \begin{itemize}
-      \item {\bfseries \l__trouble_action_tl :}
+      \item {\bfseries \AIUnrolledE{1} :}  % Action
         \tl_if_empty:NF \l__trouble_narrative_tl
         {{~\it \AIquoteFont \selectfont \color{AIwhite} \l__trouble_narrative_tl}}
         \tl_if_empty:NF \l__trouble_description_tl
         {{\color{AIkatmboxteal} {} ~ {\textbar} \nobreakspace \l__trouble_description_tl }}
-        \tl_if_empty:NF \l__trouble_mechanics_tl
-        {{} ~ \mbox{(\l__trouble_mechanics_tl)}}
+        \tl_if_empty:NF \l__trouble_mechanics_tl {{} ~ \mbox{(\l__trouble_mechanics_tl)}}
       \end{itemize}
     }
   }
@@ -338,16 +326,11 @@
         \color{AIkatmboxteal}
         \small
         \AINestedUnroll{#3} {
-          \AIUnrolled{\l__trouble_action_tl}{1}
           \AIUnrolled{\l__trouble_mechanics_tl}{2}
-          %
-          \begin{itemize}
-            % Action
-          \item {\bfseries \l__trouble_action_tl :}
-            % Narrative
-            \tl_if_empty:NF \l__trouble_mechanics_tl
-            {~{\color{AIwhite} \l__trouble_mechanics_tl}}
-          \end{itemize}
+         \begin{itemize}
+         \item {\bfseries \AIUnrolledE{1} :}  % Action
+           \tl_if_empty:NF \l__trouble_mechanics_tl {~{\color{AIwhite} \l__trouble_mechanics_tl}}
+         \end{itemize}
         }
       }
     }
@@ -369,11 +352,6 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Helper stuff for AIMonsterHarvest
-
-% Storage for the active item attributes
-\tl_new:N \l__harvest_symbol_tl
-\tl_new:N \l__harvest_item_tl
-\tl_new:N \l__harvest_qty_tl
 
 \dim_new:N \l__letterheight_dim    % Used to calculate space above katm harvest box
 
@@ -446,11 +424,9 @@
           {
             \scriptsize
             \AINestedUnroll{\l_monster_harvest_tl} {
-              \AIUnrolled{\l__harvest_symbol_tl}{1}
-              \AIUnrolled{\l__harvest_item_tl}{2}
-              \AIUnrolled{\l__harvest_qty_tl}{3}
-             \makebox[0.5cm][l]{\l__harvest_symbol_tl} \textbf{\l__harvest_item_tl}
-              \hfill {\tiny \l__harvest_qty_tl}\\
+              \makebox[0.5cm][l]{\AIUnrolledE{1}}  % Symbol
+              \textbf{\AIUnrolledE{2}}  % Item
+              \hfill {\tiny \AIUnrolledE{3}}\\  % Quantity
             }
           }
         \end{tcolorbox}
@@ -472,11 +448,9 @@
         \raggedright
         \textbf{Harvesting}~{\scriptsize(Choose~{\l_monster_harvestchoose_tl})}\\
         \AINestedUnroll{\l_monster_harvest_tl} {
-          \AIUnrolled{\l__harvest_symbol_tl}{1}
-          \AIUnrolled{\l__harvest_item_tl}{2}
-          \AIUnrolled{\l__harvest_qty_tl}{3}
-          \makebox[0.5cm][l]{\l__harvest_symbol_tl} \textbf{\l__harvest_item_tl}
-          \hfill {\l__harvest_qty_tl}\\
+          \makebox[0.5cm][l]{\AIUnrolledE{1}}  % Symbol
+          \textbf{\AIUnrolledE{2}}  % Item
+          \hfill {\AIUnrolledE{3}}\\  % Quantity
         }
       \end{minipage}
       %
