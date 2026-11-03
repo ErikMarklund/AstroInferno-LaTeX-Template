@@ -194,7 +194,7 @@
     right        = 6pt,
     top          = 0pt,
     bottom       = 6pt,
-    fonttitle    = \AIfontMuara,
+    fonttitle = \fontsize{16}{14} \AIfontMuara,
     %fontupper    = \normalsize \normalfont,
     %fontlower    = \normalsize \normalfont,
     center~title,
@@ -275,10 +275,7 @@
 \NewDocumentCommand{\__katm_troubles}{ m m m }
 {
   % Troubles
-  \__put_in_katm_box[
-  fonttitle = \fontsize{16}{14} \AIfontMuara \selectfont,
-  title = Trouble,
-  ]
+  \__put_in_katm_box[title = Trouble]
   {
     \small
     \begin{itemize}
@@ -293,10 +290,7 @@
   }
 
   % End troubles
-  \__put_in_katm_box[
-  fonttitle = \fontsize{16}{14} \AIfontMuara \selectfont,
-  title = End Trouble,
-  ]
+  \__put_in_katm_box[title = End Trouble]
   {
     \small
     \begin{itemize}
@@ -317,10 +311,7 @@
   % Make weakness box if non-empty weakness option
   \tl_if_eq:VnF {\l_monster_weakness_tl} {}
   {
-    \__put_in_katm_box[
-    fonttitle = \fontsize{16}{14} \AIfontMuara \selectfont,
-    title = Weakness,
-    ]
+    \__put_in_katm_box[title = Weakness]
     {
       {
         \color{AIkatmboxteal}
