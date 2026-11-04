@@ -421,18 +421,25 @@ Analogous modifier commands are |\AIsanity|, |\AIaura|, |\AIdamage|, |\AImortali
   |\AIloot||{1}| & \AIloot{1}\\
   |\AIloot||{-2}| & \AIloot{-2}
 \end{AITable}
+\vfill
 
 \subsection{Tiers etc.}
 Tiers and distances have their own printing functions, as do roman
 numerals:
 
-\begin{AITable}{XXXX}
-  x & |\AITier||{x}| & |\AIDist||{x}| & |\ROM||{x}| \\
-  1 & \AITier{1} & \AIDist{1} & \ROM{1} \\
-  2 & \AITier{2} & \AIDist{2} & \ROM{2} \\
-  3 & \AITier{3} & \AIDist{3} & \ROM{3} \\
-  4 & \AITier{4} & \AIDist{4} & \ROM{4} \\
-  5 & \AITier{5} & \AIDist{5} & \ROM{5}
+\begin{AITable}{lXXXl}
+  x & |\AITier||{x}| & |\AIDist||{x}| & |\AIDTier||{x}| & |\ROM||{x}| \\
+  1 & \AITier{1} & \AIDist{1} & \AIDTier{1} & \ROM{1} \\
+  2 & \AITier{2} & \AIDist{2} & \AIDTier{2} & \ROM{2} \\
+  3 & \AITier{3} & \AIDist{3} & \AIDTier{3} & \ROM{3} \\
+  4 & \AITier{4} & \AIDist{4} & \AIDTier{4} & \ROM{4} \\
+  5 & \AITier{5} & \AIDist{5} & \AIDTier{5} & \ROM{5} \\
+  6 & - & - & \AIDTier{6} & \ROM{6} \\
+  7 & - & - & \AIDTier{7} & \ROM{7} \\
+  8 & - & - & \AIDTier{8} & \ROM{8} \\
+  9 & - & - & \AIDTier{9} & \ROM{9} \\
+  10+ & - & - & \AIDTier{10} & \ROM{10} \\
+
 \end{AITable}
 \AIMakeDark[text=AIpaleblue][tableeven=AIpetroleum]
 \AINextChapterAfter{\includegraphics[width=\textwidth]{img/jellyfish_faint.png}}

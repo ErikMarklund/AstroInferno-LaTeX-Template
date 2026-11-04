@@ -109,6 +109,29 @@
   } {\msg_error:nnn { astroinferno } { invalid-tier } { #1 }}
 }
 
+% Print damage tiers (e.g., Mutilate III).
+\NewExpandableDocumentCommand\AIDTier{m}
+{
+  % Returns #1 if less than one.
+  % According to the core rulebook Disintegrate X is
+  % used also for damage over 10, so that is what we return.
+  \int_compare:nNnTF {#1} < {1}
+  {#1}
+  {
+    \int_case:nnF {\int_eval:n {#1}} {
+      {1} {Bruise\nobreakspace\ROM{#1}}
+      {2} {Injure\nobreakspace\ROM{#1}}
+      {3} {Mutilate\nobreakspace\ROM{#1}}
+      {4} {Cripple\nobreakspace\ROM{#1}}
+      {5} {Gore\nobreakspace\ROM{#1}}
+      {6} {Maim\nobreakspace\ROM{#1}}
+      {7} {Sever\nobreakspace\ROM{#1}}
+      {8} {Shatter\nobreakspace\ROM{#1}}
+      {9} {Destroy\nobreakspace\ROM{#1}}
+    } {Disintegrate\nobreakspace\ROM{10}}
+  }
+}
+
 % Print bonuses. 3 -> +3, -2 -> -2, 0 -> +0. Mainly for internal use.
 \NewDocumentCommand\AIBonus{m}
 {
