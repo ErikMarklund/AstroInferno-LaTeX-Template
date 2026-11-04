@@ -24,6 +24,12 @@
     header .value_required:n   = true,
     width .dim_set:N           = \l__AI_table_width_dim,
     width .value_required:n    = true,
+    beforespace .bool_set:N        = \l__AI_table_beforespace_bool,
+    beforespace .default:n          = true,
+    beforespace .initial:n          = true,
+    afterspace .bool_set:N        = \l__AI_table_afterspace_bool,
+    afterspace .default:n          = true,
+    afterspace .initial:n          = true
   }
 
 \tl_new:N \l_use_colour_odd_tl
@@ -38,7 +44,9 @@
   \tl_if_novalue:nF {#1}
     { \keys_set:nn { astroinferno / table } {#1} }
 
-  \par \vspace { 9pt plus 3pt minus 3pt } \noindent
+  \par
+  \bool_if:NT \l__AI_table_beforespace_bool {\vspace { 9pt plus 3pt minus 3pt }}
+  \noindent
 
   \tl_if_empty:NF \l__AI_table_header_tl
     {
@@ -66,7 +74,8 @@
 
 }
 {
-  \endtabularx \vspace { 9pt plus 3pt minus 3pt }
+  \endtabularx
+  \bool_if:NT \l__AI_table_afterspace_bool {\vspace { 9pt plus 3pt minus 3pt }}
 
   \group_end:
 }
