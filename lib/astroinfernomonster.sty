@@ -29,9 +29,10 @@
   titlestyle .tl_set:N = \l_monster_titlestyle_tl,
   titlestyle .initial:n = \l__AI_stat_block_title_style_tl,
   titleheight .tl_set:N  = \l_monster_titleheight_tl,
-  titleheight .initial:n  = -1pt, % if -1, use 1ex
+  titleheight .initial:n  = -1pt, % if <0, just print title as it is.
   titleheight .value_required:n = true,
-  % titlealign is used for the third optional argument (internal alignment) in a parbox around the monster name
+  % titlealign is used for the third optional argument (internal
+  % alignment) in a parbox around the monster name if titleheight >=0
   titlealign .tl_set:N  = \l_monster_titlealign_tl,
   titlealign .initial:n  = t,
   titlealign .value_required:n = true,
@@ -126,16 +127,18 @@
   { \tl_set:NV \l_monster_style_tl \l_monster_global_style_tl }
   
   % Print name
-  % Is titleheight set? If >=0 then yes.
-  \dim_compare:nTF {\l_monster_titleheight_tl < 0pt}
-  { \dim_set:Nn \l_theheight_dim {1ex} } % Set to 1ex
-  { \dim_set:Nn \l_theheight_dim {\l_monster_titleheight_tl} } % Set to titleheight
-
-  { \l_monster_titlefont_tl \l_monster_titlestyle_tl \selectfont
-    \parbox[t][\l_theheight_dim][\l_monster_titlealign_tl]{\columnwidth} {
-      \hfill \l_monster_title_preamble_tl \l_monster_name_tl \hfill\null
-    }\\[2mm]
+  {
+    \l_monster_titlefont_tl \l_monster_titlestyle_tl \selectfont
+    % Is titleheight set? If >=0 then yes.
+    \dim_compare:nTF {\l_monster_titleheight_tl < 0pt}
+    { \hfill \l_monster_title_preamble_tl \l_monster_name_tl \hfill\null\\[2mm] }
+    {
+      \parbox[t][\l_monster_titleheight_tl][\l_monster_titlealign_tl]{\columnwidth} {
+        \hfill \l_monster_title_preamble_tl \l_monster_name_tl \hfill\null
+      }\\[2mm]
+    }
   }
+
   \hfill\MakeUppercase{\textbf {\scriptsize{\l_monster_type_tl}}}\hfill\null\\[1.4em]
   \hfill\textls[350]{\MakeUppercase{{\fontsize{10}{12}\latoblack{\l_monster_class_tl}}}}\hfill\null\\[0.3em]
   \hfill\textls[180]{\MakeUppercase{{\fontsize{10}{12}\latoblack{\l_monster_being_tl}}}}\hfill\null\\[0.2mm]
