@@ -61,23 +61,21 @@
   quantity .tl_set:N  = \l_monster_quantity_tl,
   quantity .initial:n  = {},
   quantity .value_required:n  = true,
-  % Troubles and endtroubles should be semicolon-separated lists,
-  % because they need to accept commas in the items.
-  % Each item should be a >-separated list:
-  %   katm: action > description > mechanics
-  %   core: action > combined description/mechanics
+  % Troubles and endtroubles should be AINested lists,
+  %   katm: {action > description > mechanics ; ...}
+  %   core: {action > combined description/mechanics ; ...}
   troubles .tl_set:N  = \l_monster_troubles_tl,
   troubles .initial:n  = {},
   troubles .value_required:n  = true,
-  % See troubles above. Here:
-  %   katm: Action > narrative > description > mechanics
-  %   cofre: Action > combined
+  % AINested list
+  %   katm: {action > narrative > description > mechanics ; ...}
+  %   cofre: {action > combined ; ...}
   endtroubles .tl_set:N  = \l_monster_end_troubles_tl,
   endtroubles .initial:n  = {},
   endtroubles .value_required:n  = true,
-  % See troubles above. Here:
-  % katm: weakness > mechanics
-  % core: weakness > mechanics (not present in core rulebook)
+  % AINested list
+  % katm: {weakness > mechanics ; ...}
+  % core: {weakness > mechanics ; ...} (not featured in core rulebook)
   weakness .tl_set:N  = \l_monster_weakness_tl,
   weakness .initial:n  = {},
   weakness .value_required:n  = true,
@@ -87,8 +85,8 @@
   description .tl_set:N  = \l_monster_description_tl,
   description .initial:n  = -~unknown~-,
   description .value_required:n  = true,
-  % See troubles above. Here:
-  %   Symbol > item > quantity
+  % AINested list
+  %   {symbol > item > quantity ; ...}
   harvest .tl_set:N = \l_monster_harvest_tl,
   harvest .initial:n  = {},
   harvest .value_required:n  = true,
@@ -161,11 +159,7 @@
   % Harvest and loot.
   % Only write if not empty harvest list.
   % Leave empty if making separate harvest/loot box later.
-  \tl_if_empty:NF \l_monster_harvest_tl
-  {
-    \AIMonsterHarvest[#1] {}
-    %{\l_monster_harvest_tl}{\l_monster_lootqty_tl}{\l_monster_lootblood_tl}
-  }
+  \tl_if_empty:NF \l_monster_harvest_tl {\AIMonsterHarvest[#1] {} }
   \vspace{\baselineskip} % Add vertical space after the harvest/loot
 }
 
@@ -195,8 +189,6 @@
     top          = 0pt,
     bottom       = 6pt,
     fonttitle = \fontsize{16}{14} \AIfontMuara,
-    %fontupper    = \normalsize \normalfont,
-    %fontlower    = \normalsize \normalfont,
     center~title,
     colframe  = AIkatmboxtext,
     coltitle     = AIkatmboxtext,
@@ -323,17 +315,15 @@
   {
     \__put_in_katm_box[title = Weakness]
     {
-      {
-        \color{AIkatmboxteal}
-        \small
-        \begin{itemize}
-          \AINestedUnroll{#3} {
-            \AIUnrolled{\l__trouble_mechanics_tl}{2}
-          \item {\bfseries \AIUnrolledE{1}}  % Action
-            \tl_if_empty:NF \l__trouble_mechanics_tl {\textbf{:}~{\color{AIwhite} \l__trouble_mechanics_tl}}
-          }
-        \end{itemize}
-      }
+      \color{AIkatmboxteal}
+      \small
+      \begin{itemize}
+        \AINestedUnroll{#3} {
+          \AIUnrolled{\l__trouble_mechanics_tl}{2}
+        \item {\bfseries \AIUnrolledE{1}}  % Action
+          \tl_if_empty:NF \l__trouble_mechanics_tl {\textbf{:}~{\color{AIwhite} \l__trouble_mechanics_tl}}
+        }
+      \end{itemize}
     }
   }
   \vspace{0.15cm}
