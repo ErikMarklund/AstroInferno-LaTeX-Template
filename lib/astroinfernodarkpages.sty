@@ -42,9 +42,7 @@
   {\clearpage}
   \AISSetGlobalColour{\l_dark_text_tl}
   \AIDarkColours[#3]
-  \bool_if:NTF #1
-  { \AIPlaceNewBackground*{\l_dark_background_tl} }
-  { \AIPlaceNewBackground{\l_dark_background_tl} }
+  \AIPlaceNewBackground{\l_dark_background_tl}
 }
 
 
@@ -69,9 +67,7 @@
   {\clearpage}
   \AISSetGlobalColour{\l_light_text_tl}
   \AILightColours[#3]
-  \bool_if:NTF #1
-  { \AIPlaceNewBackground*{\l_light_background_tl} }
-  { \AIPlaceNewBackground{\l_light_background_tl} }
+  \AIPlaceNewBackground{\l_light_background_tl}
 }
 
 %%%%%%%%%%%% Image injection %%%%%%%%%%%%
