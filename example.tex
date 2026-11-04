@@ -375,24 +375,20 @@ Astro Inferno uses various special symbols.
 Useful information about them can be found in the Astro
 Inferno Rules Reference
 \footnote{\url{https://astroinferno.com/astro_coven/srd/srd.html\#symbols}}.
-This template has commands for rendering the symbols:
+This template has commands for rendering the symbols.
+\subsection{Core symbols}
 
-\begin{AITable}[header=Core Stat Tokens]{XX}
+\begin{AITable}[afterspace=false]{XX}
   Command & Result \\
   |\AIlifesymbol| & \AIlifesymbol \\
   |\AIsanitysymbol| & \AIsanitysymbol \\
-  |\AIaurasymbol| & \AIaurasymbol \\
-  |\AIchestsymbol| & \AIchestsymbol
+  |\AIaurasymbol| & \AIaurasymbol
 \end{AITable}
-
-\begin{AITable}[header=Combat Stat Tokens]{XX}
-  Command & Result \\
+\begin{AITable}[beforespace=false, afterspace=false]{XX}
   |\AIspsymbol| & \AIspsymbol\\
   |\AIlimitsymbol| & \AIlimitsymbol
-\end{AITable}
-
-\begin{AITable}[header=Loot Skill Tokens]{XX}
-  Command & Result \\
+  \end{AITable}
+\begin{AITable}[beforespace=false, afterspace=false]{XX}
   |\AIalchemysymbol| & \AIalchemysymbol\\
   |\AIancientsymbol| & \AIancientsymbol\\
   |\AIsecularsymbol| & \AIsecularsymbol\\
@@ -402,29 +398,42 @@ This template has commands for rendering the symbols:
   |\AIdominionsymbol| & \AIdominionsymbol\\
   |\AIscroungesymbol| & \AIscroungesymbol
 \end{AITable}
-
-\begin{AITable}[header=Other]{XX}
-  Command & Result \\
+\begin{AITable}[beforespace=false, afterspace]{XX}
+  |\AIchestsymbol| & \AIchestsymbol\\
   |\AIbloodsymbol| & \AIbloodsymbol
 \end{AITable}
 
+\subsection{Symbol Modifier Commands}
 Some symbols additionally have helper functions for consistent layout, e.g., of modifiers.
-\begin{AITable}[header=AIlife Helper Function]{XX}
+\begin{AITable}{XX}
   Command & Result \\
-  |\AIlife{3}| & \AIlife{3}\\
-  |\AIlife[+]{1}| & \AIlife[+]{1}\\
-  |\AIlife[-]{2}| & \AIlife[-]{2}
+  |\AIlife||{3}| & \AIlife{3}\\
+  |\AIlife||[+]{1}| & \AIlife[+]{1}\\
+  |\AIlife||[-]{2}| & \AIlife[-]{2}
 \end{AITable}
 
-Analogous commands are |\AIsanity|, |\AIaura|, |\AIdamage|, |\AImortality|, and |\AIbones|.
-|\AIloot| is similar, but non identical:
-\begin{AITable}[header=Loot Helper Function]{XX}
+Analogous modifier commands are |\AIsanity|, |\AIaura|, |\AIdamage|, |\AImortality|, and |\AIbones|.
+|\AIloot| is similar, but not identical:
+
+\begin{AITable}{XX}
   Command & Result \\
-  |\AIloot{}| & \AIloot{}\\
-  |\AIloot{1}| & \AIloot{1}\\
-  |\AIloot{-2}| & \AIloot{-2}
+  |\AIloot||{}| & \AIloot{}\\
+  |\AIloot||{1}| & \AIloot{1}\\
+  |\AIloot||{-2}| & \AIloot{-2}
 \end{AITable}
 
+\subsection{Tiers etc.}
+Tiers and distances have their own printing functions, as do roman
+numerals:
+
+\begin{AITable}{XXXX}
+  x & |\AITier||{x}| & |\AIDist||{x}| & |\ROM||{x}| \\
+  1 & \AITier{1} & \AIDist{1} & \ROM{1} \\
+  2 & \AITier{2} & \AIDist{2} & \ROM{2} \\
+  3 & \AITier{3} & \AIDist{3} & \ROM{3} \\
+  4 & \AITier{4} & \AIDist{4} & \ROM{4} \\
+  5 & \AITier{5} & \AIDist{5} & \ROM{5}
+\end{AITable}
 \AIMakeDark[text=AIpaleblue][tableeven=AIpetroleum]
 \AINextChapterAfter{\includegraphics[width=\textwidth]{img/jellyfish_faint.png}}
 \chapter{Images} \label{ch:images}
