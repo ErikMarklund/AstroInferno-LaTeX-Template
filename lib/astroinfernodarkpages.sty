@@ -23,10 +23,15 @@
 %
 \keys_define:nn { astroinferno / darkpages / dark }
 {
+  % text is the textcolour
   text .tl_set:N  = \l_dark_text_tl,
   text .default:n  = AIwhite,
   background .tl_set:N  = \l_dark_background_tl,
   background .default:n  = img/paper-darkred,
+  % If backgroundfill is non-empty, a recatangle with colour
+  % backgroundfill will be used instead of image background
+  backgroundfill .tl_set:N  = \l_dark_backgroundfill_tl,
+  backgroundfill .default:n  = {}
 }
 
 % Starred version does not clear page.
@@ -35,14 +40,19 @@
 \NewDocumentCommand{\AIMakeDark} {s O{} O{}}
 {
 
-  \keys_set:nn { astroinferno / darkpages / dark } {text, background, #2}
+  \keys_set:nn { astroinferno / darkpages / dark } {text, background, backgroundfill, #2}
 
   \bool_set_true:N \g_AI_dark_mode_bool
   \bool_if:NF{#1}
   {\clearpage}
   \AISSetGlobalColour{\l_dark_text_tl}
   \AIDarkColours[#3]
-  \AIPlaceNewBackground{\l_dark_background_tl}
+  \tl_if_empty:NTF \l_dark_backgroundfill_tl
+  { % use background image
+    \AIPlaceNewBackground{\l_dark_background_tl}
+  } { % Use solid colour
+    \AIPlaceNewBackgroundColour{\l_dark_backgroundfill_tl}
+  }
 }
 
 
@@ -50,24 +60,34 @@
 %
 \keys_define:nn { astroinferno / darkpages / light }
 {
+  % text is the textcolour
   text .tl_set:N  = \l_light_text_tl,
   text .default:n = AIblack,
   background .tl_set:N  = \l_light_background_tl,
   background .default:n  = img/paper-pale,
+  % If backgroundfill is non-empty, a recatangle with colour
+  % backgroundfill will be used instead of image background
+  backgroundfill .tl_set:N  = \l_light_backgroundfill_tl,
+  backgroundfill .default:n  = {}
 }
 
 \NewDocumentCommand{\AIMakeLight} {s O{} O{}}
 {
 
   % First reset the keys to defaults
-  \keys_set:nn { astroinferno / darkpages / light } {text, background,#2}
+  \keys_set:nn { astroinferno / darkpages / light } {text, background, backgroundfill, #2}
 
   \bool_set_false:N \g_AI_dark_mode_bool
   \bool_if:NF #1
   {\clearpage}
   \AISSetGlobalColour{\l_light_text_tl}
   \AILightColours[#3]
-  \AIPlaceNewBackground{\l_light_background_tl}
+  \tl_if_empty:NTF \l_light_backgroundfill_tl
+  { % use background image
+    \AIPlaceNewBackground{\l_light_background_tl}
+  } { % Use solid colour
+    \AIPlaceNewBackgroundColour{\l_light_backgroundfill_tl}
+  }
 }
 
 %%%%%%%%%%%% Image injection %%%%%%%%%%%%
@@ -89,6 +109,29 @@
     }
   }
 }
+
+\NewDocumentCommand{\AIPlaceNewBackgroundColour} {s m}
+{
+  \RemoveFromHook{shipout/background} % Must clear earlier background, or the page number position will be broken.
+  \bool_if:NTF{#1} {
+    \AddToShipoutPictureBG*{
+      \begin{tikzpicture}[remember~picture,overlay]
+        \fill[color=#2]
+        (current~page.south~west) -- (current~page.north~west) --
+        (current~page.north~east) -- (current~page.south~east);
+      \end{tikzpicture}
+    }
+  } {
+    \AddToShipoutPictureBG{
+      \begin{tikzpicture}[remember~picture,overlay]
+        \fill[color=#2]
+        (current~page.south~west) -- (current~page.north~west) --
+        (current~page.north~east) -- (current~page.south~east);
+      \end{tikzpicture}
+    }
+  }
+}
+
 
 %%%%%%%%%%%%% Commands for setting mode colours %%%%%%%%%%%%%
 % Pass keys in the optional argument.

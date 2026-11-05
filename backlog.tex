@@ -136,13 +136,18 @@
 
 \subsection{Functionality}
 \begin{itemize}
-\item Allow single-colour background instead of image.
-  
+\item Remove appending |AIcurrentcolour| to |normalfont| and instead
+  make sure all |tcolorbox|es etc. explicitly use the right colour.
+
 \item \onice{ Make option to automatically exclude personal-use fonts.\\
   {\color{red} A bit tricky with all different font licences.}}
 \item \onice{ Simple column-balancing feature.\\
   {\color{red} Not simple. Forget it (for now at least)}}
 
+\item[x] \so{Allow single-colour background instead of image.}
+  \fixnote{New command |AIPlaceNewBackgroundColour|, sister to
+    |\AIPlaceNewBackground|, puts a solid colour for
+    background. Starred version is single page only. }
 \item{x} \so{Command for damage tiers similar to |AIDist|.}\\
   \fixnote{Implemented command |AIDTier|.}
 \item[x] \so{Optionally suppress space before and after AITable.}\\
