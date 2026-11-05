@@ -39,7 +39,10 @@
     % stack sets beforespace, afterspace, fatfirst to suit stacked tables.
     stack .choices:nn = {none, single, top, middle, bottom}
     { \int_set:NV \l__AI_table_stack_int {\l_keys_choice_int} },
-    stack .initial:n                = none
+    stack .initial:n                = none,
+    oddevenswap .bool_set:N   = \l__AI_table_oddevenswap_bool,
+    oddevenswap .default:n   = true,
+    oddevenswap .initial:n     = false
   }
 
 \tl_new:N \l_use_colour_odd_tl
@@ -76,6 +79,13 @@
       \bool_set_true:N \l__AI_table_afterspace_bool
       \bool_set_false:N \l__AI_table_fatfirst_bool
     }
+  }
+
+  % Swap row colours
+  \bool_if:NT \l__AI_table_oddevenswap_bool {
+    \tl_set:NV \l_tmpa_tl {\l__AI_table_colour_odd_tl}
+    \tl_set:NV \l__AI_table_colour_odd_tl {\l__AI_table_colour_even_tl}
+    \tl_set:NV \l__AI_table_colour_even_tl {\l_tmpa_tl}
   }
 
   \par

@@ -146,10 +146,23 @@
 
 \item[x] \so{Allow single-colour background instead of image.}
   \fixnote{New command |AIPlaceNewBackgroundColour|, sister to
-    |\AIPlaceNewBackground|, puts a solid colour for
+    |AIPlaceNewBackground|, puts a solid colour for
     background. Starred version is single page only. }
 \item{x} \so{Command for damage tiers similar to |AIDist|.}\\
   \fixnote{Implemented command |AIDTier|.}
+\item[x] \so{AITable options to simpolify stacking.}\\
+  \fixnote{
+    \begin{itemize}
+    \item Option |stack|, with values |none|(default, does nothing),
+      |single|, |top|, |middle|, |bottom| suppress spacing and sets
+      boldface first row according to where in the stack.
+    \item Option |oddevenswap| switches the colours for odd and even
+      rows, which is useful when stacking tables to maintain alternating
+      row colours.
+    \end{itemize}
+  }
+\item[x] \so{Optionally suppress boldface on first row of AITable.}\\
+  \fixnote{Option |fatfirst=false| does the job.}
 \item[x] \so{Optionally suppress space before and after AITable.}\\
   \fixnote{Options |beforespace| and |afterspace| can now be given to
     |AITable|. Both are |true| by default.}

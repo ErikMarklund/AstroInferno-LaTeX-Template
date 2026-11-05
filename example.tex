@@ -363,6 +363,7 @@ corresponding columns (see symbols table on p.~\ref{ch:symbols}).
 The first row is boldface by default. Suppress with |fatfirst=false|.
 To make stacking easier, use option |stack=single/top/middle/bottom|
 to set spacing and boldface first row in one stroke.
+The option |oddevenswap| switches the row colours, which can be good when stacking.
 
 \begin{AITable}[header=Stacked Tables of Dead Gods, stack=top]{XXX}
   Mythos & Dead God & Blood \\
@@ -371,12 +372,12 @@ to set spacing and boldface first row in one stroke.
 \end{AITable}
 
 % Need to swap odd/even colours here
-\begin{AITable}[stack=middle, colourodd=AItableeven, coloureven=AItableodd]{XXX}
+\begin{AITable}[stack=middle, oddevenswap]{XXX}
   \cellcolor{AIlightteal} \textcolor{AIblack}{Olympian} & Dionysos & \textcolor{AIorange}{Tainted Golden}\\
   \cellcolor{AIlightteal} \textcolor{AIblack}{Olympian} & Poseidon & \textcolor{AIyellow}{Golden}
 \end{AITable}
 
-\begin{AITable}[stack=bottom, colourodd=AItableeven, coloureven=AItableodd]{XXX}
+\begin{AITable}[stack=bottom, oddevenswap]{XXX}
   \cellcolor{AIpaleblue} \textcolor{AIblack}{Vanir} & Freyja & \textcolor{AIyellow}{Golden} \\
   \cellcolor{AIpaleblue} \textcolor{AIblack}{Aesir} & Thor & \textcolor{AIorange}{Tainted Golden}
 \end{AITable}

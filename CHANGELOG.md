@@ -13,7 +13,15 @@ This changelog is now flushed to only incorporate changes for the Astro Inferno 
 
 ### Added
 
+* \AIMakeDark and \AIMakeLight take keys now for better control.
+* AITable takes options to facilitate stacking.
+* \AIDTier for printing damage tiers.
+* Solid colour can be used for backgrounds instead of images.
+
 ### Changed
+
+* Localisation is reduced. Will probably disappear.
+* Default titleheight handled better for AIMonster.
 
 ## [1.1.1] - 2026-11-03
 
