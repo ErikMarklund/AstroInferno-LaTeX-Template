@@ -356,6 +356,30 @@ Odd and/or even rows can have transparent background.
     Some value  & Some value
 \end{AITable}
 
+The tables add space before and after by default. This can be
+suppressed by setting the options |beforespace| and
+|afterspace| to |false|. This can be good for stacked tables with
+corresponding columns (see symbols table on p.~\ref{ch:symbols}).
+The first row is boldface by default. Suppress with |fatfirst=false|.
+To make stacking easier, use option |stack=single/top/middle/bottom|
+to set spacing and boldface first row in one stroke.
+
+\begin{AITable}[header=Stacked Tables of Dead Gods, stack=top]{XXX}
+  Mythos & Dead God & Blood \\
+  \cellcolor{AImidteal} \textcolor{AIpetroleum}{Egyptian} & Anubis & \textcolor{AIyellow}{Golden} \\
+  \cellcolor{AImidteal} \textcolor{AIpetroleum}{Egyptian} & Seth & \textcolor{AIorange}{Tainted Golden}
+\end{AITable}
+
+% Need to swap odd/even colours here
+\begin{AITable}[stack=middle, colourodd=AItableeven, coloureven=AItableodd]{XXX}
+  \cellcolor{AIlightteal} \textcolor{AIblack}{Olympian} & Dionysos & \textcolor{AIorange}{Tainted Golden}\\
+  \cellcolor{AIlightteal} \textcolor{AIblack}{Olympian} & Poseidon & \textcolor{AIyellow}{Golden}
+\end{AITable}
+
+\begin{AITable}[stack=bottom, colourodd=AItableeven, coloureven=AItableodd]{XXX}
+  \cellcolor{AIpaleblue} \textcolor{AIblack}{Vanir} & Freyja & \textcolor{AIyellow}{Golden} \\
+  \cellcolor{AIpaleblue} \textcolor{AIblack}{Aesir} & Thor & \textcolor{AIorange}{Tainted Golden}
+\end{AITable}
 % Check this out!
 % There are functions for adding stuff before and after the next chapter title.
 % We can use it to mimic some chapter titles in the Astro Inferno Core Rulebook,
@@ -371,7 +395,7 @@ Odd and/or even rows can have transparent background.
 }
 \AINextChapterAfter{\normalsize\AIquoteFont\textit{And thou shalt take this rod in thine hand, wherewith thou shalt do signs.\\- Exodus 4:7}\\[1cm]}
 
-\chapter{Symbols}
+\chapter{Symbols} \label{ch:symbols}
 Astro Inferno uses various special symbols.
 Useful information about them can be found in the Astro
 Inferno Rules Reference
