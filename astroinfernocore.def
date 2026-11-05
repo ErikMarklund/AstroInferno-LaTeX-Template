@@ -23,8 +23,6 @@
 \RequirePackage {colortbl}
 \RequirePackage {enumitem}
 \RequirePackage {etoolbox}
-\RequirePackage {textcomp,gensymb} % degree symbol for italian ordinals
-\RequirePackage [autolanguage] {numprint} % localization of thousands separator
 \RequirePackage {tabularx} % variable-width table columns
 \RequirePackage [breakable,skins,xparse]{tcolorbox} % styled text boxes
 \RequirePackage {tikz} % drawing ornaments and lines
