@@ -6,16 +6,14 @@
 
 \bool_new:N \g_AI_dark_mode_bool
 
+
 % Provide a default initial colour name so fontspec doesn't crash during preamble compilation
-\gdef\AICurrentThemeColourName{AIblack}
+%\gdef\AICurrentThemeColourName{AIblack}
 
 % Updated to NewDocumentCommand with a mandatory argument 'm'
 \NewDocumentCommand{\AISSetGlobalColour}{ m }
 {
   \color{#1}% Set local color
-  \global\let\default@color\current@color % Force it into floats and tables
-  % Save the colour name to a flat, underscore-free standard macro name globally
-  \gdef\AICurrentThemeColourName{#1}%
   \colorlet {AIcurrentcolour}{#1}
 }
 
@@ -26,6 +24,7 @@
   % text is the textcolour
   text .tl_set:N  = \l_dark_text_tl,
   text .default:n  = AIwhite,
+  text .initial:n  = AIwhite,
   background .tl_set:N  = \l_dark_background_tl,
   background .default:n  = img/paper-darkred,
   % If backgroundfill is non-empty, a recatangle with colour
@@ -63,6 +62,7 @@
   % text is the textcolour
   text .tl_set:N  = \l_light_text_tl,
   text .default:n = AIblack,
+  text .initial:n = AIblack,
   background .tl_set:N  = \l_light_background_tl,
   background .default:n  = img/paper-pale,
   % If backgroundfill is non-empty, a recatangle with colour
@@ -189,16 +189,6 @@
   \colorlet {readaloudcolour} {\l_light_readaloud_tl}
   \colorlet {sidebarcolour} {\l_light_sidebar_tl}
 }
-
-
-\ExplSyntaxOff % Step out of LaTeX3 mode safely
-
-% Classic LaTeX2e hook to intercept \normalfont using the underscore-free macro
-\makeatletter
-\g@addto@macro\normalfont{\color{\AICurrentThemeColourName}}
-\makeatother
-
-\ExplSyntaxOn
 
 % Call this to execute #1 if dark mode is on, #2 otherwise
 \NewDocumentCommand{\AIIsDarkMode}{mm}

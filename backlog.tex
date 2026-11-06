@@ -136,14 +136,18 @@
 
 \subsection{Functionality}
 \begin{itemize}
-\item Remove appending |AIcurrentcolour| to |normalfont| and instead
-  make sure all |tcolorbox|es etc. explicitly use the right colour.
 
 \item \onice{ Make option to automatically exclude personal-use fonts.\\
   {\color{red} A bit tricky with all different font licences.}}
 \item \onice{ Simple column-balancing feature.\\
   {\color{red} Not simple. Forget it (for now at least)}}
 
+\item[x] \so{Remove appending |AIcurrentcolour| to |normalfont| and instead
+    make sure all |tcolorbox|es etc. explicitly use the right colour.}\\
+  \fixnote{\textbf{MAJOR} refactoring of boxes and the machinery
+    around |AIMakeDark|/|AIMakeLight| allowed
+    this. AIComment, AIReadaloud, and AISidebar collected in
+    |lib/astroinfernobox.sty|. Some things remain elsewhere.}
 \item[x] \so{Allow single-colour background instead of image.}
   \fixnote{New command |AIPlaceNewBackgroundColour|, sister to
     |AIPlaceNewBackground|, puts a solid colour for

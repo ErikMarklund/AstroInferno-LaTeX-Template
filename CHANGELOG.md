@@ -22,6 +22,7 @@ This changelog is now flushed to only incorporate changes for the Astro Inferno 
 
 * Localisation is reduced. Will probably disappear.
 * Default titleheight handled better for AIMonster.
+* Refactoring of boxes. All gathered in lib/astroinfernobox.sty.
 
 ## [1.1.1] - 2026-11-03
 
