@@ -881,62 +881,67 @@ See |example.tex| source code.
 
 \chapter{Colours}
 
-\begin{table*}[b]
-  \caption{\AIFontTableTitle{}Colours Defined by this Package}\label{tab:colours}
-
-  \begin{tabularx}{\linewidth}{lX}
+\begin{AITable}[header=Colours Defined by this Package]{lX}
     \textbf{Colour}                  & \textbf{Description} \\
     \rowcolor{AIlogored}
     |AIlogored|                 & Astro Inferno logo red \\
     \rowcolor{AIdeepred}
-    \textcolor{AIwhite}{|AIdeepred|} & \textcolor{AIwhite}{ Deep red seen all over the Rulebook}\\
+    \textcolor{AIwhite}{|AIdeepred|} & \textcolor{AIwhite}{All over Rulebook}\\
     \rowcolor{AIred}
-    \textcolor{AIwhite}{|AIred|} & \textcolor{AIwhite}{ Red (e.g., tables on p.~19)}\\
+    \textcolor{AIwhite}{|AIred|} & \textcolor{AIwhite}{Tables Rulebook p.~19)}\\
     \rowcolor{AIbrightred}
-    |AIbrightred|                 & Bright red (e.g., tables on p.~19)\\
+    |AIbrightred|                 & Tables Rulebook p.~19)\\
     \rowcolor{AIorange}
-    |AIorange|                 & Orange seen in Rulebook, Gear section\\
+    |AIorange|                 & Rulebook, Gear section\\
     \rowcolor{AIyellow}
-    |AIyellow|                 & Yellow seen in Rulebook, Gear section\\
+    |AIyellow|                 & Rulebook, Gear section\\
     \rowcolor{AIundyingblue}
-    |AIundyingblue|                 & Blue used with Undying in Rulebook on p.~59\\
+    |AIundyingblue|                 & Rulebook p.~59\\
     \rowcolor{AIpaleblue}
-    |AIpaleblue| & Pale blue seen in Rulebook, Destiny section \\
-    \rowcolor{AIpetroleum}
-    |AIpetroleum| & Petroleum blue seen in Rulebook, Destiny section \\
+    |AIpaleblue| & Rulebook, Destiny section \\
+    \rowcolor{AIpetroleum}      %
+    |AIpetroleum| & Rulebook, Destiny section \\
     \rowcolor{AIlightteal}
-    |AIlightteal| & Light teal seen in tables, boxes \\
+    |AIlightteal| & Tables, boxes \\
     \rowcolor{AImidteal}
-    |AImidteal| & Mid teal seen in tables, boxes \\
+    |AImidteal| & Tables, boxes \\
     \rowcolor{AIdarkteal}
-    |AIdarkteal| & Dark teal seen in weapon boxes (with 25~\% opacity) \\
+    |AIdarkteal| & Weapon boxes (25~\% opacity) \\
     \rowcolor{AImidgreybrown}
-    \textcolor{AIwhite}{|AImidgreybrown|} & \textcolor{AIwhite}{ Greyish brown seen in boxes} \\
+    \textcolor{AIwhite}{|AImidgreybrown|} & \textcolor{AIwhite}{Boxes} \\
     \rowcolor{AIdarkgreybrown}
-    \textcolor{AIwhite}{|AIdarkgreybrown|} & \textcolor{AIwhite}{ Dark greyish brown seen in boxes} \\
+    \textcolor{AIwhite}{|AIdarkgreybrown|} & \textcolor{AIwhite}{Boxes} \\
     \rowcolor{AIlightgrey}
     |AIlightgrey| & Light grey seen in tables \\
     \rowcolor{AImidgrey}
     |AImidgrey| & Grey seen in tables \\
     \rowcolor{AImidsteelgrey}
-    \textcolor{AIwhite}{|AImidsteelgrey|} & \textcolor{AIwhite}{ Steel grey seen in boxes on dark pages} \\
+    \textcolor{AIwhite}{|AImidsteelgrey|} & \textcolor{AIwhite}{Boxes on dark pages} \\
     \rowcolor{AIdarksteelgrey}
-    \textcolor{AIwhite}{|AIdarksteelgrey|} & \textcolor{AIwhite}{Dark steel grey seen in boxes on dark pages}\\
+    \textcolor{AIwhite}{|AIdarksteelgrey|} & \textcolor{AIwhite}{Boxes on dark pages}\\
     \rowcolor{AIledgreen}
     {|AIledgreen|} & {LED green. See p.~\pageref{ch:box_customisation}}\\
-  \end{tabularx}
-\end{table*}
+    \rowcolor{AIkatmboxtext}
+    \textcolor{AIwhite}{|AIkatmboxtext|} & \textcolor{AIwhite} {KATM monster box title}\\
+    \rowcolor{AIkatmbox}
+    \textcolor{AIwhite}{|AIkatmbox|} & \textcolor{AIwhite} {KATM monster box bg}\\
+    \rowcolor{AIkatmboxtransp}
+    \textcolor{AIwhite}{|AIkatmboxtransp|} & \textcolor{AIwhite} {KATM monster box bg (80 \% opacity)}\\
+    \rowcolor{AIkatmboxteal}
+    |AIkatmboxteal| & KATM monster teal text\\
+    \label{tab:colours}
+\end{AITable}
 
 \section{Colour control}
 Global colour variables to style |AIComment|, |AIReadAloud|, |AISidebar|, and |AITable| environments are provided.
 
 \begin{AITable}[header=Box Colours]{lX}
   Colour            &  Description \\
-  |commentcolour|   & |AIComment| background \\
-  |readaloudcolour| & |AIReadAloud| background \\
-  |sidebarcolour|   & |AISidebar| background \\
-  |AItableodd| & |AITable| odd rows \\
-  |AItableeven| & |AITable| even rows
+  |AIcolourComment|   & |AIComment| background \\
+  |AIcolourReadaloud| & |AIReadAloud| background \\
+  |AIcolourSidebar|   & |AISidebar| background \\
+  |AIcolourTableodd| & |AITable| odd rows \\
+  |AIcolourTableeven| & |AITable| even rows
 \end{AITable}
 
 Those environments also accept an optional colour argument to set the colour for a single instance.
@@ -954,10 +959,10 @@ Those environments also accept an optional colour argument to set the colour for
 \end{AITable}
 
 \section{Themed Colours}
-Use |\AISetThemeColour[<colour>]| to set |commentcolour|,
-|readaloudcolour|, |sidebarcolour|, and |tablecolour| to a specific
+Use |\AISetThemeColour[<colour>]| to set |AIcolourComment|,
+|AIcolourReadaloud|, |AIcolourSidebar|, and |tablecolour| to a specific
 colour. Calling |\AISetThemeColour| without an argument sets those
-colours to the current |themecolour|.
+colours to the current |AIcolourTheme|.
 \begin{AIComment}{Tip!}
   Set the theme colour between |\begingroup| \ldots |\endgroup| to
   restrict the change of colour to elements within the group.

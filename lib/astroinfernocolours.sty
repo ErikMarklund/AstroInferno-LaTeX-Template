@@ -1,6 +1,19 @@
 \ExplSyntaxOn
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% =========  Colour names  =========
+%
+% Specific colours have names starting with AI followed by description, such as AIorange.
+%
+% Dynamic colours have names starting with AIcolour followed by role, such as AIcolourComment.
+%
+% AIcolourMode is set by AIMakeDark and AIMakeLight, and determines
+% the default text colour.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Define colours, sampled from the books.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -32,16 +45,16 @@
 \definecolor {AIkatmboxteal} {HTML} {c1b49c} % Used for teal text in KATM style monsters, e.g. weakness.
 
 % The colour used in \AISetThemeColour when a new colour is not set
-\colorlet {themecolour} {AIlightteal}
+\colorlet {AIcolourTheme} {AIlightteal}
 
-% Sets the themecolour and colours for all themed elements
-% If called without the optional colour, resets the colour of all themed elements to the current themecolour
-\NewDocumentCommand {\AISetThemeColour} { O {themecolour} }
+% Sets the AIcolourTheme and colours for all themed elements
+% If called without the optional colour, resets the colour of all themed elements to the current AIcolourTheme
+\NewDocumentCommand {\AISetThemeColour} { O {AIcolourTheme} }
   {
-    \colorlet {themecolour}   {#1}
-    \colorlet {commentcolour} {#1}
-    \colorlet {sidebarcolour} {#1}
+    \colorlet {AIcolourTheme}   {#1}
+    \colorlet {AIcolourComment} {#1}
+    \colorlet {AIcolourSidebar} {#1}
     \colorlet {tablecolour}   {#1}
   }
 
-\DeclareRobustCommand{\normalcolor}{\color{AIcurrentcolour}}
+\DeclareRobustCommand{\normalcolor}{\color{AIcolourMode}}

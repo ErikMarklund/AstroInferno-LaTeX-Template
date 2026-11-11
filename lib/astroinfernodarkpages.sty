@@ -1,6 +1,6 @@
 \ExplSyntaxOn
 
-\definecolor{AIcurrentcolour}{rgb}{0,0,0}
+\definecolor{AIcolourMode}{rgb}{0,0,0}
 \definecolor{AIdarkbox}{rgb}{0.3,0.3,0.3}
 \definecolor{AIlightbox}{rgb}{0.7,0.7,0.7}
 
@@ -14,7 +14,7 @@
 \NewDocumentCommand{\AISSetGlobalColour}{ m }
 {
   \color{#1}% Set local color
-  \colorlet {AIcurrentcolour}{#1}
+  \colorlet {AIcolourMode}{#1}
 }
 
 %%%%%%%%%%%% Dark mode %%%%%%%%%%%%
@@ -156,11 +156,11 @@
   \keys_set:nn { astroinferno / modecolours / dark }
   {tableodd, tableeven, comment, readaloud, sidebar, #1}
 
-  \colorlet {AItableodd} {\l_dark_tableodd_tl}
-  \colorlet {AItableeven} {\l_dark_tableeven_tl}
-  \colorlet {commentcolour} {\l_dark_comment_tl}
-  \colorlet {readaloudcolour} {\l_dark_readaloud_tl}
-  \colorlet {sidebarcolour} {\l_dark_sidebar_tl}
+  \colorlet {AIcolourTableodd} {\l_dark_tableodd_tl}
+  \colorlet {AIcolourTableeven} {\l_dark_tableeven_tl}
+  \colorlet {AIcolourComment} {\l_dark_comment_tl}
+  \colorlet {AIcolourReadaloud} {\l_dark_readaloud_tl}
+  \colorlet {AIcolourSidebar} {\l_dark_sidebar_tl}
 }
 
 \keys_define:nn { astroinferno / modecolours / light }
@@ -183,11 +183,11 @@
   \keys_set:nn { astroinferno / modecolours / light }
   {tableodd, tableeven, comment, readaloud, sidebar, #1}
 
-  \colorlet {AItableodd} {\l_light_tableodd_tl}
-  \colorlet {AItableeven} {\l_light_tableeven_tl}
-  \colorlet {commentcolour} {\l_light_comment_tl}
-  \colorlet {readaloudcolour} {\l_light_readaloud_tl}
-  \colorlet {sidebarcolour} {\l_light_sidebar_tl}
+  \colorlet {AIcolourTableodd} {\l_light_tableodd_tl}
+  \colorlet {AIcolourTableeven} {\l_light_tableeven_tl}
+  \colorlet {AIcolourComment} {\l_light_comment_tl}
+  \colorlet {AIcolourReadaloud} {\l_light_readaloud_tl}
+  \colorlet {AIcolourSidebar} {\l_light_sidebar_tl}
 }
 
 % Call this to execute #1 if dark mode is on, #2 otherwise

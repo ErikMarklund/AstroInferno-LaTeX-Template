@@ -53,7 +53,10 @@
 
 \section{Cleanup}
 \begin{itemize}
-\item Harmonise colour names
+\item[x] \so{Harmonise colour names}\\
+  \fixnote{Specific colours now named AIxxx, where xxx is description,
+    e.g., AIdeepred. Dynamic colours now named AIcolourXxx, where Xxx
+    is function/scope/role, e.g., AIcolourComment.}
 \item[x] \so{Organise fonts into folders}\\
   \fixnote{fonts/FONTNAME/FONTFILES}
 \item[x] \so{Clean up keys \{ astroinferno / fonts \}. Style commands should
@@ -146,7 +149,7 @@
   \fixnote{In line with the reworked mode colour handling below.}
 \item[x] \so{|AIWeapon| now changes colour via keys, not fontstyle definitions.}\\
   \fixnote{In line with the reworked mode colour handling below.}
-\item[x] \so{Remove appending |AIcurrentcolour| to |normalfont| and instead
+\item[x] \so{Remove appending |AIcolourMode| to |normalfont| and instead
     make sure all |tcolorbox|es etc. explicitly use the right colour.}\\
   \fixnote{\textbf{MAJOR} refactoring of boxes and the machinery
     around |AIMakeDark|/|AIMakeLight| allowed
@@ -245,6 +248,9 @@
 
 \subsection{Issues}
 \begin{itemize}
+  \item[x] \so{Investigate why readaloud-style doesn't automatically change to
+    current mode colour with AIquoteFont. Same for sidebar.}\\
+  \fixnote{Fixed with refactoring of mode colours and boxes.}
 \item[x] \so{KATM (end)troubles might print the ':' even if no description or
     mechanics are provided.}\\
   \fixnote{Checks if anything after the ':' is non-empty, if so, prints ':'}
@@ -271,8 +277,6 @@
     compilation. Why?}\\
   \fixnote{Reimplemented with before-code and after-code, removed mode,
     modeafter etc. More robust.}
-\item Investigate why readaloud-style doesn't automatically change to
-  current mode colour with AIquoteFont. Same for sidebar.
 \item[x] \so{AIloot needs fixing. AIloot\{+1\} makes double +}\\
   \fixnote{(didn't really need fixing. Was called wrong in example.tex)}
 \item[x] \so{Positioning of the page numbers is wrong when switching back
