@@ -13,6 +13,12 @@ This changelog is now flushed to only incorporate changes for the Astro Inferno 
 
 ### Added
 
+### Changed
+
+## [1.1.2] - 2026-11-16
+
+### Added
+
 * \AIMakeDark and \AIMakeLight take keys now for better control.
 * AITable takes options to facilitate stacking.
 * \AIDTier for printing damage tiers.
