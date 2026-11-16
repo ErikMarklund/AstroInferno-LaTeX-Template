@@ -1,0 +1,167 @@
+\ExplSyntaxOn
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Boxes AIComment, AISidebar, and AIReadaloud were inherited from the DnD5e Template.
+% Here, we have both simplified them and made them more powerful, and gathered them in a
+% single sty file. Adding more box types should be fairly straightforward.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% The commands \AIxxxxAddBoxstyle etc sets/clears the box style for all boxes of type xxx.
+% See astroinfernoboxstyles.sty for styles.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% ====== AISidebar ====================
+\NewDocumentCommand\AISidebarAddBoxstyle {m} {
+  \tcbset{ AI_sidebar_extra/.append~style={#1} }
+}
+\NewDocumentCommand\AISidebarClearBoxstyle {} {
+  \tcbset{ AI_sidebar_extra/.style={} }
+}
+\NewDocumentCommand\AISidebarDefaultBoxstyle {} {
+  \AISidebarClearBoxstyle \AISidebarAddBoxstyle{AIboxstylePointyBanner}
+}
+
+% ====== AIComment ====================
+\NewDocumentCommand\AICommentAddBoxstyle {m} {
+  \tcbset{ AI_comment_extra/.append~style={#1} }
+}
+
+\NewDocumentCommand\AICommentClearBoxstyle {} {
+  \tcbset{ AI_comment_extra/.style={} }
+}
+
+\NewDocumentCommand\AICommentDefaultBoxstyle {} {
+  \AICommentClearBoxstyle
+}
+
+% ====== AIReadaloud ====================
+\NewDocumentCommand\AIReadAloudAddBoxstyle {m} {
+  \tcbset{ AI_readaloud_extra/.append~style={#1} }
+}
+
+\NewDocumentCommand\AIReadAloudClearBoxstyle {} {
+  \tcbset{ AI_readaloud_extra/.style={} }
+}
+
+\NewDocumentCommand\AIReadAloudDefaultBoxstyle {} {
+  \AIReadAloudClearBoxstyle
+}
+
+% Initialize modifiers to clean states
+\AISidebarDefaultBoxstyle
+\AICommentDefaultBoxstyle
+\AIReadAloudDefaultBoxstyle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Unified Base Style Definitions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\NewDocumentCommand{\__AI_boxes_justify} {}
+{
+  \bool_if:NT \l__AI_layout_bool { \bool_if:NF \l__AI_justified_bool {\RaggedRight} }
+}
+
+\tcbset{
+  % --- BASE SIDEBAR STYLE ---
+  AI_sidebar_base/.style = {
+    colback              = AIcolourSidebar,
+    colbacktitle         = AIcolourSidebar,
+    % colback/.append~code = { \tcbset{colbacktitle={##1}} }, % If colback is set, propagate to colbacktitle.
+    coltitle             = AIcolourMode,
+    coltext              = AIcolourMode,
+    before~upper         = \__AI_boxes_justify,
+    code                 = { \linespread{.9} },
+    frame~hidden,
+    boxrule = 0pt,
+    enhanced~jigsaw,
+    sharp~corners,
+    parbox = false,
+    before~skip          = 13pt plus 4pt minus 4pt,
+    after~skip            = 14pt plus 4pt minus 4pt,
+    toptitle                = 2pt,
+    boxsep                = 3pt,
+    left = 6pt, right = 6pt, top = 0pt, bottom = 0pt,
+    valign = center,
+    fonttitle            = \AIFontSidebarTitle,
+    fontupper         = \AIFontSidebarBody,
+    fontlower         = \AIFontSidebarBody,
+  },
+
+  % --- BASE COMMENT STYLE ---
+  AI_comment_base/.style = {
+    colback              = AIcolourComment,
+    colbacktitle         = AIcolourComment,
+    % colback/.append~code = { \tcbset{colbacktitle={##1}} },
+    coltitle             = AIcolourMode,
+    coltext              = AIcolourMode,
+    before~upper         = \__AI_boxes_justify,
+    code                 = { \linespread{.9} },
+    frame~hidden,
+    boxrule = 0pt,
+    enhanced~jigsaw,
+    sharp~corners,
+    parbox = false,
+    before~skip          = 13pt plus 4pt minus 4pt,
+    after~skip            = 13pt plus 4pt minus 4pt,
+    toptitle                = 2pt,
+    boxsep                = 3pt,
+    left = 6pt, right = 6pt, top = 0pt, bottom = 2pt,
+    fonttitle            = \AIFontCommentTitle,
+    fontupper         = \AIFontCommentBody,
+    fontlower         = \AIFontCommentBody,
+  },
+
+  % --- BASE READ ALOUD STYLE ---
+  AI_readaloud_base/.style = {
+    colback              = AIcolourReadaloud,
+    colbacktitle         = AIcolourReadaloud,
+    % colback/.append~code = { \tcbset{colbacktitle={##1}} },
+    coltitle             = AIcolourMode,
+    coltext              = AIcolourMode,
+    before~upper         = \__AI_boxes_justify,
+    code                 = { \linespread{.9} },
+    frame~hidden,
+    boxrule = 0pt,
+    enhanced~jigsaw,
+    sharp~corners,
+    parbox = false,
+    before~skip          = 13pt plus 4pt minus 4pt,
+    after~skip            = 13pt plus 4pt minus 4pt,
+    left = 0pt, right = 0pt, top = 0pt, bottom = 0pt,
+    fonttitle            = \AIFontReadAloud,
+    fontupper         = \AIFontReadAloud,
+    fontlower         = \AIFontReadAloud,
+  }
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Environments for all box types. AI_xxx_extra takes care of added box styles.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% --- AISidebar Environment ---
+\NewDocumentEnvironment {AISidebar} { O{} m }
+{
+  \begin{tcolorbox}[ AI_sidebar_base, AI_sidebar_extra, title = {#2}, #1 ]
+}
+{
+  \end{tcolorbox}
+}
+
+% --- AIComment Environment ---
+\NewDocumentEnvironment {AIComment} { O{} m }
+{
+  \begin{tcolorbox}[ AI_comment_base, AI_comment_extra, title = {#2}, #1 ]
+}
+{
+  \end{tcolorbox}
+}
+
+% --- AIReadAloud Environment ---
+\NewDocumentEnvironment {AIReadAloud} { O{} }
+{
+  \begin{tcolorbox}[ AI_readaloud_base, AI_readaloud_extra, #1 ]
+}
+{
+  \end{tcolorbox}
+}
