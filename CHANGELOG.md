@@ -15,6 +15,16 @@ This changelog is now flushed to only incorporate changes for the Astro Inferno 
 
 ### Changed
 
+## [1.1.3] - 2026-11-16
+
+Emergency release. Essential file was missing from repo.
+
+### Added
+
+* lib/astroinfernobox.sty added to repo.
+
+### Changed
+
 ## [1.1.2] - 2026-11-16
 
 ### Added
