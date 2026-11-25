@@ -1,0 +1,68 @@
+\documentclass[a4paper,twocolumn,openany,nodeprecatedcode]{astroinfernobook}
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[singlelinecheck=false]{caption}
+\usepackage{lipsum}
+\usepackage{listings}
+\usepackage{shortvrb}
+\usepackage{stfloats}
+\usepackage[hidelinks]{hyperref}
+
+\captionsetup[table]{labelformat=empty,font={sf,sc,bf,},skip=0pt}
+
+\MakeShortVerb{|}
+
+\lstset{%
+  basicstyle=\ttfamily\footnotesize,
+  language=[LaTeX]{TeX},
+  breaklines=true,
+}
+
+\newfontfamily\AIfontBeryllium{Berylium_Rg.otf}[
+    Path = fonts/berylium/,
+    Extension = .otf,
+    UprightFont = *,
+    BoldFont = Berylium_Bd,       % Change to your exact bold file name
+    ItalicFont = Berylium_Rg_It,     % Change to your exact italic file name
+    BoldItalicFont = Berylium_Bd_It  % Change to your exact bold-italic file name
+]
+
+
+\begin{document}
+
+\frontmatter
+
+\begin{titlepage}
+\AIMakeElementTitlepage
+  [
+  titlefont = \AIfontBeryllium,
+  quote = {
+    \hfill$L/S = \sqrt{2}$.\hfill\null},
+    quotewidth = 0.25\textwidth
+  ]
+  {% Put title here
+    {\Huge The Infernal \LaTeX{}\\[0.5em]}
+    {\large Testing A4 paper size\\[1.5em]}
+    Erik Marklund\\
+    \AIreleasedate\\[\baselineskip] % bump-version DATE_TAG <- Do not touch!
+    {\texttt{[~\AIversion~]}} % Do not touch! bump-version will update.
+  }
+\end{titlepage}
+
+\AIMakeElementTOCpage
+
+\mainmatter
+
+\part{Document elements}
+\chapter{Sections etc.}
+\section{A section}
+\subsection{A subsection}
+\subsubsection{A subsubsection}
+\paragraph{Paragraph}
+Some text in all this
+%Insert rules 
+\part{The Divine Comedy}
+\chapter{Hell}
+\input{Hell.txt}
+\end{document}
