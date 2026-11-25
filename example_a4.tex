@@ -133,6 +133,60 @@ Some text in all this
  ]
 \end{AIMonster}
 
+\chapter{Gear}
+\begin{AIWeapon*}{Cyclopean club}
+  \AIWeaponData*[
+  titlestyle={\fontsize{39}{42}},
+  description={Titan great hammer of the Sea},
+  tier=4,
+  attack=0,
+  damage=6,
+  targets=1,
+  grade=1,
+  skill=Crushing,
+  features={Heavy > Phew! ; Hard > Rock hard indeed},
+  % Here we use the imagecode option, which executes a block of code
+  % early in the rendering of the weapon. Very dirty and un-LaTeX-y hack.
+  % Will take some fiddling to get right, and will hopefully be reimplemented
+  % in a better way.
+  % One disadvantage is that the extent of the image is not automatically detected
+  % by other elements on the page, so might cause overlap. Perhaps padding with extra
+  % \vspace{} outside \smash{...} could help.
+  imagecode={
+    \smash{ % Makes this "invisible" to the rest of the typesetting
+      \hspace{0.3cm} % Move down slightly. Will depend on image.
+      \raisebox{-0.4cm} { % Shift right to align with weapon name
+         % 0.93 Seems to be the right width to exactly span the visible part of the float.
+        \includegraphics[width=0.93\textwidth]{img/club.png}
+      }
+    }
+  }
+  ]
+\end{AIWeapon*}
+\begin{AIWeapon*}{Sultr}
+  \AIWeaponData*[
+  description={Myrkheim knife of Samael},
+  tier=3,
+  attack=0,
+  damage=6,
+  targets=x2,
+  grade=1,
+  skill=Slashing,
+  features={Chaotic > 3~targets hit ; Dirty > Blueargh!}]
+\end{AIWeapon*}
+
+\noindent
+\begin{AIWeapon}{Soul dicer}
+  \AIWeaponData[
+  description={Sinful dagger of Tiamat},
+  tier=3,
+  attack=3,
+  damage=4,
+  targets=2,
+  grade=1,
+  skill=Slashing,
+  features={Quick > 2~targets hit/~\AIspsymbol~spent ; Sharp > Yikes!}]
+\end{AIWeapon}
 
 
 \AIMakeLight
