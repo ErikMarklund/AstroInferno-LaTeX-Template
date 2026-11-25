@@ -7,6 +7,7 @@
 \usepackage{listings}
 \usepackage{shortvrb}
 \usepackage{stfloats}
+\usepackage[hidelinks]{hyperref}
 \usepackage{lua-ul}
 
 \captionsetup[table]{labelformat=empty,font={sf,sc,bf,},skip=0pt}
@@ -80,7 +81,9 @@
 \section{Astro Inferno features}
 \subsection{Cosmetic}
 \begin{itemize}
-\item A4 paper size
+\item[x] \so{A4 paper size.}\\
+  \fixnote{The elements below work. No other things are expected to
+    break (and if they do, put them under \nameref{sec:issues}.}
   \begin{itemize}
   \item[x] \so{Boxes.}\\
     \fixnote{Works without modification.}
@@ -265,7 +268,7 @@
 \item[x] \so{Explain Dominican font}
 \end{itemize}
 
-\subsection{Issues}
+\subsection{Issues} \label{sec:issues}
 \begin{itemize}
   \item Chapter headings in appendix placed too low. Noticed in Escape from Delos.
   \item[x] \so{Investigate why readaloud-style doesn't automatically change to
