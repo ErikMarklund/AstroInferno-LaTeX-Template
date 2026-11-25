@@ -27,7 +27,10 @@
     ItalicFont = Berylium_Rg_It,     % Change to your exact italic file name
     BoldItalicFont = Berylium_Bd_It  % Change to your exact bold-italic file name
 ]
-
+\newfontfamily\AIfontMinster{minster6.ttf}[
+Path = fonts/minster/,
+Extension = .ttf
+]
 
 \begin{document}
 
@@ -61,7 +64,78 @@
 \subsubsection{A subsubsection}
 \paragraph{Paragraph}
 Some text in all this
-%Insert rules 
+
+\AIMakeDark
+
+\chapter{Adversaries}
+\begin{AIMonster}
+  \AIMonsterData [
+  name = Void cult accolyte,
+  titlepreamble = \rule{0pt}{1.5cm},
+  titleheight=1.0cm,
+  type = Souls - imps,
+  class = Minions,
+  being = Ashen souls,
+  damage = 3, mortality = 12, bones = 3,
+  troubles = {
+    Shoot > \AIdamage{6};
+    Cower > \AIbones[+]{1}
+  },
+  endtroubles = {
+    Suicide bomb > \AIdamage{15}, area;
+    Frenzy > \AIdamage[+]{3}
+  },
+  weakness = {
+    Peanuts > \AImortality[+]{2}, "allergic''
+  },
+  traits = Trigger happy - volatile,
+  description = {Fanatic minions, both cowards and suicidal at the same time.},
+  harvest = {
+    \AIapotecharysymbol > Unlight tobacco > {\scriptsize 1D6}/\AIspsymbol;
+    \AIsecularsymbol > Erthian ingots > {\scriptsize 1D6}/\AIspsymbol
+  },
+  lootqty = -4,
+  lootblood = Soiled blood
+ ]
+\end{AIMonster}
+\newpage % Actually new column
+\begin{AIMonster}
+  \AIMonsterData [
+  name = Void cult demagogue,
+  titlepreamble = \rule{0pt}{1.5cm},
+  titleheight=1.5cm,
+  titlefont = \AIfontMinster,
+  titlestyle = \fontsize{40}{46},
+  type = Void priests - Obliviation deacons,
+  class = Champions,
+  being = Greater souls,
+  damage = 6, mortality = 6, bones = 3,
+  troubles = {
+    Punishment > \AIdamage{10};
+    Glossolalia > \AIdamage[+]{2};
+    Support > +5~Accolytes
+  },
+  endtroubles = {
+    Possess one character > ;
+    Curse > Party disadvantage
+  },
+  traits = Insane - zealous - devoted,
+  description = {Fanatic mid-level leaders in the cult. Will never
+  retreat, ready to sacrifice themselves for the greater evil.},
+  harvest = {
+    \AIapotecharysymbol > \AITier{3} Elixir > {\scriptsize 1}/\AIspsymbol;
+    \AIalchemysymbol > Exotic ingredient > {\scriptsize 2}/\AIspsymbol;
+    \AIancientsymbol > \AITier{3} Valuable > {\scriptsize 1D4}/\AIspsymbol
+  },
+  harvestchoose = two,
+  lootqty = -4,
+  lootblood = Normal blood
+ ]
+\end{AIMonster}
+
+
+
+\AIMakeLight
 \part{The Divine Comedy}
 \chapter{Hell}
 \input{Hell.txt}
