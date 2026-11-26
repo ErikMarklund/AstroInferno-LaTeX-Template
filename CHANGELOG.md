@@ -14,6 +14,7 @@ This changelog is now flushed to only incorporate changes for the Astro Inferno 
 ### Added
 
 * \AIQuote for consisten quotes e.g. under chapter headings.
+* astrobase.tex was added as a starting point for new Astro Inferno documents.
 
 ### Changed
 

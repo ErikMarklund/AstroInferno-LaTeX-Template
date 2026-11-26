@@ -1,0 +1,160 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Template for making new Astro Inferno documents with the Infernal LaTeX
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%  * * * Remember to comply with the Astro Inferno 3rd party licence! * * *
+% Somewhere in the document body you should put an Astro Coven logo
+% and the 3rd party licence text.
+% The former is included with the template
+% (img/astro-inferno-logo-kit/Astro~Inferno~-~Coven~[Black|White].png).
+% \AIcopyright or \AIcopyright* wiill print the licence text (starred version circumvents
+% problems with missing copyright symbols in the font used to replace 1651 Alchemy).
+%
+% The pre-made titlepage and table of contents (\AIMakeElementTitlepage, \AIMakeElementTOCpage)
+% renders both 3rd party licence text and coven logo.
+%
+% Acknowledging the Infernal LaTeX is not required, but appreciated!
+%
+% It is your responsibility to make sure you comply with the font licences.
+% And of course that you have the rights to use any content you put into this template.
+%  * * *
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%   ===~- Preamble -~===
+%
+
+%  * * * Here we invoke the astroinfernobook style. * * *
+%
+% The provided options mimic Astro Inferno.
+%
+% Change option letterpaper to a4paper to get A4 paper size better for printing in Europe)
+%
+% Option twocolumn is strongly recommended. Astro Inferno uses two columns most of the time
+% and the template was designed with that in mind. Some elements might not be tested
+% in onecolumn mode.
+%
+\documentclass[letterpaper,twocolumn,openany,nodeprecatedcode]{astroinfernobook}
+
+% Load some packages. Add more if needed.
+\usepackage[utf8]{inputenc}
+\usepackage[singlelinecheck=false]{caption}
+\usepackage{stfloats}
+\usepackage[hidelinks]{hyperref}
+
+% Control table captions
+\captionsetup[table]{labelformat=empty,font={sf,sc,bf,},skip=0pt}
+
+% Load Berylium font
+% \newfontfamily\AIfontBeryllium{Berylium_Rg.otf}[
+%     Path = fonts/berylium/,
+%     Extension = .otf,
+%     UprightFont = *,
+%     BoldFont = Berylium_Bd,
+%     ItalicFont = Berylium_Rg_It,
+%     BoldItalicFont = Berylium_Bd_It
+% ]
+
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%   ===~- The actual body of the document -~===
+%
+
+%  * * * Dark and Light mode * * *
+% The document starts in light mode by default. If you want to start in dark mode, comment out \AIMakeDark* below.
+% \AIMakeDark*
+%
+% To switch mode later in the document, use \AIMakeDark and \AIMakeLight
+% where you want to make a page break and continue in the new mode.
+
+
+\begin{document}
+
+% Start frontmatter, which is titlepage, TOC, etc.
+% Uses unnumbered chapters, roman numerals for page numbers.
+\frontmatter
+
+
+% You want a title page?
+\begin{titlepage}
+  % You can make your own title page however you like.
+  % Or you can use the pre-made one, which is a bit flexible via options etc.
+  % The pre-made one prints the mandatory 3rd party licence text.
+  \AIMakeElementTitlepage
+  [
+  % You can use titlefont to pick a font for the title block. AvalenRekas is the default.
+  % titlefont = \AIfontBeryllium,
+  quote = {\AIQuote[width=0.6\textwidth, source=- Unholy Diver, sourcegap=\baselineskip]
+    {
+      This is where you can put a verse or quote.\\
+      See {\normalfont \texttt{lib/astroinfernoutility.sty}} for options and default values.\\
+      Left-adjusted quote, right adjusted source by default.
+    }
+  }
+  ]
+  {% Ttile block.
+    {\Huge Title\\[0.5em]}
+    % Using the default AvalenRekas for the smaller stuff becomes a bit heavy, so we switch to normalfont (lato)
+    \normalfont
+    {\large Subtitle\\[1.5em]}
+    Author name\\
+    \today
+  }
+\end{titlepage}
+
+
+% You want a table of contents page?
+% You get the pre-made one with \AIMakeElementTOCpage, including mandatory coven logo.
+% Just a normal \tableofcontents actually goes a long way too.
+\AIMakeElementTOCpage
+
+
+% Time for the real content. mainmatter starts numbering chapters, restarts page numbering using arabic numerals.
+\mainmatter
+
+
+% Start new part
+\part{Commence brutality}
+
+% Before starting a new chapter, we add inject some empty space above and a padded word of warning below the chapter title.
+% Here, we use \AIQuote for the latter, which is not needed, you can just enter text or other things if you want.
+\AINextChapterBefore[2cm]{}
+\AINextChapterAfter[1cm][1cm]{
+  \AIQuote[adjust=c]{
+    \textbf{Warning!}\\[\baselineskip] % Add extra space between lines
+    Chapter might contain exciting material.\\
+    Not suitable for dull people.
+  }
+}
+% Actually start the chapter. Give it a label if you want to refer to it elsewhere.
+\chapter{Soul evisceration} \label{ch:slaughter}
+
+% Start a new section
+\section{Materials} \label{sec:materials}
+\begin{itemize}
+\item 1 Soul
+\item Spirit cutter
+\item Sturdy table
+\item Shackles or restraints
+\item Coal
+\end{itemize}
+\section{Preparations}
+% Start writing away
+First, bring out a newly sharpened spirit cutter (see \nameref{sec:materials}). Heat over burning coal until red-hot.
+
+\ldots
+
+\end{document}
+
+%
+% Once finished editing, compile with lualatex (here assuming UNIX-like system):
+% lualatex astrobase.tex && lualatex astrobase.tex
+%
+% See how we ran it twice through lualatex, which is needed to get references right, also borders.
+%
+% Alternatively use latexmk. If working in the directory of the Infernal LaTeX, the Makefile makes this simple:
+% make astrobase.pdf
