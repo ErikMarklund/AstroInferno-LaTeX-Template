@@ -17,8 +17,8 @@
   titlefont .initial:n = \AIfontAvalenRekas,
   quote .tl_set:N = \l__AI_titlepage_quote_tl,
   quote .initial:n = {},
-  quotewidth .tl_set:N = \l__AI_titlepage_quotewidth_tl,
-  quotewidth .initial:n = 0.25\textwidth
+  %quotewidth .tl_set:N = \l__AI_titlepage_quotewidth_tl,
+  %quotewidth .initial:n = 0.25\textwidth
 }
 
 \NewDocumentCommand\AIMakeElementTitlepage{O{} +m}
@@ -37,12 +37,12 @@
           % to the right of the text that follows.
     \vspace{1.5cm}
     \hfill
-    \begin{minipage}[t]{\l__AI_titlepage_quotewidth_tl}
+    %\begin{minipage}[t]{\l__AI_titlepage_quotewidth_tl}
       {
-        \it \AIquoteFont
+      %  \it \AIquoteFont
         \l__AI_titlepage_quote_tl
       }
-    \end{minipage}
+    %\end{minipage}
     \hfill\null
     \vspace*{\stretch{2}}\par
     \hfill

@@ -223,3 +223,89 @@
 % 'Inline' looks too much like a small 'L'. 'E' for 'express'?)
 \NewDocumentCommand{\AIUnrolledE} {m}
 { \seq_item:Nn \l_unroll_seq { #1 } }
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Quotes command for ease and consistent looks
+\str_new:N \l_quote_adjust_str
+
+\keys_define:nn { astroinferno / utility / quote }
+{
+  source .tl_set:N  = \l_quote_source_tl,
+  source .initial:n  = {},
+  source .value_required:n  = true,
+  sourcegap .dim_set:N  = \l_quote_sourcegap_dim,
+  sourcegap .initial:n  = {0pt},
+  sourcegap .value_required:n  = true,
+  % Use to set font, fontsize, colour, etc
+  style .tl_set:N  = \l_quote_style_tl,
+  style .initial:n  = \it \AIquoteFont,
+  style .value_required:n = true,
+  width .dim_set:N  = \l_quote_width_dim,
+  width .initial:n  = \columnwidth,
+  width .value_required:n = true,
+  % How to adjust the quote. lr/left-right is left-adjusted quote,
+  % right-adjusted source. rl/right-left is other way round.
+  adjust .choices:nn = {l, r, c, lr, rl, left, right, center, left-right, right-left}
+  { \str_set:NV \l_quote_adjust_str {\l_keys_choice_str} },
+  adjust .initial:n                = lr
+}
+
+% Use \group_begin: and _end: to stop \RaggedRight/Left to affect the rest of the minipage
+\cs_new_protected:Nn \__left_quote:n { \group_begin: \RaggedRight {#1} \par \group_end:}
+\cs_new_protected:Nn \__right_quote:n { \group_begin: \RaggedLeft {#1} \par \group_end:}
+\cs_new_protected:Nn \__center_quote:n { \group_begin: \Centering {#1} \par \group_end:}
+
+\NewDocumentCommand{\AIQuote} {O{} +m} {
+  \keys_set:nn { astroinferno / utility / quote } {#1}
+
+  \begin{minipage}[t]{\l_quote_width_dim}
+    {
+      % Apply style
+      \l_quote_style_tl \selectfont
+
+      \str_case:Vn \l_quote_adjust_str
+      {
+        % left-adjust quote
+        {l} {\__left_quote:n {#2}}
+        {left} {\__left_quote:n {#2}}
+        {lr} {\__left_quote:n {#2}}
+        {left-right} {\__left_quote:n {#2}}
+        % right-adjust quote
+        {r} {\__right_quote:n {#2}}
+        {rl} {\__right_quote:n {#2}}
+        {right} {\__right_quote:n {#2}}
+        {right-left} {\__right_quote:n {#2}}
+        % center quote
+        {c} {\__center_quote:n {#2}}
+        {center} {\__center_quote:n {#2}}
+      }
+
+      % Is source non-empty?
+      \tl_if_eq:NnF \l_quote_source_tl {}
+      {
+        % Insert vspace if non-zero gap
+        \dim_compare:nNnF {\l_quote_sourcegap_dim} = {0pt}
+        { \vspace{\l_quote_sourcegap_dim} }
+
+        % Insert source
+        \str_case:Vn \l_quote_adjust_str
+        {
+          % left-adjust source
+          {l} {\__left_quote:n {\l_quote_source_tl}}
+          {rl} {\__left_quote:n {\l_quote_source_tl}}
+          {left} {\__left_quote:n {\l_quote_source_tl}}
+          {right-left} {\__left_quote:n {\l_quote_source_tl}}
+          % right-adjust source
+          {r} {\__right_quote:n {\l_quote_source_tl}}
+          {right} {\__right_quote:n {\l_quote_source_tl}}
+          {lr} {\__right_quote:n {\l_quote_source_tl}}
+          {left-right} {\__right_quote:n {\l_quote_source_tl}}
+          % center source
+          {c} {\__center_quote:n {\l_quote_source_tl}}
+          {center} {\__center_quote:n {\l_quote_source_tl}}
+        }
+      }
+    }
+  \end{minipage}
+}

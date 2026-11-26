@@ -13,6 +13,8 @@ This changelog is now flushed to only incorporate changes for the Astro Inferno 
 
 ### Added
 
+* \AIQuote for consisten quotes e.g. under chapter headings.
+
 ### Changed
 
 ## [1.1.3] - 2026-11-16

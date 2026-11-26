@@ -60,13 +60,16 @@ Extension = .ttf
   \AIMakeElementTitlepage
   [
   titlefont = \AIfontBeryllium,
+  % Must place \AIQuote in braces.
   quote = {
-    "I scream in the dark,\\
-    To find true salvation,\\
-    But the only thing I hear,\\
-    Is your final salutation."\\[\baselineskip]
-    \hfill -Totalt Jävla Mörker},
-  quotewidth = 0.25\textwidth
+    \AIQuote[ width = 0.25\textwidth, source = -Totalt J\"{a}vla M\"{o}rker, sourcegap=\baselineskip]
+    {
+      "I scream in the dark,\\
+      To find true salvation,\\
+      But the only thing I hear,\\
+      Is your final salutation."
+    }
+  }
   ]
   {% Put title here
     {\Huge The Infernal \LaTeX{}\\[0.5em]}
@@ -214,7 +217,7 @@ part~\ref{ch:weapons}.
 \AIMakeDark
 
 \AINextChapterBefore[3cm]{}
-\AINextChapterAfter[1.5cm][1cm]{\AIquoteFont \textit{If you are going through hell, keep going.\\-Winston Churchill}}
+\AINextChapterAfter[1.5cm][1cm]{\AIQuote[adjust=c, source=-Winston Churchill]{If you are going through hell, keep going.}}
 \chapter{Chapters}
 This package is designed to aid you in writing beautifully typeset documents for Astro Inferno. It starts by adjusting the section formatting from the defaults in \LaTeX{} to something a bit more familiar to the reader. The chapter formatting is displayed above.
 Chapters cause a page break, and the chapter title is put on top of a new page by defauls.
@@ -395,7 +398,7 @@ The option |oddevenswap| switches the row colours, which can be good when stacki
   \includegraphics[width=0.6\paperwidth]{img/astro-inferno-cuneiform.png}}
   %\vspace{3cm}\\
 }
-\AINextChapterAfter{\normalsize\AIquoteFont\textit{And thou shalt take this rod in thine hand, wherewith thou shalt do signs.\\- Exodus 4:7}\\[1cm]}
+\AINextChapterAfter[][1cm]{\AIQuote[width=\textwidth,adjust=c, source=- Exodus 4:7]{And thou shalt take this rod in thine hand, wherewith thou shalt do signs.}}
 
 \chapter{Symbols} \label{ch:symbols}
 Astro Inferno uses various special symbols.
@@ -755,7 +758,9 @@ also with core-rulebook style adversaries.
 
 
 \AINextChapterBefore[3cm]{}
-\AINextChapterAfter[1.5cm][1cm]{{\AIquoteFont \textit{I\"{a}! Shub-Niggurath! The Black Goat of the Woods with a Thousand Young!}}}
+\AINextChapterAfter[1.5cm][1cm]{
+  \AIQuote[adjust=c, width=\textwidth]{I\"{a}! Shub-Niggurath! The Black Goat of the Woods with a Thousand Young!}
+}
 \chapter{Masters}
 \hfill
 \includegraphics[width=\columnwidth]{img/hel.jpg}
@@ -792,20 +797,14 @@ blessings = {
 \AIMakeLight
 %\AINextChapterBefore{\vspace{2cm}\\}
 \AINextChapterAfter[0.5cm]{
-  \normalsize\AIquoteFont
-  \begin{minipage}[t]{0.9\textwidth}
-    \begin{center}
-      \textit{
-        Naked splendour, pain divine, each breath is a cry to be sifted\\
-        Sifted as wheat! Sifted as wheat! Wood to the pyre, sifted as wheat! \\
-        Scorched lungs, solemn benediction \\
-        I shall make mountains bleed for thy holy mission \\[\baselineskip]
-        Sword of faith - Breastplate of righteousness\\
-        Garments of vengeance - Locust and the helmet of Salvation\\[\baselineskip]
-        - Funeral Mist
-      }
-    \end{center}
-  \end{minipage}
+  \AIQuote[width=\textwidth, adjust=c, source=- Funeral Mist, sourcegap=\baselineskip] {
+    Naked splendour, pain divine, each breath is a cry to be sifted\\
+    Sifted as wheat! Sifted as wheat! Wood to the pyre, sifted as wheat! \\
+    Scorched lungs, solemn benediction \\
+    I shall make mountains bleed for thy holy mission \\[\baselineskip]
+    Sword of faith - Breastplate of righteousness\\
+    Garments of vengeance - Locust and the helmet of Salvation
+  }
 }
 \chapter{Weapons} \label{ch:weapons}
 % We place this AIWeapon already here, or it will probably render on a separate page.
